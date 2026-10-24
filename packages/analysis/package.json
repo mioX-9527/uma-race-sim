@@ -1,0 +1,13 @@
+{
+  "name": "@uma-race-sim/analysis",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@uma-race-sim/engine": "*"
+  },
+  "scripts": {
+    "typecheck": "tsc -p .",
+    "test": "vitest run"
+  }
+}

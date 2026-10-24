@@ -1,0 +1,23 @@
+{
+  "$comment": "人工维护:BWIKI 触发条件文本 → 引擎条件枚举。带参数的条件(第n个弯道/行驶距离/剩余距离/经过时间/地点%)由脚本参数化处理;依赖他马的条件映射到期望假设并标记 approx。",
+  "仅序盘": { "kind": "phase", "phase": 0 },
+  "仅中盘": { "kind": "phase", "phase": 1 },
+  "仅终盘": { "kind": "phase", "phase": 2 },
+  "仅最终盘": { "kind": "phase", "phase": 3 },
+  "后半": { "kind": "phaseAfter", "phase": 2 },
+  "最终第3弯道": { "kind": "thirdCornerFromEnd" },
+  "终盘弯道": { "kind": "lateCorner" },
+  "最终弯道": { "kind": "finalCorner" },
+  "终盘直线": { "kind": "lateStraight" },
+  "最终直线": { "kind": "finalStraight" },
+  "弯道最快": { "kind": "cornerFastest" },
+  "直线最快": { "kind": "straightFastest" },
+  "上坡最快": { "kind": "uphillFastest" },
+  "下坡最快": { "kind": "downhillFastest" },
+  "起步时": { "kind": "raceStart" },
+  "行驶距离[m]": { "kind": "distanceRun", "params": ["meters"], "base": "params" },
+  "剩余距离[m]": { "kind": "distanceLeft", "params": ["meters"] },
+  "经过时间[s]": { "kind": "elapsedSec", "params": ["seconds"], "base": "params" },
+  "地点[%]指定": { "kind": "positionPct", "params": ["pct"] },
+  "序位条件(approx)": { "kind": "phase", "phase": 3, "note": "序位类视为满足,期望时刻=终盘起" }
+}

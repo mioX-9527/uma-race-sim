@@ -1,0 +1,7 @@
+{
+  "version": "0.0.0-placeholder",
+  "generatedAt": "2026-10-24",
+  "sources": [],
+  "counts": { "courses": 0, "skills": 0 },
+  "note": "结构占位:真实数据由 tools/scrape-once.ts 于 D2~D3 数据日生成(技能: BWIKI 技能速查表一次性抓取;赛道: 开源解包数据集 + BWIKI 核对)"
+}

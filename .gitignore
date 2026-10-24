@@ -1,0 +1,8 @@
+node_modules/
+dist/
+coverage/
+.toolchain/
+*.log
+.DS_Store
+tools/inbox/
+data/raw/

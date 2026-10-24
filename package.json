@@ -1,0 +1,25 @@
+{
+  "name": "uma-race-sim",
+  "private": true,
+  "version": "0.1.0",
+  "description": "赛马娘国服赛道模拟器 — 技能发动位置 / 速度与体力曲线 / 每技能马身收益(开源,GPL-3.0)",
+  "license": "GPL-3.0",
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "typecheck": "npm run typecheck -w @uma-race-sim/engine && npm run typecheck -w @uma-race-sim/analysis && npm run typecheck -w @uma-race-sim/schema",
+    "test": "npm run test -w @uma-race-sim/engine && npm run test -w @uma-race-sim/analysis",
+    "dev": "npm run dev -w @uma-race-sim/web",
+    "build": "npm run build -w @uma-race-sim/web"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5",
+    "vitest": "^1.6.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
