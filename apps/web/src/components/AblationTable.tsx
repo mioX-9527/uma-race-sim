@@ -8,6 +8,7 @@ export function AblationTable({ report }: { report: AblationReport }): JSX.Eleme
 
   return (
     <div>
+      <div className="table-scroll">
       <table className="ablation">
         <thead>
           <tr>
@@ -70,6 +71,7 @@ export function AblationTable({ report }: { report: AblationReport }): JSX.Eleme
           </tfoot>
         )}
       </table>
+      </div>
       <p className="note">
         收益 = 去掉该技能后完赛变慢的幅度(马身 = 米差/2.5)。Σ单项 ≠ 总收益属正常:技能间存在交互
         (回体技能改变后续发动位置、速度技能改变体力曲线)。未发动的技能不计收益。

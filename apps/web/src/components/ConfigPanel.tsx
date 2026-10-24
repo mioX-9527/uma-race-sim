@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import type { Aptitude, Motivation, Stats, Tactic } from '@uma-race-sim/engine';
 import { APTITUDES, COURSES, MOTIVATION_LABEL, TACTIC_LABEL, type UiConfig } from '../lib/sim';
 import { SkillPicker } from './SkillPicker';
@@ -26,21 +27,19 @@ export function ConfigPanel({ config, onChange }: Props): JSX.Element {
     <div className="panel" style={{ display: 'grid', gap: 12 }}>
       <section>
         <h2>属性设定</h2>
-        <div className="field-grid">
+        <div className="stats-grid">
           {STAT_KEYS.map(k => (
-            <label key={k} htmlFor={`stat-${k}`}>{STAT_LABEL[k]}</label>
-          ))}
-          {STAT_KEYS.map(k => (
-            <input
-              key={k}
-              id={`stat-${k}`}
-              type="number"
-              min={1}
-              max={2400}
-              value={config.stats[k]}
-              onChange={e => setStat(k, Math.max(1, Number(e.target.value) || 0))}
-              style={{ gridColumn: `span ${STAT_KEYS.length}` }}
-            />
+            <Fragment key={k}>
+              <label htmlFor={`stat-${k}`}>{STAT_LABEL[k]}</label>
+              <input
+                id={`stat-${k}`}
+                type="number"
+                min={1}
+                max={2400}
+                value={config.stats[k]}
+                onChange={e => setStat(k, Math.max(1, Number(e.target.value) || 0))}
+              />
+            </Fragment>
           ))}
         </div>
       </section>

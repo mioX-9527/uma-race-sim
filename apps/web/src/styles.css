@@ -52,13 +52,21 @@ header.app-header .sub { color: var(--muted); font-size: 12px; }
 .result-summary .warn { color: var(--warn); }
 
 .layout { display: grid; grid-template-columns: 340px 1fr; gap: 12px; align-items: start; }
+.layout > * { min-width: 0; }
 @media (max-width: 960px) { .layout { grid-template-columns: 1fr; } }
 
-.panel { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 12px; box-shadow: 0 1px 2px #0f172a0d; }
+.panel { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 12px; box-shadow: 0 1px 2px #0f172a0d; min-width: 0; }
 .panel h2 { font-size: 13px; margin: 4px 0 10px; color: var(--muted); font-weight: 600; letter-spacing: 0.05em; }
 
-.field-grid { display: grid; grid-template-columns: repeat(5, 56px 1fr); gap: 6px 6px; align-items: center; }
-.field-grid label { color: var(--muted); font-size: 12px; }
+/* 属性:两列(标签+输入框)一组,共两组一行 */
+.stats-grid { display: grid; grid-template-columns: repeat(2, 48px 1fr); gap: 6px 8px; align-items: center; }
+.stats-grid label { color: var(--muted); font-size: 12px; white-space: nowrap; }
+
+/* 适性与跑法:单组(标签+下拉)一行 */
+.field-grid { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 6px 8px; align-items: center; }
+.field-grid label { color: var(--muted); font-size: 12px; white-space: nowrap; }
+
+.table-scroll { overflow-x: auto; }
 
 input[type='number'], select {
   width: 100%;
