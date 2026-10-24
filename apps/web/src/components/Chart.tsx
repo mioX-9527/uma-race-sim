@@ -6,6 +6,8 @@ interface Props {
   x: Float64Array;
   v: Float64Array;
   hpPct: Float64Array;
+  /** 绘图区水平范围上报(用于赛道条按距离对齐) */
+  onPlotArea?: (area: { left: number; width: number }) => void;
 }
 
 /** 悬浮提示:显示当前位置的速度与体力具体数值 */
@@ -36,10 +38,12 @@ function makeTooltipPlugin(getEl: () => HTMLDivElement): uPlot.Plugin {
 }
 
 /** 速度 + 剩余体力 双轴曲线(横轴=距离),悬浮显示具体数值 */
-export function Chart({ x, v, hpPct }: Props): JSX.Element {
+export function Chart({ x, v, hpPct, onPlotArea }: Props): JSX.Element {
   const elRef = useRef<HTMLDivElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
   const tipRef = useRef<HTMLDivElement>(null);
+  const areaCbRef = useRef(onPlotArea);
+  areaCbRef.current = onPlotArea;
   const [width, setWidth] = useState(900);
 
   useEffect(() => {
@@ -80,18 +84,25 @@ export function Chart({ x, v, hpPct }: Props): JSX.Element {
         },
       ],
       axes: [
-        { label: 'm', stroke: '#6b7280', grid: { stroke: '#e5e7eb' }, ticks: { stroke: '#e5e7eb' } },
+        {
+          label: 'm',
+          stroke: '#6b7280',
+          grid: { stroke: '#e5e7eb' },
+          ticks: { stroke: '#e5e7eb' },
+          values: (u, vals) => vals.map(v => String(Math.round(v))),
+        },
         { scale: 'v', label: 'm/s', stroke: '#2563eb', grid: { show: false }, ticks: { stroke: '#e5e7eb' } },
         { scale: 'pct', label: '%', side: 1, stroke: '#d97706', grid: { show: false }, ticks: { stroke: '#e5e7eb' } },
       ],
       scales: {
-        x: { min: 0, max: x[x.length - 1] ?? 1 },
+        x: { min: 0, max: x[x.length - 1] ?? 1, time: false },
         v: { range: (u, min, max) => [Math.floor(min - 0.5), Math.ceil(max + 0.5)] as [number, number] },
         pct: { range: [0, 105] as [number, number] },
       },
     };
     const data = [Array.from(x), Array.from(v), Array.from(hpPct)] as unknown as uPlot.AlignedData;
     const u = new uPlot(opts, data, el);
+    areaCbRef.current?.({ left: u.bbox.left, width: u.bbox.width });
     return () => {
       u.destroy();
       if (tip.parentElement === el) el.removeChild(tip);

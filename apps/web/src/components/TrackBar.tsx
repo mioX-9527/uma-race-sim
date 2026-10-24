@@ -5,12 +5,14 @@ interface Props {
   course: Course;
   activations: readonly Activation[];
   exhaustedAtMeter: number | null;
+  /** 与曲线图绘图区对齐(同一边距映射距离);缺省用自带边距 */
+  align?: { left: number; width: number };
 }
 
 const H = 96;
 
 /** 赛道条:弯道/坡度/阶段分界/技能发动点/体力归零点 */
-export function TrackBar({ course, activations, exhaustedAtMeter }: Props): JSX.Element {
+export function TrackBar({ course, activations, exhaustedAtMeter, align }: Props): JSX.Element {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
   const tipRef = useRef<HTMLDivElement>(null);
@@ -38,10 +40,11 @@ export function TrackBar({ course, activations, exhaustedAtMeter }: Props): JSX.
     ctx.scale(dpr, dpr);
 
     const D = course.distance;
-    const padL = 14;
-    const padR = 14;
-    const px = (m: number): number => padL + (m / D) * (width - padL - padR);
-    const meterAt = (x: number): number => ((x - padL) / (width - padL - padR)) * D;
+    // 与曲线图绘图区共用同一水平映射:同一段距离在两图中垂直对齐
+    const padL = align?.left ?? 14;
+    const trackW = align?.width ?? width - 14 - 14;
+    const px = (m: number): number => padL + (m / D) * trackW;
+    const meterAt = (x: number): number => ((x - padL) / trackW) * D;
 
     ctx.clearRect(0, 0, width, H);
     ctx.font = '10px system-ui';
@@ -153,7 +156,7 @@ export function TrackBar({ course, activations, exhaustedAtMeter }: Props): JSX.
       canvas.removeEventListener('mousemove', onMove);
       canvas.removeEventListener('mouseleave', onLeave);
     };
-  }, [width, course, activations, exhaustedAtMeter]);
+  }, [width, course, activations, exhaustedAtMeter, align]);
 
   return (
     <div className="track-wrap" ref={wrapRef}>

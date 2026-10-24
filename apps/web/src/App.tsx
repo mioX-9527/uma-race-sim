@@ -9,6 +9,7 @@ import { DEFAULT_CONFIG, buildRunner, findCourse, fmtSec, type UiConfig } from '
 
 export function App(): JSX.Element {
   const [config, setConfig] = useState<UiConfig>(DEFAULT_CONFIG);
+  const [plotArea, setPlotArea] = useState<{ left: number; width: number } | undefined>(undefined);
 
   const course = useMemo(() => findCourse(config.courseId), [config.courseId]);
   const runner = useMemo(() => buildRunner(config), [config]);
@@ -59,12 +60,12 @@ export function App(): JSX.Element {
 
         <div style={{ display: 'grid', gap: 12 }}>
           <section className="panel">
-            <h2>赛道条(弯道 / 坡度 / 阶段 / 技能发动位置)</h2>
-            <TrackBar course={course} activations={result.activations} exhaustedAtMeter={result.exhaustedAtMeter} />
+            <h2>赛道条(弯道 / 坡度 / 阶段 / 技能发动位置,与下图按距离对齐)</h2>
+            <TrackBar course={course} activations={result.activations} exhaustedAtMeter={result.exhaustedAtMeter} align={plotArea} />
           </section>
 
           <section className="panel">
-            <Chart x={result.x} v={result.v} hpPct={hpPct} />
+            <Chart x={result.x} v={result.v} hpPct={hpPct} onPlotArea={setPlotArea} />
           </section>
 
           <section className="panel">
