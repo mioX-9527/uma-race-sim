@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
-import { simulate } from '@uma-race-sim/engine';
+import { BODY_LENGTH_METERS, simulate } from '@uma-race-sim/engine';
+import type { SimResult } from '@uma-race-sim/engine';
 import { ablate } from '@uma-race-sim/analysis';
 import { AblationTable } from './components/AblationTable';
 import { Chart } from './components/Chart';
@@ -24,6 +25,20 @@ export function App(): JSX.Element {
     for (let i = 0; i < result.hp.length; i++) arr[i] = (result.hp[i]! / result.maxHp) * 100;
     return arr;
   }, [result]);
+
+  /** 适性 S↔A 马身差:同配置下分别以 S/A 模拟(距离适性影响终盘/末脚速度与加速度,场地适性影响加速度) */
+  const aptCompare = useMemo(() => {
+    const distS = simulate(course, { ...runner, distanceAptitude: 'S' });
+    const distA = simulate(course, { ...runner, distanceAptitude: 'A' });
+    const surfS = simulate(course, { ...runner, surfaceAptitude: 'S' });
+    const surfA = simulate(course, { ...runner, surfaceAptitude: 'A' });
+    const endV = distS.v[distS.v.length - 1] ?? 20;
+    const diff = (s: SimResult, a: SimResult) => {
+      const deltaSec = a.finishTimeSec - s.finishTimeSec; // >0 = S 更快
+      return { deltaSec, deltaBody: (deltaSec * endV) / BODY_LENGTH_METERS };
+    };
+    return { distance: diff(distS, distA), surface: diff(surfS, surfA) };
+  }, [course, runner]);
 
   const activatedCount = result.activations.length;
 
@@ -56,6 +71,10 @@ export function App(): JSX.Element {
             </b> 马身(约)
           </span>
         )}
+        <span className="item" title="同配置下分别以适性 S 与 A 模拟:距离适性影响终盘/末脚速度与加速度,场地适性影响加速度;正值 = S 比 A 快">
+          适性 S−A:距离 <b className="pos">+{aptCompare.distance.deltaBody.toFixed(2)}</b> / 场地{' '}
+          <b className="pos">+{aptCompare.surface.deltaBody.toFixed(2)}</b> 马身
+        </span>
       </div>
 
       <div className="layout">
