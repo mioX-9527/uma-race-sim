@@ -62,7 +62,7 @@ function intersect(rs: readonly Region[], win: Region): Region[] {
   return out;
 }
 
-/** 赛道直线段(弯道之间的空隙) */
+/** 赛道直线段(弯道之间的空隙);注意与 realStraights 的区别 */
 export function straightGaps(course: Course): readonly Region[] {
   const gaps: Region[] = [];
   let cursor = 0;
@@ -72,6 +72,18 @@ export function straightGaps(course: Course): readonly Region[] {
   }
   if (cursor < course.distance) gaps.push([cursor, course.distance]);
   return gaps;
+}
+
+/**
+ * 真实直线段(用于「直線」类技能条件):以解包 straights 列表为准。
+ * 138 条赛道中有 28 条存在「既非弯道也非直线」的过渡区(如 有馬記念中山2500 起跑后
+ * 最初的 100m、大井1200 的 300m 起跑引道),这些区段不触发 直線/corner==0 条件。
+ * 数据缺失时回退为弯道间隙。
+ */
+export function realStraights(course: Course): readonly Region[] {
+  const list = (course.straights ?? []).filter(s => s.end > s.start).map(s => [s.start, s.end] as Region);
+  if (list.length > 0) return list;
+  return straightGaps(course);
 }
 
 /** 看台对面的直线段(frontType===2);无该数据时回退为最长的非最终直线 */
@@ -120,7 +132,7 @@ export function activationRegions(cond: SkillCondition, course: Course): readonl
     }
     case 'cornerFastest': {
       let cs = course.corners.map(c => [c.start, c.end] as Region);
-      if (spurtFilter) cs = cs.filter(([, end]) => end > late);
+      if (spurtFilter) cs = cs.filter(([, end]) => end > late).map(([from, end]) => [Math.max(from, late), end] as Region);
       else if (phaseFilter !== undefined) {
         const lo = boundOf(course, phaseFilter);
         const hi = phaseEndOf(course, phaseFilter);
@@ -156,14 +168,19 @@ export function activationRegions(cond: SkillCondition, course: Course): readonl
       break;
     }
     case 'finalStraight': {
-      const last = course.corners[course.corners.length - 1];
-      const from = last ? last.end : 0;
-      regions = from < L ? [[from, L]] : [];
+      // 最终直线 = straights 列表末段(通常即末弯道出口到终点);无数据时按末弯道出口推
+      const last = course.straights?.[course.straights.length - 1];
+      if (last !== undefined && last.end > last.start) regions = [[last.start, last.end]];
+      else {
+        const lastCorner = course.corners[course.corners.length - 1];
+        const from = lastCorner ? lastCorner.end : 0;
+        regions = from < L ? [[from, L]] : [];
+      }
       break;
     }
     case 'straightFastest': {
-      let gs = straightGaps(course);
-      if (spurtFilter) gs = gs.filter(([, end]) => end > late);
+      let gs = realStraights(course);
+      if (spurtFilter) gs = gs.filter(([, end]) => end > late).map(([from, end]) => [Math.max(from, late), end] as Region);
       else if (phaseFilter !== undefined) {
         const lo = boundOf(course, phaseFilter);
         const hi = phaseEndOf(course, phaseFilter);
@@ -176,13 +193,13 @@ export function activationRegions(cond: SkillCondition, course: Course): readonl
       regions = [...backStraightRegions(course)];
       break;
     case 'lateStraight': {
-      const g = straightGaps(course).find(g => g[1] > late);
+      const g = realStraights(course).find(g => g[1] > late);
       regions = g ? [[Math.max(g[0], late), g[1]]] : [];
       break;
     }
     case 'uphillFastest': {
       let ss = course.slopes.filter(s => s.gradient > 0).map(s => [s.start, s.end] as Region);
-      if (spurtFilter) ss = ss.filter(([, end]) => end > late);
+      if (spurtFilter) ss = ss.filter(([, end]) => end > late).map(([from, end]) => [Math.max(from, late), end] as Region);
       else if (phaseFilter !== undefined) {
         const lo = boundOf(course, phaseFilter);
         const hi = phaseEndOf(course, phaseFilter);
@@ -193,7 +210,7 @@ export function activationRegions(cond: SkillCondition, course: Course): readonl
     }
     case 'downhillFastest': {
       let ss = course.slopes.filter(s => s.gradient < 0).map(s => [s.start, s.end] as Region);
-      if (spurtFilter) ss = ss.filter(([, end]) => end > late);
+      if (spurtFilter) ss = ss.filter(([, end]) => end > late).map(([from, end]) => [Math.max(from, late), end] as Region);
       else if (phaseFilter !== undefined) {
         const lo = boundOf(course, phaseFilter);
         const hi = phaseEndOf(course, phaseFilter);

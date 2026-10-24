@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import type { Activation, Course } from '@uma-race-sim/engine';
+import { realStraights } from '@uma-race-sim/engine';
 
 interface Props {
   course: Course;
@@ -56,6 +57,12 @@ export function TrackBar({ course, activations, exhaustedAtMeter, align }: Props
     ctx.moveTo(px(0), 44);
     ctx.lineTo(px(D), 44);
     ctx.stroke();
+
+    // 真实直线段(解包 straights;既非直线也非弯道的过渡区保持裸轨道)
+    for (const s of realStraights(course)) {
+      ctx.fillStyle = '#94a8cc33';
+      ctx.fillRect(px(s[0]), 37, Math.max(px(s[1]) - px(s[0]), 2), 14);
+    }
 
     // 坡道带(上坡红/下坡蓝)
     for (const s of course.slopes) {
@@ -127,15 +134,19 @@ export function TrackBar({ course, activations, exhaustedAtMeter, align }: Props
     });
 
     // 悬停
+    const straights = realStraights(course);
     const onMove = (ev: MouseEvent): void => {
       const rect = canvas.getBoundingClientRect();
       const mx = ev.clientX - rect.left;
       const m = Math.max(0, Math.min(D, meterAt(mx)));
       const corner = course.corners.find(c => m >= c.start && m <= c.end);
       const slope = course.slopes.find(s => m >= s.start && m <= s.end);
+      const onStraight = !corner && straights.some(s => m >= s[0] && m <= s[1]);
       const phase = m >= b.finalStart ? '末脚' : m >= b.lateStart ? '终盘' : m >= b.midStart ? '中盘' : '序盘';
       const parts = [`${Math.round(m)}m · ${phase}`];
       if (corner !== undefined) parts.push(`弯道${corner.n}`);
+      else if (onStraight) parts.push('直线');
+      else parts.push('过渡区(非直线非弯道)');
       if (slope !== undefined) parts.push(`${slope.gradient > 0 ? '上' : '下'}坡 ${slope.gradient}%`);
       const act = activations.find(a => Math.abs(a.atMeter - m) < D / 200);
       if (act !== undefined) parts.push(`技能发动: ${act.name}`);
@@ -164,6 +175,8 @@ export function TrackBar({ course, activations, exhaustedAtMeter, align }: Props
       <div className="track-tooltip" ref={tipRef} />
       <div className="legend">
         <span><i className="k" style={{ background: '#52607d' }} />弯道</span>
+        <span><i className="k" style={{ background: '#94a8cc55' }} />直线</span>
+        <span><i className="k" style={{ background: '#3a465e' }} />过渡区</span>
         <span><i className="k" style={{ background: '#d6454566' }} />上坡</span>
         <span><i className="k" style={{ background: '#3d8bfd66' }} />下坡</span>
         <span><i className="k" style={{ background: '#2563eb' }} />技能发动</span>

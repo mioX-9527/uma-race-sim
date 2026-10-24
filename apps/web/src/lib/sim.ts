@@ -28,7 +28,9 @@ export function describeCondition(c: SkillConfig['condition']): string {
   if (seg !== undefined && 'spurt' in c && c.spurt === true) {
     return `末脚内${seg}(末脚为动态起点)`;
   }
-  const pctWin = 'withinPct' in c && c.withinPct !== undefined ? `(${c.withinPct[0]}~${c.withinPct[1]}%处)` : '';
+  const pctWin = 'withinPct' in c && c.withinPct !== undefined
+    ? `(${Math.round(c.withinPct[0] * 10) / 10}~${Math.round(c.withinPct[1] * 10) / 10}%处)`
+    : '';
   const leftWin = 'withinLeftM' in c && c.withinLeftM !== undefined ? `(剩${c.withinLeftM[0]}~${c.withinLeftM[1]}m)` : '';
   const win = pctWin !== '' ? pctWin : leftWin;
   switch (c.kind) {
