@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { PRECISION_LABEL, SKILLS, type SkillEntry } from '../lib/sim';
+import { PRECISION_LABEL, SKILLS, describeCondition, describeEffects, type SkillEntry } from '../lib/sim';
 
 interface Props {
   selected: readonly string[];
@@ -8,7 +8,7 @@ interface Props {
 
 const MAX_SKILLS = 30;
 
-/** 技能搜索点选(非手填数值) */
+/** 技能搜索点选:简中/繁中/日文三语匹配,显示发动条件与效果数值 */
 export function SkillPicker({ selected, onChange }: Props): JSX.Element {
   const [query, setQuery] = useState('');
 
@@ -16,7 +16,12 @@ export function SkillPicker({ selected, onChange }: Props): JSX.Element {
     const q = query.trim().toLowerCase();
     if (q === '') return [];
     return SKILLS.filter(s => !s.precision.includes('unsupported'))
-      .filter(s => s.name.toLowerCase().includes(q) || (s.nameJa ?? '').toLowerCase().includes(q))
+      .filter(
+        s =>
+          s.name.toLowerCase().includes(q) ||
+          (s.nameJa ?? '').toLowerCase().includes(q) ||
+          (s.nameTrad ?? '').toLowerCase().includes(q),
+      )
       .slice(0, 40);
   }, [query]);
 
@@ -34,7 +39,7 @@ export function SkillPicker({ selected, onChange }: Props): JSX.Element {
     <div className="skill-search">
       <input
         type="text"
-        placeholder={`搜索技能(名称/日文名),已选 ${selected.length}/${MAX_SKILLS}`}
+        placeholder={`搜索技能(简中/繁中/日文名),已选 ${selected.length}/${MAX_SKILLS}`}
         value={query}
         onChange={e => setQuery(e.target.value)}
       />
@@ -46,11 +51,15 @@ export function SkillPicker({ selected, onChange }: Props): JSX.Element {
               className={`skill-item${selected.includes(s.id) ? ' selected' : ''}`}
               onClick={() => toggle(s.id)}
             >
-              <span className="name">{s.name}</span>
-              <span className="meta">
-                {s.restriction ? `${s.restriction} · ` : ''}
+              <div className="row1">
+                <span className="name">{s.name}</span>
                 <span className={`badge ${s.precision}`}>{PRECISION_LABEL[s.precision]}</span>
-              </span>
+              </div>
+              <div className="meta">
+                {describeCondition(s.condition)} · {describeEffects(s)}
+                {s.restriction !== undefined && s.restriction !== '' ? ` · 限${s.restriction}` : ''}
+                {s.nameJa !== undefined && s.nameJa !== s.name ? ` · 原名:${s.nameJa}` : ''}
+              </div>
             </div>
           ))}
         </div>
@@ -58,7 +67,12 @@ export function SkillPicker({ selected, onChange }: Props): JSX.Element {
       {selectedSkills.length > 0 && (
         <div className="chips">
           {selectedSkills.map((s, i) => (
-            <span key={s.id} className="chip" onClick={() => toggle(s.id)} title="点击移除">
+            <span
+              key={s.id}
+              className="chip"
+              onClick={() => toggle(s.id)}
+              title={`点击移除 · ${describeCondition(s.condition)} · ${describeEffects(s)}`}
+            >
               <span className="idx">{i + 1}</span>
               {s.name}
               <span className={`badge ${s.precision}`}>{PRECISION_LABEL[s.precision]}</span>

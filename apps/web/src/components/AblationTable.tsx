@@ -1,5 +1,5 @@
 import type { AblationReport } from '@uma-race-sim/analysis';
-import { PRECISION_LABEL, SKILLS } from '../lib/sim';
+import { PRECISION_LABEL, SKILLS, describeCondition, describeEffects } from '../lib/sim';
 
 /** 每技能马身收益(leave-one-out 消融) */
 export function AblationTable({ report }: { report: AblationReport }): JSX.Element {
@@ -13,6 +13,7 @@ export function AblationTable({ report }: { report: AblationReport }): JSX.Eleme
           <tr>
             <th>#</th>
             <th>技能</th>
+            <th className="left">发动条件 / 效果</th>
             <th>发动位置</th>
             <th>发动时刻</th>
             <th>Δ时间</th>
@@ -31,6 +32,16 @@ export function AblationTable({ report }: { report: AblationReport }): JSX.Eleme
                   {r.name}
                   {skill !== undefined && <span className={`badge ${skill.precision}`}>{PRECISION_LABEL[skill.precision]}</span>}
                 </td>
+                <td className="left">
+                  {skill !== undefined ? (
+                    <>
+                      <div>{describeCondition(skill.condition)}</div>
+                      <div className="meta">{describeEffects(skill)}</div>
+                    </>
+                  ) : (
+                    '—'
+                  )}
+                </td>
                 <td>{r.activatedAtMeter === null ? '—' : `${Math.round(r.activatedAtMeter)}m`}</td>
                 <td>{r.activatedAtSec === null ? '—' : `${r.activatedAtSec.toFixed(2)}s`}</td>
                 <td className={r.deltaSec > 0 ? 'pos' : 'neg'}>{r.deltaSec >= 0 ? '+' : ''}{r.deltaSec.toFixed(3)}s</td>
@@ -40,19 +51,19 @@ export function AblationTable({ report }: { report: AblationReport }): JSX.Eleme
             );
           })}
           {rows.length === 0 && (
-            <tr><td colSpan={7} style={{ textAlign: 'center', color: 'var(--muted)' }}>左侧搜索并点选技能后显示收益</td></tr>
+            <tr><td colSpan={8} style={{ textAlign: 'center', color: 'var(--muted)' }}>左侧搜索并点选技能后显示收益</td></tr>
           )}
         </tbody>
         {rows.length > 0 && (
           <tfoot>
             <tr>
-              <td colSpan={4}>Σ 单项收益(去重前)</td>
+              <td colSpan={5}>Σ 单项收益(去重前)</td>
               <td>+{report.sumDeltaSec.toFixed(3)}s</td>
               <td>+{(report.sumDeltaSec * 20).toFixed(0)}m(约)</td>
               <td>+{(report.sumDeltaSec * 20 / 2.5).toFixed(2)}(约)</td>
             </tr>
             <tr>
-              <td colSpan={4}>实测总收益(无技能 − 全技能)</td>
+              <td colSpan={5}>实测总收益(无技能 − 全技能)</td>
               <td>+{report.totalDeltaSec.toFixed(3)}s</td>
               <td colSpan={2}>+{(report.totalDeltaSec * 20 / 2.5).toFixed(2)} 马身(约)</td>
             </tr>

@@ -26,6 +26,8 @@ interface OutSkill {
   id: string;
   name: string;
   nameJa?: string;
+  /** 繁中(台服)译名,便于搜索对照 */
+  nameTrad?: string;
   rarity: string;
   precision: 'precise' | 'approx' | 'unsupported';
   effects: OutEffect[];
@@ -236,6 +238,8 @@ for (const e of raw.results) {
   const rarity = rarityCn === '普通' ? 'normal' : rarityCn === '传说' ? 'rareEvolved' : 'unique5';
   const nameJa = prop(e, '技能名') || e.page;
   const baseName = cleanName(prop(e, '中文名')) || nameJa;
+  const tradRaw = cleanName(prop(e, '繁译名'));
+  const tradName = /^(（?\(?未[实實]裝\)?）?)$/.test(tradRaw) || tradRaw === '' ? '' : tradRaw;
   const restrictionBase = prop(e, '条件限制');
   const filterHint = prop(e, '速查筛选');
 
@@ -315,6 +319,7 @@ for (const e of raw.results) {
       id: id + suffix,
       name: multi ? `${baseName}(${b + 1})` : baseName,
       nameJa,
+      nameTrad: tradName !== '' ? tradName : undefined,
       rarity,
       precision,
       effects,

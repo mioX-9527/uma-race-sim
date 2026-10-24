@@ -96,30 +96,30 @@ export function TrackBar({ course, activations, exhaustedAtMeter }: Props): JSX.
 
     // 体力归零点
     if (exhaustedAtMeter !== null) {
-      ctx.strokeStyle = '#ff6b6b';
+      ctx.strokeStyle = '#dc2626';
       ctx.setLineDash([4, 3]);
       ctx.beginPath();
       ctx.moveTo(px(exhaustedAtMeter), 16);
       ctx.lineTo(px(exhaustedAtMeter), 80);
       ctx.stroke();
       ctx.setLineDash([]);
-      ctx.fillStyle = '#ff6b6b';
+      ctx.fillStyle = '#dc2626';
       ctx.fillText('体力归零', px(exhaustedAtMeter) - 18, 88);
     }
 
     // 技能发动点
     activations.forEach((a, i) => {
       const x = px(a.atMeter);
-      ctx.strokeStyle = a.precision === 'approx' ? '#fbbf24' : '#4da3ff';
+      ctx.strokeStyle = a.precision === 'approx' ? '#d97706' : '#2563eb';
       ctx.beginPath();
       ctx.moveTo(x, 20);
       ctx.lineTo(x, 52);
       ctx.stroke();
-      ctx.fillStyle = a.precision === 'approx' ? '#fbbf24' : '#4da3ff';
+      ctx.fillStyle = a.precision === 'approx' ? '#d97706' : '#2563eb';
       ctx.beginPath();
       ctx.arc(x, 17, 7, 0, Math.PI * 2);
       ctx.fill();
-      ctx.fillStyle = '#10141c';
+      ctx.fillStyle = '#ffffff';
       ctx.fillText(`${i + 1}`, x - 2, 20.5);
     });
 
@@ -163,9 +163,9 @@ export function TrackBar({ course, activations, exhaustedAtMeter }: Props): JSX.
         <span><i className="k" style={{ background: '#52607d' }} />弯道</span>
         <span><i className="k" style={{ background: '#d6454566' }} />上坡</span>
         <span><i className="k" style={{ background: '#3d8bfd66' }} />下坡</span>
-        <span><i className="k" style={{ background: '#4da3ff' }} />技能发动</span>
-        <span><i className="k" style={{ background: '#fbbf24' }} />近似层发动</span>
-        <span><i className="k" style={{ background: '#ff6b6b' }} />体力归零</span>
+        <span><i className="k" style={{ background: '#2563eb' }} />技能发动</span>
+        <span><i className="k" style={{ background: '#d97706' }} />近似层发动</span>
+        <span><i className="k" style={{ background: '#dc2626' }} />体力归零</span>
       </div>
     </div>
   );
