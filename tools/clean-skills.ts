@@ -250,6 +250,15 @@ function parseCondition(text: string, fallbackFilter: string): CondParse {
     approx = true;
   }
 
+  // 阶段语境兜底:锚点分句本身不含阶段词时,从全文推断
+  // (如「最后冲刺，直线」→ 直线应限最终盘,而非比赛首个直线)
+  if (anchor !== null && phaseWord === null && SEGMENT_KINDS.has(anchor.kind)) {
+    if (/最终盘|最后冲刺|最终冲刺/.test(text)) phaseWord = 3;
+    else if (/终盘/.test(text)) phaseWord = 2;
+    else if (/中盘/.test(text)) phaseWord = 1;
+    else if (/序盘/.test(text)) phaseWord = 0;
+  }
+
   // 无条件类:必定触发/常时 → 起步时(不标近似)
   if (anchor === null && /必定触发|无特殊条件|常时|无条件/.test(text)) {
     return { condition: { kind: 'raceStart' }, approx, restrictions, unresolved: reasons };

@@ -24,6 +24,11 @@ describe('发动条件 → 可发动区间(静态预解析)', () => {
     expect(activationRegions({ kind: 'straightFastest' }, C)).toEqual([[0, 160]]);
   });
 
+  test('直线最快·限最终盘 → 裁剪到最终盘边界内(不再提前到直线段起点)', () => {
+    // 夹具最终直线段为 [1980, 2400],最终盘 [1920, 2400] → 交集为 [1980, 2400]
+    expect(activationRegions({ kind: 'straightFastest', phaseFilter: 3 }, C)).toEqual([[1980, 2400]]);
+  });
+
   test('下坡最快 → 首个下坡段', () => {
     expect(activationRegions({ kind: 'downhillFastest' }, C)).toEqual([[1250, 1500]]);
   });

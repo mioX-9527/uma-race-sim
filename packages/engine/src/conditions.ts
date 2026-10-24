@@ -75,10 +75,13 @@ export function activationRegions(cond: SkillCondition, course: Course): readonl
       return c ? [[c.start, c.end]] : [];
     }
     case 'cornerFastest': {
-      const list = phaseFilter !== undefined
-        ? course.corners.filter(c => c.end > boundOf(course, phaseFilter) && c.start < phaseEndOf(course, phaseFilter))
-        : course.corners;
-      const c = list[0];
+      if (phaseFilter !== undefined) {
+        const lo = boundOf(course, phaseFilter);
+        const hi = phaseEndOf(course, phaseFilter);
+        const c = course.corners.find(c => c.end > lo && c.start < hi);
+        return c ? [[Math.max(c.start, lo), Math.min(c.end, hi)]] : [];
+      }
+      const c = course.corners[0];
       return c ? [[c.start, c.end]] : [];
     }
     case 'finalCorner': {
@@ -108,10 +111,13 @@ export function activationRegions(cond: SkillCondition, course: Course): readonl
       return from < L ? [[from, L]] : [];
     }
     case 'straightFastest': {
-      const gaps = phaseFilter !== undefined
-        ? straightGaps(course).filter(g => g[1] > boundOf(course, phaseFilter) && g[0] < phaseEndOf(course, phaseFilter))
-        : straightGaps(course);
-      const g = gaps[0];
+      if (phaseFilter !== undefined) {
+        const lo = boundOf(course, phaseFilter);
+        const hi = phaseEndOf(course, phaseFilter);
+        const g = straightGaps(course).find(g => g[1] > lo && g[0] < hi);
+        return g ? [[Math.max(g[0], lo), Math.min(g[1], hi)]] : [];
+      }
+      const g = straightGaps(course)[0];
       return g ? [g] : [];
     }
     case 'lateStraight': {
@@ -119,17 +125,23 @@ export function activationRegions(cond: SkillCondition, course: Course): readonl
       return g ? [[Math.max(g[0], late), g[1]]] : [];
     }
     case 'uphillFastest': {
-      const list = phaseFilter !== undefined
-        ? course.slopes.filter(s => s.gradient > 0 && s.end > boundOf(course, phaseFilter) && s.start < phaseEndOf(course, phaseFilter))
-        : course.slopes.filter(s => s.gradient > 0);
-      const s = list[0];
+      if (phaseFilter !== undefined) {
+        const lo = boundOf(course, phaseFilter);
+        const hi = phaseEndOf(course, phaseFilter);
+        const s = course.slopes.find(s => s.gradient > 0 && s.end > lo && s.start < hi);
+        return s ? [[Math.max(s.start, lo), Math.min(s.end, hi)]] : [];
+      }
+      const s = course.slopes.find(s => s.gradient > 0);
       return s ? [[s.start, s.end]] : [];
     }
     case 'downhillFastest': {
-      const list = phaseFilter !== undefined
-        ? course.slopes.filter(s => s.gradient < 0 && s.end > boundOf(course, phaseFilter) && s.start < phaseEndOf(course, phaseFilter))
-        : course.slopes.filter(s => s.gradient < 0);
-      const s = list[0];
+      if (phaseFilter !== undefined) {
+        const lo = boundOf(course, phaseFilter);
+        const hi = phaseEndOf(course, phaseFilter);
+        const s = course.slopes.find(s => s.gradient < 0 && s.end > lo && s.start < hi);
+        return s ? [[Math.max(s.start, lo), Math.min(s.end, hi)]] : [];
+      }
+      const s = course.slopes.find(s => s.gradient < 0);
       return s ? [[s.start, s.end]] : [];
     }
     case 'distanceRun': {

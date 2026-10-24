@@ -15968,7 +15968,8 @@
   ],
   "durationSec": 0.9,
   "condition": {
-   "kind": "straightFastest"
+   "kind": "straightFastest",
+   "phaseFilter": 3
   },
   "restriction": {
    "tactics": [
@@ -15996,7 +15997,8 @@
   ],
   "durationSec": 0.9,
   "condition": {
-   "kind": "straightFastest"
+   "kind": "straightFastest",
+   "phaseFilter": 3
   },
   "restriction": {
    "tactics": [
@@ -27171,7 +27173,8 @@
   ],
   "durationSec": 0.9,
   "condition": {
-   "kind": "straightFastest"
+   "kind": "straightFastest",
+   "phaseFilter": 3
   },
   "restriction": {
    "tactics": [
@@ -27202,7 +27205,8 @@
   ],
   "durationSec": 0.9,
   "condition": {
-   "kind": "straightFastest"
+   "kind": "straightFastest",
+   "phaseFilter": 3
   },
   "restriction": {
    "tactics": [
@@ -32155,7 +32159,8 @@
   ],
   "durationSec": 0.9,
   "condition": {
-   "kind": "straightFastest"
+   "kind": "straightFastest",
+   "phaseFilter": 3
   },
   "restriction": {
    "tactics": [
@@ -32182,7 +32187,8 @@
   ],
   "durationSec": 0.9,
   "condition": {
-   "kind": "straightFastest"
+   "kind": "straightFastest",
+   "phaseFilter": 3
   },
   "restriction": {
    "tactics": [
@@ -35774,7 +35780,8 @@
   ],
   "durationSec": 0.9,
   "condition": {
-   "kind": "straightFastest"
+   "kind": "straightFastest",
+   "phaseFilter": 3
   },
   "restriction": {
    "tactics": [
@@ -35800,7 +35807,8 @@
   ],
   "durationSec": 0.9,
   "condition": {
-   "kind": "straightFastest"
+   "kind": "straightFastest",
+   "phaseFilter": 3
   },
   "restriction": {
    "tactics": [
