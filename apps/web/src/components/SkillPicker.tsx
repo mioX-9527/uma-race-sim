@@ -15,14 +15,12 @@ export function SkillPicker({ selected, onChange }: Props): JSX.Element {
   const matches = useMemo(() => {
     const q = query.trim().toLowerCase();
     if (q === '') return [];
-    return SKILLS.filter(s => !s.precision.includes('unsupported'))
-      .filter(
-        s =>
-          s.name.toLowerCase().includes(q) ||
-          (s.nameJa ?? '').toLowerCase().includes(q) ||
-          (s.nameTrad ?? '').toLowerCase().includes(q),
-      )
-      .slice(0, 40);
+    return SKILLS.filter(
+      s =>
+        s.name.toLowerCase().includes(q) ||
+        (s.nameJa ?? '').toLowerCase().includes(q) ||
+        (s.nameTrad ?? '').toLowerCase().includes(q),
+    ).slice(0, 40);
   }, [query]);
 
   const selectedSkills = useMemo(
@@ -48,7 +46,7 @@ export function SkillPicker({ selected, onChange }: Props): JSX.Element {
           {matches.map(s => (
             <div
               key={s.id}
-              className={`skill-item${selected.includes(s.id) ? ' selected' : ''}`}
+              className={`skill-item${selected.includes(s.id) ? ' selected' : ''}${s.precision === 'unsupported' ? ' dim' : ''}`}
               onClick={() => toggle(s.id)}
             >
               <div className="row1">

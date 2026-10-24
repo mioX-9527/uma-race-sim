@@ -1917,7 +1917,7 @@
   "durationSec": 6,
   "condition": {
    "kind": "phase",
-   "phase": 2
+   "phase": 3
   },
   "wisdomScaled": true,
   "source": "BWIKI 技能速查表",
@@ -5835,7 +5835,7 @@
   "durationSec": 6,
   "condition": {
    "kind": "phase",
-   "phase": 2
+   "phase": 3
   },
   "wisdomScaled": true,
   "source": "BWIKI 技能速查表",
@@ -24758,7 +24758,7 @@
   "nameTrad": "渾然忘我",
   "cnReleased": true,
   "rarity": "rareEvolved",
-  "precision": "unsupported",
+  "precision": "approx",
   "effects": [
    {
     "type": "acceleration",
@@ -24771,7 +24771,8 @@
   ],
   "durationSec": 1.5,
   "condition": {
-   "kind": "raceStart"
+   "kind": "phase",
+   "phase": 3
   },
   "restriction": {
    "tactics": [
@@ -24793,7 +24794,7 @@
   "nameTrad": "不顧一切",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "approx",
   "effects": [
    {
     "type": "acceleration",
@@ -24806,7 +24807,8 @@
   ],
   "durationSec": 1.5,
   "condition": {
-   "kind": "raceStart"
+   "kind": "phase",
+   "phase": 3
   },
   "restriction": {
    "tactics": [
@@ -36729,7 +36731,7 @@
   "name": "突破风障！",
   "nameJa": "開けろ風穴！",
   "rarity": "rareEvolved",
-  "precision": "unsupported",
+  "precision": "approx",
   "effects": [
    {
     "type": "acceleration",
@@ -36738,7 +36740,8 @@
   ],
   "durationSec": 3,
   "condition": {
-   "kind": "raceStart"
+   "kind": "phase",
+   "phase": 3
   },
   "restriction": {
    "surfaces": [
@@ -36755,7 +36758,7 @@
   "name": "越过沙尘",
   "nameJa": "砂塵を越えて",
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "approx",
   "effects": [
    {
     "type": "acceleration",
@@ -36764,7 +36767,8 @@
   ],
   "durationSec": 3,
   "condition": {
-   "kind": "raceStart"
+   "kind": "phase",
+   "phase": 3
   },
   "restriction": {
    "surfaces": [
@@ -38053,7 +38057,7 @@
   "durationSec": 2.4,
   "condition": {
    "kind": "phase",
-   "phase": 2
+   "phase": 3
   },
   "restriction": {
    "distanceTypes": [
@@ -38082,7 +38086,7 @@
   "durationSec": 2.4,
   "condition": {
    "kind": "phase",
-   "phase": 2
+   "phase": 3
   },
   "restriction": {
    "distanceTypes": [

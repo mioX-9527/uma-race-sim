@@ -1,8 +1,22 @@
+// 临时检查:追踪某个技能名在数据链路中的踪迹
 import { readFileSync } from 'node:fs';
-const s = JSON.parse(readFileSync('data/skills.json', 'utf8'));
-const cn = s.filter(x => x.cnReleased);
-console.log(`cnReleased: ${cn.length} / ${s.length}`);
-const prof = s.filter(x => x.nameJa === '弧線のプロフェッサー');
-console.log('弧線のプロフェッサー →', JSON.stringify(prof.map(x => ({ name: x.name, cn: x.cnReleased }))));
-const bad = s.filter(x => x.cnReleased && !/[\u4e00-\u9fff]/.test(x.name.slice(0, 2)));
-console.log('已实装但名字非中文开头:', bad.length, bad.slice(0, 5).map(x => x.name).join(','));
+const kw = process.argv[2] ?? '浑然忘我';
+
+const cnNames = JSON.parse(readFileSync('data/raw/cn-skill-names.json', 'utf8')).map;
+const hitCn = Object.entries(cnNames).filter(([, v]) => String(v).includes(kw));
+console.log(`官方译名映射命中 ${hitCn.length}:${JSON.stringify(hitCn.slice(0, 5))}`);
+
+const raw = JSON.parse(readFileSync('data/raw/skills.raw.json', 'utf8')).results;
+const hitRaw = raw.filter(r =>
+  [r.props['技能名'], r.props['中文名'], r.props['繁译名'], r.page].some(v => String(v ?? '').includes(kw)),
+);
+for (const r of hitRaw.slice(0, 5)) {
+  console.log(`raw: ID=${r.props['ID']} ${r.page} 中文名=${r.props['中文名']} 繁译=${r.props['繁译名']} 稀有度=${r.props['稀有度']}`);
+}
+
+const skills = JSON.parse(readFileSync('data/skills.json', 'utf8'));
+const hitSkills = skills.filter(s => [s.name, s.nameJa, s.nameTrad].some(v => String(v ?? '').includes(kw)));
+for (const s of hitSkills.slice(0, 5)) {
+  console.log(`skills.json: id=${s.id} name=${s.name} precision=${s.precision} cn=${s.cnReleased ?? false}`);
+}
+if (hitSkills.length === 0) console.log('skills.json: 未命中');

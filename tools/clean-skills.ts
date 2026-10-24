@@ -137,7 +137,7 @@ const ANCHORS: Array<{ re: RegExp; kind: string; approxHint?: boolean }> = [
   { re: /下坡/, kind: 'downhillFastest' },
   { re: /弯道/, kind: 'cornerFastest' },
   { re: /直线/, kind: 'straightFastest' },
-  { re: /最后冲刺|最终冲刺状态/, kind: 'phase3', approxHint: true },
+  { re: /最后冲刺|最终冲刺/, kind: 'phase3', approxHint: true },
   { re: /最终盘/, kind: 'phase3' },
   { re: /终盘前半|终盘后半|终盘四分之三|终盘前四分之一|终盘中后|终盘前八分之一/, kind: 'phase2', approxHint: true },
   { re: /终盘/, kind: 'phase2' },

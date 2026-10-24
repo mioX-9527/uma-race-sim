@@ -59,14 +59,14 @@ export function AblationTable({ report }: { report: AblationReport }): JSX.Eleme
           <tfoot>
             <tr>
               <td colSpan={5}>Σ 单项收益(去重前)</td>
-              <td>+{report.sumDeltaSec.toFixed(3)}s</td>
-              <td>+{(report.sumDeltaSec * 20).toFixed(0)}m(约)</td>
-              <td>+{(report.sumDeltaSec * 20 / 2.5).toFixed(2)}(约)</td>
+              <td>{report.sumDeltaSec >= 0 ? '+' : ''}{report.sumDeltaSec.toFixed(3)}s</td>
+              <td>{report.sumDeltaSec >= 0 ? '+' : ''}{(report.sumDeltaSec * 20).toFixed(0)}m(约)</td>
+              <td>{report.sumDeltaSec >= 0 ? '+' : ''}{((report.sumDeltaSec * 20) / 2.5).toFixed(2)}(约)</td>
             </tr>
             <tr>
               <td colSpan={5}>实测总收益(无技能 − 全技能)</td>
-              <td>+{report.totalDeltaSec.toFixed(3)}s</td>
-              <td colSpan={2}>+{(report.totalDeltaSec * 20 / 2.5).toFixed(2)} 马身(约)</td>
+              <td>{report.totalDeltaSec >= 0 ? '+' : ''}{report.totalDeltaSec.toFixed(3)}s</td>
+              <td colSpan={2}>{report.totalDeltaSec >= 0 ? '+' : ''}{((report.totalDeltaSec * 20) / 2.5).toFixed(2)} 马身(约)</td>
             </tr>
           </tfoot>
         )}
