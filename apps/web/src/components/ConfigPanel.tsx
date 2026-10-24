@@ -125,7 +125,13 @@ export function ConfigPanel({ config, onChange }: Props): JSX.Element {
           发动位置为赛程百分比,只计温存判定前。上排=回体,下排=减益。列:档位 / 数量 / 位置。
         </p>
         <div className="heal-grid">
+          <span className="heal-head">回体</span>
+          <span className="heal-head">数量</span>
+          <span className="heal-head">位置</span>
           {HEAL_TIERS.map(t => tierRow(t, 'heal'))}
+          <span className="heal-head">减益</span>
+          <span className="heal-head">数量</span>
+          <span className="heal-head">位置</span>
           {DEBUFF_TIERS.map(t => tierRow(t, 'debuff'))}
         </div>
       </section>

@@ -66,9 +66,11 @@ header.app-header .sub { color: var(--muted); font-size: 12px; }
 .field-grid { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 6px 8px; align-items: center; }
 .field-grid label { color: var(--muted); font-size: 12px; white-space: nowrap; }
 
-/* 耐力试算:标签 / 数量 / 位置 三列一组 */
-.heal-grid { display: grid; grid-template-columns: repeat(3, 64px 44px 56px); gap: 6px 6px; align-items: center; }
+/* 耐力试算:每档一行(档位标签 / 数量 / 发动位置) */
+.heal-grid { display: grid; grid-template-columns: 64px 52px 68px; gap: 5px 8px; align-items: center; }
 .heal-grid label { color: var(--muted); font-size: 12px; white-space: nowrap; }
+.heal-grid .heal-group { display: contents; }
+.heal-grid .heal-head { color: var(--muted); font-size: 11px; font-weight: 600; }
 
 .table-scroll { overflow-x: auto; }
 
