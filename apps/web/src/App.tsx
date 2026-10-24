@@ -66,7 +66,7 @@ export function App(): JSX.Element {
       <header className="app-header">
         <h1>uma-race-sim · 赛马娘赛道模拟器</h1>
         <span className="sub">
-          单马确定性期望模型 · 与 614tools 实算对拍 116.366s(差 0.038s;游戏参考 116.987s)· v0.2 开发版
+          单马确定性期望模型 · 赛道补正按门槛属性自动计算 · 对拍 614tools(×1.2 档)差 0.038s / 游戏实录差 0.26s · v0.3 开发版
         </span>
       </header>
 

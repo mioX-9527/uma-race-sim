@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
+import { courseFixOf } from '@uma-race-sim/engine';
 import type { Aptitude, Motivation, Stats, Tactic } from '@uma-race-sim/engine';
-import { APTITUDES, COURSES, DEBUFF_TIERS, HEAL_TIERS, MOTIVATION_LABEL, TACTIC_LABEL, type HealPlanItem, type UiConfig } from '../lib/sim';
+import { APTITUDES, COURSES, DEBUFF_TIERS, HEAL_TIERS, MOTIVATION_LABEL, TACTIC_LABEL, buildRunner, findCourse, type HealPlanItem, type UiConfig } from '../lib/sim';
 import { SkillPicker } from './SkillPicker';
 
 interface Props {
@@ -12,6 +13,16 @@ const STAT_KEYS: readonly (keyof Stats)[] = ['speed', 'stamina', 'power', 'guts'
 const STAT_LABEL: Record<keyof Stats, string> = { speed: '速度', stamina: '耐力', power: '力量', guts: '根性', wisdom: '智力' };
 const TACTICS: readonly Tactic[] = ['nige', 'senko', 'sashi', 'oikomi'];
 const MOTIVATIONS: readonly Motivation[] = ['best', 'good', 'normal', 'bad', 'worst'];
+
+/** 赛道补正说明行:门槛属性 + 当前配置下的补正值(自动或手动覆盖) */
+function courseFixNote(config: UiConfig): string {
+  const course = findCourse(config.courseId);
+  const refs = course.courseSetStatus ?? [];
+  const gate = refs.length === 0 ? '无门槛属性(基准 ×1.0)' : `门槛:${refs.map(k => STAT_LABEL[k]).join('/')}`;
+  const fix = courseFixOf(course, buildRunner(config));
+  const mode = config.courseFix === undefined || config.courseFix === 'auto' ? '自动补正' : '手动补正';
+  return `${course.name} — ${gate},${mode} ×${fix.toFixed(2)}(自动档:≥901→×1.2、601~900→×1.15、301~600→×1.10、≤300→×1.05)`;
+}
 
 export function ConfigPanel({ config, onChange }: Props): JSX.Element {
   const set = (patch: Partial<UiConfig>): void => onChange({ ...config, ...patch });
@@ -97,14 +108,20 @@ export function ConfigPanel({ config, onChange }: Props): JSX.Element {
           <select id="cfg-mot" value={config.motivation} onChange={e => set({ motivation: e.target.value as Motivation })}>
             {MOTIVATIONS.map(m => <option key={m} value={m}>{MOTIVATION_LABEL[m]}</option>)}
           </select>
-          <label htmlFor="cfg-fix" title="有效速度 ×赛道补正:最大=1.2、标准=1(与 614tools 一致,默认最大)">
+          <label htmlFor="cfg-fix" title="自动 = 按赛道门槛属性(courseSetStatus)与五维计算:1 + 平均((1+floor(min(属性,901)/300.01))×0.05),只作用于有效速度;空门槛赛道 = ×1.0。最大/标准 = 手动覆盖(与 614tools 档位一致)">
             赛道补正
           </label>
-          <select id="cfg-fix" value={config.courseFix ?? 1.2} onChange={e => set({ courseFix: Number(e.target.value) })}>
+          <select
+            id="cfg-fix"
+            value={config.courseFix ?? 'auto'}
+            onChange={e => set({ courseFix: e.target.value === 'auto' ? 'auto' : Number(e.target.value) })}
+          >
+            <option value="auto">自动(按门槛属性)</option>
             <option value={1.2}>最大(×1.2)</option>
             <option value={1}>标准(×1.0)</option>
           </select>
         </div>
+        <p className="note">{courseFixNote(config)}</p>
       </section>
 
       <section>

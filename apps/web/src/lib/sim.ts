@@ -127,8 +127,11 @@ export interface UiConfig {
   readonly distanceAptitude: Aptitude;
   readonly surfaceAptitude: Aptitude;
   readonly motivation: Motivation;
-  /** 赛道补正:有效速度 ×1.2(最大)或 ×1(标准);缺省=最大,与 614tools 默认一致 */
-  readonly courseFix?: number;
+  /**
+   * 赛道补正:'auto'(缺省)= 按赛道门槛属性(courseSetStatus)与五维自动计算
+   * (uma-skill-tools 公式,见 engine courseFixOf);数字 = 手动覆盖。
+   */
+  readonly courseFix?: number | 'auto';
   /** 回体/减益试算(614tools 耐力计算器口径;发动位置取首档,温存判定前) */
   readonly healPlan?: readonly HealPlanItem[];
   readonly courseId: string;
@@ -182,7 +185,7 @@ export function buildRunner(cfg: UiConfig): RunnerConfig {
     distanceAptitude: cfg.distanceAptitude,
     surfaceAptitude: cfg.surfaceAptitude,
     motivation: cfg.motivation,
-    courseFix: cfg.courseFix ?? 1.2,
+    courseFix: cfg.courseFix ?? 'auto',
     skills: [...skills, ...planToSkills(cfg.healPlan, 'heal'), ...planToSkills(cfg.healPlan, 'debuff')],
   };
 }

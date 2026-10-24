@@ -4,7 +4,7 @@ import type { Course, GroundCondition, PhaseId, RunnerConfig } from './types';
 
 /** 体力上限 = 0.8 × 跑法系数 × 有效耐力(软上限+干劲;绿技能不参与) + 距离 */
 export function maxHpOf(course: Course, runner: RunnerConfig): number {
-  return 0.8 * HP_STRATEGY_COEF[runner.tactic] * effectiveStatsOf(runner).stamina + course.distance;
+  return 0.8 * HP_STRATEGY_COEF[runner.tactic] * effectiveStatsOf(runner, course).stamina + course.distance;
 }
 
 /** 终盘起的根性消耗系数 = 1 + 200/√(600×有效根性) */

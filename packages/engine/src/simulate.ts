@@ -113,7 +113,7 @@ export function simulate(course: Course, runner: RunnerConfig, opts: SimOptions 
   const ground = runner.groundCondition ?? 0;
   const distScale = course.distance / 1000;
   const late = course.phaseBounds.lateStart;
-  const eff = effectiveStatsOf(runner);
+  const eff = effectiveStatsOf(runner, course);
 
   // 序盘 PDM(取位放缓):仅非逃马,0~int(d/24);发动目标/即时速度技能时提前解除(614tools)
   const pdmApplies = runner.tactic !== 'nige';

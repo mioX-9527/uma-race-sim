@@ -181,8 +181,13 @@ export interface RunnerConfig {
   readonly surfaceAptitude: Aptitude;
   readonly motivation: Motivation;
   readonly groundCondition?: GroundCondition;
-  /** 赛道补正对有效速度的乘数(最大=1.2,标准/无=1;缺省=最大,与 614tools 默认一致) */
-  readonly courseFix?: number;
+  /**
+   * 赛道补正:'auto'(缺省)= 按赛道门槛属性(courseSetStatus)与五维计算:
+   * 1 + 平均((1+floor(min(属性,901)/300.01))×0.05)(uma-skill-tools CourseHelpers.courseSpeedModifier;
+   * 属性取 (面板+绿)×干劲);空门槛赛道 = 1.0。数字 = 手动覆盖(1.2 最大 / 1.0 标准)。
+   * 补正只乘有效速度(终盘/末脚速度加成),不作用于力量/根性/耐力。
+   */
+  readonly courseFix?: number | 'auto';
   /** 前提:脚色充分(终盘起 3 秒加速度,面板力量;默认开) */
   readonly assumeAshiiro?: boolean;
   /** 前提:耐力对决(终盘起速度,参照耐力=面板×干劲;默认开) */
