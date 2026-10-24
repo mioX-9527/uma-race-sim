@@ -53,7 +53,10 @@ export function SkillPicker({ selected, onChange }: Props): JSX.Element {
             >
               <div className="row1">
                 <span className="name">{s.name}</span>
-                <span className={`badge ${s.precision}`}>{PRECISION_LABEL[s.precision]}</span>
+                <span>
+                  {s.cnReleased === true && <span className="badge cn">国服</span>}
+                  <span className={`badge ${s.precision}`}>{PRECISION_LABEL[s.precision]}</span>
+                </span>
               </div>
               <div className="meta">
                 {describeCondition(s.condition)} · {describeEffects(s)}

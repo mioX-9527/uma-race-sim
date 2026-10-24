@@ -10,7 +10,7 @@
  *   耐力恢复→heal、被动(属性)→passive(前提值)、妨害/视野/横向速度→unsupported
  * - 持续时间为基准值:运行期按 距离/1000 缩放(解包模型,RaceSolver.activateSkill)
  */
-import { readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 
 interface RawEntry {
   page: string;
@@ -28,6 +28,8 @@ interface OutSkill {
   nameJa?: string;
   /** 繁中(台服)译名,便于搜索对照 */
   nameTrad?: string;
+  /** 国服已实装(名称取自 BWIKI 简中技能速查表的官方译名) */
+  cnReleased?: boolean;
   rarity: string;
   precision: 'precise' | 'approx' | 'unsupported';
   effects: OutEffect[];
@@ -44,6 +46,10 @@ const raw = JSON.parse(readFileSync('data/raw/skills.raw.json', 'utf8')) as {
   source: string;
   results: RawEntry[];
 };
+/** 国服官方译名:BWIKI 简中技能速查表(简/ 页面,ID 对齐);文件未生成时视为空映射 */
+const cnNames = existsSync('data/raw/cn-skill-names.json')
+  ? (JSON.parse(readFileSync('data/raw/cn-skill-names.json', 'utf8')) as { map: Record<string, string> })
+  : { map: {} as Record<string, string> };
 const review: Array<{ id: string; page: string; reasons: string[] }> = [];
 
 // ---------- 字段工具 ----------
@@ -237,7 +243,9 @@ for (const e of raw.results) {
 
   const rarity = rarityCn === '普通' ? 'normal' : rarityCn === '传说' ? 'rareEvolved' : 'unique5';
   const nameJa = prop(e, '技能名') || e.page;
-  const baseName = cleanName(prop(e, '中文名')) || nameJa;
+  // 名称优先级:国服官方译名(简中技能速查表)> wiki 中文名(社区译名)> 日文原名
+  const official = cnNames.map[id];
+  const baseName = official || cleanName(prop(e, '中文名')) || nameJa;
   const tradRaw = cleanName(prop(e, '繁译名'));
   const tradName = /^(（?\(?未[实實]裝\)?）?)$/.test(tradRaw) || tradRaw === '' ? '' : tradRaw;
   const restrictionBase = prop(e, '条件限制');
@@ -320,6 +328,7 @@ for (const e of raw.results) {
       name: multi ? `${baseName}(${b + 1})` : baseName,
       nameJa,
       nameTrad: tradName !== '' ? tradName : undefined,
+      cnReleased: official !== undefined ? true : undefined,
       rarity,
       precision,
       effects,

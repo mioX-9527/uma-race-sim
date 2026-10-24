@@ -5,6 +5,7 @@ import skillsJson from '../../../../data/skills.json';
 export interface SkillEntry extends SkillConfig {
   readonly nameJa?: string;
   readonly nameTrad?: string;
+  readonly cnReleased?: boolean;
   readonly restriction?: string;
 }
 
