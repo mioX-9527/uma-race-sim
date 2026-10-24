@@ -41,9 +41,20 @@ export function TrackBar({ course, activations, exhaustedAtMeter, align }: Props
     ctx.scale(dpr, dpr);
 
     const D = course.distance;
-    // 与曲线图绘图区共用同一水平映射:同一段距离在两图中垂直对齐
-    const padL = align?.left ?? 14;
-    const trackW = align?.width ?? width - 14 - 14;
+    // 与曲线图绘图区共用同一水平映射:直接测量 uPlot 绘图区 DOM(u-under),
+    // 保证两图按距离逐像素对齐(align 仅作图表未挂载时的回退与重绘触发)。
+    let padL = align?.left ?? 14;
+    let trackW = align?.width ?? width - 14 - 14;
+    const plotEl = wrapRef.current?.parentElement?.parentElement
+      ?.querySelector<HTMLDivElement>('.chart-wrap .u-under');
+    if (plotEl !== null && plotEl !== undefined) {
+      const pr = plotEl.getBoundingClientRect();
+      const cr = canvas.getBoundingClientRect();
+      if (pr.width > 50) {
+        padL = pr.left - cr.left;
+        trackW = pr.width;
+      }
+    }
     const px = (m: number): number => padL + (m / D) * trackW;
     const meterAt = (x: number): number => ((x - padL) / trackW) * D;
 

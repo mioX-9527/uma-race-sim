@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { courseFixOf } from '@uma-race-sim/engine';
 import type { Aptitude, Motivation, Stats, Tactic } from '@uma-race-sim/engine';
-import { APTITUDES, COURSES, DEBUFF_TIERS, HEAL_TIERS, MOTIVATION_LABEL, TACTIC_LABEL, buildRunner, findCourse, type HealPlanItem, type UiConfig } from '../lib/sim';
+import { APTITUDES, COURSES, DEBUFF_TIERS, MOTIVATION_LABEL, TACTIC_LABEL, buildRunner, findCourse, type HealPlanItem, type UiConfig } from '../lib/sim';
 import { SkillPicker } from './SkillPicker';
 
 interface Props {
@@ -136,16 +136,12 @@ export function ConfigPanel({ config, onChange }: Props): JSX.Element {
       </section>
 
       <section>
-        <h2>耐力试算(回体 / 减益)</h2>
+        <h2>耐力试算(减益)</h2>
         <p className="note" style={{ marginTop: 0 }}>
-          按体力上限百分比快速计入回体技能与耐力减益(614tools 耐力计算器口径);
-          发动位置为赛程百分比,只计温存判定前。上排=回体,下排=减益。列:档位 / 数量 / 位置。
+          按体力上限百分比快速计入耐力减益(614tools 耐力计算器口径);发动位置为赛程百分比,只计温存判定前。
+          回体请在下方技能里直接选择(弯道回复○、金回等已按解包数值入库)。列:档位 / 数量 / 位置。
         </p>
         <div className="heal-grid">
-          <span className="heal-head">回体</span>
-          <span className="heal-head">数量</span>
-          <span className="heal-head">位置</span>
-          {HEAL_TIERS.map(t => tierRow(t, 'heal'))}
           <span className="heal-head">减益</span>
           <span className="heal-head">数量</span>
           <span className="heal-head">位置</span>
