@@ -40,6 +40,25 @@ export function App(): JSX.Element {
     return { distance: diff(distS, distA), surface: diff(surfS, surfA) };
   }, [course, runner]);
 
+  /**
+   * 耐力温存判定(614tools 耐力计算器口径):
+   * 探针模拟(体力可降至负、不温存)求"不温存跑完全程所需 HP"= maxHp − min(hp);
+   * 温存回避线 = 所需 ×1.04(判定余量)×1.05(默认安全余量);
+   * 到达度 = maxHp / 回避线;结论:≥100% 余量充足 / 实际能跑完但 <100% 无余量 / 否则耐力不足。
+   */
+  const staminaJudge = useMemo(() => {
+    const probe = simulate(course, runner, { ignoreExhaustion: true });
+    let minHp = Infinity;
+    for (let i = 0; i < probe.hp.length; i++) minHp = Math.min(minHp, probe.hp[i]!);
+    const required = result.maxHp - minHp;
+    const avoidLine = required * 1.04 * 1.05;
+    const reach = (result.maxHp / avoidLine) * 100;
+    const margin = result.maxHp - avoidLine;
+    const verdict: 'safe' | 'tight' | 'short' =
+      reach >= 100 ? 'safe' : required <= result.maxHp ? 'tight' : 'short';
+    return { required, avoidLine, reach, margin, verdict };
+  }, [course, runner, result.maxHp]);
+
   const activatedCount = result.activations.length;
 
   return (
@@ -58,7 +77,7 @@ export function App(): JSX.Element {
           赛道 <b>{course.name}</b>
         </span>
         <span className="item">
-          技能发动 <b>{activatedCount}/{config.skillIds.length}</b>
+          技能发动 <b>{activatedCount}/{runner.skills.length}</b>
         </span>
         <span className="item warn">
           {result.exhaustedAtMeter === null ? '体力充足' : `体力归零 @ ${Math.round(result.exhaustedAtMeter)}m(温存)`}
@@ -74,6 +93,22 @@ export function App(): JSX.Element {
         <span className="item" title="同配置下分别以适性 S 与 A 模拟:距离适性影响终盘/末脚速度与加速度,场地适性影响加速度;正值 = S 比 A 快">
           适性 S−A:距离 <b className="pos">+{aptCompare.distance.deltaBody.toFixed(2)}</b> / 场地{' '}
           <b className="pos">+{aptCompare.surface.deltaBody.toFixed(2)}</b> 马身
+        </span>
+        <span
+          className={`item ${staminaJudge.verdict === 'safe' ? '' : 'warn'}`}
+          title={
+            '耐力温存判定(614tools 耐力计算器口径):不温存跑完全程所需 HP ' +
+            `${Math.round(staminaJudge.required)} × 1.04(判定余量) × 1.05(安全余量) = 回避线 ` +
+            `${Math.round(staminaJudge.avoidLine)};体力上限 ${Math.round(result.maxHp)};` +
+            '到达度 = 上限/回避线,≥100% 判定余量充足。'
+          }
+        >
+          耐力判定{' '}
+          <b className={staminaJudge.verdict === 'safe' ? 'pos' : staminaJudge.verdict === 'tight' ? '' : 'neg'}>
+            {staminaJudge.verdict === 'safe' ? '余量充足' : staminaJudge.verdict === 'tight' ? '无余量' : '耐力不足'}
+          </b>{' '}
+          ({staminaJudge.margin >= 0 ? '+' : ''}
+          {Math.round(staminaJudge.margin)}HP · 到达度 {staminaJudge.reach.toFixed(1)}%)
         </span>
       </div>
 

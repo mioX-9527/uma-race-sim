@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import type { Aptitude, Motivation, Stats, Tactic } from '@uma-race-sim/engine';
-import { APTITUDES, COURSES, MOTIVATION_LABEL, TACTIC_LABEL, type UiConfig } from '../lib/sim';
+import { APTITUDES, COURSES, DEBUFF_TIERS, HEAL_TIERS, MOTIVATION_LABEL, TACTIC_LABEL, type HealPlanItem, type UiConfig } from '../lib/sim';
 import { SkillPicker } from './SkillPicker';
 
 interface Props {
@@ -22,6 +22,40 @@ export function ConfigPanel({ config, onChange }: Props): JSX.Element {
     if (!venueGroups.has(c.venue)) venueGroups.set(c.venue, []);
     venueGroups.get(c.venue)!.push(c);
   }
+
+  const plan = config.healPlan ?? [];
+  const setPlan = (next: readonly HealPlanItem[]): void => set({ healPlan: next });
+  const getTier = (tierKey: string): HealPlanItem => plan.find(p => p.tierKey === tierKey) ?? { tierKey, count: 0, atPct: 25 };
+  const updateTier = (item: HealPlanItem): void =>
+    setPlan([...plan.filter(p => p.tierKey !== item.tierKey), ...(item.count > 0 ? [item] : [])]);
+  const tierRow = (tier: (typeof HEAL_TIERS)[number], kind: 'heal' | 'debuff'): JSX.Element => {
+    const item = getTier(tier.key);
+    return (
+      <Fragment key={tier.key}>
+        <label title={`${tier.note};${kind === 'heal' ? '回复' : '扣除'}体力上限 ×${tier.value},同档多次合并发动`}>
+          {kind === 'heal' ? '+' : '−'}
+          {tier.label}
+        </label>
+        <input
+          type="number"
+          min={0}
+          max={9}
+          value={item.count}
+          aria-label={`${tier.label}${kind === 'heal' ? '回体' : '减益'}数量`}
+          onChange={e => updateTier({ ...item, count: Math.max(0, Math.min(9, Number(e.target.value) || 0)) })}
+        />
+        <select
+          value={item.atPct}
+          aria-label={`${tier.label}${kind === 'heal' ? '回体' : '减益'}发动位置`}
+          onChange={e => updateTier({ ...item, atPct: Number(e.target.value) as 10 | 25 | 40 })}
+        >
+          <option value={10}>10%</option>
+          <option value={25}>25%</option>
+          <option value={40}>40%</option>
+        </select>
+      </Fragment>
+    );
+  };
 
   return (
     <div className="panel" style={{ display: 'grid', gap: 12 }}>
@@ -82,6 +116,18 @@ export function ConfigPanel({ config, onChange }: Props): JSX.Element {
             </optgroup>
           ))}
         </select>
+      </section>
+
+      <section>
+        <h2>耐力试算(回体 / 减益)</h2>
+        <p className="note" style={{ marginTop: 0 }}>
+          按体力上限百分比快速计入回体技能与耐力减益(614tools 耐力计算器口径);
+          发动位置为赛程百分比,只计温存判定前。上排=回体,下排=减益。列:档位 / 数量 / 位置。
+        </p>
+        <div className="heal-grid">
+          {HEAL_TIERS.map(t => tierRow(t, 'heal'))}
+          {DEBUFF_TIERS.map(t => tierRow(t, 'debuff'))}
+        </div>
       </section>
 
       <section>

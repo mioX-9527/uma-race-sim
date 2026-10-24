@@ -200,6 +200,14 @@ export interface Activation {
   readonly precision: Precision;
 }
 
+export interface SimOptions {
+  /**
+   * 体力探针模式:体力可降至负值、不进入温存(用于计算"不温存跑完全程所需 HP",
+   * 即 614tools 耐力计算器的温存回避线口径)。exhaustedAtMeter 仍记录首次归零位置。
+   */
+  readonly ignoreExhaustion?: boolean;
+}
+
 export interface SimResult {
   /** 完赛时间(秒,冲线帧线性插值) */
   readonly finishTimeSec: number;

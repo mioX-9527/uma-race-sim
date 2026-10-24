@@ -34,7 +34,7 @@ import {
   type Buff,
 } from './skills';
 import { gutsDrainModifier, maxHpOf, staminaDrainPerSecond } from './stamina';
-import type { Activation, Course, RunnerConfig, SimResult, Slope } from './types';
+import type { Activation, Course, RunnerConfig, SimOptions, SimResult, Slope } from './types';
 
 const MAX_SECONDS = 600;
 
@@ -103,7 +103,8 @@ function solveSpurtTransition(
  * 单马确定性期望模拟:dt 帧级积分,物理公式见 docs/formulas.md(解包模型 + 614tools 交叉验证)。
  * 随机项(焦躁/追比/下坡模式/位置保持等)v0.1 不参与计算;全开冲刺/前提机制按期望建模。
  */
-export function simulate(course: Course, runner: RunnerConfig): SimResult {
+export function simulate(course: Course, runner: RunnerConfig, opts: SimOptions = {}): SimResult {
+  const ignoreExhaustion = opts.ignoreExhaustion === true;
   const baseV = baseSpeedOf(course);
   const maxHp = maxHpOf(course, runner);
   const minSpeed = minSpeedOf(course, runner);
@@ -193,7 +194,7 @@ export function simulate(course: Course, runner: RunnerConfig): SimResult {
     target += targetSpeedBonus(buffs, t);
     // 前提:耐力对决(终盘起概算加速)
     if (sfBonus > 0 && x >= late) target += sfBonus;
-    if (hp <= 0) tempering = true;
+    if (hp <= 0 && !ignoreExhaustion) tempering = true;
     if (tempering) {
       target = Math.min(target, minSpeed);
     } else if (slope !== null && slope.gradient > 0) {

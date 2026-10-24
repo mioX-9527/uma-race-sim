@@ -66,6 +66,10 @@ header.app-header .sub { color: var(--muted); font-size: 12px; }
 .field-grid { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 6px 8px; align-items: center; }
 .field-grid label { color: var(--muted); font-size: 12px; white-space: nowrap; }
 
+/* 耐力试算:标签 / 数量 / 位置 三列一组 */
+.heal-grid { display: grid; grid-template-columns: repeat(3, 64px 44px 56px); gap: 6px 6px; align-items: center; }
+.heal-grid label { color: var(--muted); font-size: 12px; white-space: nowrap; }
+
 .table-scroll { overflow-x: auto; }
 
 input[type='number'], select {

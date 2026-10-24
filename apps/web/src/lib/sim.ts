@@ -89,6 +89,38 @@ export function describeEffects(skill: SkillConfig): string {
   return parts.join(' / ') + dur + cd;
 }
 
+/** 回体/减益档位(614tools 耐力计算器同款分组;value=相对体力上限的比例) */
+export interface HealTier {
+  readonly key: string;
+  readonly label: string;
+  readonly note: string;
+  readonly value: number;
+}
+
+export const HEAL_TIERS: readonly HealTier[] = [
+  { key: 'h035', label: '0.35%', note: '快速、霸气十足等', value: 0.0035 },
+  { key: 'h05', label: '0.5%', note: '斗争心、璀璨之星等', value: 0.005 },
+  { key: 'h15', label: '1.5%', note: '弯道回复○等', value: 0.015 },
+  { key: 'h35', label: '3.5%', note: '固有或复合回体', value: 0.035 },
+  { key: 'h55', label: '5.5%', note: '圆弧的艺术家等金回', value: 0.055 },
+  { key: 'h75', label: '7.5%', note: '进化或强化回体', value: 0.075 },
+  { key: 'h95', label: '9.5%', note: '部分进化回体', value: 0.095 },
+];
+
+export const DEBUFF_TIERS: readonly HealTier[] = [
+  { key: 'd05', label: '0.5%', note: '耐力吞噬等', value: -0.005 },
+  { key: 'd1', label: '1%', note: '牵制、焦躁、低语等', value: -0.01 },
+  { key: 'd2', label: '2%', note: '部分固有或复合减益', value: -0.02 },
+  { key: 'd3', label: '3%', note: '魅惑的低语、八方睥睨等', value: -0.03 },
+];
+
+/** 单档回体/减益:数量与发动位置(赛程百分比) */
+export interface HealPlanItem {
+  readonly tierKey: string;
+  readonly count: number;
+  readonly atPct: 10 | 25 | 40;
+}
+
 export interface UiConfig {
   readonly stats: Stats;
   readonly tactic: Tactic;
@@ -97,6 +129,8 @@ export interface UiConfig {
   readonly motivation: Motivation;
   /** 赛道补正:有效速度 ×1.2(最大)或 ×1(标准);缺省=最大,与 614tools 默认一致 */
   readonly courseFix?: number;
+  /** 回体/减益试算(614tools 耐力计算器口径;发动位置取首档,温存判定前) */
+  readonly healPlan?: readonly HealPlanItem[];
   readonly courseId: string;
   readonly skillIds: readonly string[];
 }
@@ -115,6 +149,28 @@ export function findCourse(id: string): Course {
   return COURSES.find(c => c.id === id) ?? COURSES[0]!;
 }
 
+/** 回体/减益计划 → 合成 heal 技能(同档多次按所选位置合并发动;value 相对体力上限) */
+export function planToSkills(plan: readonly HealPlanItem[] | undefined, kind: 'heal' | 'debuff'): SkillEntry[] {
+  const tiers = kind === 'heal' ? HEAL_TIERS : DEBUFF_TIERS;
+  const out: SkillEntry[] = [];
+  for (const item of plan ?? []) {
+    if (!Number.isFinite(item.count) || item.count <= 0) continue;
+    const tier = tiers.find(t => t.key === item.tierKey);
+    if (tier === undefined) continue;
+    out.push({
+      id: `plan-${kind}-${item.tierKey}-${item.atPct}`,
+      name: `${kind === 'heal' ? '回体' : '减益'}${tier.label}×${item.count}(${item.atPct}%)`,
+      rarity: 'normal',
+      precision: 'precise',
+      effects: [{ type: 'heal', value: tier.value * item.count }],
+      durationSec: null,
+      condition: { kind: 'positionPct', pct: item.atPct },
+      wisdomScaled: false,
+    });
+  }
+  return out;
+}
+
 export function buildRunner(cfg: UiConfig): RunnerConfig {
   const skills = cfg.skillIds
     .map(id => SKILLS.find(s => s.id === id))
@@ -127,7 +183,7 @@ export function buildRunner(cfg: UiConfig): RunnerConfig {
     surfaceAptitude: cfg.surfaceAptitude,
     motivation: cfg.motivation,
     courseFix: cfg.courseFix ?? 1.2,
-    skills,
+    skills: [...skills, ...planToSkills(cfg.healPlan, 'heal'), ...planToSkills(cfg.healPlan, 'debuff')],
   };
 }
 
