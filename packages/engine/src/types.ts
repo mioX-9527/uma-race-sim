@@ -119,6 +119,9 @@ export interface SkillConfig {
   readonly wisdomScaled: boolean;
 }
 
+/** 场地状态:0=良 1=好 2=稍重 3=不良 */
+export type GroundCondition = 0 | 1 | 2 | 3;
+
 export interface RunnerConfig {
   readonly stats: Stats;
   /** 绿技能提供的前提值 */
@@ -127,6 +130,7 @@ export interface RunnerConfig {
   readonly distanceAptitude: Aptitude;
   readonly surfaceAptitude: Aptitude;
   readonly motivation: Motivation;
+  readonly groundCondition?: GroundCondition;
   readonly skills: readonly SkillConfig[];
 }
 

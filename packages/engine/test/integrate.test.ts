@@ -1,23 +1,21 @@
 import { describe, expect, test } from 'vitest';
 import { simulate } from '../src/simulate';
+import { lastSpurtSpeedOf, minSpeedOf, phaseTargetSpeed } from '../src/speed';
 import { freshRunner, makeRunner, speedSkill, TOKYO_TURF_2400 as C } from './fixtures';
 
-describe('无技能帧积分(占位赛道,断言机制而非数值精度)', () => {
+describe('无技能帧积分(解包公式,占位赛道)', () => {
   const res = simulate(C, freshRunner());
 
-  test('完成全程并给出有限完赛时间', () => {
+  test('完成全程并给出合理完赛时间', () => {
     expect(res.finishTimeSec).toBeGreaterThan(100);
     expect(res.finishTimeSec).toBeLessThan(160);
     expect(res.activations).toHaveLength(0);
     expect(res.exhaustedAtMeter).toBeNull();
   });
 
-  test('位置单调递增且冲线', () => {
+  test('位置单调递增且冲线;速度处于合理区间', () => {
     for (let i = 1; i < res.x.length; i++) expect(res.x[i]!).toBeGreaterThan(res.x[i - 1]!);
     expect(res.x[res.x.length - 1]!).toBeGreaterThanOrEqual(C.distance);
-  });
-
-  test('速度处于合理区间', () => {
     for (const v of res.v) {
       expect(v).toBeGreaterThan(0);
       expect(v).toBeLessThanOrEqual(30);
@@ -25,8 +23,14 @@ describe('无技能帧积分(占位赛道,断言机制而非数值精度)', () =
   });
 
   test('出闸:24 m/s² 加速至基准 85%', () => {
-    const idx = Math.round(0.67 / (1 / 30)); // ~0.67s 处应已越过 85%×19.6≈16.66
+    const idx = Math.round(0.67 / (1 / 30));
     expect(res.v[idx]!).toBeGreaterThanOrEqual(16.6);
+  });
+
+  test('末脚速度高于终盘目标,终盘目标高于中盘(先行)', () => {
+    const r = freshRunner();
+    expect(lastSpurtSpeedOf(C, r)).toBeGreaterThan(phaseTargetSpeed(C, r, 2));
+    expect(phaseTargetSpeed(C, r, 2)).toBeGreaterThan(phaseTargetSpeed(C, r, 1));
   });
 
   test('体力全程递减', () => {
@@ -35,21 +39,27 @@ describe('无技能帧积分(占位赛道,断言机制而非数值精度)', () =
 });
 
 describe('体力耗尽 → 温存', () => {
-  test('低耐力:记录体力归零点且完赛更慢', () => {
-    const weak = simulate(C, makeRunner({ stats: { speed: 1200, stamina: 700, power: 1200, guts: 1200, wisdom: 1200 } }));
+  // 高速度(大消耗)+ 极低耐力,保证耗尽:hp = 0.8×0.89×200+2400 ≈ 2542 < 全程消耗
+  const weak = makeRunner({ stats: { speed: 2400, stamina: 200, power: 1700, guts: 1200, wisdom: 1800 } });
+
+  test('记录体力归零点且完赛更慢;耗尽后速度受温存线约束', () => {
+    const drained = simulate(C, weak);
     const rich = simulate(C, freshRunner());
-    expect(weak.exhaustedAtMeter).not.toBeNull();
-    expect(weak.finishTimeSec).toBeGreaterThan(rich.finishTimeSec);
+    expect(drained.exhaustedAtMeter).not.toBeNull();
+    expect(drained.finishTimeSec).toBeGreaterThan(rich.finishTimeSec);
+    const minSpeed = minSpeedOf(C, weak);
+    const idx = drained.x.findIndex(x => x >= (drained.exhaustedAtMeter ?? 0) + 100);
+    expect(drained.v[idx]!).toBeLessThanOrEqual(minSpeed + 1.0);
   });
 });
 
 describe('技能发动', () => {
-  test('终盘速度技能在最终盘分界后发动,并加快完赛', () => {
+  test('终盘速度技能在阶段分界后发动,并加快完赛', () => {
     const skill = speedSkill('finale', 1.0, 10);
     const withSkill = simulate(C, freshRunner([skill]));
     const without = simulate(C, freshRunner());
     expect(withSkill.activations).toHaveLength(1);
-    expect(withSkill.activations[0]!.atMeter).toBeGreaterThanOrEqual(C.phaseBounds.finalStart);
+    expect(withSkill.activations[0]!.atMeter).toBeGreaterThanOrEqual(C.phaseBounds.lateStart);
     expect(withSkill.finishTimeSec).toBeLessThan(without.finishTimeSec);
   });
 
@@ -66,7 +76,7 @@ describe('技能发动', () => {
       durationSec: null,
       condition: { kind: 'phase', phase: 1 } as const,
     };
-    const weak = { stats: { speed: 1200, stamina: 700, power: 1200, guts: 1200, wisdom: 1200 } };
+    const weak = { stats: { speed: 2400, stamina: 200, power: 1700, guts: 1200, wisdom: 1800 } };
     const noHeal = simulate(C, makeRunner({ ...weak, skills: [] }));
     const withHeal = simulate(C, makeRunner({ ...weak, skills: [healSkill] }));
     expect(withHeal.exhaustedAtMeter!).toBeGreaterThan(noHeal.exhaustedAtMeter!);

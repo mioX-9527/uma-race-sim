@@ -1,4 +1,4 @@
-import { CALIB, MOTIVATION_WISDOM_MULT, RARITY_LEVEL_FACTOR } from './constants';
+import { LAST_SPURT_EXT_ACCEL_SCALE, MOTIVATION_WISDOM_MULT, RARITY_LEVEL_FACTOR } from './constants';
 import type { RunnerConfig, SkillConfig } from './types';
 
 export interface Buff {
@@ -62,7 +62,7 @@ export function spurtExtensionAccel(buffs: readonly Buff[], t: number, runner: R
   for (const b of buffs) {
     if (t >= b.untilSec) continue;
     for (const e of b.skill.effects) {
-      if (e.type === 'lastSpurtExtension') sum += e.value * CALIB.lastSpurtExtensionAccelScale * effectMultiplier(b.skill, runner);
+      if (e.type === 'lastSpurtExtension') sum += e.value * LAST_SPURT_EXT_ACCEL_SCALE * effectMultiplier(b.skill, runner);
     }
   }
   return sum;
