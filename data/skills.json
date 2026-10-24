@@ -1,9 +1,10 @@
 [
  {
   "id": "100011",
-  "name": "流星",
+  "name": "璀璨流星",
   "nameJa": "シューティングスター",
   "nameTrad": "逐夢之星",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -27,9 +28,10 @@
  },
  {
   "id": "100021-b1",
-  "name": "最前端的风景…不会让给任何人！(1)",
+  "name": "决不让出领头的景色……！(1)",
   "nameJa": "先頭の景色は譲らない…！",
   "nameTrad": "不會讓出領先的景色……！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -49,9 +51,10 @@
  },
  {
   "id": "100021-b2",
-  "name": "最前端的风景…不会让给任何人！(2)",
+  "name": "决不让出领头的景色……！(2)",
   "nameJa": "先頭の景色は譲らない…！",
   "nameTrad": "不會讓出領先的景色……！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -75,6 +78,7 @@
   "name": "究极帝王舞步(1)",
   "nameJa": "究極テイオーステップ",
   "nameTrad": "終極帝皇舞步",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -109,6 +113,7 @@
   "name": "究极帝王舞步(2)",
   "nameJa": "究極テイオーステップ",
   "nameTrad": "終極帝皇舞步",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -128,9 +133,10 @@
  },
  {
   "id": "100041",
-  "name": "红焰齿轮/LP1211-M",
+  "name": "红焰档/LP1211-M",
   "nameJa": "紅焔ギア/LP1211-M",
   "nameTrad": "紅焰檔位/LP1211-M",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -149,9 +155,10 @@
  },
  {
   "id": "100051",
-  "name": "闪耀煌星的演剧",
+  "name": "群星闪耀之演剧",
   "nameJa": "煌星のヴォードヴィル",
   "nameTrad": "閃耀歌舞劇",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -174,6 +181,7 @@
   "name": "胜利的鼓动",
   "nameJa": "勝利の鼓動",
   "nameTrad": "勝利的躍動",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "unsupported",
   "effects": [
@@ -195,6 +203,7 @@
   "name": "不沉之舰，拔锚起航！",
   "nameJa": "不沈艦、抜錨ォッ！",
   "nameTrad": "不沉戰艦起錨！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -214,9 +223,10 @@
  },
  {
   "id": "100081",
-  "name": "切割×驱动!",
+  "name": "凌厉×DRIVE！",
   "nameJa": "カッティング×DRIVE！",
   "nameTrad": "CUTTING×DRIVE！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "unsupported",
   "effects": [
@@ -238,6 +248,7 @@
   "name": "闪耀的赤色王牌",
   "nameJa": "ブリリアント・レッドエース",
   "nameTrad": "燦爛．赤色王牌",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -262,9 +273,10 @@
  },
  {
   "id": "100101",
-  "name": "胜利射击",
+  "name": "胜利射击！",
   "nameJa": "ヴィクトリーショット！",
   "nameTrad": "VICTORY SHOT！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -283,9 +295,10 @@
  },
  {
   "id": "100111",
-  "name": "精神一到、何事不成",
+  "name": "精诚所至，金石为开",
   "nameJa": "精神一到何事か成らざらん",
   "nameTrad": "精誠所至金石為開",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -304,9 +317,10 @@
  },
  {
   "id": "100121",
-  "name": "单挑！白热化！",
+  "name": "单挑！并驾齐驱！",
   "nameJa": "タイマン！デッドヒート！",
   "nameTrad": "一較高下！激烈對決！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -325,9 +339,10 @@
  },
  {
   "id": "100131-b1",
-  "name": "显贵的使命仍需完成(1)",
+  "name": "为了完成高贵的使命(1)",
   "nameJa": "貴顕の使命を果たすべく",
   "nameTrad": "必須貫徹高貴的使命",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -352,9 +367,10 @@
  },
  {
   "id": "100131-b2",
-  "name": "显贵的使命仍需完成(2)",
+  "name": "为了完成高贵的使命(2)",
   "nameJa": "貴顕の使命を果たすべく",
   "nameTrad": "必須貫徹高貴的使命",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -376,6 +392,7 @@
   "name": "胜利者☆飞扑(1)",
   "nameJa": "プランチャ☆ガナドール",
   "nameTrad": "勝利者☆飛身撲",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -407,6 +424,7 @@
   "name": "胜利者☆飞扑(2)",
   "nameJa": "プランチャ☆ガナドール",
   "nameTrad": "勝利者☆飛身撲",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -432,6 +450,7 @@
   "name": "献给维多利亚的舞蹈",
   "nameJa": "ヴィットーリアに捧ぐ舞踏",
   "nameTrad": "獻給勝利女神的舞蹈",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -451,9 +470,10 @@
  },
  {
   "id": "100161-b1",
-  "name": "打破阴影(1)",
+  "name": "Shadow Break(1)",
   "nameJa": "Shadow Break",
   "nameTrad": "Shadow Break",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -472,9 +492,10 @@
  },
  {
   "id": "100161-b2",
-  "name": "打破阴影(2)",
+  "name": "Shadow Break(2)",
   "nameJa": "Shadow Break",
   "nameTrad": "Shadow Break",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -493,9 +514,10 @@
  },
  {
   "id": "100171",
-  "name": "汝等，瞻仰皇帝之神威吧",
+  "name": "汝等，瞻仰皇帝的神威吧",
   "nameJa": "汝、皇帝の神威を見よ",
   "nameTrad": "讓你見識皇帝的威勢吧",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "precise",
   "effects": [
@@ -514,9 +536,10 @@
  },
  {
   "id": "100181",
-  "name": "自尊之炎",
+  "name": "骄傲之焰",
   "nameJa": "ブレイズ・オブ・プライド",
   "nameTrad": "自尊之炎",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -535,9 +558,10 @@
  },
  {
   "id": "100191",
-  "name": "尊之☆最终冲刺—(ﾟ∀ﾟ)—ﾄ!",
+  "name": "神圣☆最后冲—(ﾟ∀ﾟ)—刺！",
   "nameJa": "尊み☆ﾗｽﾄｽﾊﾟ—(ﾟ∀ﾟ)—ﾄ!",
   "nameTrad": "尊爆☆最後衝—(ﾟ∀ﾟ)—刺！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "unsupported",
   "effects": [
@@ -565,6 +589,7 @@
   "name": "愿者上钩",
   "nameJa": "アングリング×スキーミング",
   "nameTrad": "釣魚×計謀",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -584,9 +609,10 @@
  },
  {
   "id": "100211",
-  "name": "白色闪电，见识一下吧！",
+  "name": "让你们见识一下白色闪电！",
   "nameJa": "白い稲妻、見せたるで！",
   "nameTrad": "見識一下白色閃電吧！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -609,9 +635,10 @@
  },
  {
   "id": "100221",
-  "name": "童话故事",
+  "name": "Fairy tale",
   "nameJa": "Fairy tale",
   "nameTrad": "Fairy tale",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -634,6 +661,7 @@
   "name": "∴win Q.E.D.(1)",
   "nameJa": "∴win Q.E.D.",
   "nameTrad": "∴win Q.E.D.",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -655,6 +683,7 @@
   "name": "∴win Q.E.D.(2)",
   "nameJa": "∴win Q.E.D.",
   "nameTrad": "∴win Q.E.D.",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -676,6 +705,7 @@
   "name": "闪光☆着陆",
   "nameJa": "ひらめき☆ランディング",
   "nameTrad": "閃耀☆著陸",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -698,9 +728,10 @@
  },
  {
   "id": "100251",
-  "name": "逐君之形",
+  "name": "追寻你的背影",
   "nameJa": "アナタヲ・オイカケテ",
   "nameTrad": "緊緊追著妳",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "unsupported",
   "effects": [
@@ -725,9 +756,10 @@
  },
  {
   "id": "100261-b1",
-  "name": "G00 1st.F∞;(1)",
+  "name": "G00 1st.F∞；(1)",
   "nameJa": "G00 1st.F∞;",
   "nameTrad": "G00 1st.F∞;",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -746,9 +778,10 @@
  },
  {
   "id": "100261-b2",
-  "name": "G00 1st.F∞;(2)",
+  "name": "G00 1st.F∞；(2)",
   "nameJa": "G00 1st.F∞;",
   "nameTrad": "G00 1st.F∞;",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -767,9 +800,10 @@
  },
  {
   "id": "100271",
-  "name": "成长吧我的肌肉！",
+  "name": "成长吧肌肉！",
   "nameJa": "レッツ・アナボリック！",
   "nameTrad": "合成代謝開始！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -789,9 +823,10 @@
  },
  {
   "id": "100281-b1",
-  "name": "全速☆前进！！(1)",
+  "name": "I'M☆FULL☆SPEED！！(1)",
   "nameJa": "I'M☆FULL☆SPEED!!",
   "nameTrad": "I'M☆FULL☆SPEED!!",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -817,9 +852,10 @@
  },
  {
   "id": "100281-b2",
-  "name": "全速☆前进！！(2)",
+  "name": "I'M☆FULL☆SPEED！！(2)",
   "nameJa": "I'M☆FULL☆SPEED!!",
   "nameTrad": "I'M☆FULL☆SPEED!!",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -839,9 +875,10 @@
  },
  {
   "id": "100291",
-  "name": "雪夜追光",
+  "name": "雪之光芒，全力追逐",
   "nameJa": "ゆきあかり、おいかけて",
   "nameTrad": "雪光，追上去吧",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -861,9 +898,10 @@
  },
  {
   "id": "100301",
-  "name": "蓝蔷薇追猎者",
+  "name": "蓝玫瑰猎人",
   "nameJa": "ブルーローズチェイサー",
   "nameTrad": "藍薔薇追擊者",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -885,6 +923,7 @@
   "name": "充能完毕！全速前进！(1)",
   "nameJa": "チャージ完了！全速前進！",
   "nameTrad": "充能完畢！全速前進！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -907,6 +946,7 @@
   "name": "充能完毕！全速前进！(2)",
   "nameJa": "チャージ完了！全速前進！",
   "nameTrad": "充能完畢！全速前進！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -926,9 +966,10 @@
  },
  {
   "id": "100321",
-  "name": "U=ma2",
+  "name": "U=ma²",
   "nameJa": "U=ma2",
   "nameTrad": "U=ma2",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -951,9 +992,10 @@
  },
  {
   "id": "100331-b1",
-  "name": "双子流星(1)",
+  "name": "双生流星(1)",
   "nameJa": "ディオスクロイの流星",
   "nameTrad": "迪奧斯庫洛伊流星",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -972,9 +1014,10 @@
  },
  {
   "id": "100331-b2",
-  "name": "双子流星(2)",
+  "name": "双生流星(2)",
   "nameJa": "ディオスクロイの流星",
   "nameTrad": "迪奧斯庫洛伊流星",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -993,9 +1036,10 @@
  },
  {
   "id": "100341",
-  "name": "如此疾驰，快哉快哉！",
+  "name": "要飞奔吗，要飞奔吧！",
   "nameJa": "快走かな、快走かな！",
   "nameTrad": "要衝嗎！要衝吧！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "unsupported",
   "effects": [
@@ -1014,9 +1058,10 @@
  },
  {
   "id": "100351",
-  "name": "为你奉上，胜利奖券！",
+  "name": "为你奉上，胜利之券！",
   "nameJa": "勝利のチケットを、君にッ！",
   "nameTrad": "將勝利的獎券獻給你！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -1035,9 +1080,10 @@
  },
  {
   "id": "100361",
-  "name": "律动扳机",
+  "name": "trigger：BEAT",
   "nameJa": "trigger:BEAT",
   "nameTrad": "trigger:BEAT",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "unsupported",
   "effects": [
@@ -1061,9 +1107,10 @@
  },
  {
   "id": "100371-b1",
-  "name": "漆黑之剑(1)",
+  "name": "Schwarzes Schwert(1)",
   "nameJa": "Schwarzes Schwert",
   "nameTrad": "Schwarzes Schwert",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -1082,9 +1129,10 @@
  },
  {
   "id": "100371-b2",
-  "name": "漆黑之剑(2)",
+  "name": "Schwarzes Schwert(2)",
   "nameJa": "Schwarzes Schwert",
   "nameTrad": "Schwarzes Schwert",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -1106,6 +1154,7 @@
   "name": "＃LookatCurren",
   "nameJa": "＃LookatCurren",
   "nameTrad": "#LookatCurren",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "unsupported",
   "effects": [
@@ -1128,9 +1177,10 @@
  },
  {
   "id": "100391",
-  "name": "以姬之名，手握胜利",
+  "name": "身为公主，亲手拿下胜利",
   "nameJa": "姫たるもの、勝利をこの手に",
   "nameTrad": "身為公主要親手取勝",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -1149,9 +1199,10 @@
  },
  {
   "id": "100401",
-  "name": "保持真我",
+  "name": "KEEP IT REAL.",
   "nameJa": "KEEP IT REAL.",
   "nameTrad": "KEEP IT REAL.",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -1171,9 +1222,10 @@
  },
  {
   "id": "100411",
-  "name": "优等生×爆进=大胜利",
+  "name": "优等生×前进＝大胜利",
   "nameJa": "優等生×バクシン＝大勝利ッ",
   "nameTrad": "模範生×驀進＝大獲全勝",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -1193,9 +1245,10 @@
  },
  {
   "id": "100421-b1",
-  "name": "『吾名为可能』(1)",
+  "name": "“I'm possible”(1)",
   "nameJa": "『I'm possible』",
   "nameTrad": "「I'm possible」",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -1215,9 +1268,10 @@
  },
  {
   "id": "100421-b2",
-  "name": "『吾名为可能』(2)",
+  "name": "“I'm possible”(2)",
   "nameJa": "『I'm possible』",
   "nameTrad": "「I'm possible」",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -1237,9 +1291,10 @@
  },
  {
   "id": "100431-b1",
-  "name": "叮咚嘣(1)",
+  "name": "Ding Dong Boo(1)",
   "nameJa": "Ding Dong Boo",
   "nameTrad": "Ding Dong Boo",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "unsupported",
   "effects": [
@@ -1268,9 +1323,10 @@
  },
  {
   "id": "100431-b2",
-  "name": "叮咚嘣(2)",
+  "name": "Ding Dong Boo(2)",
   "nameJa": "Ding Dong Boo",
   "nameTrad": "Ding Dong Boo",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "unsupported",
   "effects": [
@@ -1289,9 +1345,10 @@
  },
  {
   "id": "100441",
-  "name": "我赢定了☆终极魔法发动！",
+  "name": "拿下胜利☆Strelitzia！",
   "nameJa": "いただき☆ストレリチア！",
   "nameTrad": "我贏定了☆發動天堂鳥魔法！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -1311,9 +1368,10 @@
  },
  {
   "id": "100451",
-  "name": "纯洁之心",
+  "name": "纯粹之心",
   "nameJa": "ピュリティオブハート",
   "nameTrad": "純潔之心",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -1333,9 +1391,10 @@
  },
  {
   "id": "100461",
-  "name": "闪耀☆明星",
+  "name": "闪耀☆STARDOM",
   "nameJa": "キラキラ☆STARDOM",
   "nameTrad": "閃耀奪目☆STARDOM",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -1360,9 +1419,10 @@
  },
  {
   "id": "100471-b1",
-  "name": "此身为剑所天成，拔剑！(1)",
+  "name": "高举吾魂之剑！(1)",
   "nameJa": "掲げよ、己が魂の剣を！",
   "nameTrad": "舉起吧，我的靈魂之劍！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -1382,9 +1442,10 @@
  },
  {
   "id": "100471-b2",
-  "name": "此身为剑所天成，拔剑！(2)",
+  "name": "高举吾魂之剑！(2)",
   "nameJa": "掲げよ、己が魂の剣を！",
   "nameTrad": "舉起吧，我的靈魂之劍！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -1404,9 +1465,10 @@
  },
  {
   "id": "100481",
-  "name": "耶☆生动时光！",
+  "name": "YEAH☆VIVID TIME！",
   "nameJa": "YEAH☆VIVID TIME!",
   "nameTrad": "YEAH☆VIVID TIME!",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -1425,9 +1487,10 @@
  },
  {
   "id": "100491-b1",
-  "name": "会当凌绝顶，听我楚狂笑(1)",
+  "name": "峰顶峭尖，我笑疯癫(1)",
   "nameJa": "剣ヶ峰より、狂気に嗤え",
   "nameTrad": "身處存亡之際，面顯猖狂訕笑",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -1447,9 +1510,10 @@
  },
  {
   "id": "100491-b2",
-  "name": "会当凌绝顶，听我楚狂笑(2)",
+  "name": "峰顶峭尖，我笑疯癫(2)",
   "nameJa": "剣ヶ峰より、狂気に嗤え",
   "nameTrad": "身處存亡之際，面顯猖狂訕笑",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -1472,6 +1536,7 @@
   "name": "Nemesis",
   "nameJa": "Nemesis",
   "nameTrad": "Nemesis",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -1490,9 +1555,10 @@
  },
  {
   "id": "100511",
-  "name": "待到野花烂漫时",
+  "name": "蓓蕾绽放之时",
   "nameJa": "つぼみ、ほころぶ時",
   "nameTrad": "花苞綻放之時",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -1512,9 +1578,10 @@
  },
  {
   "id": "100521",
-  "name": "满怀期待地迎接顶点吧",
+  "name": "满怀期待地迎来最高潮",
   "nameJa": "ワクワククライマックス",
   "nameTrad": "雀躍不已的精彩時刻",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -1534,9 +1601,10 @@
  },
  {
   "id": "100531",
-  "name": "热血！！风纪进击",
+  "name": "热血！纪律突击",
   "nameJa": "熱血！！風紀アタック",
   "nameTrad": "熱血！！糾察之擊",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -1560,9 +1628,10 @@
  },
  {
   "id": "100541",
-  "name": "疾风爆走天马冲刺！",
+  "name": "疾风猛冲飞驹冲刺！",
   "nameJa": "疾風爆走ペガサスダッシュ！",
   "nameTrad": "疾風暴衝飛駒衝刺！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -1582,9 +1651,10 @@
  },
  {
   "id": "100551-b1",
-  "name": "万彩☆美丽★世界(1)",
+  "name": "万彩☆marvelous★世界(1)",
   "nameJa": "万彩☆マーベラス★世界",
   "nameTrad": "萬彩☆美麗★世界",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -1605,9 +1675,10 @@
  },
  {
   "id": "100551-b2",
-  "name": "万彩☆美丽★世界(2)",
+  "name": "万彩☆marvelous★世界(2)",
   "nameJa": "万彩☆マーベラス★世界",
   "nameTrad": "萬彩☆美麗★世界",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -1628,9 +1699,10 @@
  },
  {
   "id": "100561",
-  "name": "快来了要来了让它来啊！",
+  "name": "快来了要来了让它来吧！",
   "nameJa": "来ます来てます来させます！",
   "nameTrad": "顯靈了要顯靈了請顯靈吧！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -1655,9 +1727,10 @@
  },
  {
   "id": "100571-b1",
-  "name": "旅途终点的抒情诗(1)",
+  "name": "旅途尽头，心潮澎湃(1)",
   "nameJa": "叙情、旅路の果てに",
   "nameTrad": "抒情，往旅途的終點",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "precise",
   "effects": [
@@ -1677,9 +1750,10 @@
  },
  {
   "id": "100571-b2",
-  "name": "旅途终点的抒情诗(2)",
+  "name": "旅途尽头，心潮澎湃(2)",
   "nameJa": "叙情、旅路の果てに",
   "nameTrad": "抒情，往旅途的終點",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -1706,9 +1780,10 @@
  },
  {
   "id": "100581",
-  "name": "永不言败",
+  "name": "I Never Goof Up！",
   "nameJa": "I Never Goof Up!",
   "nameTrad": "I Never Goof Up!",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -1732,9 +1807,10 @@
  },
  {
   "id": "100591",
-  "name": "超越彼方",
+  "name": "向着，更远的地方……",
   "nameJa": "彼方、その先へ…",
   "nameTrad": "彼端就在那前方……",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -1753,9 +1829,10 @@
  },
  {
   "id": "100601",
-  "name": "一定就在前方…！",
+  "name": "一定能更进一步……！",
   "nameJa": "きっとその先へ…！",
   "nameTrad": "一定能抵達前方……！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -1779,6 +1856,7 @@
   "name": "Pride of KING",
   "nameJa": "Pride of KING",
   "nameTrad": "Pride of KING",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "unsupported",
   "effects": [
@@ -1797,9 +1875,10 @@
  },
  {
   "id": "100621",
-  "name": "咚~啪~嗯~",
+  "name": "咚！啪！加油！",
   "nameJa": "どんっ、パッ、むんっ",
   "nameTrad": "咚、啪、姆！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -1826,6 +1905,7 @@
   "name": "百炼成钢",
   "nameJa": "百錬成鋼",
   "nameTrad": "百鍊成鋼",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -1845,9 +1925,10 @@
  },
  {
   "id": "100641",
-  "name": "冠绝之路",
+  "name": "绝尘之路",
   "nameJa": "ぶっちぎりロード",
   "nameTrad": "遙遙領先之道",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -1871,9 +1952,10 @@
  },
  {
   "id": "100651-b1",
-  "name": "艾瑞巴蒂一起来！(1)",
+  "name": "高举双手嗨起来！(1)",
   "nameJa": "アゲてアゲてぷちょへんざ！",
   "nameTrad": "嗨起來嗨起來把手都舉高！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -1900,9 +1982,10 @@
  },
  {
   "id": "100651-b2",
-  "name": "艾瑞巴蒂一起来！(2)",
+  "name": "高举双手嗨起来！(2)",
   "nameJa": "アゲてアゲてぷちょへんざ！",
   "nameTrad": "嗨起來嗨起來把手都舉高！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -1929,9 +2012,10 @@
  },
  {
   "id": "100661-b1",
-  "name": "涡轮引擎全开！大喷射！(1)",
+  "name": "引擎全开！全力喷射！(1)",
   "nameJa": "エンジン全開！大噴射！",
   "nameTrad": "引擎全開！大噴射！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "precise",
   "effects": [
@@ -1952,9 +2036,10 @@
  },
  {
   "id": "100661-b2",
-  "name": "涡轮引擎全开！大喷射！(2)",
+  "name": "引擎全开！全力喷射！(2)",
   "nameJa": "エンジン全開！大噴射！",
   "nameTrad": "引擎全開！大噴射！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -1974,9 +2059,10 @@
  },
  {
   "id": "100671-b1",
-  "name": "照亮昏暗吧 永恒的光辉(1)",
+  "name": "照亮阴霾的永世辉耀(1)",
   "nameJa": "晦冥を照らせ永遠の耀き",
   "nameTrad": "永世光輝為我照亮昏暗",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -1995,9 +2081,10 @@
  },
  {
   "id": "100671-b2",
-  "name": "照亮昏暗吧 永恒的光辉(2)",
+  "name": "照亮阴霾的永世辉耀(2)",
   "nameJa": "晦冥を照らせ永遠の耀き",
   "nameTrad": "永世光輝為我照亮昏暗",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -2016,9 +2103,10 @@
  },
  {
   "id": "100681-b1",
-  "name": "胜利万岁！(1)",
+  "name": "胜利凯歌，嘿呦！(1)",
   "nameJa": "勝ち鬨ワッショイ！",
   "nameTrad": "勝利歡呼嘿呀！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -2042,9 +2130,10 @@
  },
  {
   "id": "100681-b2",
-  "name": "胜利万岁！(2)",
+  "name": "胜利凯歌，嘿呦！(2)",
   "nameJa": "勝ち鬨ワッショイ！",
   "nameTrad": "勝利歡呼嘿呀！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -2063,9 +2152,10 @@
  },
  {
   "id": "100691",
-  "name": "憧憬着跨越樱花！",
+  "name": "超越樱花的憧憬！",
   "nameJa": "憧れは桜を越える！",
   "nameTrad": "夢想是超越櫻花！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -2086,9 +2176,10 @@
  },
  {
   "id": "100701-b1",
-  "name": "天骄(1)",
+  "name": "Seirios(1)",
   "nameJa": "セイリオス",
   "nameTrad": "絢爛焦灼",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -2114,9 +2205,10 @@
  },
  {
   "id": "100701-b2",
-  "name": "天骄(2)",
+  "name": "Seirios(2)",
   "nameJa": "セイリオス",
   "nameTrad": "絢爛焦灼",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -2139,6 +2231,7 @@
   "name": "小心波澜炮！",
   "nameJa": "波乱注意砲！",
   "nameTrad": "波瀾注意砲！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -2158,9 +2251,10 @@
  },
  {
   "id": "100711",
-  "name": "一生之梦，刹那的飞翔",
+  "name": "毕生之梦，刹那翱翔",
   "nameJa": "一期の夢、刹那の飛翔",
   "nameTrad": "畢生夢想剎那翱翔",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "precise",
   "effects": [
@@ -2187,6 +2281,7 @@
   "name": "烈火缭乱，无敌之舞",
   "nameJa": "烈火繚乱、無敵之舞",
   "nameTrad": "烈火撩亂，無敵之舞",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -2227,9 +2322,10 @@
  },
  {
   "id": "100741",
-  "name": "优雅清风待花开",
+  "name": "美丽优雅的花信风",
   "nameJa": "麗しき花信風",
   "nameTrad": "清雅花信風",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -2249,9 +2345,10 @@
  },
  {
   "id": "100761-b1",
-  "name": "花开世界(1)",
+  "name": "花开，世界(1)",
   "nameJa": "花開き、世界",
   "nameTrad": "花開，世界",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -2281,9 +2378,10 @@
  },
  {
   "id": "100761-b2",
-  "name": "花开世界(2)",
+  "name": "花开，世界(2)",
   "nameJa": "花開き、世界",
   "nameTrad": "花開，世界",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -2303,9 +2401,10 @@
  },
  {
   "id": "100771-b1",
-  "name": "荣光之路(1)",
+  "name": "Road to Glory(1)",
   "nameJa": "Road to Glory",
   "nameTrad": "Road to Glory",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -2331,9 +2430,10 @@
  },
  {
   "id": "100771-b2",
-  "name": "荣光之路(2)",
+  "name": "Road to Glory(2)",
   "nameJa": "Road to Glory",
   "nameTrad": "Road to Glory",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -2353,9 +2453,10 @@
  },
  {
   "id": "100781-b1",
-  "name": "光风霁月(1)",
+  "name": "绚丽风光(1)",
   "nameJa": "風光る",
   "nameTrad": "春光明媚",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -2374,9 +2475,10 @@
  },
  {
   "id": "100781-b2",
-  "name": "光风霁月(2)",
+  "name": "绚丽风光(2)",
   "nameJa": "風光る",
   "nameTrad": "春光明媚",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -2496,6 +2598,7 @@
   "name": "加速装置X",
   "nameJa": "アクセルX",
   "nameTrad": "加速X",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "unsupported",
   "effects": [
@@ -2627,9 +2730,10 @@
  },
  {
   "id": "100831-b1",
-  "name": "任务：凯旋(1)",
+  "name": "Mission: Triumph(1)",
   "nameJa": "Mission: Triumph",
   "nameTrad": "Mission: Triumph",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -2648,9 +2752,10 @@
  },
  {
   "id": "100831-b2",
-  "name": "任务：凯旋(2)",
+  "name": "Mission: Triumph(2)",
   "nameJa": "Mission: Triumph",
   "nameTrad": "Mission: Triumph",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -2669,9 +2774,10 @@
  },
  {
   "id": "100841-b1",
-  "name": "霹雳中的奥伏赫变(1)",
+  "name": "霹雳扬弃(1)",
   "nameJa": "霹靂のアウフヘーベン",
   "nameTrad": "雷霆的揚棄",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -2699,9 +2805,10 @@
  },
  {
   "id": "100841-b2",
-  "name": "霹雳中的奥伏赫变(2)",
+  "name": "霹雳扬弃(2)",
   "nameJa": "霹靂のアウフヘーベン",
   "nameTrad": "雷霆的揚棄",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -2729,9 +2836,10 @@
  },
  {
   "id": "100851",
-  "name": "至高无上",
+  "name": "登峰造极",
   "nameJa": "至上であれ",
   "nameTrad": "保持至高",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "unsupported",
   "effects": [
@@ -2756,9 +2864,10 @@
  },
  {
   "id": "100861",
-  "name": "消融在爱中吧",
+  "name": "与爱相融吧",
   "nameJa": "愛と熔けよただ熔けよ",
   "nameTrad": "就這樣和愛一起熔解吧",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -2778,9 +2887,10 @@
  },
  {
   "id": "100871",
-  "name": "静谧字符",
+  "name": "Silent letter",
   "nameJa": "Silent letter",
   "nameTrad": "Silent letter",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -2804,9 +2914,10 @@
  },
  {
   "id": "100881-b1",
-  "name": "逆转魔术(1)",
+  "name": "Reversal Illusion(1)",
   "nameJa": "Reversal Illusion",
   "nameTrad": "Reversal Illusion",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -2832,9 +2943,10 @@
  },
  {
   "id": "100881-b2",
-  "name": "逆转魔术(2)",
+  "name": "Reversal Illusion(2)",
   "nameJa": "Reversal Illusion",
   "nameTrad": "Reversal Illusion",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -2854,9 +2966,10 @@
  },
  {
   "id": "100891-b1",
-  "name": "青冥誓约(1)",
+  "name": "Celeste Oath(1)",
   "nameJa": "Celeste Oath",
   "nameTrad": "Celeste Oath",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -2880,9 +2993,10 @@
  },
  {
   "id": "100891-b2",
-  "name": "青冥誓约(2)",
+  "name": "Celeste Oath(2)",
   "nameJa": "Celeste Oath",
   "nameTrad": "Celeste Oath",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -2967,6 +3081,7 @@
   "name": "赤色王牌",
   "nameJa": "レッドエース",
   "nameTrad": "赤色王牌",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -2991,9 +3106,10 @@
  },
  {
   "id": "100911-b1",
-  "name": "豪华☆喷泉(1)",
+  "name": "绚丽☆喷泉(1)",
   "nameJa": "デラックス☆ファウンテン",
   "nameTrad": "絢爛☆噴泉",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -3013,9 +3129,10 @@
  },
  {
   "id": "100911-b2",
-  "name": "豪华☆喷泉(2)",
+  "name": "绚丽☆喷泉(2)",
   "nameJa": "デラックス☆ファウンテン",
   "nameTrad": "絢爛☆噴泉",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -3083,9 +3200,10 @@
  },
  {
   "id": "100931-b1",
-  "name": "幸福的湛蓝光芒(1)",
+  "name": "幸福的蓝色光芒(1)",
   "nameJa": "幸せの青い光",
   "nameTrad": "幸福的藍光",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -3112,9 +3230,10 @@
  },
  {
   "id": "100931-b2",
-  "name": "幸福的湛蓝光芒(2)",
+  "name": "幸福的蓝色光芒(2)",
   "nameJa": "幸せの青い光",
   "nameTrad": "幸福的藍光",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -3341,9 +3460,10 @@
  },
  {
   "id": "100981",
-  "name": "理运开天龙飞翔",
+  "name": "时来运转，龙腾九霄",
   "nameJa": "理運開かりて翔る",
   "nameTrad": "開運天翔",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -3371,9 +3491,10 @@
  },
  {
   "id": "100991-b1",
-  "name": "闪耀☆苫小牧(1)",
+  "name": "闪耀吧☆苫小牧(1)",
   "nameJa": "かがやけ☆とまこまい",
   "nameTrad": "閃耀吧☆苫小牧",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -3399,9 +3520,10 @@
  },
  {
   "id": "100991-b2",
-  "name": "闪耀☆苫小牧(2)",
+  "name": "闪耀吧☆苫小牧(2)",
   "nameJa": "かがやけ☆とまこまい",
   "nameTrad": "閃耀吧☆苫小牧",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -3427,9 +3549,10 @@
  },
  {
   "id": "101001-b1",
-  "name": "永不言弃(1)",
+  "name": "Never Say Never(1)",
   "nameJa": "Never Say Never",
   "nameTrad": "Never Say Never",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -3459,9 +3582,10 @@
  },
  {
   "id": "101001-b2",
-  "name": "永不言弃(2)",
+  "name": "Never Say Never(2)",
   "nameJa": "Never Say Never",
   "nameTrad": "Never Say Never",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -3568,9 +3692,10 @@
  },
  {
   "id": "101041-b1",
-  "name": "拂晓御旗『葛城荣主』！(1)",
+  "name": "破晓大旗“葛城荣主”！(1)",
   "nameJa": "暁の御旗『葛城栄主』！",
   "nameTrad": "破曉錦旗「葛城榮主」！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -3602,9 +3727,10 @@
  },
  {
   "id": "101041-b2",
-  "name": "拂晓御旗『葛城荣主』！(2)",
+  "name": "破晓大旗“葛城荣主”！(2)",
   "nameJa": "暁の御旗『葛城栄主』！",
   "nameTrad": "破曉錦旗「葛城榮主」！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -3627,9 +3753,10 @@
  },
  {
   "id": "101051-b1",
-  "name": "终抵群星(1)",
+  "name": "Ad astra(1)",
   "nameJa": "アド・アストラ",
   "nameTrad": "飛向星辰彼端",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -3655,9 +3782,10 @@
  },
  {
   "id": "101051-b2",
-  "name": "终抵群星(2)",
+  "name": "Ad astra(2)",
   "nameJa": "アド・アストラ",
   "nameTrad": "飛向星辰彼端",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -3677,9 +3805,10 @@
  },
  {
   "id": "101061-b1",
-  "name": "砰☆奇迹天降！(1)",
+  "name": "Bang☆意外奇迹！(1)",
   "nameJa": "Bang☆ミラクるわせ！",
   "nameTrad": "Bang☆大爆冷門的奇蹟！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -3704,9 +3833,10 @@
  },
  {
   "id": "101061-b2",
-  "name": "砰☆奇迹天降！(2)",
+  "name": "Bang☆意外奇迹！(2)",
   "nameJa": "Bang☆ミラクるわせ！",
   "nameTrad": "Bang☆大爆冷門的奇蹟！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -3725,9 +3855,10 @@
  },
  {
   "id": "101071",
-  "name": "万贯星辰",
+  "name": "Billions of stars",
   "nameJa": "Billions of stars",
   "nameTrad": "Billions of stars",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -3746,9 +3877,10 @@
  },
  {
   "id": "101081-b1",
-  "name": "赤翼罗刹越九天(1)",
+  "name": "罗刹，举赤翼以摩苍穹(1)",
   "nameJa": "羅刹、赤翼にて天上へ至らん",
   "nameTrad": "羅剎，振赤翼直至九霄",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -3768,9 +3900,10 @@
  },
  {
   "id": "101081-b2",
-  "name": "赤翼罗刹越九天(2)",
+  "name": "罗刹，举赤翼以摩苍穹(2)",
   "nameJa": "羅刹、赤翼にて天上へ至らん",
   "nameTrad": "羅剎，振赤翼直至九霄",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -3894,9 +4027,10 @@
  },
  {
   "id": "10111",
-  "name": "精神一到",
+  "name": "精诚所至",
   "nameJa": "精神一到",
   "nameTrad": "精誠所至",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -5075,9 +5209,10 @@
  },
  {
   "id": "10141",
-  "name": "热血☆兄弟",
+  "name": "热血☆挚友",
   "nameJa": "熱血☆アミーゴ",
   "nameTrad": "熱血☆AMIGO",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -5373,9 +5508,10 @@
  },
  {
   "id": "10181",
-  "name": "女帝的荣耀",
+  "name": "女帝的骄傲",
   "nameJa": "エンプレス・プライド",
   "nameTrad": "女帝的自尊",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -5397,6 +5533,7 @@
   "name": "胜利之吻☆",
   "nameJa": "勝利のキッス☆",
   "nameTrad": "勝利之吻☆",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -5419,9 +5556,10 @@
  },
  {
   "id": "10271",
-  "name": "燃烧吧我的肌肉！",
+  "name": "燃烧吧肌肉！",
   "nameJa": "燃えろ筋肉！",
   "nameTrad": "燃燒吧肌肉！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -5444,6 +5582,7 @@
   "name": "introduction：My body",
   "nameJa": "introduction：My body",
   "nameTrad": "introduction：My body",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -5466,9 +5605,10 @@
  },
  {
   "id": "10351",
-  "name": "全力V字手！",
+  "name": "全力的胜利手势！",
   "nameJa": "全力Vサインッ！",
   "nameTrad": "全力V字手勢！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -5487,9 +5627,10 @@
  },
  {
   "id": "10411",
-  "name": "班长+速度=爆进",
+  "name": "班长+速度=前进",
   "nameJa": "学級委員長+速さ＝バクシン",
   "nameTrad": "班長＋快速＝驀進",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -5512,6 +5653,7 @@
   "name": "纯净之心",
   "nameJa": "クリアハート",
   "nameTrad": "清澈之心",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -5534,6 +5676,7 @@
   "name": "满怀期待地起跑吧",
   "nameJa": "ワクワクよーいドン",
   "nameTrad": "雀躍不已預備～跑！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -5553,9 +5696,10 @@
  },
  {
   "id": "10541",
-  "name": "天马全力出击！",
+  "name": "飞驹全力出击！",
   "nameJa": "ペガサスフルパワー！",
   "nameTrad": "飛駒全力！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -5578,6 +5722,7 @@
   "name": "快点来啊快点来啊！",
   "nameJa": "来てください来てください！",
   "nameTrad": "請顯靈吧請顯靈吧！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -5602,9 +5747,10 @@
  },
  {
   "id": "10601",
-  "name": "人家偶尔也是能行的，对吧？",
+  "name": "人家偶尔也是可以的，对吧？",
   "nameJa": "アタシもたまには、ね？",
   "nameTrad": "我偶爾也能辦到的對吧？",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -5628,6 +5774,7 @@
   "name": "Call me KING",
   "nameJa": "Call me KING",
   "nameTrad": "Call me KING",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "unsupported",
   "effects": [
@@ -5646,9 +5793,10 @@
  },
  {
   "id": "10621",
-  "name": "准备，咚~",
+  "name": "预备，咚！",
   "nameJa": "レディー、どんっ",
   "nameTrad": "Ready～衝刺！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -5675,6 +5823,7 @@
   "name": "千锤百炼",
   "nameJa": "打ち、鍛えて",
   "nameTrad": "千錘百鍊",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -5694,9 +5843,10 @@
  },
  {
   "id": "10661-b1",
-  "name": "涡轮引擎点火！(1)",
+  "name": "引擎点火！(1)",
   "nameJa": "エンジン点火！",
   "nameTrad": "引擎點火！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "precise",
   "effects": [
@@ -5717,9 +5867,10 @@
  },
  {
   "id": "10661-b2",
-  "name": "涡轮引擎点火！(2)",
+  "name": "引擎点火！(2)",
   "nameJa": "エンジン点火！",
   "nameTrad": "引擎點火！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -5760,9 +5911,10 @@
  },
  {
   "id": "110011",
-  "name": "超级可爱♪飞身入海",
+  "name": "激萌♪海中潜游",
   "nameJa": "わやかわ♪マリンダイヴ",
   "nameTrad": "超級可愛♪海洋潛水",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -5786,9 +5938,10 @@
  },
  {
   "id": "110021-b1",
-  "name": "向海平线的彼端(1)",
+  "name": "向着水平线的彼端(1)",
   "nameJa": "水平線のその先へ",
   "nameTrad": "邁向水平線的彼端",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -5808,9 +5961,10 @@
  },
  {
   "id": "110021-b2",
-  "name": "向海平线的彼端(2)",
+  "name": "向着水平线的彼端(2)",
   "nameJa": "水平線のその先へ",
   "nameTrad": "邁向水平線的彼端",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -5831,9 +5985,10 @@
  },
  {
   "id": "110031",
-  "name": "一定是我！",
+  "name": "绝对是我赢",
   "nameJa": "絶対は、ボクだ",
   "nameTrad": "絕對是我",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -5852,9 +6007,10 @@
  },
  {
   "id": "110041",
-  "name": "一鼓作气♪啾",
+  "name": "心头一击♪啾",
   "nameJa": "グッときて♪Chu",
   "nameTrad": "一鼓作氣♪Chu",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -5874,9 +6030,10 @@
  },
  {
   "id": "110051",
-  "name": "倾国倾城",
+  "name": "Ravissant",
   "nameJa": "Ravissant",
   "nameTrad": "Ravissant",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -5895,9 +6052,10 @@
  },
  {
   "id": "110061",
-  "name": "圣诞夜的奇迹奔跑！",
+  "name": "圣诞夜的奇迹飞驰！",
   "nameJa": "聖夜のミラクルラン！",
   "nameTrad": "聖夜的奇蹟跑者！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "precise",
   "effects": [
@@ -5925,9 +6083,10 @@
  },
  {
   "id": "110071",
-  "name": "黄金船的奇妙冒险",
+  "name": "Adventure of 564",
   "nameJa": "Adventure of 564",
   "nameTrad": "Adventure of 564",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "unsupported",
   "effects": [
@@ -5952,9 +6111,10 @@
  },
  {
   "id": "110081-b1",
-  "name": "马力全开！(1)",
+  "name": "Into High Gear!(1)",
   "nameJa": "Into High Gear!",
   "nameTrad": "Into High Gear!",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -5983,9 +6143,10 @@
  },
  {
   "id": "110081-b2",
-  "name": "马力全开！(2)",
+  "name": "Into High Gear!(2)",
   "nameJa": "Into High Gear!",
   "nameTrad": "Into High Gear!",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -6010,9 +6171,10 @@
  },
  {
   "id": "110091-b1",
-  "name": "女皇辉光(1)",
+  "name": "Queen's Lumination(1)",
   "nameJa": "Queen's Lumination",
   "nameTrad": "Queen's Lumination",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -6032,9 +6194,10 @@
  },
  {
   "id": "110091-b2",
-  "name": "女皇辉光(2)",
+  "name": "Queen's Lumination(2)",
   "nameJa": "Queen's Lumination",
   "nameTrad": "Queen's Lumination",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -6053,9 +6216,10 @@
  },
  {
   "id": "110101-b1",
-  "name": "快乐之旅！(1)",
+  "name": "Joyful Voyage！(1)",
   "nameJa": "Joyful Voyage!",
   "nameTrad": "Joyful Voyage!",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -6080,9 +6244,10 @@
  },
  {
   "id": "110101-b2",
-  "name": "快乐之旅！(2)",
+  "name": "Joyful Voyage！(2)",
   "nameJa": "Joyful Voyage!",
   "nameTrad": "Joyful Voyage!",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -6102,9 +6267,10 @@
  },
  {
   "id": "110111",
-  "name": "上级增愈术",
+  "name": "强效治愈术·高级",
   "nameJa": "ゲインヒール・スペリアー",
   "nameTrad": "卓越治癒術",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -6124,9 +6290,10 @@
  },
  {
   "id": "110121",
-  "name": "大碗的爱！一生有口福！",
+  "name": "超大份！咬下第一口！",
   "nameJa": "大盛り！ファーストバイト！",
   "nameTrad": "超大份量！一口定情！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -6153,6 +6320,7 @@
   "name": "赌上最强之名",
   "nameJa": "最強の名を懸けて",
   "nameTrad": "賭上最強之名",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -6175,6 +6343,7 @@
   "name": "神鹰猛击波",
   "nameJa": "コンドル猛撃波",
   "nameTrad": "兀鷹猛擊波",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -6194,9 +6363,10 @@
  },
  {
   "id": "110151-b1",
-  "name": "惠福船歌(1)",
+  "name": "赐福船歌(1)",
   "nameJa": "恵福バルカローレ",
   "nameTrad": "惠福的船歌",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "unsupported",
   "effects": [
@@ -6215,9 +6385,10 @@
  },
  {
   "id": "110151-b2",
-  "name": "惠福船歌(2)",
+  "name": "赐福船歌(2)",
   "nameJa": "恵福バルカローレ",
   "nameTrad": "惠福的船歌",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "unsupported",
   "effects": [
@@ -6236,9 +6407,10 @@
  },
  {
   "id": "110161-b1",
-  "name": "灰色临界点(1)",
+  "name": "灰色的临界点(1)",
   "nameJa": "灰色の臨界点",
   "nameTrad": "灰色臨界點",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -6263,9 +6435,10 @@
  },
  {
   "id": "110161-b2",
-  "name": "灰色临界点(2)",
+  "name": "灰色的临界点(2)",
   "nameJa": "灰色の臨界点",
   "nameTrad": "灰色臨界點",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -6284,9 +6457,10 @@
  },
  {
   "id": "110171",
-  "name": "喧嚣之箭，击退晦冥",
+  "name": "拨云见月鸣镝箭",
   "nameJa": "翳り退く、さざめきの矢",
   "nameTrad": "劃破陰霾之響箭",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -6305,9 +6479,10 @@
  },
  {
   "id": "110181",
-  "name": "和暖微风，瞬间亦永恒",
+  "name": "熏风，予以永恒的瞬间",
   "nameJa": "薫風、永遠なる瞬間を",
   "nameTrad": "暖風吹向永恆的瞬間",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -6330,6 +6505,7 @@
   "name": "萌到让我活过来了！",
   "nameJa": "萌到讓我活過來了！",
   "nameTrad": "萌到讓我活過來了！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -6350,9 +6526,10 @@
  },
  {
   "id": "110201-b1",
-  "name": "你要霹雳舞吗！(1)",
+  "name": "Do Ya Breakin！(1)",
   "nameJa": "Do Ya Breakin!",
   "nameTrad": "Do Ya Breakin!",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -6376,9 +6553,10 @@
  },
  {
   "id": "110201-b2",
-  "name": "你要霹雳舞吗！(2)",
+  "name": "Do Ya Breakin！(2)",
   "nameJa": "Do Ya Breakin!",
   "nameTrad": "Do Ya Breakin!",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -6401,6 +6579,7 @@
   "name": "火神鸣",
   "nameJa": "火神鳴",
   "nameTrad": "火神鳴",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "precise",
   "effects": [
@@ -6424,9 +6603,10 @@
  },
  {
   "id": "110221-b1",
-  "name": "特雷森假日(1)",
+  "name": "Best day ever(1)",
   "nameJa": "Best day ever",
   "nameTrad": "Best day ever",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -6450,9 +6630,10 @@
  },
  {
   "id": "110221-b2",
-  "name": "特雷森假日(2)",
+  "name": "Best day ever(2)",
   "nameJa": "Best day ever",
   "nameTrad": "Best day ever",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -6471,9 +6652,10 @@
  },
  {
   "id": "110231",
-  "name": "来自X的礼物",
+  "name": "Presents from X",
   "nameJa": "Presents from X",
   "nameTrad": "Presents from X",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -6493,9 +6675,10 @@
  },
  {
   "id": "110241-b1",
-  "name": "花绚机动(1)",
+  "name": "绚丽☆演习(1)",
   "nameJa": "フラワリー☆マニューバ",
   "nameTrad": "花樣繽紛☆飛行演習",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -6514,9 +6697,10 @@
  },
  {
   "id": "110241-b2",
-  "name": "花绚机动(2)",
+  "name": "绚丽☆演习(2)",
   "nameJa": "フラワリー☆マニューバ",
   "nameTrad": "花樣繽紛☆飛行演習",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -6535,9 +6719,10 @@
  },
  {
   "id": "110251-b1",
-  "name": "诚心诚意，以喵待人(1)",
+  "name": "诚挚的喵心款待(1)",
   "nameJa": "心からのおもてにゃし",
   "nameTrad": "由衷的喵情款待",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "precise",
   "effects": [
@@ -6562,9 +6747,10 @@
  },
  {
   "id": "110251-b2",
-  "name": "诚心诚意，以喵待人(2)",
+  "name": "诚挚的喵心款待(2)",
   "nameJa": "心からのおもてにゃし",
   "nameTrad": "由衷的喵情款待",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "precise",
   "effects": [
@@ -6583,9 +6769,10 @@
  },
  {
   "id": "110261",
-  "name": "可可行动",
+  "name": "行动·Cacao",
   "nameJa": "オペレーション・Cacao",
   "nameTrad": "巧克力作戰行動",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -6610,9 +6797,10 @@
  },
  {
   "id": "110271-b1",
-  "name": "献给你的雕花(1)",
+  "name": "献给你的咖啡拉花(1)",
   "nameJa": "あなたに捧げるフリーポア",
   "nameTrad": "獻給你的拉花",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -6642,9 +6830,10 @@
  },
  {
   "id": "110271-b2",
-  "name": "献给你的雕花(2)",
+  "name": "献给你的咖啡拉花(2)",
   "nameJa": "あなたに捧げるフリーポア",
   "nameTrad": "獻給你的拉花",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -6719,9 +6908,10 @@
  },
  {
   "id": "110291-b1",
-  "name": "祝你胃口嘎嘎好！(1)",
+  "name": "请您多多品尝嘞！(1)",
   "nameJa": "いっぱいおあげんしぇ！",
   "nameTrad": "請多多品嚐看看餒！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -6747,9 +6937,10 @@
  },
  {
   "id": "110291-b2",
-  "name": "祝你胃口嘎嘎好！(2)",
+  "name": "请您多多品尝嘞！(2)",
   "nameJa": "いっぱいおあげんしぇ！",
   "nameTrad": "請多多品嚐看看餒！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -6769,9 +6960,10 @@
  },
  {
   "id": "110301",
-  "name": "玫瑰之吻",
+  "name": "Drain for rose",
   "nameJa": "Drain for rose",
   "nameTrad": "Drain for rose",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "unsupported",
   "effects": [
@@ -6821,9 +7013,10 @@
  },
  {
   "id": "110311",
-  "name": "清新☆茶室",
+  "name": "清新☆咖啡店",
   "nameJa": "フレッシュ☆パーラー",
   "nameTrad": "清新☆待客",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -6847,9 +7040,10 @@
  },
  {
   "id": "110321-b1",
-  "name": "夏空光晕(1)",
+  "name": "夏日光晕(1)",
   "nameJa": "夏空ハレーション",
   "nameTrad": "夏日天空下的光暈",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -6878,9 +7072,10 @@
  },
  {
   "id": "110321-b2",
-  "name": "夏空光晕(2)",
+  "name": "夏日光晕(2)",
   "nameJa": "夏空ハレーション",
   "nameTrad": "夏日天空下的光暈",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -6959,6 +7154,7 @@
   "name": "灯穗",
   "nameJa": "灯穂",
   "nameTrad": "燈穗",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -6977,9 +7173,10 @@
  },
  {
   "id": "110351",
-  "name": "传递到梦想前方吧！",
+  "name": "送往梦想的前方！",
   "nameJa": "夢の先へ、届け！",
   "nameTrad": "直達夢想的彼端！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -7002,9 +7199,10 @@
  },
  {
   "id": "110361-b1",
-  "name": "...抓到你了.(1)",
+  "name": "found you…(1)",
   "nameJa": "...found you.",
   "nameTrad": "...found you.",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -7023,9 +7221,10 @@
  },
  {
   "id": "110361-b2",
-  "name": "...抓到你了.(2)",
+  "name": "found you…(2)",
   "nameJa": "...found you.",
   "nameTrad": "...found you.",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -7044,9 +7243,10 @@
  },
  {
   "id": "110371",
-  "name": "祝您胃口好♪",
+  "name": "Guten Appetit♪",
   "nameJa": "Guten Appetit♪",
   "nameTrad": "Guten Appetit♪",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "precise",
   "effects": [
@@ -7065,9 +7265,10 @@
  },
  {
   "id": "110381",
-  "name": "本色唯一",
+  "name": "One True Color",
   "nameJa": "One True Color",
   "nameTrad": "One True Color",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -7092,9 +7293,10 @@
  },
  {
   "id": "110391",
-  "name": "快意刚劲",
+  "name": "豪迈大力",
   "nameJa": "快なる剛力",
   "nameTrad": "爽快剛勁",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -7117,6 +7319,7 @@
   "name": "GET DOWN",
   "nameJa": "GET DOWN",
   "nameTrad": "GET DOWN",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -7139,9 +7342,10 @@
  },
  {
   "id": "110411",
-  "name": "樱桃色☆飞天流",
+  "name": "CHERRY☆大乱战",
   "nameJa": "CHERRY☆スクランブル",
   "nameTrad": "CHERRY☆亂擊",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -7317,9 +7521,10 @@
  },
  {
   "id": "110451",
-  "name": "妈咪恶作剧团团转♡",
+  "name": "绕圈圈木乃伊戏法♡",
   "nameJa": "ぐるぐるマミートリック♡",
   "nameTrad": "繃帶木乃伊的惡作劇♡",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -7343,9 +7548,10 @@
  },
  {
   "id": "110461-b1",
-  "name": "阿尔法星(1)",
+  "name": "α-star*(1)",
   "nameJa": "α-star*",
   "nameTrad": "α-star*",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -7375,9 +7581,10 @@
  },
  {
   "id": "110461-b2",
-  "name": "阿尔法星(2)",
+  "name": "α-star*(2)",
   "nameJa": "α-star*",
   "nameTrad": "α-star*",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -7453,9 +7660,10 @@
  },
  {
   "id": "110481-b1",
-  "name": "我们辣妹，永远的姐妹♪(1)",
+  "name": "辣妹回忆永不灭♪(1)",
   "nameJa": "GALmem.ふぉーえば♪",
   "nameTrad": "GALmem.直到永遠♪",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -7475,9 +7683,10 @@
  },
  {
   "id": "110481-b2",
-  "name": "我们辣妹，永远的姐妹♪(2)",
+  "name": "辣妹回忆永不灭♪(2)",
   "nameJa": "GALmem.ふぉーえば♪",
   "nameTrad": "GALmem.直到永遠♪",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -7552,9 +7761,10 @@
  },
  {
   "id": "110501",
-  "name": "锻造之神",
+  "name": "Hephaistos",
   "nameJa": "Hephaistos",
   "nameTrad": "Hephaistos",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -7573,9 +7783,10 @@
  },
  {
   "id": "110511-b1",
-  "name": "梦想绽放(1)",
+  "name": "Flowering Dreams(1)",
   "nameJa": "Flowering Dreams",
   "nameTrad": "Flowering Dreams",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -7600,9 +7811,10 @@
  },
  {
   "id": "110511-b2",
-  "name": "梦想绽放(2)",
+  "name": "Flowering Dreams(2)",
   "nameJa": "Flowering Dreams",
   "nameTrad": "Flowering Dreams",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -7622,9 +7834,10 @@
  },
  {
   "id": "110521",
-  "name": "跌倒113次爬起114次",
+  "name": "113跌114起",
   "nameJa": "113転び114起き",
   "nameTrad": "113跌倒114爬起",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "precise",
   "effects": [
@@ -7643,9 +7856,10 @@
  },
  {
   "id": "110531-b1",
-  "name": "奥义·灼热常夏！！(1)",
+  "name": "奥义·盛夏激情！！(1)",
   "nameJa": "奥義・常夏バーニング！！",
   "nameTrad": "奧義．盛夏燃燒！！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -7671,9 +7885,10 @@
  },
  {
   "id": "110531-b2",
-  "name": "奥义·灼热常夏！！(2)",
+  "name": "奥义·盛夏激情！！(2)",
   "nameJa": "奥義・常夏バーニング！！",
   "nameTrad": "奧義．盛夏燃燒！！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -7742,6 +7957,7 @@
   "name": "禾乃登",
   "nameJa": "禾スナハチ登ル",
   "nameTrad": "三候秋收開始",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -7783,9 +7999,10 @@
  },
  {
   "id": "110581",
-  "name": "幽灵-害怕-高兴",
+  "name": "Spooky-Scary-Happy",
   "nameJa": "Spooky-Scary-Happy",
   "nameTrad": "Spooky-Scary-Happy",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "unsupported",
   "effects": [
@@ -7814,9 +8031,10 @@
  },
  {
   "id": "110591",
-  "name": "奔向那名为悸动的彼方",
+  "name": "奔向那令人心动的前方",
   "nameJa": "ときめきが呼ぶほうへ",
   "nameTrad": "奔向讓人心動之處",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -7836,9 +8054,10 @@
  },
  {
   "id": "110601-b1",
-  "name": "加油☆加油☆冲冲冲！(1)",
+  "name": "Go☆Go☆for it！(1)",
   "nameJa": "Go☆Go☆for it!",
   "nameTrad": "Go☆Go☆for it!",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -7857,9 +8076,10 @@
  },
  {
   "id": "110601-b2",
-  "name": "加油☆加油☆冲冲冲！(2)",
+  "name": "Go☆Go☆for it！(2)",
   "nameJa": "Go☆Go☆for it!",
   "nameTrad": "Go☆Go☆for it!",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -7878,9 +8098,10 @@
  },
  {
   "id": "110611",
-  "name": "威震八方！特雷森应援团！！",
+  "name": "震天高呼！特雷森后援团！！",
   "nameJa": "轟！トレセン応援団！！",
   "nameTrad": "轟隆作響！特雷森應援團！！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -7899,9 +8120,10 @@
  },
  {
   "id": "110621-b1",
-  "name": "车轮滚滚！？诗歌剧大回旋(1)",
+  "name": "骨碌碌？！超强回旋(1)",
   "nameJa": "ごろりん！？パワードライブ",
   "nameTrad": "滾呀滾！？強力迴旋",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -7930,9 +8152,10 @@
  },
  {
   "id": "110621-b2",
-  "name": "车轮滚滚！？诗歌剧大回旋(2)",
+  "name": "骨碌碌？！超强回旋(2)",
   "nameJa": "ごろりん！？パワードライブ",
   "nameTrad": "滾呀滾！？強力迴旋",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -7999,9 +8222,10 @@
  },
  {
   "id": "110641-b1",
-  "name": "铃儿响叮当(1)",
+  "name": "jingle all the way(1)",
   "nameJa": "jingle all the way",
   "nameTrad": "jingle all the way",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -8033,9 +8257,10 @@
  },
  {
   "id": "110641-b2",
-  "name": "铃儿响叮当(2)",
+  "name": "jingle all the way(2)",
   "nameJa": "jingle all the way",
   "nameTrad": "jingle all the way",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -8108,9 +8333,10 @@
  },
  {
   "id": "110671",
-  "name": "箭光向日黑云开",
+  "name": "拨云见日金甲箭",
   "nameJa": "玄雲散らす、黄金甲矢",
   "nameTrad": "消散烏雲的黃金甲箭",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -8134,9 +8360,10 @@
  },
  {
   "id": "110681",
-  "name": "惊叹的饕餮盛宴！",
+  "name": "正月福运大放送！",
   "nameJa": "あっぱれ大盤振る舞い！",
   "nameTrad": "吉兆驚天大放送！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -8160,9 +8387,10 @@
  },
  {
   "id": "110691",
-  "name": "尚为花蕾的我啊，绽放吧！",
+  "name": "我要！纵情盛放！",
   "nameJa": "咲け咲け！私！",
   "nameTrad": "盛開吧盛開吧！我！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -8232,9 +8460,10 @@
  },
  {
   "id": "110711",
-  "name": "翩翩起舞惜当下",
+  "name": "Danser le présent",
   "nameJa": "Danser le présent",
   "nameTrad": "Danser le présent",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -8304,9 +8533,10 @@
  },
  {
   "id": "110741-b1",
-  "name": "华灯为君绽(1)",
+  "name": "Illuminate you(1)",
   "nameJa": "Illuminate you",
   "nameTrad": "Illuminate you",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -8330,9 +8560,10 @@
  },
  {
   "id": "110741-b2",
-  "name": "华灯为君绽(2)",
+  "name": "Illuminate you(2)",
   "nameJa": "Illuminate you",
   "nameTrad": "Illuminate you",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -8598,9 +8829,10 @@
  },
  {
   "id": "110831-b1",
-  "name": "不死不灭者(1)",
+  "name": "Immortal Work(1)",
   "nameJa": "Immortal Work",
   "nameTrad": "Immortal Work",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "precise",
   "effects": [
@@ -8628,9 +8860,10 @@
  },
  {
   "id": "110831-b2",
-  "name": "不死不灭者(2)",
+  "name": "Immortal Work(2)",
   "nameJa": "Immortal Work",
   "nameTrad": "Immortal Work",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "precise",
   "effects": [
@@ -9979,9 +10212,10 @@
  },
  {
   "id": "120011-b1",
-  "name": "威风凛凛，逐梦似锦！(1)",
+  "name": "威风堂堂，锦绣逐梦！(1)",
   "nameJa": "威風堂々、夢錦！",
   "nameTrad": "威風凜凜，揭夢！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "precise",
   "effects": [
@@ -10006,9 +10240,10 @@
  },
  {
   "id": "120011-b2",
-  "name": "威风凛凛，逐梦似锦！(2)",
+  "name": "威风堂堂，锦绣逐梦！(2)",
   "nameJa": "威風堂々、夢錦！",
   "nameTrad": "威風凜凜，揭夢！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "precise",
   "effects": [
@@ -10033,9 +10268,10 @@
  },
  {
   "id": "120031-b1",
-  "name": "载歌载舞，喜乐无边(1)",
+  "name": "歌舞升平，妙趣横生(1)",
   "nameJa": "歌舞歓楽や、ああをかし",
   "nameTrad": "歌舞昇平，趣味橫生",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -10058,9 +10294,10 @@
  },
  {
   "id": "120031-b2",
-  "name": "载歌载舞，喜乐无边(2)",
+  "name": "歌舞升平，妙趣横生(2)",
   "nameJa": "歌舞歓楽や、ああをかし",
   "nameTrad": "歌舞昇平，趣味橫生",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -10217,9 +10454,10 @@
  },
  {
   "id": "120071-b1",
-  "name": "黄金万岁(1)",
+  "name": "Vive la GOLD(1)",
   "nameJa": "Vive la GOLD",
   "nameTrad": "Vive la GOLD",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -10245,9 +10483,10 @@
  },
  {
   "id": "120071-b2",
-  "name": "黄金万岁(2)",
+  "name": "Vive la GOLD(2)",
   "nameJa": "Vive la GOLD",
   "nameTrad": "Vive la GOLD",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -10377,9 +10616,10 @@
  },
  {
   "id": "120131",
-  "name": "波光粼粼，耀眼的你",
+  "name": "波光粼粼为海，璀璨闪烁是你",
   "nameJa": "きらめくは海、まばゆきは君",
   "nameTrad": "波光粼粼的海，燦爛輝煌的你",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -11302,9 +11542,10 @@
  },
  {
   "id": "120601-b1",
-  "name": "天天晴晴，年年甜甜蜜蜜(1)",
+  "name": "软糯Q弹·晴空万里(1)",
   "nameJa": "もちっと・ハレハレ",
   "nameTrad": "Q彈．陽光普照",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -11329,9 +11570,10 @@
  },
  {
   "id": "120601-b2",
-  "name": "天天晴晴，年年甜甜蜜蜜(2)",
+  "name": "软糯Q弹·晴空万里(2)",
   "nameJa": "もちっと・ハレハレ",
   "nameTrad": "Q彈．陽光普照",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -11372,9 +11614,10 @@
  },
  {
   "id": "120671-b1",
-  "name": "钻石桥(1)",
+  "name": "钻石锋芒(1)",
   "nameJa": "ポンテ・デ・ディアマン",
   "nameTrad": "鑽石鋒芒",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -11400,9 +11643,10 @@
  },
  {
   "id": "120671-b2",
-  "name": "钻石桥(2)",
+  "name": "钻石锋芒(2)",
   "nameJa": "ポンテ・デ・ディアマン",
   "nameTrad": "鑽石鋒芒",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -11428,9 +11672,10 @@
  },
  {
   "id": "120681-b1",
-  "name": "众星捧月，一马当先！(1)",
+  "name": "我要成为万众之爱！(1)",
   "nameJa": "ミンナノアタシへ！",
   "nameTrad": "成為大家的我！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -11450,9 +11695,10 @@
  },
  {
   "id": "120681-b2",
-  "name": "众星捧月，一马当先！(2)",
+  "name": "我要成为万众之爱！(2)",
   "nameJa": "ミンナノアタシへ！",
   "nameTrad": "成為大家的我！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -11603,6 +11849,7 @@
   "name": "大师驱动",
   "nameJa": "マスターズドライブ",
   "nameTrad": "大師驅動",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -11647,6 +11894,7 @@
   "name": "顺时针◎",
   "nameJa": "右回り◎",
   "nameTrad": "順時針◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -11669,6 +11917,7 @@
   "name": "顺时针○",
   "nameJa": "右回り○",
   "nameTrad": "順時針○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -11691,6 +11940,7 @@
   "name": "顺时针×",
   "nameJa": "右回り×",
   "nameTrad": "順時針×",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -11710,9 +11960,10 @@
  },
  {
   "id": "200014",
-  "name": "顺时针之鬼",
+  "name": "顺时针恶煞",
   "nameJa": "右回りの鬼",
   "nameTrad": "順時針之鬼",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -11741,6 +11992,7 @@
   "name": "逆时针◎",
   "nameJa": "左回り◎",
   "nameTrad": "逆時針◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -11763,6 +12015,7 @@
   "name": "逆时针○",
   "nameJa": "左回り○",
   "nameTrad": "逆時針○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -11785,6 +12038,7 @@
   "name": "逆时针×",
   "nameJa": "左回り×",
   "nameTrad": "逆時針×",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -11831,9 +12085,10 @@
  },
  {
   "id": "200031",
-  "name": "东京竞马场◎",
+  "name": "东京赛场◎",
   "nameJa": "東京レース場◎",
   "nameTrad": "東京賽場◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -11859,9 +12114,10 @@
  },
  {
   "id": "200032",
-  "name": "东京竞马场○",
+  "name": "东京赛场○",
   "nameJa": "東京レース場○",
   "nameTrad": "東京賽場○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -11887,9 +12143,10 @@
  },
  {
   "id": "200033",
-  "name": "东京竞马场×",
+  "name": "东京赛场×",
   "nameJa": "東京レース場×",
   "nameTrad": "東京賽場×",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -11953,9 +12210,10 @@
  },
  {
   "id": "200041",
-  "name": "中山竞马场◎",
+  "name": "中山赛场◎",
   "nameJa": "中山レース場◎",
   "nameTrad": "中山賽場◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -11981,9 +12239,10 @@
  },
  {
   "id": "200042",
-  "name": "中山竞马场○",
+  "name": "中山赛场○",
   "nameJa": "中山レース場○",
   "nameTrad": "中山賽場○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -12009,9 +12268,10 @@
  },
  {
   "id": "200043",
-  "name": "中山竞马场×",
+  "name": "中山赛场×",
   "nameJa": "中山レース場×",
   "nameTrad": "中山賽場×",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -12037,9 +12297,10 @@
  },
  {
   "id": "200051",
-  "name": "阪神竞马场◎",
+  "name": "阪神赛场◎",
   "nameJa": "阪神レース場◎",
   "nameTrad": "阪神賽場◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -12065,9 +12326,10 @@
  },
  {
   "id": "200052",
-  "name": "阪神竞马场○",
+  "name": "阪神赛场○",
   "nameJa": "阪神レース場○",
   "nameTrad": "阪神賽場○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -12093,9 +12355,10 @@
  },
  {
   "id": "200053",
-  "name": "阪神竞马场×",
+  "name": "阪神赛场×",
   "nameJa": "阪神レース場×",
   "nameTrad": "阪神賽場×",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -12121,9 +12384,10 @@
  },
  {
   "id": "200061",
-  "name": "京都竞马场◎",
+  "name": "京都赛场◎",
   "nameJa": "京都レース場◎",
   "nameTrad": "京都賽場◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -12149,9 +12413,10 @@
  },
  {
   "id": "200062",
-  "name": "京都竞马场○",
+  "name": "京都赛场○",
   "nameJa": "京都レース場○",
   "nameTrad": "京都賽場○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -12177,9 +12442,10 @@
  },
  {
   "id": "200063",
-  "name": "京都竞马场×",
+  "name": "京都赛场×",
   "nameJa": "京都レース場×",
   "nameTrad": "京都賽場×",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -12205,9 +12471,10 @@
  },
  {
   "id": "200064",
-  "name": "淀区天才",
+  "name": "淀之奇才",
   "nameJa": "淀の申し子",
   "nameTrad": "淀之奇才",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -12243,9 +12510,10 @@
  },
  {
   "id": "200071",
-  "name": "中京竞马场◎",
+  "name": "中京赛场◎",
   "nameJa": "中京レース場◎",
   "nameTrad": "中京賽場◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -12271,9 +12539,10 @@
  },
  {
   "id": "200072",
-  "name": "中京竞马场○",
+  "name": "中京赛场○",
   "nameJa": "中京レース場○",
   "nameTrad": "中京賽場○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -12299,9 +12568,10 @@
  },
  {
   "id": "200073",
-  "name": "中京竞马场×",
+  "name": "中京赛场×",
   "nameJa": "中京レース場×",
   "nameTrad": "中京賽場×",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -12327,9 +12597,10 @@
  },
  {
   "id": "200081",
-  "name": "札幌竞马场◎",
+  "name": "札幌赛场◎",
   "nameJa": "札幌レース場◎",
   "nameTrad": "札幌賽場◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -12355,9 +12626,10 @@
  },
  {
   "id": "200082",
-  "name": "札幌竞马场○",
+  "name": "札幌赛场○",
   "nameJa": "札幌レース場○",
   "nameTrad": "札幌賽場○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -12383,9 +12655,10 @@
  },
  {
   "id": "200083",
-  "name": "札幌竞马场×",
+  "name": "札幌赛场×",
   "nameJa": "札幌レース場×",
   "nameTrad": "札幌賽場×",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -12411,9 +12684,10 @@
  },
  {
   "id": "200091",
-  "name": "函馆竞马场◎",
+  "name": "函馆赛场◎",
   "nameJa": "函館レース場◎",
   "nameTrad": "函館賽場◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -12439,9 +12713,10 @@
  },
  {
   "id": "200092",
-  "name": "函馆竞马场○",
+  "name": "函馆赛场○",
   "nameJa": "函館レース場○",
   "nameTrad": "函館賽場○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -12467,9 +12742,10 @@
  },
  {
   "id": "200093",
-  "name": "函馆竞马场×",
+  "name": "函馆赛场×",
   "nameJa": "函館レース場×",
   "nameTrad": "函館賽場×",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -12495,9 +12771,10 @@
  },
  {
   "id": "200101",
-  "name": "福岛竞马场◎",
+  "name": "松浪赛场◎",
   "nameJa": "福島レース場◎",
   "nameTrad": "福島賽場◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -12518,9 +12795,10 @@
  },
  {
   "id": "200102",
-  "name": "福岛竞马场○",
+  "name": "松浪赛场○",
   "nameJa": "福島レース場○",
   "nameTrad": "福島賽場○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -12541,9 +12819,10 @@
  },
  {
   "id": "200103",
-  "name": "福岛竞马场×",
+  "name": "松浪赛场×",
   "nameJa": "福島レース場×",
   "nameTrad": "福島賽場×",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -12564,9 +12843,10 @@
  },
  {
   "id": "200111",
-  "name": "新泻竞马场◎",
+  "name": "新潟赛场◎",
   "nameJa": "新潟レース場◎",
   "nameTrad": "新潟賽場◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -12592,9 +12872,10 @@
  },
  {
   "id": "200112",
-  "name": "新泻竞马场○",
+  "name": "新潟赛场○",
   "nameJa": "新潟レース場○",
   "nameTrad": "新潟賽場○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -12620,9 +12901,10 @@
  },
  {
   "id": "200113",
-  "name": "新泻竞马场×",
+  "name": "新潟赛场×",
   "nameJa": "新潟レース場×",
   "nameTrad": "新潟賽場×",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -12648,9 +12930,10 @@
  },
  {
   "id": "200121",
-  "name": "小仓竞马场◎",
+  "name": "小仓赛场◎",
   "nameJa": "小倉レース場◎",
   "nameTrad": "小倉賽場◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -12676,9 +12959,10 @@
  },
  {
   "id": "200122",
-  "name": "小仓竞马场○",
+  "name": "小仓赛场○",
   "nameJa": "小倉レース場○",
   "nameTrad": "小倉賽場○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -12704,9 +12988,10 @@
  },
  {
   "id": "200123",
-  "name": "小仓竞马场×",
+  "name": "小仓赛场×",
   "nameJa": "小倉レース場×",
   "nameTrad": "小倉賽場×",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -12732,9 +13017,10 @@
  },
  {
   "id": "200131",
-  "name": "根干距离◎",
+  "name": "标准距离◎",
   "nameJa": "根幹距離◎",
   "nameTrad": "主要距離◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -12754,9 +13040,10 @@
  },
  {
   "id": "200132",
-  "name": "根干距离○",
+  "name": "标准距离○",
   "nameJa": "根幹距離○",
   "nameTrad": "主要距離○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -12776,9 +13063,10 @@
  },
  {
   "id": "200133",
-  "name": "根干距离×",
+  "name": "标准距离×",
   "nameJa": "根幹距離×",
   "nameTrad": "主要距離×",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -12798,9 +13086,10 @@
  },
  {
   "id": "200141",
-  "name": "非根干距离◎",
+  "name": "非标准距离◎",
   "nameJa": "非根幹距離◎",
   "nameTrad": "非主要距離◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -12820,9 +13109,10 @@
  },
  {
   "id": "200142",
-  "name": "非根干距离○",
+  "name": "非标准距离○",
   "nameJa": "非根幹距離○",
   "nameTrad": "非主要距離○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -12842,9 +13132,10 @@
  },
  {
   "id": "200143",
-  "name": "非根干距离×",
+  "name": "非标准距离×",
   "nameJa": "非根幹距離×",
   "nameTrad": "非主要距離×",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -12864,9 +13155,10 @@
  },
  {
   "id": "200151",
-  "name": "好马场◎",
+  "name": "良场地◎",
   "nameJa": "良バ場◎",
   "nameTrad": "良好場地◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -12892,9 +13184,10 @@
  },
  {
   "id": "200152",
-  "name": "好马场○",
+  "name": "良场地○",
   "nameJa": "良バ場○",
   "nameTrad": "良好場地○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -12920,9 +13213,10 @@
  },
  {
   "id": "200153",
-  "name": "好马场×",
+  "name": "良场地×",
   "nameJa": "良バ場×",
   "nameTrad": "良好場地×",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -12948,9 +13242,10 @@
  },
  {
   "id": "200154",
-  "name": "好马场之鬼",
+  "name": "良场地恶煞",
   "nameJa": "良バ場の鬼",
   "nameTrad": "良好場地之鬼",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -12984,6 +13279,7 @@
   "name": "路况不佳◎",
   "nameJa": "道悪◎",
   "nameTrad": "路況差勁◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -13013,6 +13309,7 @@
   "name": "路况不佳○",
   "nameJa": "道悪○",
   "nameTrad": "路況差勁○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -13042,6 +13339,7 @@
   "name": "路况不佳×",
   "nameJa": "道悪×",
   "nameTrad": "路況差勁×",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -13068,9 +13366,10 @@
  },
  {
   "id": "200164",
-  "name": "坏马场之鬼",
+  "name": "不佳路况恶煞",
   "nameJa": "道悪の鬼",
   "nameTrad": "路況差勁之鬼",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -13101,9 +13400,10 @@
  },
  {
   "id": "200171",
-  "name": "春马娘◎",
+  "name": "春季优俊少女◎",
   "nameJa": "春ウマ娘◎",
   "nameTrad": "春賽馬娘◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -13124,9 +13424,10 @@
  },
  {
   "id": "200172",
-  "name": "春马娘○",
+  "name": "春季优俊少女○",
   "nameJa": "春ウマ娘○",
   "nameTrad": "春賽馬娘○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -13147,9 +13448,10 @@
  },
  {
   "id": "200173",
-  "name": "春马娘×",
+  "name": "春季优俊少女×",
   "nameJa": "春ウマ娘×",
   "nameTrad": "春賽馬娘×",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -13170,9 +13472,10 @@
  },
  {
   "id": "200174",
-  "name": "春风起",
+  "name": "春初暖风",
   "nameJa": "春一番",
   "nameTrad": "春初暖風",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -13198,9 +13501,10 @@
  },
  {
   "id": "200181",
-  "name": "夏马娘◎",
+  "name": "夏季优俊少女◎",
   "nameJa": "夏ウマ娘◎",
   "nameTrad": "夏賽馬娘◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -13221,9 +13525,10 @@
  },
  {
   "id": "200182",
-  "name": "夏马娘○",
+  "name": "夏季优俊少女○",
   "nameJa": "夏ウマ娘○",
   "nameTrad": "夏賽馬娘○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -13244,9 +13549,10 @@
  },
  {
   "id": "200183",
-  "name": "夏马娘×",
+  "name": "夏季优俊少女×",
   "nameJa": "夏ウマ娘×",
   "nameTrad": "夏賽馬娘×",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -13267,9 +13573,10 @@
  },
  {
   "id": "200184",
-  "name": "青岚",
+  "name": "初夏疾风",
   "nameJa": "青嵐",
   "nameTrad": "青嵐",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -13295,9 +13602,10 @@
  },
  {
   "id": "200191",
-  "name": "秋马娘◎",
+  "name": "秋季优俊少女◎",
   "nameJa": "秋ウマ娘◎",
   "nameTrad": "秋賽馬娘◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -13318,9 +13626,10 @@
  },
  {
   "id": "200192",
-  "name": "秋马娘○",
+  "name": "秋季优俊少女○",
   "nameJa": "秋ウマ娘○",
   "nameTrad": "秋賽馬娘○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -13341,9 +13650,10 @@
  },
  {
   "id": "200193",
-  "name": "秋马娘×",
+  "name": "秋季优俊少女×",
   "nameJa": "秋ウマ娘×",
   "nameTrad": "秋賽馬娘×",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -13364,9 +13674,10 @@
  },
  {
   "id": "200194",
-  "name": "秋风",
+  "name": "秋初强风",
   "nameJa": "初嵐",
   "nameTrad": "秋初強風",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -13391,9 +13702,10 @@
  },
  {
   "id": "200201",
-  "name": "冬马娘◎",
+  "name": "冬季优俊少女◎",
   "nameJa": "冬ウマ娘◎",
   "nameTrad": "冬賽馬娘◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -13414,9 +13726,10 @@
  },
  {
   "id": "200202",
-  "name": "冬马娘○",
+  "name": "冬季优俊少女○",
   "nameJa": "冬ウマ娘○",
   "nameTrad": "冬賽馬娘○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -13437,9 +13750,10 @@
  },
  {
   "id": "200203",
-  "name": "冬马娘×",
+  "name": "冬季优俊少女×",
   "nameJa": "冬ウマ娘×",
   "nameTrad": "冬賽馬娘×",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -13460,9 +13774,10 @@
  },
  {
   "id": "200204",
-  "name": "寒风凛冽",
+  "name": "冬日寒风",
   "nameJa": "凍て風",
   "nameTrad": "冷冽之風",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -13491,6 +13806,7 @@
   "name": "晴天◎",
   "nameJa": "晴れの日◎",
   "nameTrad": "晴天◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -13513,6 +13829,7 @@
   "name": "晴天○",
   "nameJa": "晴れの日○",
   "nameTrad": "晴天○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -13535,6 +13852,7 @@
   "name": "阴天◎",
   "nameJa": "曇りの日◎",
   "nameTrad": "陰天◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -13557,6 +13875,7 @@
   "name": "阴天○",
   "nameJa": "曇りの日○",
   "nameTrad": "陰天○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -13579,6 +13898,7 @@
   "name": "雨天◎",
   "nameJa": "雨の日◎",
   "nameTrad": "下雨天◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -13601,6 +13921,7 @@
   "name": "雨天○",
   "nameJa": "雨の日○",
   "nameTrad": "下雨天○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -13623,6 +13944,7 @@
   "name": "雨天×",
   "nameJa": "雨の日×",
   "nameTrad": "下雨天×",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -13645,6 +13967,7 @@
   "name": "雪天◎",
   "nameJa": "雪の日◎",
   "nameTrad": "下雪天◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -13667,6 +13990,7 @@
   "name": "雪天○",
   "nameJa": "雪の日○",
   "nameTrad": "下雪天○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -13686,9 +14010,10 @@
  },
  {
   "id": "200251",
-  "name": "擅长内枠◎",
+  "name": "擅长内道◎",
   "nameJa": "内枠得意◎",
   "nameTrad": "擅長內側閘位◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -13708,9 +14033,10 @@
  },
  {
   "id": "200252",
-  "name": "擅长内枠○",
+  "name": "擅长内道○",
   "nameJa": "内枠得意○",
   "nameTrad": "擅長內側閘位○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -13730,9 +14056,10 @@
  },
  {
   "id": "200253",
-  "name": "不擅长内枠",
+  "name": "不擅长内道",
   "nameJa": "内枠苦手",
   "nameTrad": "不擅長內側閘位",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -13752,9 +14079,10 @@
  },
  {
   "id": "200261",
-  "name": "擅长外枠◎",
+  "name": "擅长外道◎",
   "nameJa": "外枠得意◎",
   "nameTrad": "擅長外側閘位◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -13774,9 +14102,10 @@
  },
  {
   "id": "200262",
-  "name": "擅长外枠○",
+  "name": "擅长外道○",
   "nameJa": "外枠得意○",
   "nameTrad": "擅長外側閘位○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -13796,9 +14125,10 @@
  },
  {
   "id": "200263",
-  "name": "不擅长外枠",
+  "name": "不擅长外道",
   "nameJa": "外枠苦手",
   "nameTrad": "不擅長外側閘位",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -13818,9 +14148,10 @@
  },
  {
   "id": "200271",
-  "name": "独自一人◎",
+  "name": "独行侠◎",
   "nameJa": "おひとり様◎",
   "nameTrad": "喜歡獨處◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -13841,9 +14172,10 @@
  },
  {
   "id": "200272",
-  "name": "独自一人○",
+  "name": "独行侠○",
   "nameJa": "おひとり様○",
   "nameTrad": "喜歡獨處○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -13867,6 +14199,7 @@
   "name": "对抗意识◎",
   "nameJa": "対抗意識◎",
   "nameTrad": "對抗意識◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -13890,6 +14223,7 @@
   "name": "对抗意识○",
   "nameJa": "対抗意識○",
   "nameTrad": "對抗意識○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -13913,6 +14247,7 @@
   "name": "畏缩不前",
   "nameJa": "引っ込み思案",
   "nameTrad": "內向保守",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -13933,9 +14268,10 @@
  },
  {
   "id": "200291",
-  "name": "彻底标记◎",
+  "name": "彻底盯紧◎",
   "nameJa": "徹底マーク◎",
   "nameTrad": "徹底鎖定◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -13956,9 +14292,10 @@
  },
  {
   "id": "200292",
-  "name": "彻底标记○",
+  "name": "彻底盯紧○",
   "nameJa": "徹底マーク○",
   "nameTrad": "徹底鎖定○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -13982,6 +14319,7 @@
   "name": "伏兵◎",
   "nameJa": "伏兵◎",
   "nameTrad": "伏兵◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -14004,6 +14342,7 @@
   "name": "伏兵○",
   "nameJa": "伏兵○",
   "nameTrad": "伏兵○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -14023,9 +14362,10 @@
  },
  {
   "id": "200311",
-  "name": "G1苦手",
+  "name": "不擅长一级赛事",
   "nameJa": "GⅠ苦手",
   "nameTrad": "不擅長GⅠ",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -14048,6 +14388,7 @@
   "name": "胆小鬼",
   "nameJa": "小心者",
   "nameTrad": "膽小",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -14067,9 +14408,10 @@
  },
  {
   "id": "200331",
-  "name": "弧线专家",
+  "name": "弧线大师",
   "nameJa": "弧線のプロフェッサー",
   "nameTrad": "弧線的教授",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -14088,9 +14430,10 @@
  },
  {
   "id": "200332",
-  "name": "弯道巧者○",
+  "name": "弯道能手○",
   "nameJa": "コーナー巧者○",
   "nameTrad": "彎道靈巧○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -14109,9 +14452,10 @@
  },
  {
   "id": "200333",
-  "name": "弯道巧者×",
+  "name": "弯道能手×",
   "nameJa": "コーナー巧者×",
   "nameTrad": "彎道靈巧×",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -14130,9 +14474,10 @@
  },
  {
   "id": "200341",
-  "name": "曲线侍酒师",
+  "name": "曲线行家",
   "nameJa": "曲線のソムリエ",
   "nameTrad": "曲線的侍酒師",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -14154,6 +14499,7 @@
   "name": "弯道加速○",
   "nameJa": "コーナー加速○",
   "nameTrad": "彎道加速○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -14175,6 +14521,7 @@
   "name": "弯道加速×",
   "nameJa": "コーナー加速×",
   "nameTrad": "彎道加速×",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -14193,9 +14540,10 @@
  },
  {
   "id": "200351",
-  "name": "圆弧大师",
+  "name": "圆弧艺术家",
   "nameJa": "円弧のマエストロ",
   "nameTrad": "圓弧的藝術家",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -14214,9 +14562,10 @@
  },
  {
   "id": "200352",
-  "name": "弯道回复○",
+  "name": "弯道恢复○",
   "nameJa": "コーナー回復○",
   "nameTrad": "彎道回復○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -14235,9 +14584,10 @@
  },
  {
   "id": "200353",
-  "name": "弯道回复×",
+  "name": "弯道恢复×",
   "nameJa": "コーナー回復×",
   "nameTrad": "彎道回復×",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -14256,9 +14606,10 @@
  },
  {
   "id": "200361",
-  "name": "疾风一直线",
+  "name": "迅疾如风",
   "nameJa": "ハヤテ一文字",
   "nameTrad": "疾風一文字",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -14277,9 +14628,10 @@
  },
  {
   "id": "200362",
-  "name": "直线巧者",
+  "name": "直线能手",
   "nameJa": "直線巧者",
   "nameTrad": "直線靈巧",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -14301,6 +14653,7 @@
   "name": "一阵狂风",
   "nameJa": "一陣の風",
   "nameTrad": "快如陣風",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -14326,6 +14679,7 @@
   "name": "直线加速",
   "nameJa": "直線加速",
   "nameTrad": "直線加速",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -14344,9 +14698,10 @@
  },
  {
   "id": "200381",
-  "name": "好转一息",
+  "name": "喘口气",
   "nameJa": "好転一息",
   "nameTrad": "好轉歇息",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -14366,9 +14721,10 @@
  },
  {
   "id": "200382",
-  "name": "直线回复",
+  "name": "直线恢复",
   "nameJa": "直線回復",
   "nameTrad": "直線回復",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -14391,6 +14747,7 @@
   "name": "不擅长坡道",
   "nameJa": "坂苦手",
   "nameTrad": "不擅長上坡",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -14409,9 +14766,10 @@
  },
  {
   "id": "200401",
-  "name": "讨厌马群",
+  "name": "厌恶队伍",
   "nameJa": "バ群嫌い",
   "nameTrad": "討厭成群",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -14433,6 +14791,7 @@
   "name": "容易放弃",
   "nameJa": "あきらめ癖",
   "nameTrad": "習慣放棄",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -14454,6 +14813,7 @@
   "name": "容易大意",
   "nameJa": "手抜き癖",
   "nameTrad": "習慣偷懶",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -14474,9 +14834,10 @@
  },
  {
   "id": "200431",
-  "name": "专注",
+  "name": "专心一意",
   "nameJa": "コンセントレーション",
   "nameTrad": "全神貫注",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -14496,9 +14857,10 @@
  },
  {
   "id": "200432",
-  "name": "集中力",
+  "name": "专注力",
   "nameJa": "集中力",
   "nameTrad": "集中力",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -14518,9 +14880,10 @@
  },
  {
   "id": "200433",
-  "name": "出闸困难",
+  "name": "起跑困难",
   "nameJa": "ゲート難",
   "nameTrad": "閘門障礙",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -14543,6 +14906,7 @@
   "name": "钢铁意志",
   "nameJa": "鋼の意志",
   "nameTrad": "鋼鐵意志",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -14567,9 +14931,10 @@
  },
  {
   "id": "200442",
-  "name": "隐身蓑衣",
+  "name": "隐身衣",
   "nameJa": "隠れ蓑",
   "nameTrad": "隱藏身影",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -14594,9 +14959,10 @@
  },
  {
   "id": "200451",
-  "name": "注目的舞女",
+  "name": "人气舞娘",
   "nameJa": "注目の踊り子",
   "nameTrad": "矚目的舞者",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -14617,9 +14983,10 @@
  },
  {
   "id": "200452",
-  "name": "距离感",
+  "name": "位置感",
   "nameJa": "ポジションセンス",
   "nameTrad": "取位天賦",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -14640,9 +15007,10 @@
  },
  {
   "id": "200461",
-  "name": "冲过来了!",
+  "name": "兴奋起来了！",
   "nameJa": "アガッてきた！",
   "nameTrad": "追上去！",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -14665,6 +15033,7 @@
   "name": "加快步伐",
   "nameJa": "ペースアップ",
   "nameTrad": "加速步調",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -14687,6 +15056,7 @@
   "name": "不屈之心",
   "nameJa": "不屈の心",
   "nameTrad": "不屈之心",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -14709,6 +15079,7 @@
   "name": "保持步伐",
   "nameJa": "ペースキープ",
   "nameTrad": "維持步調",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -14731,6 +15102,7 @@
   "name": "耳边风",
   "nameJa": "どこ吹く風",
   "nameTrad": "充耳不聞",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -14750,9 +15122,10 @@
  },
  {
   "id": "200482",
-  "name": "混战冷静",
+  "name": "临危不乱",
   "nameJa": "ウマ込み冷静",
   "nameTrad": "混戰冷靜",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -14772,9 +15145,10 @@
  },
  {
   "id": "200491",
-  "name": "永不停歇的少女",
+  "name": "不停步的女孩",
   "nameJa": "ノンストップガール",
   "nameTrad": "不停頓女孩",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -14800,9 +15174,10 @@
  },
  {
   "id": "200492",
-  "name": "回避力竭马",
+  "name": "回避失速优俊少女",
   "nameJa": "垂れウマ回避",
   "nameTrad": "避開力竭賽馬娘",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -14828,9 +15203,10 @@
  },
  {
   "id": "200501",
-  "name": "赛道魔术师",
+  "name": "赛道的魔术师",
   "nameJa": "レーンの魔術師",
   "nameTrad": "跑道的魔術師",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -14851,9 +15227,10 @@
  },
  {
   "id": "200502",
-  "name": "随机应变",
+  "name": "临机应变",
   "nameJa": "臨機応変",
   "nameTrad": "臨機應變",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -14874,9 +15251,10 @@
  },
  {
   "id": "200511",
-  "name": "全身心",
+  "name": "全神贯注",
   "nameJa": "全身全霊",
   "nameTrad": "全心全力",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -14896,9 +15274,10 @@
  },
  {
   "id": "200512",
-  "name": "末脚",
+  "name": "最后冲刺",
   "nameJa": "末脚",
   "nameTrad": "尾段加速",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -14918,9 +15297,10 @@
  },
  {
   "id": "200521",
-  "name": "空转",
+  "name": "竹篮打水",
   "nameJa": "空回り",
   "nameTrad": "空轉",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -14942,9 +15322,10 @@
  },
  {
   "id": "200531",
-  "name": "先手必胜",
+  "name": "先发制人",
   "nameJa": "先手必勝",
   "nameTrad": "先發必勝",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -14970,9 +15351,10 @@
  },
  {
   "id": "200532",
-  "name": "先驱",
+  "name": "抢先",
   "nameJa": "先駆け",
   "nameTrad": "先鋒",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -15001,6 +15383,7 @@
   "name": "逃脱术",
   "nameJa": "脱出術",
   "nameTrad": "逃脫術",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -15029,6 +15412,7 @@
   "name": "疾步",
   "nameJa": "急ぎ足",
   "nameTrad": "疾行",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -15057,6 +15441,7 @@
   "name": "逃亡者",
   "nameJa": "逃亡者",
   "nameTrad": "逃亡者",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -15081,9 +15466,10 @@
  },
  {
   "id": "200552",
-  "name": "一逃到底",
+  "name": "准备压制",
   "nameJa": "押し切り準備",
   "nameTrad": "準備強行衝線",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -15108,9 +15494,10 @@
  },
  {
   "id": "200561",
-  "name": "绰绰有余",
+  "name": "游刃有余",
   "nameJa": "余裕綽々",
   "nameTrad": "綽綽有餘",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -15136,9 +15523,10 @@
  },
  {
   "id": "200562",
-  "name": "保持体力",
+  "name": "保留体力",
   "nameJa": "スタミナキープ",
   "nameTrad": "維持持久力",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -15164,9 +15552,10 @@
  },
  {
   "id": "200571",
-  "name": "比赛筹划者",
+  "name": "比赛策略家",
   "nameJa": "レースプランナー",
   "nameTrad": "賽場規劃師",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -15192,9 +15581,10 @@
  },
  {
   "id": "200572",
-  "name": "好位追走",
+  "name": "稳步紧追",
   "nameJa": "好位追走",
   "nameTrad": "好位追趕",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -15223,6 +15613,7 @@
   "name": "速度之星",
   "nameJa": "スピードスター",
   "nameTrad": "速度之星",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -15250,6 +15641,7 @@
   "name": "准备突围",
   "nameJa": "抜け出し準備",
   "nameTrad": "準備突圍",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -15277,6 +15669,7 @@
   "name": "迅速果断",
   "nameJa": "迅速果断",
   "nameTrad": "迅速果斷",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -15302,9 +15695,10 @@
  },
  {
   "id": "200592",
-  "name": "向前取位",
+  "name": "向前抢位",
   "nameJa": "位置取り押し上げ",
   "nameTrad": "前驅取位",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -15330,9 +15724,10 @@
  },
  {
   "id": "200601",
-  "name": "善于换乘",
+  "name": "换乘能手",
   "nameJa": "乗り換え上手",
   "nameTrad": "熟練轉換",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -15358,9 +15753,10 @@
  },
  {
   "id": "200602",
-  "name": "超越姿态",
+  "name": "超越架势",
   "nameJa": "差し切り体勢",
   "nameTrad": "居中超前姿勢",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -15386,9 +15782,10 @@
  },
  {
   "id": "200611",
-  "name": "升龙",
+  "name": "登天之龙",
   "nameJa": "昇り龍",
   "nameTrad": "昇龍",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -15413,9 +15810,10 @@
  },
  {
   "id": "200612",
-  "name": "外道超车准备",
+  "name": "准备外道超越",
   "nameJa": "外差し準備",
   "nameTrad": "準備外側超前",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -15443,6 +15841,7 @@
   "name": "沉睡的狮子",
   "nameJa": "眠れる獅子",
   "nameTrad": "沉睡的獅子",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -15471,6 +15870,7 @@
   "name": "后方待机",
   "nameJa": "後方待機",
   "nameTrad": "後方待機",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -15499,6 +15899,7 @@
   "name": "疾风怒涛",
   "nameJa": "疾風怒濤",
   "nameTrad": "疾風怒濤",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -15524,9 +15925,10 @@
  },
  {
   "id": "200632",
-  "name": "机能拔群",
+  "name": "超群冲刺",
   "nameJa": "仕掛け抜群",
   "nameTrad": "進攻時機超群",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -15552,9 +15954,10 @@
  },
  {
   "id": "200641",
-  "name": "迫近的阴影",
+  "name": "迫近的暗影",
   "nameJa": "迫る影",
   "nameTrad": "逼近的身影",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -15579,9 +15982,10 @@
  },
  {
   "id": "200642",
-  "name": "直线一气",
+  "name": "一鼓作气",
   "nameJa": "直線一気",
   "nameTrad": "直線一口氣",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -15606,9 +16010,10 @@
  },
  {
   "id": "200651",
-  "name": "短距涡轮",
+  "name": "短途涡轮",
   "nameJa": "スプリントターボ",
   "nameTrad": "短途渦輪",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -15634,9 +16039,10 @@
  },
  {
   "id": "200652",
-  "name": "短距齿轮",
+  "name": "短途齿轮",
   "nameJa": "スプリントギア",
   "nameTrad": "短途檔位",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -15665,6 +16071,7 @@
   "name": "观望",
   "nameJa": "様子見",
   "nameTrad": "靜觀其變",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -15697,6 +16104,7 @@
   "name": "电击光辉",
   "nameJa": "電撃の煌めき",
   "nameTrad": "電擊光輝",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -15726,9 +16134,10 @@
  },
  {
   "id": "200672",
-  "name": "紧追不舍",
+  "name": "逼近",
   "nameJa": "詰め寄り",
   "nameTrad": "窮追不捨",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -15758,9 +16167,10 @@
  },
  {
   "id": "200681",
-  "name": "英里支配者",
+  "name": "英里统治者",
   "nameJa": "マイルの支配者",
   "nameTrad": "一哩支配者",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -15786,9 +16196,10 @@
  },
  {
   "id": "200682",
-  "name": "积极对策",
+  "name": "积极行动",
   "nameJa": "積極策",
   "nameTrad": "積極應對",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -15817,6 +16228,7 @@
   "name": "慧眼",
   "nameJa": "慧眼",
   "nameTrad": "慧眼",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -15850,6 +16262,7 @@
   "name": "窥视展开",
   "nameJa": "展開窺い",
   "nameTrad": "觀察情勢",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -15880,9 +16293,10 @@
  },
  {
   "id": "200701",
-  "name": "豪脚",
+  "name": "奋力一搏",
   "nameJa": "豪脚",
   "nameTrad": "強勁腳力",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -15911,6 +16325,7 @@
   "name": "上升气流",
   "nameJa": "上昇気流",
   "nameTrad": "上昇氣流",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -15936,9 +16351,10 @@
  },
  {
   "id": "200711",
-  "name": "开辟者",
+  "name": "开拓者",
   "nameJa": "切り開く者",
   "nameTrad": "突破者",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -15964,9 +16380,10 @@
  },
  {
   "id": "200712",
-  "name": "前途无量",
+  "name": "前途似锦",
   "nameJa": "前途洋々",
   "nameTrad": "前途無量",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -15992,9 +16409,10 @@
  },
  {
   "id": "200721",
-  "name": "杀手旋律",
+  "name": "绝妙韵律",
   "nameJa": "キラーチューン",
   "nameTrad": "致勝曲調",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -16023,6 +16441,7 @@
   "name": "加快节奏",
   "nameJa": "テンポアップ",
   "nameTrad": "加快節奏",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -16051,6 +16470,7 @@
   "name": "对胜利的执念",
   "nameJa": "勝利への執念",
   "nameTrad": "對勝利的執著",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -16079,9 +16499,10 @@
  },
  {
   "id": "200732",
-  "name": "誓不罢休",
+  "name": "紧追不舍",
   "nameJa": "食い下がり",
   "nameTrad": "緊咬不放",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -16113,6 +16534,7 @@
   "name": "冷却",
   "nameJa": "クールダウン",
   "nameTrad": "冷卻",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -16141,6 +16563,7 @@
   "name": "深呼吸",
   "nameJa": "深呼吸",
   "nameTrad": "深呼吸",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -16166,9 +16589,10 @@
  },
  {
   "id": "200751",
-  "name": "内在体验",
+  "name": "内侧体验",
   "nameJa": "内的体験",
   "nameTrad": "內在體驗",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -16193,9 +16617,10 @@
  },
  {
   "id": "200752",
-  "name": "弯里橫",
+  "name": "弯里横",
   "nameJa": "内弁慶",
   "nameTrad": "內側強者",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -16220,9 +16645,10 @@
  },
  {
   "id": "200761",
-  "name": "火场怪力",
+  "name": "破釜沉舟",
   "nameJa": "火事場のバ鹿力",
   "nameTrad": "腎上腺素爆發",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -16251,9 +16677,10 @@
  },
  {
   "id": "200762",
-  "name": "第二体力槽",
+  "name": "大胃储备",
   "nameJa": "別腹タンク",
   "nameTrad": "第二體力條",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -16281,6 +16708,7 @@
   "name": "诡计（前）",
   "nameJa": "トリック（前）",
   "nameTrad": "謀略（前）",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -16302,9 +16730,10 @@
  },
  {
   "id": "200772",
-  "name": "令人出神的诡计",
+  "name": "吸睛诡计",
   "nameJa": "見惚れるトリック",
   "nameTrad": "吸睛謀略",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -16329,6 +16758,7 @@
   "name": "诡计（后）",
   "nameJa": "トリック（後）",
   "nameTrad": "謀略（後）",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -16349,9 +16779,10 @@
  },
  {
   "id": "200791",
-  "name": "对逃马策略",
+  "name": "领跑对策",
   "nameJa": "逃げ駆け引き",
   "nameTrad": "對領頭策略",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -16372,9 +16803,10 @@
  },
  {
   "id": "200801",
-  "name": "对先行策略",
+  "name": "跟前对策",
   "nameJa": "先行駆け引き",
   "nameTrad": "對前列策略",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -16395,9 +16827,10 @@
  },
  {
   "id": "200811",
-  "name": "对差行策略",
+  "name": "居中对策",
   "nameJa": "差し駆け引き",
   "nameTrad": "對居中策略",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -16418,9 +16851,10 @@
  },
  {
   "id": "200821",
-  "name": "对追逐策略",
+  "name": "后追对策",
   "nameJa": "追込駆け引き",
   "nameTrad": "對後追策略",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -16441,9 +16875,10 @@
  },
  {
   "id": "200831",
-  "name": "逃马牵制",
+  "name": "领跑牵制",
   "nameJa": "逃げけん制",
   "nameTrad": "牽制領頭",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -16465,9 +16900,10 @@
  },
  {
   "id": "200841",
-  "name": "逃马焦躁",
+  "name": "领跑焦躁",
   "nameJa": "逃げ焦り",
   "nameTrad": "使領頭焦躁",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -16489,9 +16925,10 @@
  },
  {
   "id": "200851",
-  "name": "逃马彷徨",
+  "name": "领跑踌躇",
   "nameJa": "逃げためらい",
   "nameTrad": "使領頭遲疑",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -16513,9 +16950,10 @@
  },
  {
   "id": "200861",
-  "name": "先行牵制",
+  "name": "跟前牵制",
   "nameJa": "先行けん制",
   "nameTrad": "牽制前列",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -16537,9 +16975,10 @@
  },
  {
   "id": "200871",
-  "name": "先行焦躁",
+  "name": "跟前焦躁",
   "nameJa": "先行焦り",
   "nameTrad": "使前列焦躁",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -16561,9 +17000,10 @@
  },
  {
   "id": "200881",
-  "name": "先行彷徨",
+  "name": "跟前踌躇",
   "nameJa": "先行ためらい",
   "nameTrad": "使前列遲疑",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -16585,9 +17025,10 @@
  },
  {
   "id": "200891",
-  "name": "差行牵制",
+  "name": "居中牵制",
   "nameJa": "差しけん制",
   "nameTrad": "牽制居中",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -16609,9 +17050,10 @@
  },
  {
   "id": "200901",
-  "name": "差行焦躁",
+  "name": "居中焦躁",
   "nameJa": "差し焦り",
   "nameTrad": "使居中焦躁",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -16633,9 +17075,10 @@
  },
  {
   "id": "200911",
-  "name": "差行彷徨",
+  "name": "居中踌躇",
   "nameJa": "差しためらい",
   "nameTrad": "使居中遲疑",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -16657,9 +17100,10 @@
  },
  {
   "id": "200921",
-  "name": "追逐牵制",
+  "name": "后追牵制",
   "nameJa": "追込けん制",
   "nameTrad": "牽制後追",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -16681,9 +17125,10 @@
  },
  {
   "id": "200931",
-  "name": "追逐焦躁",
+  "name": "后追焦躁",
   "nameJa": "追込焦り",
   "nameTrad": "使後追焦躁",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -16705,9 +17150,10 @@
  },
  {
   "id": "200941",
-  "name": "追逐彷徨",
+  "name": "后追踌躇",
   "nameJa": "追込ためらい",
   "nameTrad": "使後追遲疑",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -16729,9 +17175,10 @@
  },
  {
   "id": "200951",
-  "name": "大井竞马场◎",
+  "name": "大井赛场◎",
   "nameJa": "大井レース場◎",
   "nameTrad": "大井賽場◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -16757,9 +17204,10 @@
  },
  {
   "id": "200952",
-  "name": "大井竞马场○",
+  "name": "大井赛场○",
   "nameJa": "大井レース場○",
   "nameTrad": "大井賽場○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -16785,9 +17233,10 @@
  },
  {
   "id": "200953",
-  "name": "大井竞马场×",
+  "name": "大井赛场×",
   "nameJa": "大井レース場×",
   "nameTrad": "大井賽場×",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -16816,6 +17265,7 @@
   "name": "短距离直线◎",
   "nameJa": "短距離直線◎",
   "nameTrad": "短距離直線◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -16843,6 +17293,7 @@
   "name": "短距离直线○",
   "nameJa": "短距離直線○",
   "nameTrad": "短距離直線○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -16870,6 +17321,7 @@
   "name": "紫电一闪",
   "nameJa": "紫電一閃",
   "nameTrad": "紫電一閃",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -16897,6 +17349,7 @@
   "name": "短距离弯道◎",
   "nameJa": "短距離コーナー◎",
   "nameTrad": "短距離彎道◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -16924,6 +17377,7 @@
   "name": "短距离弯道○",
   "nameJa": "短距離コーナー○",
   "nameTrad": "短距離彎道○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -16951,6 +17405,7 @@
   "name": "紫电圆刃",
   "nameJa": "紫電円刃",
   "nameTrad": "紫電圓刃",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -16978,6 +17433,7 @@
   "name": "压倒性领先",
   "nameJa": "圧倒的リード",
   "nameTrad": "壓倒性領先",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -17003,9 +17459,10 @@
  },
  {
   "id": "200982",
-  "name": "大幅度领先",
+  "name": "遥遥领先",
   "nameJa": "大きなリード",
   "nameTrad": "大幅領先",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -17034,6 +17491,7 @@
   "name": "X计划",
   "nameJa": "プランX",
   "nameTrad": "X計劃",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -17062,6 +17520,7 @@
   "name": "善后措施",
   "nameJa": "善後策",
   "nameTrad": "善後策略",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -17090,6 +17549,7 @@
   "name": "万事俱备！",
   "nameJa": "準備万全！",
   "nameTrad": "準備萬全！",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -17120,9 +17580,10 @@
  },
  {
   "id": "201002",
-  "name": "着手准备",
+  "name": "准备冲刺",
   "nameJa": "仕掛け準備",
   "nameTrad": "準備進攻",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -17153,9 +17614,10 @@
  },
  {
   "id": "201011",
-  "name": "无脑术",
+  "name": "迷魂术",
   "nameJa": "悩殺術",
   "nameTrad": "魅惑術",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -17182,9 +17644,10 @@
  },
  {
   "id": "201012",
-  "name": "钉死后方",
+  "name": "钉牢后方",
   "nameJa": "後方釘付",
   "nameTrad": "緊盯後方",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -17214,6 +17677,7 @@
   "name": "逃亡禁令",
   "nameJa": "逃亡禁止令",
   "nameTrad": "逃亡禁令",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -17248,6 +17712,7 @@
   "name": "禁止抢先",
   "nameJa": "抜け駆け禁止",
   "nameTrad": "禁止搶先",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -17282,6 +17747,7 @@
   "name": "英里直线◎",
   "nameJa": "マイル直線◎",
   "nameTrad": "一哩直線◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -17309,6 +17775,7 @@
   "name": "英里直线○",
   "nameJa": "マイル直線○",
   "nameTrad": "一哩直線○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -17363,6 +17830,7 @@
   "name": "英里弯道◎",
   "nameJa": "マイルコーナー◎",
   "nameTrad": "一哩彎道◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -17390,6 +17858,7 @@
   "name": "英里弯道○",
   "nameJa": "マイルコーナー○",
   "nameTrad": "一哩彎道○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -17414,9 +17883,10 @@
  },
  {
   "id": "201043",
-  "name": "狂风圆刃",
+  "name": "豪风圆刃",
   "nameJa": "豪風円刃",
   "nameTrad": "豪風圓刃",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -17444,6 +17914,7 @@
   "name": "换挡",
   "nameJa": "ギアチェンジ",
   "nameTrad": "換檔",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -17472,6 +17943,7 @@
   "name": "变速",
   "nameJa": "ギアシフト",
   "nameTrad": "變速",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -17497,9 +17969,10 @@
  },
  {
   "id": "201061",
-  "name": "油门全开！",
+  "name": "马力全开！",
   "nameJa": "アクセル全開！",
   "nameTrad": "油門全開！",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -17525,9 +17998,10 @@
  },
  {
   "id": "201062",
-  "name": "加速度",
+  "name": "加快速度",
   "nameJa": "アクセラレーション",
   "nameTrad": "加速度",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -17553,9 +18027,10 @@
  },
  {
   "id": "201071",
-  "name": "御姐气质",
+  "name": "大姐头气质",
   "nameJa": "姉御肌",
   "nameTrad": "姐姐氣質",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -17582,9 +18057,10 @@
  },
  {
   "id": "201072",
-  "name": "不服输",
+  "name": "要强",
   "nameJa": "負けん気",
   "nameTrad": "不服輸",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -17611,9 +18087,10 @@
  },
  {
   "id": "201081",
-  "name": "速度贪食者",
+  "name": "掠夺速度",
   "nameJa": "スピードグリード",
   "nameTrad": "速度貪食者",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -17644,9 +18121,10 @@
  },
  {
   "id": "201082",
-  "name": "速度猎手",
+  "name": "吞噬速度",
   "nameJa": "スピードイーター",
   "nameTrad": "速度吞噬者",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -17680,6 +18158,7 @@
   "name": "布阵",
   "nameJa": "布陣",
   "nameTrad": "布陣",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -17709,6 +18188,7 @@
   "name": "布局",
   "nameJa": "布石",
   "nameTrad": "布局",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -17738,6 +18218,7 @@
   "name": "中距离直线◎",
   "nameJa": "中距離直線◎",
   "nameTrad": "中距離直線◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -17765,6 +18246,7 @@
   "name": "中距离直线○",
   "nameJa": "中距離直線○",
   "nameTrad": "中距離直線○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -17789,9 +18271,10 @@
  },
  {
   "id": "201103",
-  "name": "光芒一闪",
+  "name": "瞬息万变",
   "nameJa": "光芒一閃",
   "nameTrad": "光芒一閃",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -17819,6 +18302,7 @@
   "name": "中距离弯道◎",
   "nameJa": "中距離コーナー◎",
   "nameTrad": "中距離彎道◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -17846,6 +18330,7 @@
   "name": "中距离弯道○",
   "nameJa": "中距離コーナー○",
   "nameTrad": "中距離彎道○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -17873,6 +18358,7 @@
   "name": "光芒圆刃",
   "nameJa": "光芒円刃",
   "nameTrad": "光芒圓刃",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -17900,6 +18386,7 @@
   "name": "千里眼",
   "nameJa": "千里眼",
   "nameTrad": "千里眼",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -17929,6 +18416,7 @@
   "name": "鹰眼",
   "nameJa": "ホークアイ",
   "nameTrad": "鷹眼",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -17958,6 +18446,7 @@
   "name": "闪光步伐",
   "nameJa": "ライトニングステップ",
   "nameTrad": "閃光步伐",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -17991,6 +18480,7 @@
   "name": "闪电步伐",
   "nameJa": "イナズマステップ",
   "nameTrad": "閃電步伐",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -18021,9 +18511,10 @@
  },
  {
   "id": "201141",
-  "name": "神赐步伐",
+  "name": "神迹步伐",
   "nameJa": "神業ステップ",
   "nameTrad": "神技步伐",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -18050,9 +18541,10 @@
  },
  {
   "id": "201142",
-  "name": "轻快步伐",
+  "name": "轻盈步伐",
   "nameJa": "軽やかステップ",
   "nameTrad": "輕快步伐",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -18082,6 +18574,7 @@
   "name": "独占力",
   "nameJa": "独占力",
   "nameTrad": "獨佔力",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -18111,6 +18604,7 @@
   "name": "束缚",
   "nameJa": "束縛",
   "nameTrad": "束縛",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -18137,9 +18631,10 @@
  },
  {
   "id": "201161",
-  "name": "魅惑的细语",
+  "name": "魅惑低语",
   "nameJa": "魅惑のささやき",
   "nameTrad": "魅惑的細語",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -18166,9 +18661,10 @@
  },
  {
   "id": "201162",
-  "name": "细语",
+  "name": "低语",
   "nameJa": "ささやき",
   "nameTrad": "細語",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -18198,6 +18694,7 @@
   "name": "长距离直线◎",
   "nameJa": "長距離直線◎",
   "nameTrad": "長距離直線◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -18225,6 +18722,7 @@
   "name": "长距离直线○",
   "nameJa": "長距離直線○",
   "nameTrad": "長距離直線○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -18252,6 +18750,7 @@
   "name": "烈风一闪",
   "nameJa": "烈風一閃",
   "nameTrad": "烈風一閃",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -18279,6 +18778,7 @@
   "name": "长距离弯道◎",
   "nameJa": "長距離コーナー◎",
   "nameTrad": "長距離彎道◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -18306,6 +18806,7 @@
   "name": "长距离弯道○",
   "nameJa": "長距離コーナー○",
   "nameTrad": "長距離彎道○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -18357,9 +18858,10 @@
  },
  {
   "id": "201191",
-  "name": "先锋的心得",
+  "name": "领头心得",
   "nameJa": "先陣の心得",
   "nameTrad": "前鋒的心得",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -18388,6 +18890,7 @@
   "name": "保持领先",
   "nameJa": "リードキープ",
   "nameTrad": "維持領先",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -18413,9 +18916,10 @@
  },
  {
   "id": "201201",
-  "name": "VIP特权通行",
+  "name": "VIP熟客",
   "nameJa": "VIP顔パス",
   "nameTrad": "VIP常客",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -18442,9 +18946,10 @@
  },
  {
   "id": "201202",
-  "name": "擅长赶超",
+  "name": "赶超能手",
   "nameJa": "パス上手",
   "nameTrad": "熟練超越",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -18474,6 +18979,7 @@
   "name": "怒涛般的追击",
   "nameJa": "怒涛の追い上げ",
   "nameTrad": "怒濤的後來居上",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -18506,6 +19012,7 @@
   "name": "追击",
   "nameJa": "追い上げ",
   "nameTrad": "後來居上",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -18535,9 +19042,10 @@
  },
  {
   "id": "201221",
-  "name": "耐力贪食者",
+  "name": "掠夺体力",
   "nameJa": "スタミナグリード",
   "nameTrad": "持久力貪食者",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -18568,9 +19076,10 @@
  },
  {
   "id": "201222",
-  "name": "耐力猎手",
+  "name": "吞噬体力",
   "nameJa": "スタミナイーター",
   "nameTrad": "持久力吞噬者",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -18604,6 +19113,7 @@
   "name": "奇术师",
   "nameJa": "奇術師",
   "nameTrad": "奇術師",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -18633,6 +19143,7 @@
   "name": "障眼法",
   "nameJa": "目くらまし",
   "nameTrad": "障眼法",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -18659,9 +19170,10 @@
  },
  {
   "id": "201241",
-  "name": "逃马直线◎",
+  "name": "领跑直线◎",
   "nameJa": "逃げ直線◎",
   "nameTrad": "領頭直線◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -18686,9 +19198,10 @@
  },
  {
   "id": "201242",
-  "name": "逃马直线○",
+  "name": "领跑直线○",
   "nameJa": "逃げ直線○",
   "nameTrad": "領頭直線○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -18740,9 +19253,10 @@
  },
  {
   "id": "201251",
-  "name": "逃马弯道◎",
+  "name": "领跑弯道◎",
   "nameJa": "逃げコーナー◎",
   "nameTrad": "領頭彎道◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -18767,9 +19281,10 @@
  },
  {
   "id": "201252",
-  "name": "逃马弯道○",
+  "name": "领跑弯道○",
   "nameJa": "逃げコーナー○",
   "nameTrad": "領頭彎道○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -18794,9 +19309,10 @@
  },
  {
   "id": "201253",
-  "name": "暴风圆刃",
+  "name": "阵风圆刃",
   "nameJa": "陣風円刃",
   "nameTrad": "陣風圓刃",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -18824,6 +19340,7 @@
   "name": "第六感",
   "nameJa": "シックスセンス",
   "nameTrad": "第六感",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -18858,6 +19375,7 @@
   "name": "危险回避",
   "nameJa": "危険回避",
   "nameTrad": "迴避危險",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -18892,6 +19410,7 @@
   "name": "领跑者",
   "nameJa": "トップランナー",
   "nameTrad": "頂尖跑者",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -18917,9 +19436,10 @@
  },
  {
   "id": "201272",
-  "name": "领者的自尊心",
+  "name": "领跑的骄傲",
   "nameJa": "先頭プライド",
   "nameTrad": "領先的自尊",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -18945,9 +19465,10 @@
  },
  {
   "id": "201281",
-  "name": "悍马娘",
+  "name": "活泼优俊少女",
   "nameJa": "じゃじゃウマ娘",
   "nameTrad": "強悍賽馬娘",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -18975,6 +19496,7 @@
   "name": "随势而动",
   "nameJa": "勢い任せ",
   "nameTrad": "隨勢而動",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -18999,9 +19521,10 @@
  },
  {
   "id": "201291",
-  "name": "再次燃烧",
+  "name": "再度燃烧",
   "nameJa": "再燃焼",
   "nameTrad": "再次燃燒",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -19034,6 +19557,7 @@
   "name": "第二支箭",
   "nameJa": "二の矢",
   "nameTrad": "第二對策",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -19063,9 +19587,10 @@
  },
  {
   "id": "201302",
-  "name": "重启",
+  "name": "重新开始",
   "nameJa": "リスタート",
   "nameTrad": "重新開始",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -19092,9 +19617,10 @@
  },
  {
   "id": "201311",
-  "name": "先行直线◎",
+  "name": "跟前直线◎",
   "nameJa": "先行直線◎",
   "nameTrad": "前列直線◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -19119,9 +19645,10 @@
  },
  {
   "id": "201312",
-  "name": "先行直线○",
+  "name": "跟前直线○",
   "nameJa": "先行直線○",
   "nameTrad": "前列直線○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -19173,9 +19700,10 @@
  },
  {
   "id": "201321",
-  "name": "先行弯道◎",
+  "name": "跟前弯道◎",
   "nameJa": "先行コーナー◎",
   "nameTrad": "前列彎道◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -19200,9 +19728,10 @@
  },
  {
   "id": "201322",
-  "name": "先行弯道○",
+  "name": "跟前弯道○",
   "nameJa": "先行コーナー○",
   "nameTrad": "前列彎道○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -19257,6 +19786,7 @@
   "name": "技巧派",
   "nameJa": "技巧派",
   "nameTrad": "技巧派",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -19284,6 +19814,7 @@
   "name": "轻巧舞步",
   "nameJa": "巧みなステップ",
   "nameTrad": "靈巧步伐",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -19308,9 +19839,10 @@
  },
  {
   "id": "201341",
-  "name": "决心的速降",
+  "name": "决心的直线下坡",
   "nameJa": "決意の直滑降",
   "nameTrad": "決心的直線滑下",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -19335,9 +19867,10 @@
  },
  {
   "id": "201342",
-  "name": "直滑降",
+  "name": "直线下坡",
   "nameJa": "直滑降",
   "nameTrad": "直線滑下",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -19365,6 +19898,7 @@
   "name": "大胃王",
   "nameJa": "食いしん坊",
   "nameTrad": "貪吃鬼",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -19393,6 +19927,7 @@
   "name": "营养补给",
   "nameJa": "栄養補給",
   "nameTrad": "補充營養",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -19418,9 +19953,10 @@
  },
  {
   "id": "201361",
-  "name": "不屈不挠的精神",
+  "name": "不屈的精神",
   "nameJa": "くじけぬ精神",
   "nameTrad": "不屈精神",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -19446,9 +19982,10 @@
  },
  {
   "id": "201362",
-  "name": "重整态势",
+  "name": "重振旗鼓",
   "nameJa": "まき直し",
   "nameTrad": "重整態勢",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -19474,9 +20011,10 @@
  },
  {
   "id": "201371",
-  "name": "迷惑的干扰",
+  "name": "迷惑干扰",
   "nameJa": "幻惑のかく乱",
   "nameTrad": "幻覺干擾",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -19506,6 +20044,7 @@
   "name": "干扰",
   "nameJa": "かく乱",
   "nameTrad": "干擾",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -19532,9 +20071,10 @@
  },
  {
   "id": "201381",
-  "name": "差行直线◎",
+  "name": "居中直线◎",
   "nameJa": "差し直線◎",
   "nameTrad": "居中直線◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -19559,9 +20099,10 @@
  },
  {
   "id": "201382",
-  "name": "差行直线○",
+  "name": "居中直线○",
   "nameJa": "差し直線○",
   "nameTrad": "居中直線○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -19589,6 +20130,7 @@
   "name": "锐脚一闪",
   "nameJa": "鋭脚一閃",
   "nameTrad": "銳腳一閃",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -19613,9 +20155,10 @@
  },
  {
   "id": "201391",
-  "name": "差行弯道◎",
+  "name": "居中弯道◎",
   "nameJa": "差しコーナー◎",
   "nameTrad": "居中彎道◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -19640,9 +20183,10 @@
  },
  {
   "id": "201392",
-  "name": "差行弯道○",
+  "name": "居中弯道○",
   "nameJa": "差しコーナー○",
   "nameTrad": "居中彎道○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -19670,6 +20214,7 @@
   "name": "锐脚圆刃",
   "nameJa": "鋭脚円刃",
   "nameTrad": "銳腳圓刃",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -19697,6 +20242,7 @@
   "name": "努力家",
   "nameJa": "努力家",
   "nameTrad": "奮發圖強",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -19723,9 +20269,10 @@
  },
  {
   "id": "201402",
-  "name": "努力之人",
+  "name": "努力者",
   "nameJa": "がんばり屋",
   "nameTrad": "努力不懈",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -19755,6 +20302,7 @@
   "name": "百万马力",
   "nameJa": "百万バリキ",
   "nameTrad": "百萬衝勁",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -19782,6 +20330,7 @@
   "name": "十万马力",
   "nameJa": "十万バリキ",
   "nameTrad": "十萬衝勁",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -19809,6 +20358,7 @@
   "name": "放松",
   "nameJa": "リラックス",
   "nameTrad": "放鬆",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -19834,9 +20384,10 @@
  },
  {
   "id": "201422",
-  "name": "小休息",
+  "name": "稍作休息",
   "nameJa": "小休憩",
   "nameTrad": "稍微休息",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -19865,6 +20416,7 @@
   "name": "大局观",
   "nameJa": "大局観",
   "nameTrad": "大局觀",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -19891,9 +20443,10 @@
  },
  {
   "id": "201432",
-  "name": "阅读能力",
+  "name": "观察能力",
   "nameJa": "読解力",
   "nameTrad": "解讀力",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -19920,9 +20473,10 @@
  },
  {
   "id": "201441",
-  "name": "睥睨八方",
+  "name": "紧盯八方",
   "nameJa": "八方にらみ",
   "nameTrad": "緊盯八方",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -19952,6 +20506,7 @@
   "name": "锐利目光",
   "nameJa": "鋭い眼光",
   "nameTrad": "銳利眼光",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -19978,9 +20533,10 @@
  },
  {
   "id": "201451",
-  "name": "追逐直线◎",
+  "name": "后追直线◎",
   "nameJa": "追込直線◎",
   "nameTrad": "後追直線◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -20005,9 +20561,10 @@
  },
  {
   "id": "201452",
-  "name": "追逐直线○",
+  "name": "后追直线○",
   "nameJa": "追込直線○",
   "nameTrad": "後追直線○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -20035,6 +20592,7 @@
   "name": "月影一闪",
   "nameJa": "月影一閃",
   "nameTrad": "月影一閃",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -20059,9 +20617,10 @@
  },
  {
   "id": "201461",
-  "name": "追逐弯道◎",
+  "name": "后追弯道◎",
   "nameJa": "追込コーナー◎",
   "nameTrad": "後追彎道◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -20086,9 +20645,10 @@
  },
  {
   "id": "201462",
-  "name": "追逐弯道○",
+  "name": "后追弯道○",
   "nameJa": "追込コーナー○",
   "nameTrad": "後追彎道○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -20116,6 +20676,7 @@
   "name": "月影圆刃",
   "nameJa": "月影円刃",
   "nameTrad": "月影圓刃",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -20143,6 +20704,7 @@
   "name": "视野良好！没有异常！",
   "nameJa": "視界良好！異常なし！",
   "nameTrad": "視線良好！沒有異狀！",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -20171,6 +20733,7 @@
   "name": "看穿",
   "nameJa": "お見通し",
   "nameTrad": "看穿",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -20199,6 +20762,7 @@
   "name": "放学后的专家",
   "nameJa": "下校後のスペシャリスト",
   "nameTrad": "放學後的專家",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -20226,6 +20790,7 @@
   "name": "放学后的乐趣",
   "nameJa": "下校の楽しみ",
   "nameTrad": "放學的樂趣",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -20253,6 +20818,7 @@
   "name": "沉着冷静",
   "nameJa": "冷静沈着",
   "nameTrad": "沉著冷靜",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -20282,6 +20848,7 @@
   "name": "冷静",
   "nameJa": "冷静",
   "nameTrad": "冷靜",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -20311,6 +20878,7 @@
   "name": "知天命者",
   "nameJa": "天命士",
   "nameTrad": "天命士",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -20340,6 +20908,7 @@
   "name": "策士",
   "nameJa": "策士",
   "nameTrad": "策士",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -20369,6 +20938,7 @@
   "name": "炙热视线",
   "nameJa": "熱いまなざし",
   "nameTrad": "熱情凝視",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -20398,6 +20968,7 @@
   "name": "视线",
   "nameJa": "まなざし",
   "nameTrad": "凝視",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -20424,9 +20995,10 @@
  },
  {
   "id": "201521",
-  "name": "领放的诀窍◎",
+  "name": "领跑诀窍◎",
   "nameJa": "逃げのコツ◎",
   "nameTrad": "領頭的訣竅◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -20457,9 +21029,10 @@
  },
  {
   "id": "201522",
-  "name": "领放的诀窍○",
+  "name": "领跑诀窍○",
   "nameJa": "逃げのコツ○",
   "nameTrad": "領頭的訣竅○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -20490,9 +21063,10 @@
  },
  {
   "id": "201531",
-  "name": "先行的诀窍◎",
+  "name": "跟前诀窍◎",
   "nameJa": "先行のコツ◎",
   "nameTrad": "前列的訣竅◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -20523,9 +21097,10 @@
  },
  {
   "id": "201532",
-  "name": "先行的诀窍○",
+  "name": "跟前诀窍○",
   "nameJa": "先行のコツ○",
   "nameTrad": "前列的訣竅○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -20556,9 +21131,10 @@
  },
  {
   "id": "201541",
-  "name": "差行的诀窍◎",
+  "name": "居中诀窍◎",
   "nameJa": "差しのコツ◎",
   "nameTrad": "居中的訣竅◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -20589,9 +21165,10 @@
  },
  {
   "id": "201542",
-  "name": "差行的诀窍○",
+  "name": "居中诀窍○",
   "nameJa": "差しのコツ○",
   "nameTrad": "居中的訣竅○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -20622,9 +21199,10 @@
  },
  {
   "id": "201551",
-  "name": "追逐的诀窍◎",
+  "name": "后追诀窍◎",
   "nameJa": "追込のコツ◎",
   "nameTrad": "後追的訣竅◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -20655,9 +21233,10 @@
  },
  {
   "id": "201552",
-  "name": "追逐的诀窍○",
+  "name": "后追诀窍○",
   "nameJa": "追込のコツ○",
   "nameTrad": "後追的訣竅○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -20691,6 +21270,7 @@
   "name": "超级幸运7",
   "nameJa": "スーパーラッキーセブン",
   "nameTrad": "超級幸運7",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -20723,6 +21303,7 @@
   "name": "幸运7",
   "nameJa": "ラッキーセブン",
   "nameTrad": "幸運7",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -20755,6 +21336,7 @@
   "name": "777",
   "nameJa": "スリーセブン",
   "nameTrad": "777",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -20776,6 +21358,7 @@
   "name": "登山家",
   "nameJa": "登山家",
   "nameTrad": "登山家",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -20815,9 +21398,10 @@
  },
  {
   "id": "201591",
-  "name": "喜欢马娘",
+  "name": "优俊少女爱好者",
   "nameJa": "ウマ好み",
   "nameTrad": "喜愛賽馬娘",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -20837,9 +21421,10 @@
  },
  {
   "id": "201592",
-  "name": "马娘狂热迷",
+  "name": "优俊少女狂热粉",
   "nameJa": "ウママニア",
   "nameTrad": "賽馬娘狂粉",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -20859,9 +21444,10 @@
  },
  {
   "id": "201601",
-  "name": "打好基础",
+  "name": "打基础",
   "nameJa": "地固め",
   "nameTrad": "打好基礎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -20881,9 +21467,10 @@
  },
  {
   "id": "201602",
-  "name": "坚如磐石",
+  "name": "磐石之势",
   "nameJa": "盤石の構え",
   "nameTrad": "磐石的架式",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -20906,6 +21493,7 @@
   "name": "翘尾巴",
   "nameJa": "尻尾上がり",
   "nameTrad": "豎起尾巴",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -20925,9 +21513,10 @@
  },
  {
   "id": "201612",
-  "name": "后起之秀",
+  "name": "尾巴跃龙门",
   "nameJa": "尻尾の滝登り",
   "nameTrad": "尾巴躍龍門",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -20950,6 +21539,7 @@
   "name": "竭尽全力",
   "nameJa": "ふり絞り",
   "nameTrad": "使盡全力",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -20969,9 +21559,10 @@
  },
  {
   "id": "201631",
-  "name": "同理心",
+  "name": "共鸣",
   "nameJa": "シンパシー",
   "nameTrad": "同理心",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -21023,6 +21614,7 @@
   "name": "孤狼",
   "nameJa": "一匹狼",
   "nameTrad": "獨行俠",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -21046,6 +21638,7 @@
   "name": "尾流",
   "nameJa": "スリップストリーム",
   "nameTrad": "滑流",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -21066,9 +21659,10 @@
  },
  {
   "id": "201652",
-  "name": "来得正好！",
+  "name": "抢到好位置了！",
   "nameJa": "いいとこ入った！",
   "nameTrad": "搶到好位置了！",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -21089,9 +21683,10 @@
  },
  {
   "id": "201661",
-  "name": "游戏就到此为止了！",
+  "name": "游戏到此为止！",
   "nameJa": "遊びはおしまいっ！",
   "nameTrad": "遊戲到此為止了！",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -21115,6 +21710,7 @@
   "name": "先走一步！",
   "nameJa": "お先に失礼っ！",
   "nameTrad": "我先失陪！",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -21135,9 +21731,10 @@
  },
  {
   "id": "201671",
-  "name": "排名急上升！",
+  "name": "热度飙升！",
   "nameJa": "チャート急上昇！",
   "nameTrad": "排行驟升！",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -21163,9 +21760,10 @@
  },
  {
   "id": "201672",
-  "name": "安利",
+  "name": "人气股",
   "nameJa": "レコメンド",
   "nameTrad": "精選推薦",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -21191,9 +21789,10 @@
  },
  {
   "id": "201681",
-  "name": "目标是最前排！",
+  "name": "目标最前排！",
   "nameJa": "狙うは最前列！",
   "nameTrad": "目標是最前排！",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -21224,9 +21823,10 @@
  },
  {
   "id": "201682",
-  "name": "前行",
+  "name": "瞄准前排",
   "nameJa": "前列狙い",
   "nameTrad": "鎖定前排",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -21257,9 +21857,10 @@
  },
  {
   "id": "201691",
-  "name": "潜伏姿态",
+  "name": "潜伏状态",
   "nameJa": "潜伏態勢",
   "nameTrad": "潛伏態勢",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -21285,9 +21886,10 @@
  },
  {
   "id": "201692",
-  "name": "安静的呼吸",
+  "name": "平静的呼吸",
   "nameJa": "静かな呼吸",
   "nameTrad": "沉靜的呼吸",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -21313,9 +21915,10 @@
  },
  {
   "id": "201701",
-  "name": "决死之心",
+  "name": "拼死决心",
   "nameJa": "決死の覚悟",
   "nameTrad": "必死的決心",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -21340,9 +21943,10 @@
  },
  {
   "id": "201702",
-  "name": "倾其所有",
+  "name": "不遗余力",
   "nameJa": "ありったけ",
   "nameTrad": "傾注一切",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -21367,9 +21971,10 @@
  },
  {
   "id": "201801",
-  "name": "凹凸美甲",
+  "name": "指甲开裂",
   "nameJa": "凸凹ネイル",
   "nameTrad": "立體美甲",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -21398,6 +22003,7 @@
   "name": "短兵相接",
   "nameJa": "鍔迫り合い",
   "nameTrad": "短兵相接",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -21423,9 +22029,10 @@
  },
  {
   "id": "201902",
-  "name": "正面决斗",
+  "name": "正面较量",
   "nameJa": "真っ向勝負",
   "nameTrad": "正面對決",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -21451,9 +22058,10 @@
  },
  {
   "id": "202001",
-  "name": "沙尘专家",
+  "name": "沙尘行家",
   "nameJa": "砂の玄人",
   "nameTrad": "沙之行家",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -21483,9 +22091,10 @@
  },
  {
   "id": "202002",
-  "name": "习惯沙尘",
+  "name": "适应沙尘",
   "nameJa": "砂塵慣れ",
   "nameTrad": "適應沙塵",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -21511,9 +22120,10 @@
  },
  {
   "id": "202011",
-  "name": "压台好戏",
+  "name": "真打",
   "nameJa": "真打",
   "nameTrad": "壓軸好戲",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -21539,9 +22149,10 @@
  },
  {
   "id": "202012",
-  "name": "热场好戏",
+  "name": "影打",
   "nameJa": "影打",
   "nameTrad": "暖場好戲",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -21567,9 +22178,10 @@
  },
  {
   "id": "202021",
-  "name": "强攻计策",
+  "name": "强攻策略",
   "nameJa": "強攻策",
   "nameTrad": "強攻計策",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -21595,9 +22207,10 @@
  },
  {
   "id": "202022",
-  "name": "提早发力",
+  "name": "率先发力",
   "nameJa": "早仕掛け",
   "nameTrad": "提前進攻",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -21623,9 +22236,10 @@
  },
  {
   "id": "202031",
-  "name": "赌徒",
+  "name": "孤注一掷",
   "nameJa": "博打うち",
   "nameTrad": "好賭之徒",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -21649,9 +22263,10 @@
  },
  {
   "id": "202032",
-  "name": "怪异的作战",
+  "name": "可疑的战术",
   "nameJa": "あやしげな作戦",
   "nameTrad": "可疑的作戰",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -21675,9 +22290,10 @@
  },
  {
   "id": "202041",
-  "name": "意气冲天",
+  "name": "气势冲天",
   "nameJa": "意気衝天",
   "nameTrad": "意氣昂揚",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -21703,9 +22319,10 @@
  },
  {
   "id": "202042",
-  "name": "轻快的步调",
+  "name": "轻快的步伐",
   "nameJa": "軽い足取り",
   "nameTrad": "腳步輕盈",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -21731,9 +22348,10 @@
  },
  {
   "id": "202051",
-  "name": "大逃",
+  "name": "大差距领跑",
   "nameJa": "大逃げ",
   "nameTrad": "強勢領頭",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -21759,9 +22377,10 @@
  },
  {
   "id": "202061",
-  "name": "日本第一的赛马娘",
+  "name": "全国第一的优俊少女",
   "nameJa": "日本一のウマ娘",
   "nameTrad": "日本第一的賽馬娘",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -21789,6 +22408,7 @@
   "name": "泰然自若",
   "nameJa": "泰然自若",
   "nameTrad": "泰然自若",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -21821,6 +22441,7 @@
   "name": "我行我素",
   "nameJa": "マイペース",
   "nameTrad": "我行我素",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -21853,6 +22474,7 @@
   "name": "起死回生",
   "nameJa": "起死回生",
   "nameTrad": "起死回生",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -21878,9 +22500,10 @@
  },
  {
   "id": "202082",
-  "name": "机不可失",
+  "name": "一线胜机",
   "nameJa": "ワンチャンス",
   "nameTrad": "機不可失",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -21906,9 +22529,10 @@
  },
  {
   "id": "202091",
-  "name": "气势汹汹",
+  "name": "气焰万丈",
   "nameJa": "気炎万丈",
   "nameTrad": "氣勢如虹",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -21941,6 +22565,7 @@
   "name": "斗争心",
   "nameJa": "闘争心",
   "nameTrad": "鬥爭心",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -21970,9 +22595,10 @@
  },
  {
   "id": "202101",
-  "name": "情绪高扬",
+  "name": "情绪高涨",
   "nameJa": "高揚感",
   "nameTrad": "興奮感",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -22001,6 +22627,7 @@
   "name": "积极向前",
   "nameJa": "前のめり",
   "nameTrad": "積極前進",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -22026,9 +22653,10 @@
  },
  {
   "id": "202111",
-  "name": "势如破竹",
+  "name": "破竹之势",
   "nameJa": "破竹の勢い",
   "nameTrad": "勢如破竹",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -22056,6 +22684,7 @@
   "name": "气势十足",
   "nameJa": "気合十分",
   "nameTrad": "氣勢十足",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -22083,6 +22712,7 @@
   "name": "大胆无畏",
   "nameJa": "大胆不敵",
   "nameTrad": "大膽無畏",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -22112,9 +22742,10 @@
  },
  {
   "id": "202122",
-  "name": "不畏之心",
+  "name": "无畏之心",
   "nameJa": "恐れぬ心",
   "nameTrad": "無畏之心",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -22144,9 +22775,10 @@
  },
  {
   "id": "202131",
-  "name": "飞沙走石",
+  "name": "狂暴旋风",
   "nameJa": "荒ぶる旋風",
   "nameTrad": "狂野旋風",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -22177,9 +22809,10 @@
  },
  {
   "id": "202132",
-  "name": "气吞牛斗",
+  "name": "倾注气魄",
   "nameJa": "気迫を込めて",
   "nameTrad": "灌注氣魄",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -22210,9 +22843,10 @@
  },
  {
   "id": "202141",
-  "name": "别对我指指点点！！",
+  "name": "不要对我指手画脚！！",
   "nameJa": "アタシに指図しないで！！",
   "nameTrad": "不要命令我！！",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -22240,6 +22874,7 @@
   "name": "勇往直前",
   "nameJa": "勇往邁進",
   "nameTrad": "勇往直前",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -22269,9 +22904,10 @@
  },
  {
   "id": "202152",
-  "name": "火力全开",
+  "name": "马力全开",
   "nameJa": "フルスロットル",
   "nameTrad": "氣閥全開",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -22304,6 +22940,7 @@
   "name": "自制力",
   "nameJa": "自制心",
   "nameTrad": "自制之心",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -22328,9 +22965,10 @@
  },
  {
   "id": "202171",
-  "name": "至高的速降者",
+  "name": "顶级的下坡选手",
   "nameJa": "至高のダウンヒラー",
   "nameTrad": "至高的下坡強者",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -22349,9 +22987,10 @@
  },
  {
   "id": "202172",
-  "name": "下坡巧者",
+  "name": "下坡能手",
   "nameJa": "下り坂巧者",
   "nameTrad": "下坡靈巧",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -22370,9 +23009,10 @@
  },
  {
   "id": "202181",
-  "name": "99个问题",
+  "name": "99 Problems",
   "nameJa": "99 Problems",
   "nameTrad": "99 Problems",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -22400,6 +23040,7 @@
   "name": "专心致志",
   "nameJa": "一意専心",
   "nameTrad": "專心致志",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -22428,9 +23069,10 @@
  },
  {
   "id": "202192",
-  "name": "万无一失",
+  "name": "滴水不漏",
   "nameJa": "抜かりなし",
   "nameTrad": "毫無破綻",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -22459,9 +23101,10 @@
  },
  {
   "id": "202201",
-  "name": "川崎竞马场◎",
+  "name": "川崎赛场◎",
   "nameJa": "川崎レース場◎",
   "nameTrad": "川崎賽場◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -22487,9 +23130,10 @@
  },
  {
   "id": "202202",
-  "name": "川崎竞马场○",
+  "name": "川崎赛场○",
   "nameJa": "川崎レース場○",
   "nameTrad": "川崎賽場○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -22515,9 +23159,10 @@
  },
  {
   "id": "202203",
-  "name": "川崎竞马场×",
+  "name": "川崎赛场×",
   "nameJa": "川崎レース場×",
   "nameTrad": "川崎賽場×",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -22543,9 +23188,10 @@
  },
  {
   "id": "202211",
-  "name": "船桥竞马场◎",
+  "name": "船桥赛场◎",
   "nameJa": "船橋レース場◎",
   "nameTrad": "船橋賽場◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -22571,9 +23217,10 @@
  },
  {
   "id": "202212",
-  "name": "船桥竞马场○",
+  "name": "船桥赛场○",
   "nameJa": "船橋レース場○",
   "nameTrad": "船橋賽場○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -22599,9 +23246,10 @@
  },
  {
   "id": "202213",
-  "name": "船桥竞马场×",
+  "name": "船桥赛场×",
   "nameJa": "船橋レース場×",
   "nameTrad": "船橋賽場×",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -22627,9 +23275,10 @@
  },
  {
   "id": "202221",
-  "name": "盛冈竞马场◎",
+  "name": "盛冈赛场◎",
   "nameJa": "盛岡レース場◎",
   "nameTrad": "盛岡賽場◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -22655,9 +23304,10 @@
  },
  {
   "id": "202222",
-  "name": "盛冈竞马场○",
+  "name": "盛冈赛场○",
   "nameJa": "盛岡レース場○",
   "nameTrad": "盛岡賽場○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -22683,9 +23333,10 @@
  },
  {
   "id": "202223",
-  "name": "盛冈竞马场×",
+  "name": "盛冈赛场×",
   "nameJa": "盛岡レース場×",
   "nameTrad": "盛岡賽場×",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -22711,9 +23362,10 @@
  },
  {
   "id": "202231",
-  "name": "夜场比赛◎",
+  "name": "夜间赛◎",
   "nameJa": "ナイター◎",
   "nameTrad": "夜間賽◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -22734,9 +23386,10 @@
  },
  {
   "id": "202232",
-  "name": "夜场比赛○",
+  "name": "夜间赛○",
   "nameJa": "ナイター○",
   "nameTrad": "夜間賽○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -22757,9 +23410,10 @@
  },
  {
   "id": "202233",
-  "name": "夜场比赛×",
+  "name": "夜间赛×",
   "nameJa": "ナイター×",
   "nameTrad": "夜間賽×",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -22780,9 +23434,10 @@
  },
  {
   "id": "202241",
-  "name": "小弯道◎",
+  "name": "急弯◎",
   "nameJa": "小回り◎",
   "nameTrad": "急彎◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -22813,9 +23468,10 @@
  },
  {
   "id": "202242",
-  "name": "小弯道○",
+  "name": "急弯○",
   "nameJa": "小回り○",
   "nameTrad": "急彎○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -22846,9 +23502,10 @@
  },
  {
   "id": "202243",
-  "name": "小弯道×",
+  "name": "急弯×",
   "nameJa": "小回り×",
   "nameTrad": "急彎×",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -22882,6 +23539,7 @@
   "name": "交流重赏◎",
   "nameJa": "交流重賞◎",
   "nameTrad": "交流主要競賽◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -22904,6 +23562,7 @@
   "name": "交流重赏○",
   "nameJa": "交流重賞○",
   "nameTrad": "交流主要競賽○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -22926,6 +23585,7 @@
   "name": "交流重赏×",
   "nameJa": "交流重賞×",
   "nameTrad": "交流主要競賽×",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -22972,9 +23632,10 @@
  },
  {
   "id": "202261",
-  "name": "胜利的时机",
+  "name": "胜利的机运",
   "nameJa": "勝利の機運",
   "nameTrad": "勝利的機運",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -23003,6 +23664,7 @@
   "name": "光明的征兆",
   "nameJa": "明るい兆し",
   "nameTrad": "明朗之兆",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -23031,6 +23693,7 @@
   "name": "卷土重来",
   "nameJa": "捲土重来",
   "nameTrad": "捲土重來",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -23059,6 +23722,7 @@
   "name": "重整旗鼓",
   "nameJa": "盛り返し",
   "nameTrad": "重振旗鼓",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -23087,6 +23751,7 @@
   "name": "全速前进！",
   "nameJa": "全速前進！",
   "nameTrad": "全速前進！",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -23115,6 +23780,7 @@
   "name": "猛冲",
   "nameJa": "まっしぐら",
   "nameTrad": "長驅直入",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -23143,6 +23809,7 @@
   "name": "明镜止水",
   "nameJa": "明鏡止水",
   "nameTrad": "明鏡止水",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -23168,9 +23835,10 @@
  },
  {
   "id": "202292",
-  "name": "冷静思考",
+  "name": "思路清晰",
   "nameJa": "冴える思考",
   "nameTrad": "思緒清晰",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -23196,9 +23864,10 @@
  },
  {
   "id": "202301",
-  "name": "优雅的沙子浴",
+  "name": "优雅的沙浴",
   "nameJa": "優雅な砂浴び",
   "nameTrad": "優雅地沙浴",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -23225,9 +23894,10 @@
  },
  {
   "id": "202302",
-  "name": "沙子浴○",
+  "name": "沙浴○",
   "nameJa": "砂浴び○",
   "nameTrad": "沙浴○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -23254,9 +23924,10 @@
  },
  {
   "id": "202303",
-  "name": "沙子浴×",
+  "name": "沙浴×",
   "nameJa": "砂浴び×",
   "nameTrad": "沙浴×",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -23283,9 +23954,10 @@
  },
  {
   "id": "202311",
-  "name": "目标是C位！",
+  "name": "目标中心位！",
   "nameJa": "目指せセンター！",
   "nameTrad": "目標是中央站位！",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -23314,6 +23986,7 @@
   "name": "干劲十足",
   "nameJa": "意気込み十分",
   "nameTrad": "熱情十足",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -23339,9 +24012,10 @@
  },
  {
   "id": "202321",
-  "name": "暴走模式！",
+  "name": "狂奔模式！",
   "nameJa": "爆走モード！",
   "nameTrad": "爆走模式！",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -23367,9 +24041,10 @@
  },
  {
   "id": "202322",
-  "name": "急剧上升",
+  "name": "急速上升",
   "nameJa": "急浮上",
   "nameTrad": "緊急上升",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -23395,9 +24070,10 @@
  },
  {
   "id": "202331-b1",
-  "name": "超众的迈步(1)",
+  "name": "超群的迈步(1)",
   "nameJa": "抜群の踏み込み",
   "nameTrad": "超群的邁步",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -23423,9 +24099,10 @@
  },
  {
   "id": "202331-b2",
-  "name": "超众的迈步(2)",
+  "name": "超群的迈步(2)",
   "nameJa": "抜群の踏み込み",
   "nameTrad": "超群的邁步",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -23454,6 +24131,7 @@
   "name": "擅长迈步(1)",
   "nameJa": "踏み込み上手",
   "nameTrad": "熟練邁步",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -23482,6 +24160,7 @@
   "name": "擅长迈步(2)",
   "nameJa": "踏み込み上手",
   "nameTrad": "熟練邁步",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -23507,9 +24186,10 @@
  },
  {
   "id": "202341",
-  "name": "泥泞专家",
+  "name": "泥巴大师",
   "nameJa": "泥んこマイスター",
   "nameTrad": "泥巴大師",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -23547,6 +24227,7 @@
   "name": "玩泥巴◎",
   "nameJa": "泥遊び◎",
   "nameTrad": "玩泥巴◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -23579,6 +24260,7 @@
   "name": "玩泥巴○",
   "nameJa": "泥遊び○",
   "nameTrad": "玩泥巴○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -23611,6 +24293,7 @@
   "name": "玩泥巴×",
   "nameJa": "泥遊び×",
   "nameTrad": "玩泥巴×",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -23640,9 +24323,10 @@
  },
  {
   "id": "202351",
-  "name": "沙上的舞姬",
+  "name": "泥地上的舞姬",
   "nameJa": "砂上の舞姫",
   "nameTrad": "沙上的舞姬",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -23669,9 +24353,10 @@
  },
  {
   "id": "202352",
-  "name": "飞尘",
+  "name": "扬尘",
   "nameJa": "土煙",
   "nameTrad": "塵煙",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -23698,9 +24383,10 @@
  },
  {
   "id": "202361",
-  "name": "大意就会败北",
+  "name": "大意轻敌",
   "nameJa": "油断大敵",
   "nameTrad": "大意失荊州",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -23730,6 +24416,7 @@
   "name": "压迫感",
   "nameJa": "圧迫感",
   "nameTrad": "壓迫感",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -23759,6 +24446,7 @@
   "name": "势不可挡",
   "nameJa": "アンストッパブル",
   "nameTrad": "勢不可擋",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -23787,6 +24475,7 @@
   "name": "进攻姿态",
   "nameJa": "攻めの姿勢",
   "nameTrad": "進攻的姿態",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -23815,6 +24504,7 @@
   "name": "突破",
   "nameJa": "ブレイクスルー",
   "nameTrad": "突破",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -23848,6 +24538,7 @@
   "name": "破局之策",
   "nameJa": "打開策",
   "nameTrad": "突圍計策",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -23881,6 +24572,7 @@
   "name": "输出1000%！",
   "nameJa": "出力1000％！",
   "nameTrad": "1000％輸出！",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -23910,9 +24602,10 @@
  },
  {
   "id": "202392",
-  "name": "拼命",
+  "name": "拼尽全力",
   "nameJa": "しゃかりき",
   "nameTrad": "孜孜不倦",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -23945,6 +24638,7 @@
   "name": "电光石火",
   "nameJa": "電光石火",
   "nameTrad": "電光石火",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -23971,9 +24665,10 @@
  },
  {
   "id": "202402",
-  "name": "越级",
+  "name": "飞跃而上",
   "nameJa": "一足飛び",
   "nameTrad": "一飛衝天",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -24003,6 +24698,7 @@
   "name": "风云之志",
   "nameJa": "風雲の志",
   "nameTrad": "風雲之志",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -24028,9 +24724,10 @@
  },
  {
   "id": "202412",
-  "name": "进取心",
+  "name": "上进心",
   "nameJa": "向上心",
   "nameTrad": "上進心",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -24056,9 +24753,10 @@
  },
  {
   "id": "202421",
-  "name": "忘我之境",
+  "name": "浑然忘我",
   "nameJa": "無我夢中",
   "nameTrad": "渾然忘我",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -24090,9 +24788,10 @@
  },
  {
   "id": "202422",
-  "name": "鲁莽",
+  "name": "不顾一切",
   "nameJa": "がむしゃら",
   "nameTrad": "不顧一切",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -24124,9 +24823,10 @@
  },
  {
   "id": "202431",
-  "name": "乘胜追击",
+  "name": "气势如虹",
   "nameJa": "快進撃",
   "nameTrad": "過關斬將",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -24159,9 +24859,10 @@
  },
  {
   "id": "202432",
-  "name": "稳健的步伐",
+  "name": "步伐稳健",
   "nameJa": "確かな足取り",
   "nameTrad": "穩健的步伐",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -24194,9 +24895,10 @@
  },
  {
   "id": "202441-b1",
-  "name": "胜负师(1)",
+  "name": "博弈者(1)",
   "nameJa": "勝負師",
   "nameTrad": "賭徒",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -24226,9 +24928,10 @@
  },
  {
   "id": "202441-b2",
-  "name": "胜负师(2)",
+  "name": "博弈者(2)",
   "nameJa": "勝負師",
   "nameTrad": "賭徒",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -24258,9 +24961,10 @@
  },
  {
   "id": "202442-b1",
-  "name": "冒险家(1)",
+  "name": "投机取巧(1)",
   "nameJa": "やまっけ",
   "nameTrad": "投機取巧",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -24290,9 +24994,10 @@
  },
  {
   "id": "202442-b2",
-  "name": "冒险家(2)",
+  "name": "投机取巧(2)",
   "nameJa": "やまっけ",
   "nameTrad": "投機取巧",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -24322,9 +25027,10 @@
  },
  {
   "id": "202451",
-  "name": "最高档",
+  "name": "最高档位",
   "nameJa": "トップギア",
   "nameTrad": "最高檔速",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -24349,9 +25055,10 @@
  },
  {
   "id": "202452",
-  "name": "暴走",
+  "name": "锐利脚步",
   "nameJa": "キレる脚",
   "nameTrad": "迅猛之腳",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -24379,6 +25086,7 @@
   "name": "绝影",
   "nameJa": "踏ませぬ影",
   "nameTrad": "遙不可及的影子",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -24406,6 +25114,7 @@
   "name": "坚韧不拔",
   "nameJa": "粘り腰",
   "nameTrad": "堅定不移",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -24433,6 +25142,7 @@
   "name": "猛追",
   "nameJa": "猛追",
   "nameTrad": "猛追",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -24459,9 +25169,10 @@
  },
  {
   "id": "202472",
-  "name": "穷追",
+  "name": "紧追不放",
   "nameJa": "食らいつき",
   "nameTrad": "咬住不放",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -24491,6 +25202,7 @@
   "name": "怪物",
   "nameJa": "怪物",
   "nameTrad": "怪物",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -24519,9 +25231,10 @@
  },
  {
   "id": "202482",
-  "name": "施展本领",
+  "name": "大展身手",
   "nameJa": "本領発揮",
   "nameTrad": "發揮本領",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -24550,9 +25263,10 @@
  },
  {
   "id": "202491",
-  "name": "超众的凌厉攻势",
+  "name": "超群的犀利步伐",
   "nameJa": "抜群の切れ味",
   "nameTrad": "過人的衝勁",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -24578,9 +25292,10 @@
  },
  {
   "id": "202492",
-  "name": "凌厉攻势",
+  "name": "犀利步伐",
   "nameJa": "切れ味",
   "nameTrad": "衝勁",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -24606,9 +25321,10 @@
  },
  {
   "id": "202501",
-  "name": "横冲直撞",
+  "name": "奋不顾身",
   "nameJa": "遮二無二",
   "nameTrad": "義無反顧",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -24634,9 +25350,10 @@
  },
  {
   "id": "202502",
-  "name": "冒失",
+  "name": "不计后果",
   "nameJa": "向こう見ず",
   "nameTrad": "不顧後果",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -24662,9 +25379,10 @@
  },
  {
   "id": "202511",
-  "name": "人气第1也太牛了！",
+  "name": "妈呀我人气第一耶",
   "nameJa": "1番人気でヤバたん",
   "nameTrad": "超厲害的第一名支持度",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -24687,6 +25405,7 @@
   "name": "天衣无缝",
   "nameJa": "天衣無縫",
   "nameTrad": "天衣無縫",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -24712,9 +25431,10 @@
  },
  {
   "id": "202522",
-  "name": "打破常规",
+  "name": "特立独行",
   "nameJa": "型破り",
   "nameTrad": "破格",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -24740,9 +25460,10 @@
  },
  {
   "id": "202531",
-  "name": "创造优势",
+  "name": "建立优势",
   "nameJa": "優位形成",
   "nameTrad": "形成優勢",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -24769,9 +25490,10 @@
  },
  {
   "id": "202532",
-  "name": "端庄的步伐",
+  "name": "优雅步伐",
   "nameJa": "しとやかな足取り",
   "nameTrad": "優雅的步伐",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -24801,6 +25523,7 @@
   "name": "威风堂堂",
   "nameJa": "威風堂々",
   "nameTrad": "威風凜凜",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -24835,9 +25558,10 @@
  },
  {
   "id": "202542",
-  "name": "威压",
+  "name": "压力",
   "nameJa": "プレッシャー",
   "nameTrad": "壓力",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -24875,6 +25599,7 @@
   "name": "神速",
   "nameJa": "神速",
   "nameTrad": "神速",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -24900,6 +25625,7 @@
   "name": "快速",
   "nameJa": "快速",
   "nameTrad": "快速",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -24925,6 +25651,7 @@
   "name": "一击必中",
   "nameJa": "一発必中",
   "nameTrad": "一發必中",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -24953,6 +25680,7 @@
   "name": "锁定",
   "nameJa": "ロックオン",
   "nameTrad": "鎖定",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -24978,9 +25706,10 @@
  },
  {
   "id": "202571",
-  "name": "继往开来的奇迹",
+  "name": "开拓未来的奇迹",
   "nameJa": "未来を拓く奇跡",
   "nameTrad": "開拓未來的奇蹟",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -25006,9 +25735,10 @@
  },
  {
   "id": "202581",
-  "name": "动如脱兔",
+  "name": "超越脱兔",
   "nameJa": "脱兎の先へ",
   "nameTrad": "脫兔的彼端",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -25041,6 +25771,7 @@
   "name": "目不斜视",
   "nameJa": "脇目も振らず",
   "nameTrad": "心無旁鶩",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -25073,6 +25804,7 @@
   "name": "一气呵成",
   "nameJa": "一気呵成",
   "nameTrad": "一氣呵成",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -25101,9 +25833,10 @@
  },
  {
   "id": "202592",
-  "name": "火急",
+  "name": "十万火急",
   "nameJa": "大急ぎ",
   "nameTrad": "匆促",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -25132,9 +25865,10 @@
  },
  {
   "id": "202601",
-  "name": "闪光",
+  "name": "冷发光",
   "nameJa": "ルミネセンス",
   "nameTrad": "冷性發光",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -25162,6 +25896,7 @@
   "name": "点火",
   "nameJa": "イグニッション",
   "nameTrad": "點火",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -25213,9 +25948,10 @@
  },
  {
   "id": "202612",
-  "name": "热情洋溢",
+  "name": "满溢的热情",
   "nameJa": "溢れる情熱",
   "nameTrad": "滿溢的熱情",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -25241,9 +25977,10 @@
  },
  {
   "id": "202621",
-  "name": "陷阵之志",
+  "name": "突击之魂",
   "nameJa": "突撃魂",
   "nameTrad": "突擊魂",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -25269,9 +26006,10 @@
  },
  {
   "id": "202622",
-  "name": "开始出击",
+  "name": "开始行动",
   "nameJa": "進出開始",
   "nameTrad": "開始推進",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -25297,9 +26035,10 @@
  },
  {
   "id": "202641",
-  "name": "行千里路",
+  "name": "千里之行",
   "nameJa": "千里の道",
   "nameTrad": "千里之行",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -25325,9 +26064,10 @@
  },
  {
   "id": "202642",
-  "name": "积跬步",
+  "name": "始于足下",
   "nameJa": "一歩から",
   "nameTrad": "始於足下",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -25356,6 +26096,7 @@
   "name": "云蒸龙变",
   "nameJa": "雲蒸竜変",
   "nameTrad": "虎嘯風生",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -25387,9 +26128,10 @@
  },
  {
   "id": "202652",
-  "name": "自信者",
+  "name": "自信十足",
   "nameJa": "自信家",
   "nameTrad": "自信家",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -25421,9 +26163,10 @@
  },
  {
   "id": "202661",
-  "name": "斗志昂扬",
+  "name": "激昂的心跳",
   "nameJa": "昂る鼓動",
   "nameTrad": "激昂的心跳",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -25450,9 +26193,10 @@
  },
  {
   "id": "202662",
-  "name": "热血涌动",
+  "name": "翻涌的热情",
   "nameJa": "込み上げる熱",
   "nameTrad": "湧現熱量",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -25479,9 +26223,10 @@
  },
  {
   "id": "202671",
-  "name": "激昂澎湃",
+  "name": "斗志高昂",
   "nameJa": "ハイボルテージ",
   "nameTrad": "熱情澎湃",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -25507,9 +26252,10 @@
  },
  {
   "id": "202672",
-  "name": "雀跃",
+  "name": "心情雀跃",
   "nameJa": "心弾んで",
   "nameTrad": "雀躍",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -25535,9 +26281,10 @@
  },
  {
   "id": "202681",
-  "name": "气☆氛↑嗨起来",
+  "name": "情绪☆嗨爆↑",
   "nameJa": "ブチ☆アゲ↑バイブス",
   "nameTrad": "超☆嗨↑心情",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -25567,9 +26314,10 @@
  },
  {
   "id": "202682",
-  "name": "暖场",
+  "name": "情绪提升",
   "nameJa": "バイブス上昇",
   "nameTrad": "心情上升",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -25599,9 +26347,10 @@
  },
  {
   "id": "202691",
-  "name": "一往无前！",
+  "name": "奔向最前方！",
   "nameJa": "誰より前へ！",
   "nameTrad": "比誰都前方！",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -25627,9 +26376,10 @@
  },
  {
   "id": "202692",
-  "name": "打头阵",
+  "name": "拔得头筹",
   "nameJa": "一番乗り",
   "nameTrad": "搶得先機",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -25658,6 +26408,7 @@
   "name": "奇点(1)",
   "nameJa": "シンギュラリティ",
   "nameTrad": "奇異點",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -25689,6 +26440,7 @@
   "name": "奇点(2)",
   "nameJa": "シンギュラリティ",
   "nameTrad": "奇異點",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -25720,6 +26472,7 @@
   "name": "探求心(1)",
   "nameJa": "探求心",
   "nameTrad": "探求心",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -25751,6 +26504,7 @@
   "name": "探求心(2)",
   "nameJa": "探求心",
   "nameTrad": "探求心",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -25782,6 +26536,7 @@
   "name": "将军",
   "nameJa": "王手",
   "nameTrad": "將軍",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -25808,9 +26563,10 @@
  },
  {
   "id": "202712",
-  "name": "会心一步",
+  "name": "关键一步",
   "nameJa": "会心の一歩",
   "nameTrad": "自信的一步",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -25837,9 +26593,10 @@
  },
  {
   "id": "202721",
-  "name": "Never Give Up",
+  "name": "永不言弃",
   "nameJa": "ネバーギブアップ",
   "nameTrad": "永不放棄",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -25858,9 +26615,10 @@
  },
  {
   "id": "202722",
-  "name": "坚强的心",
+  "name": "坚定之心",
   "nameJa": "折れない心",
   "nameTrad": "堅毅之心",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -25879,9 +26637,10 @@
  },
  {
   "id": "202731",
-  "name": "隆尚竞马场◎",
+  "name": "隆尚赛场◎",
   "nameJa": "ロンシャンレース場◎",
   "nameTrad": "隆尚賽場◎",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -25907,9 +26666,10 @@
  },
  {
   "id": "202732",
-  "name": "隆尚竞马场○",
+  "name": "隆尚赛场○",
   "nameJa": "ロンシャンレース場○",
   "nameTrad": "隆尚賽場○",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -25935,9 +26695,10 @@
  },
  {
   "id": "202733",
-  "name": "隆尚竞马场×",
+  "name": "隆尚赛场×",
   "nameJa": "ロンシャンレース場×",
   "nameTrad": "隆尚賽場×",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -25963,9 +26724,10 @@
  },
  {
   "id": "202734",
-  "name": "隆尚的天才",
+  "name": "隆尚奇才",
   "nameJa": "ロンシャンの申し子",
   "nameTrad": "隆尚奇才",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -26004,6 +26766,7 @@
   "name": "十全十美",
   "nameJa": "十全十美",
   "nameTrad": "十全十美",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -26032,6 +26795,7 @@
   "name": "品行方正",
   "nameJa": "品行方正",
   "nameTrad": "品行端正",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -26057,9 +26821,10 @@
  },
  {
   "id": "202751",
-  "name": "铁骨铮铮",
+  "name": "傲骨嶙嶙",
   "nameJa": "気骨稜稜",
   "nameTrad": "堅守信念",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -26088,6 +26853,7 @@
   "name": "一心向前",
   "nameJa": "ひたむき前進",
   "nameTrad": "專注前進",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -26113,9 +26879,10 @@
  },
  {
   "id": "202761",
-  "name": "全垒打！",
+  "name": "打飞它吧！",
   "nameJa": "かっとばせ！",
   "nameTrad": "轟出去吧！",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -26141,9 +26908,10 @@
  },
  {
   "id": "202762",
-  "name": "向着胜利",
+  "name": "迈向胜利",
   "nameJa": "勝利に向かって",
   "nameTrad": "邁向勝利",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -26200,9 +26968,10 @@
  },
  {
   "id": "202772",
-  "name": "瞄准目标",
+  "name": "锁定目标",
   "nameJa": "狙いを定めて",
   "nameTrad": "瞄準目標",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -26253,9 +27022,10 @@
  },
  {
   "id": "202792",
-  "name": "中盘巧者",
+  "name": "中期能手",
   "nameJa": "中盤巧者",
   "nameTrad": "中期靈巧",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -26275,9 +27045,10 @@
  },
  {
   "id": "202801",
-  "name": "先发制人",
+  "name": "抢占先机",
   "nameJa": "機先の勝負",
   "nameTrad": "洞察機先的對決",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -26297,9 +27068,10 @@
  },
  {
   "id": "202802",
-  "name": "序盘巧者",
+  "name": "初期能手",
   "nameJa": "序盤巧者",
   "nameTrad": "初期靈巧",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -26322,6 +27094,7 @@
   "name": "画龙点睛",
   "nameJa": "画竜点睛",
   "nameTrad": "畫龍點睛",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -26350,9 +27123,10 @@
  },
  {
   "id": "202812",
-  "name": "终幕",
+  "name": "尾声将至",
   "nameJa": "大詰め",
   "nameTrad": "終幕",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -26381,9 +27155,10 @@
  },
  {
   "id": "202821",
-  "name": "万里一空",
+  "name": "坚定一心",
   "nameJa": "万里一空",
   "nameTrad": "水滴石穿萬里行",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -26411,9 +27186,10 @@
  },
  {
   "id": "202822",
-  "name": "果决",
+  "name": "毫不迷茫",
   "nameJa": "迷いなし",
   "nameTrad": "無所迷惘",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -26441,9 +27217,10 @@
  },
  {
   "id": "202831-b1",
-  "name": "打call&互动(1)",
+  "name": "互动＆回应(1)",
   "nameJa": "コール&レスポンス",
   "nameTrad": "打call&回應",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -26469,9 +27246,10 @@
  },
  {
   "id": "202831-b2",
-  "name": "打call&互动(2)",
+  "name": "互动＆回应(2)",
   "nameJa": "コール&レスポンス",
   "nameTrad": "打call&回應",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -26500,6 +27278,7 @@
   "name": "两手准备(1)",
   "nameJa": "二段構え",
   "nameTrad": "未雨綢繆",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -26528,6 +27307,7 @@
   "name": "两手准备(2)",
   "nameJa": "二段構え",
   "nameTrad": "未雨綢繆",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -26585,9 +27365,10 @@
  },
  {
   "id": "202842",
-  "name": "洗尘",
+  "name": "拂去沙土",
   "nameJa": "砂払い",
   "nameTrad": "除去沙塵",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -26616,6 +27397,7 @@
   "name": "一网打尽",
   "nameJa": "一網打尽",
   "nameTrad": "一網打盡",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -26644,9 +27426,10 @@
  },
  {
   "id": "202852",
-  "name": "一跃而上",
+  "name": "连续超越",
   "nameJa": "ごぼう抜き",
   "nameTrad": "脫穎而出",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -26675,9 +27458,10 @@
  },
  {
   "id": "202861",
-  "name": "超级起步",
+  "name": "火箭起步",
   "nameJa": "ロケットスタート",
   "nameTrad": "火箭起跑",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -26703,9 +27487,10 @@
  },
  {
   "id": "202862",
-  "name": "紧急发动",
+  "name": "急速起步",
   "nameJa": "急発進",
   "nameTrad": "急速起步",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -26734,6 +27519,7 @@
   "name": "君临",
   "nameJa": "君臨",
   "nameTrad": "君臨",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -26761,9 +27547,10 @@
  },
  {
   "id": "202872",
-  "name": "浑身解数",
+  "name": "倾尽全力的步伐",
   "nameJa": "渾身の足取り",
   "nameTrad": "全力以赴的步伐",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -26821,6 +27608,7 @@
   "name": "热血沸腾",
   "nameJa": "たぎる血潮",
   "nameTrad": "沸騰血潮",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -26872,9 +27660,10 @@
  },
  {
   "id": "202892",
-  "name": "不可动摇",
+  "name": "不动之心",
   "nameJa": "不動の心",
   "nameTrad": "不動之心",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -26931,6 +27720,7 @@
   "name": "动力十足",
   "nameJa": "推力十分",
   "nameTrad": "推力十足",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -26956,9 +27746,10 @@
  },
  {
   "id": "202912",
-  "name": "瓦解",
+  "name": "瓦解敌势",
   "nameJa": "切り崩し",
   "nameTrad": "瓦解敵勢",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -27025,9 +27816,10 @@
  },
  {
   "id": "202922",
-  "name": "不惜一切",
+  "name": "毫无保留",
   "nameJa": "惜しみなし",
   "nameTrad": "毫無保留",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -27088,6 +27880,7 @@
   "name": "踏影",
   "nameJa": "影踏み",
   "nameTrad": "踏影而行",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -27113,9 +27906,10 @@
  },
  {
   "id": "202942",
-  "name": "恐惧的逼近",
+  "name": "鬼气逼人",
   "nameJa": "鬼気迫って",
   "nameTrad": "鬼氣逼人",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -36385,9 +37179,10 @@
  },
  {
   "id": "210011",
-  "name": "燃烧青春・速",
+  "name": "燃烧青春·速",
   "nameJa": "アオハル燃焼・速",
   "nameTrad": "青春燃燒．速度",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -36407,9 +37202,10 @@
  },
  {
   "id": "210012",
-  "name": "点燃青春・速",
+  "name": "点燃青春·速",
   "nameJa": "アオハル点火・速",
   "nameTrad": "青春點火．速度",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -36429,9 +37225,10 @@
  },
  {
   "id": "210021",
-  "name": "燃烧青春・耐",
+  "name": "燃烧青春·耐",
   "nameJa": "アオハル燃焼・体",
   "nameTrad": "青春燃燒．體能",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -36451,9 +37248,10 @@
  },
  {
   "id": "210022",
-  "name": "点燃青春・耐",
+  "name": "点燃青春·耐",
   "nameJa": "アオハル点火・体",
   "nameTrad": "青春點火．體能",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -36473,9 +37271,10 @@
  },
  {
   "id": "210031",
-  "name": "燃烧青春・力",
+  "name": "燃烧青春·力",
   "nameJa": "アオハル燃焼・力",
   "nameTrad": "青春燃燒．力量",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -36495,9 +37294,10 @@
  },
  {
   "id": "210032",
-  "name": "点燃青春・力",
+  "name": "点燃青春·力",
   "nameJa": "アオハル点火・力",
   "nameTrad": "青春點火．力量",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -36517,9 +37317,10 @@
  },
  {
   "id": "210041",
-  "name": "燃烧青春・毅",
+  "name": "燃烧青春·毅",
   "nameJa": "アオハル燃焼・根",
   "nameTrad": "青春燃燒．意志",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -36543,9 +37344,10 @@
  },
  {
   "id": "210042",
-  "name": "点燃青春・毅",
+  "name": "点燃青春·毅",
   "nameJa": "アオハル点火・根",
   "nameTrad": "青春點火．意志",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -36569,9 +37371,10 @@
  },
  {
   "id": "210051",
-  "name": "燃烧青春・智",
+  "name": "燃烧青春·智",
   "nameJa": "アオハル燃焼・賢",
   "nameTrad": "青春燃燒．智慧",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -36597,9 +37400,10 @@
  },
  {
   "id": "210052",
-  "name": "点燃青春・智",
+  "name": "点燃青春·智",
   "nameJa": "アオハル点火・賢",
   "nameTrad": "青春點火．智慧",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -36625,9 +37429,10 @@
  },
  {
   "id": "210061",
-  "name": "第一颗星",
+  "name": "启明星",
   "nameJa": "一番星",
   "nameTrad": "一等星",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -36655,9 +37460,10 @@
  },
  {
   "id": "210062",
-  "name": "绮罗星",
+  "name": "闪耀之星",
   "nameJa": "綺羅星",
   "nameTrad": "璀璨繁星",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -36685,9 +37491,10 @@
  },
  {
   "id": "210071",
-  "name": "想和你一起赢",
+  "name": "想与你一同取胜",
   "nameJa": "キミと勝ちたい",
   "nameTrad": "想和你一起獲得勝利",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "unsupported",
   "effects": [
@@ -36710,9 +37517,10 @@
  },
  {
   "id": "210072",
-  "name": "梦想的途中",
+  "name": "追梦途中",
   "nameJa": "夢の途中",
   "nameTrad": "夢想的途中",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -36738,6 +37546,7 @@
   "name": "超越极限",
   "nameJa": "限界の先へ",
   "nameTrad": "超越極限",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -36757,9 +37566,10 @@
  },
  {
   "id": "210082",
-  "name": "注视前方",
+  "name": "专注前方",
   "nameJa": "前だけ見据えて",
   "nameTrad": "只注視前方",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -36779,9 +37589,10 @@
  },
  {
   "id": "210091",
-  "name": "比赛之精髓·速",
+  "name": "比赛的真谛·速",
   "nameJa": "レースの真髄・速",
   "nameTrad": "競賽的精髓．速度",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -36801,9 +37612,10 @@
  },
  {
   "id": "210101",
-  "name": "比赛之精髓·体",
+  "name": "比赛的真谛·耐",
   "nameJa": "レースの真髄・体",
   "nameTrad": "競賽的精髓．體能",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -36827,9 +37639,10 @@
  },
  {
   "id": "210111",
-  "name": "比赛之精髓·力",
+  "name": "比赛的真谛·力",
   "nameJa": "レースの真髄・力",
   "nameTrad": "競賽的精髓．力量",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -36849,9 +37662,10 @@
  },
  {
   "id": "210121",
-  "name": "比赛之精髓·毅",
+  "name": "比赛的真谛·毅",
   "nameJa": "レースの真髄・根",
   "nameTrad": "競賽的精髓．意志",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -36870,9 +37684,10 @@
  },
  {
   "id": "210131",
-  "name": "比赛之精髓·智",
+  "name": "比赛的真谛·智",
   "nameJa": "レースの真髄・賢",
   "nameTrad": "競賽的精髓．智慧",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -36891,9 +37706,10 @@
  },
  {
   "id": "210141",
-  "name": "比赛之精髓·心",
+  "name": "比赛的真谛·心",
   "nameJa": "レースの真髄・心",
   "nameTrad": "競賽的精髓．心得",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -36923,9 +37739,10 @@
  },
  {
   "id": "210261",
-  "name": "太阳之睿智",
+  "name": "太阳的睿智",
   "nameJa": "太陽の叡智",
   "nameTrad": "太陽的睿智",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "approx",
   "effects": [
@@ -36945,9 +37762,10 @@
  },
  {
   "id": "210262",
-  "name": "日之加护",
+  "name": "阳之庇佑",
   "nameJa": "陽の加護",
   "nameTrad": "太陽的庇護",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "approx",
   "effects": [
@@ -36967,9 +37785,10 @@
  },
  {
   "id": "210271",
-  "name": "大海之睿智",
+  "name": "大海的睿智",
   "nameJa": "大海の叡智",
   "nameTrad": "大海的睿智",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -36989,9 +37808,10 @@
  },
  {
   "id": "210272",
-  "name": "海之加护",
+  "name": "海之庇佑",
   "nameJa": "海の加護",
   "nameTrad": "大海的庇護",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -37011,9 +37831,10 @@
  },
  {
   "id": "210281",
-  "name": "大地之睿智",
+  "name": "大地的睿智",
   "nameJa": "大地の叡智",
   "nameTrad": "大地的睿智",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -37033,9 +37854,10 @@
  },
  {
   "id": "210282",
-  "name": "地之加护",
+  "name": "地之庇佑",
   "nameJa": "地の加護",
   "nameTrad": "大地的庇護",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -37055,9 +37877,10 @@
  },
  {
   "id": "210291",
-  "name": "巅峰的梦想",
+  "name": "巅峰之梦",
   "nameJa": "最高峰の夢",
   "nameTrad": "最高峰的夢想",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -37076,9 +37899,10 @@
  },
  {
   "id": "210292",
-  "name": "背负理想",
+  "name": "背负信念",
   "nameJa": "想いを背負って",
   "nameTrad": "背負意志",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -37097,9 +37921,10 @@
  },
  {
   "id": "210301",
-  "name": "爆烈焰光！",
+  "name": "爆热的闪耀！",
   "nameJa": "爆熱のキラメキ！",
   "nameTrad": "熾烈的閃耀光輝！",
+  "cnReleased": true,
   "rarity": "rareEvolved",
   "precision": "precise",
   "effects": [
@@ -37126,9 +37951,10 @@
  },
  {
   "id": "210302",
-  "name": "燃魂",
+  "name": "燃烧之魂",
   "nameJa": "バーニングソウル",
   "nameTrad": "燃燒靈魂",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "precise",
   "effects": [
@@ -37155,9 +37981,10 @@
  },
  {
   "id": "210311-b1",
-  "name": "运动员精神(1)",
+  "name": "运动员之魂(1)",
   "nameJa": "アスリート魂",
   "nameTrad": "運動員之魂",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -37183,9 +38010,10 @@
  },
  {
   "id": "210311-b2",
-  "name": "运动员精神(2)",
+  "name": "运动员之魂(2)",
   "nameJa": "アスリート魂",
   "nameTrad": "運動員之魂",
+  "cnReleased": true,
   "rarity": "normal",
   "precision": "unsupported",
   "effects": [
@@ -37612,6 +38440,7 @@
   "name": "无尽渴求",
   "nameJa": "癒えない渇き",
   "nameTrad": "止不住的渴望",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "unsupported",
   "effects": [
@@ -37637,9 +38466,10 @@
  },
  {
   "id": "300021",
-  "name": "一成不变",
+  "name": "不变的信念",
   "nameJa": "変わらぬままで",
   "nameTrad": "始終如一",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "unsupported",
   "effects": [
@@ -37660,9 +38490,10 @@
  },
  {
   "id": "300031",
-  "name": "追逐梦境",
+  "name": "追寻向往的景色",
   "nameJa": "夢の景色へ",
   "nameTrad": "奔向理想的景色",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "unsupported",
   "effects": [
@@ -37682,9 +38513,10 @@
  },
  {
   "id": "300041",
-  "name": "扩散的担忧",
+  "name": "担忧不断蔓延",
   "nameJa": "拡がる恐れ",
   "nameTrad": "擔憂擴散",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "unsupported",
   "effects": [
@@ -37704,9 +38536,10 @@
  },
  {
   "id": "300051",
-  "name": "显现的担忧",
+  "name": "忧虑愈现",
   "nameJa": "鮮明になる畏怖",
   "nameTrad": "浮上心頭的擔憂",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "unsupported",
   "effects": [
@@ -37725,9 +38558,10 @@
  },
  {
   "id": "300061",
-  "name": "逐梦竞走",
+  "name": "梦幻般的奔跑",
   "nameJa": "夢の走り",
   "nameTrad": "理想的奔馳",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "precise",
   "effects": [
@@ -37746,9 +38580,10 @@
  },
  {
   "id": "300071",
-  "name": "呈现未知的比赛",
+  "name": "展现探求未知的奔跑吧",
   "nameJa": "未知への走りを見せてくれ",
   "nameTrad": "展現追尋未知的跑姿",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "unsupported",
   "effects": [
@@ -37768,9 +38603,10 @@
  },
  {
   "id": "300081",
-  "name": "快跑祈愿！",
+  "name": "天灵灵～祈祷飞奔！",
   "nameJa": "ほんにゃか快走祈願！",
   "nameTrad": "喝哪嘎～祈禱快跑！",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "unsupported",
   "effects": [
@@ -37790,9 +38626,10 @@
  },
  {
   "id": "300091",
-  "name": "挚友与劲敌",
+  "name": "亦敌亦友",
   "nameJa": "友として、ライバルとして",
   "nameTrad": "是摯友亦是勁敵",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "unsupported",
   "effects": [
@@ -37812,9 +38649,10 @@
  },
  {
   "id": "300101",
-  "name": "憧憬的应援",
+  "name": "憧憬的助威",
   "nameJa": "憧れのエール",
   "nameTrad": "憧憬的鼓舞",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "unsupported",
   "effects": [
@@ -37833,9 +38671,10 @@
  },
  {
   "id": "300111",
-  "name": "抬起头！达比赛马娘",
+  "name": "昂首挺胸的德比优俊少女",
   "nameJa": "胸を張れダービーウマ娘",
   "nameTrad": "抬頭挺胸打比賽馬娘",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "unsupported",
   "effects": [
@@ -37855,9 +38694,10 @@
  },
  {
   "id": "300121",
-  "name": "我是队伍的一份子",
+  "name": "身为队伍的一员",
   "nameJa": "チームの一員として",
   "nameTrad": "身為隊伍的一員",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "unsupported",
   "effects": [
@@ -37877,9 +38717,10 @@
  },
  {
   "id": "300131",
-  "name": "日本总大将",
+  "name": "全国总大将",
   "nameJa": "日本総大将",
   "nameTrad": "日本總大將",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
@@ -37902,6 +38743,7 @@
   "name": "不屈不挠",
   "nameJa": "不撓不屈",
   "nameTrad": "不屈不撓",
+  "cnReleased": true,
   "rarity": "unique5",
   "precision": "approx",
   "effects": [
