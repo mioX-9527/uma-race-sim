@@ -28,16 +28,20 @@ export interface Course {
   readonly venue: string;
   readonly distance: number;
   readonly surface: 'turf' | 'dirt';
+  /** 距离档(数据层冗余,便于筛选) */
+  readonly distanceType?: 'short' | 'mile' | 'mid' | 'long';
   readonly corners: readonly Corner[];
   readonly slopes: readonly Slope[];
-  /** 阶段分界(米) */
+  /** 阶段分界(米);按 中盘=1/6、终盘=2/3、最终盘=5/6(解包公式) */
   readonly phaseBounds: {
     readonly midStart: number;
     readonly lateStart: number;
     readonly finalStart: number;
   };
-  /** 基准速度 m/s;缺省用 DEFAULT_BASE_SPEED(占位,见 docs/formulas.md) */
+  /** 基准速度 m/s = 20 − (距离−2000)/1000(解包公式);字段冗余便于核对 */
   readonly baseSpeed?: number;
+  /** 赛道补正门槛属性(course_set_status),用于赛道补正公式 */
+  readonly courseSetStatus?: readonly PassiveStat[];
 }
 
 export interface Stats {
@@ -61,12 +65,19 @@ export type SkillRarity =
 /** 条件精度层级:精确 / 近似(依赖他马,UI 需角标) / 不支持 */
 export type Precision = 'precise' | 'approx' | 'unsupported';
 
+/** 绿技能被动的属性种类 */
+export type PassiveStat = 'speed' | 'stamina' | 'power' | 'guts' | 'wisdom';
+
 export type SkillEffect =
   | { readonly type: 'targetSpeed'; readonly value: number }
   | { readonly type: 'acceleration'; readonly value: number }
   | { readonly type: 'currentSpeed'; readonly value: number }
   | { readonly type: 'lastSpurtExtension'; readonly value: number }
-  | { readonly type: 'heal'; readonly value: number };
+  | { readonly type: 'heal'; readonly value: number }
+  /** 绿技能前提值:不参与比赛过程,由配置侧折算进 greenBonus */
+  | { readonly type: 'passive'; readonly stat: PassiveStat; readonly value: number }
+  /** v0.1 无法建模的效果(妨害/视野/横向速度等),仅保留信息 */
+  | { readonly type: 'unsupported'; readonly label: string; readonly value: number | null };
 
 /** 距离/时间类条件的基准偏移 */
 export type ConditionBase = 'start' | 'midStart' | 'lateStart' | 'finalStart';
@@ -80,15 +91,16 @@ export type SkillCondition =
   | { readonly kind: 'phase'; readonly phase: PhaseId }
   | { readonly kind: 'phaseAfter'; readonly phase: PhaseId }
   | { readonly kind: 'cornerN'; readonly n: number }
-  | { readonly kind: 'cornerFastest' }
+  | { readonly kind: 'cornerFastest'; readonly phaseFilter?: PhaseId }
   | { readonly kind: 'finalCorner' }
   | { readonly kind: 'thirdCornerFromEnd' }
   | { readonly kind: 'lateCorner' }
+  | { readonly kind: 'midCorner' }
   | { readonly kind: 'finalStraight' }
-  | { readonly kind: 'straightFastest' }
+  | { readonly kind: 'straightFastest'; readonly phaseFilter?: PhaseId }
   | { readonly kind: 'lateStraight' }
-  | { readonly kind: 'uphillFastest' }
-  | { readonly kind: 'downhillFastest' }
+  | { readonly kind: 'uphillFastest'; readonly phaseFilter?: PhaseId }
+  | { readonly kind: 'downhillFastest'; readonly phaseFilter?: PhaseId }
   | { readonly kind: 'distanceRun'; readonly meters: number; readonly base: ConditionBase }
   | { readonly kind: 'distanceLeft'; readonly meters: number }
   | { readonly kind: 'elapsedSec'; readonly seconds: number; readonly base: ConditionBase }

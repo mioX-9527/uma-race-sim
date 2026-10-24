@@ -7,6 +7,8 @@ import { z } from 'zod';
 
 const nonneg = z.number().nonnegative();
 
+const passiveStat = z.enum(['speed', 'stamina', 'power', 'guts', 'wisdom']);
+
 export const cornerSchema = z.object({
   n: z.number().int().positive(),
   start: nonneg,
@@ -25,28 +27,32 @@ export const courseSchema = z.object({
   venue: z.string().min(1),
   distance: z.number().int().positive(),
   surface: z.enum(['turf', 'dirt']),
+  distanceType: z.enum(['short', 'mile', 'mid', 'long']).optional(),
   corners: z.array(cornerSchema),
   slopes: z.array(slopeSchema),
   phaseBounds: z.object({ midStart: nonneg, lateStart: nonneg, finalStart: nonneg }),
   baseSpeed: z.number().positive().optional(),
+  courseSetStatus: z.array(passiveStat).optional(),
 });
 
 const conditionBase = z.enum(['start', 'midStart', 'lateStart', 'finalStart']);
+const phaseId = z.union([z.literal(0), z.literal(1), z.literal(2), z.literal(3)]);
 
 export const skillConditionSchema = z.discriminatedUnion('kind', [
   z.object({ kind: z.literal('raceStart') }),
   z.object({ kind: z.literal('phase'), phase: z.union([z.literal(0), z.literal(1), z.literal(2), z.literal(3)]) }),
   z.object({ kind: z.literal('phaseAfter'), phase: z.union([z.literal(0), z.literal(1), z.literal(2), z.literal(3)]) }),
   z.object({ kind: z.literal('cornerN'), n: z.number().int().positive() }),
-  z.object({ kind: z.literal('cornerFastest') }),
+  z.object({ kind: z.literal('cornerFastest'), phaseFilter: phaseId.optional() }),
   z.object({ kind: z.literal('finalCorner') }),
   z.object({ kind: z.literal('thirdCornerFromEnd') }),
   z.object({ kind: z.literal('lateCorner') }),
+  z.object({ kind: z.literal('midCorner') }),
   z.object({ kind: z.literal('finalStraight') }),
-  z.object({ kind: z.literal('straightFastest') }),
+  z.object({ kind: z.literal('straightFastest'), phaseFilter: phaseId.optional() }),
   z.object({ kind: z.literal('lateStraight') }),
-  z.object({ kind: z.literal('uphillFastest') }),
-  z.object({ kind: z.literal('downhillFastest') }),
+  z.object({ kind: z.literal('uphillFastest'), phaseFilter: phaseId.optional() }),
+  z.object({ kind: z.literal('downhillFastest'), phaseFilter: phaseId.optional() }),
   z.object({ kind: z.literal('distanceRun'), meters: z.number().positive(), base: conditionBase }),
   z.object({ kind: z.literal('distanceLeft'), meters: z.number().positive() }),
   z.object({ kind: z.literal('elapsedSec'), seconds: z.number().positive(), base: conditionBase }),
@@ -58,12 +64,15 @@ export const skillEffectSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('acceleration'), value: z.number() }),
   z.object({ type: z.literal('currentSpeed'), value: z.number() }),
   z.object({ type: z.literal('lastSpurtExtension'), value: z.number() }),
-  z.object({ type: z.literal('heal'), value: z.number().positive() }),
+  z.object({ type: z.literal('heal'), value: z.number() }),
+  z.object({ type: z.literal('passive'), stat: passiveStat, value: z.number() }),
+  z.object({ type: z.literal('unsupported'), label: z.string(), value: z.number().nullable() }),
 ]);
 
 export const skillSchema = z.object({
   id: z.string().min(1),
   name: z.string().min(1),
+  nameJa: z.string().optional(),
   rarity: z.enum(['normal', 'rareEvolved', 'unique1', 'unique2', 'unique3', 'unique4', 'unique5', 'unique6']),
   precision: z.enum(['precise', 'approx', 'unsupported']),
   effects: z.array(skillEffectSchema).min(1),

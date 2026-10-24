@@ -1,7 +1,16 @@
 {
-  "version": "0.0.0-placeholder",
+  "version": "0.1.0-d2d3",
   "generatedAt": "2026-10-24",
-  "sources": [],
-  "counts": { "courses": 0, "skills": 0 },
-  "note": "结构占位:真实数据由 tools/scrape-once.ts 于 D2~D3 数据日生成(技能: BWIKI 技能速查表一次性抓取;赛道: 开源解包数据集 + BWIKI 核对)"
+  "sources": [
+    "BWIKI 技能速查表(api.php action=ask,1907 条原始;tools/scrape-once.ts)",
+    "uma-skill-tools data/course_data.json(游戏解包;tools/make-courses.ts 转换)"
+  ],
+  "counts": { "courses": 138, "skills": 1432 },
+  "skillPrecision": { "precise": 269, "approx": 742, "unsupported": 421, "excludedEvolution": 681 },
+  "notes": [
+    "技能:进化稀有度 681 条按 v0.1 范围排除;固有双分支拆为 -b1/-b2;子条件变体(条件N.M)取基础值;复核清单 data/skill-review.json",
+    "技能持续时间为基准值,运行期按 距离/1000 缩放(解包模型)",
+    "赛道:阶段分界=距离的 1/6、2/3、5/6;基准速度=20−(距离−2000)/1000;坡度已换算为百分比(原始值/10000)",
+    "赛场映射:10001-10010=JRA 十场(东京 10006/中山 10005/京都 10008 已用坡度指纹验证);地方 10101-10105 与海外 10201-10203 按游戏内顺序映射,精度中等,待与 BWIKI 抽查确认"
+  ]
 }
