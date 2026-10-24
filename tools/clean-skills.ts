@@ -1,14 +1,16 @@
 /**
  * 技能清洗脚本:data/raw/skills.raw.json(BWIKI 技能速查表)→ data/skills.json + data/skill-review.json
  *
- * 规则要点(见 docs/最终方案.md §4/§5):
- * - 排除「进化」稀有度(v0.1 不支持进化技能)
- * - 固有技能的 条件1/条件2 双分支拆成独立条目(id 加 -b1/-b2 后缀)
- * - 发动条件文本 → 引擎条件枚举:静态锚点(阶段/弯道/坡道/位置)精确;
- *   名次/间距/随机/依赖他马的条款 → approx(UI 需角标);无法解析 → 复核清单
- * - 技能效果词表:速度→targetSpeed、即时速度→currentSpeed、加速度→acceleration、
- *   耐力恢复→heal、被动(属性)→passive(前提值)、妨害/视野/横向速度→unsupported
- * - 持续时间为基准值:运行期按 距离/1000 缩放(解包模型,RaceSolver.activateSkill)
+ * 条件解析双层策略:
+ * 1. 触发代码优先 —— BWIKI「模块:技能数据库内容」(游戏解包,parse-skill-lua.js 转存为
+ *    data/raw/skill-data-lua.json):condition_1/2 为机器可读表达式(如
+ *    running_style==4&is_lastspurt==1&corner==0),效果/持续时间/冷却取 ability_type_s_e /
+ *    float_ability_time_s / float_cooldown_time_s(均 ×10000 缩放)。
+ *    代码内「@」分隔"或"变体(对应速查表 条件N.M):限制取并集,区段取首个变体并标记 approx。
+ * 2. 文本兜底 —— Lua 数据缺失的技能沿用中文文本规则解析(锚点表 + 近似词表)。
+ *
+ * 精度分层:所有 token 可精确映射 → precise;含随机位置(_random)/名次/他马相关 token → approx;
+ * 无可发动区段或效果不支持 → unsupported(灰显可搜索)。
  */
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 
@@ -34,6 +36,7 @@ interface OutSkill {
   precision: 'precise' | 'approx' | 'unsupported';
   effects: OutEffect[];
   durationSec: number | null;
+  cooldownSec?: number | null;
   condition: Record<string, unknown>;
   restriction?: Record<string, unknown>;
   restrictionText?: string;
@@ -51,6 +54,12 @@ const raw = JSON.parse(readFileSync('data/raw/skills.raw.json', 'utf8')) as {
 const cnNames = existsSync('data/raw/cn-skill-names.json')
   ? (JSON.parse(readFileSync('data/raw/cn-skill-names.json', 'utf8')) as { map: Record<string, string> })
   : { map: {} as Record<string, string> };
+/** 游戏解包技能数据(模块:技能数据库内容);未生成时全部走文本兜底 */
+const luaSkills = existsSync('data/raw/skill-data-lua.json')
+  ? (JSON.parse(readFileSync('data/raw/skill-data-lua.json', 'utf8')) as Array<Record<string, string>>)
+  : [];
+const luaById = new Map(luaSkills.map(r => [r.id!, r]));
+
 const review: Array<{ id: string; page: string; reasons: string[] }> = [];
 
 // ---------- 字段工具 ----------
@@ -88,6 +97,466 @@ function fieldByBranch(field: string, labels: readonly string[]): string[] {
   }
   return labels.map(l => labeled.get(l) ?? parts.map(p => p.text).join(','));
 }
+
+// =====================================================================
+// 触发代码解析(模块:技能数据库内容,游戏解包表达式)
+// =====================================================================
+
+/** 赛场编号 → 名称(与 make-courses.ts 的 VENUES 一致) */
+const TRACK_VENUES: Record<number, string> = {
+  10001: '札幌', 10002: '函馆', 10003: '新潟', 10004: '福岛', 10005: '中山',
+  10006: '东京', 10007: '中京', 10008: '京都', 10009: '阪神', 10010: '小仓',
+  10101: '大井', 10103: '川崎', 10104: '船桥', 10105: '盛冈',
+  10201: '隆尚', 10202: '圣安妮塔公园', 10203: '德尔马',
+};
+const CODE_TACTIC: Record<string, string> = { '1': 'nige', '2': 'senko', '3': 'sashi', '4': 'oikomi' };
+const CODE_DISTTYPE: Record<string, string> = { '1': 'short', '2': 'mile', '3': 'mid', '4': 'long' };
+const CODE_PHASE: Record<string, 0 | 1 | 2 | 3> = { '0': 0, '1': 1, '2': 2, '3': 3 };
+/** 阶段 → 行进距离百分比窗口(阶段分界 1/6、2/3、5/6 的百分比表示) */
+const PHASE_PCT: Record<0 | 1 | 2 | 3, [number, number]> = {
+  0: [0, 100 / 6],
+  1: [100 / 6, 200 / 3],
+  2: [200 / 3, 500 / 6],
+  3: [500 / 6, 100],
+};
+
+interface CodeRestriction {
+  tactics: Set<string>;
+  distanceTypes: Set<string>;
+  surfaces: Set<string>;
+  venues: Set<string>;
+  grounds: Set<number>;
+  distances: Set<number>;
+  distanceMin?: number;
+  distanceMax?: number;
+}
+
+interface CodeParse {
+  /** 条件对象(null=无可发动区段) */
+  condition: Record<string, unknown> | null;
+  approx: boolean;
+  restriction: CodeRestriction;
+  notes: string[];
+}
+
+interface Token {
+  name: string;
+  op: string;
+  value: number;
+  raw: string;
+}
+
+function tokenize(code: string): Token[] {
+  return code
+    .split(/&&|&(?!&)/)
+    .map(p => p.trim())
+    .filter(Boolean)
+    .map(p => {
+      const m = p.match(/^([A-Za-z_0-9]+)\s*(==|!=|>=|<=|>|<)\s*(-?\d+(?:\.\d+)?)$/);
+      return m ? { name: m[1]!, op: m[2]!, value: Number.parseFloat(m[3]!), raw: p } : { name: p, op: '?', value: NaN, raw: p };
+    });
+}
+
+/** 名次/他马/随机相关 token → 近似层 */
+const APPROX_NAME_RE =
+  /^order|bashin_diff|distance_diff|near_|infront_near|behind_near|is_behind_in|is_overtake|overtake_target|blocked_|is_surrounded|compete_|temptation|is_temptation|change_order|is_activate_other|is_activate_any|is_activate_heal|activate_count|is_used_skill|hp_per|run_at_full_speed_random|running_style_count|running_style_equal|is_other_character|same_skill_horse|is_badstart|is_goodstart/;
+/** 环境前提 token:单马模拟视为满足,记录到备注 */
+const ENV_TOKENS = new Set([
+  'base_speed', 'base_stamina', 'base_power', 'base_guts', 'base_wiz',
+  'weather', 'season', 'rotation', 'motivation', 'popularity', 'post_number',
+  'fan_count', 'grade', 'is_abroad', 'is_dirtgrade', 'is_tight_track', 'lane_type',
+  'furlong', 'remain_distance_viewer_id', 'is_exist_chara_id', 'succession_skill_count',
+  'is_basis_distance', 'visiblehorse', 'random_lot', 'random_lot_shared', 'is_move_lane', 'time',
+]);
+
+function emptyRestriction(): CodeRestriction {
+  return { tactics: new Set(), distanceTypes: new Set(), surfaces: new Set(), venues: new Set(), grounds: new Set(), distances: new Set() };
+}
+
+function mergeRestriction(a: CodeRestriction, b: CodeRestriction): void {
+  for (const v of b.tactics) a.tactics.add(v);
+  for (const v of b.distanceTypes) a.distanceTypes.add(v);
+  for (const v of b.surfaces) a.surfaces.add(v);
+  for (const v of b.venues) a.venues.add(v);
+  for (const v of b.grounds) a.grounds.add(v);
+  for (const v of b.distances) a.distances.add(v);
+  if (b.distanceMin !== undefined) a.distanceMin = a.distanceMin === undefined ? b.distanceMin : Math.min(a.distanceMin, b.distanceMin);
+  if (b.distanceMax !== undefined) a.distanceMax = a.distanceMax === undefined ? b.distanceMax : Math.max(a.distanceMax, b.distanceMax);
+}
+
+/**
+ * 解析单个变体(「@」分隔的其中一支)。
+ * 锚点优先级(高→低):末脚起点 > 具体弯道 > 最终弯道/直线 > 任意弯道/直线 > 坡道 > 看台对面直线 >
+ * 距离窗口(独立成锚) > 阶段 > 累计时间 > 常驻。阶段/距离窗口与区段锚联用时转为裁剪字段。
+ */
+function parseVariant(tokens: readonly Token[], notes: string[]): Omit<CodeParse, 'restriction'> & { restriction: CodeRestriction } {
+  const restriction = emptyRestriction();
+  let approx = false;
+
+  // 距离窗口(可与区段锚联用)
+  let rateLo: number | null = null;
+  let rateHi: number | null = null;
+  let leftLo: number | null = null;
+  let leftHi: number | null = null;
+  // 阶段信息(可与区段锚联用)
+  let phaseRange: [number, number] | null = null;
+  let phaseAfter: number | null = null;
+  let phaseFilter: number | null = null;
+
+  type Anchor = { rank: number; cond: Record<string, unknown> };
+  let anchor: Anchor | null = null;
+  const setAnchor = (rank: number, cond: Record<string, unknown>): void => {
+    if (anchor === null || rank < anchor.rank) anchor = { rank, cond };
+  };
+  let spurtFlag = false;
+  let trackMin: number | null = null;
+  let trackMax: number | null = null;
+  let slopeSign = 0;
+  /** 全部 token 都属于装配限制/环境前提(无位置锚点)→ 条件视为"满足即常驻" */
+  let onlyRestrictive = true;
+
+  for (const tk of tokens) {
+    const { name, op, value } = tk;
+    const v1 = op === '==' && value === 1;
+    switch (true) {
+      // ---- 锚点 ----
+      case name === 'always' && v1:
+        setAnchor(90, { kind: 'raceStart' });
+        break;
+      case name === 'lastspurt' && op === '==' && value === 2:
+        setAnchor(10, { kind: 'lastSpurt' });
+        break;
+      case (name === 'is_lastspurt' && v1) || (name === 'lastspurt' && v1):
+        spurtFlag = true;
+        break;
+      case name === 'corner' && op === '==' && value >= 1:
+        setAnchor(20, { kind: 'cornerN', n: value });
+        break;
+      case name === 'corner' && op === '==' && value === 0:
+        setAnchor(40, { kind: 'straightFastest' });
+        break;
+      case (name === 'corner' && (op === '!=' || op === '>=')) || (name === 'corner' && op === '>' && value === 0):
+        setAnchor(40, { kind: 'cornerFastest' });
+        break;
+      case name === 'is_finalcorner_laterhalf' && v1:
+        setAnchor(20, { kind: 'finalCorner', part: 'laterHalf' });
+        break;
+      case name === 'is_finalcorner' && v1:
+        setAnchor(20, { kind: 'finalCorner' });
+        break;
+      case name === 'is_finalcorner_random' && v1:
+        approx = true;
+        setAnchor(20, { kind: 'finalCorner' });
+        break;
+      case (name === 'is_last_straight' || name === 'is_last_straight_onetime') && v1:
+        setAnchor(30, { kind: 'finalStraight' });
+        break;
+      case name === 'last_straight_random' && v1:
+        approx = true;
+        setAnchor(30, { kind: 'finalStraight' });
+        break;
+      case name === 'corner_random' || name === 'all_corner_random':
+        approx = true;
+        setAnchor(40, { kind: 'cornerFastest' });
+        break;
+      case name === 'straight_random':
+        approx = true;
+        setAnchor(40, { kind: 'straightFastest' });
+        break;
+      case name === 'phase_corner_random':
+        approx = true;
+        phaseFilter = CODE_PHASE[String(value)] ?? null;
+        setAnchor(40, { kind: 'cornerFastest' });
+        break;
+      case name === 'phase_straight_random':
+        approx = true;
+        phaseFilter = CODE_PHASE[String(value)] ?? null;
+        setAnchor(40, { kind: 'straightFastest' });
+        break;
+      case name === 'up_slope_random':
+        approx = true;
+        setAnchor(50, { kind: 'uphillFastest' });
+        break;
+      case name === 'down_slope_random':
+        approx = true;
+        setAnchor(50, { kind: 'downhillFastest' });
+        break;
+      case name === 'slope' && op === '==' && value === 1:
+        slopeSign = 1;
+        setAnchor(50, { kind: 'uphillFastest' });
+        break;
+      case name === 'slope' && op === '==' && value === 2:
+        slopeSign = -1;
+        setAnchor(50, { kind: 'downhillFastest' });
+        break;
+      case name === 'slope' && op === '==' && value === 0:
+        // 非坡道区段:没有精确几何,按全场近似
+        approx = true;
+        notes.push('slope==0(非坡道)按全场近似');
+        setAnchor(85, { kind: 'raceStart' });
+        break;
+      case name === 'straight_front_type' && op === '==' && value === 2:
+        setAnchor(45, { kind: 'backStraight' });
+        break;
+      // ---- 阶段 ----
+      case name === 'phase' && (op === '==' || op === '>='):
+        if (op === '==') {
+          const p = CODE_PHASE[String(value)];
+          if (p !== undefined) {
+            phaseRange = PHASE_PCT[p];
+            setAnchor(70, { kind: 'phase', phase: p });
+          }
+        } else {
+          phaseAfter = value;
+          setAnchor(75, { kind: 'phaseAfter', phase: value });
+        }
+        break;
+      case name === 'phase' && (op === '<=' || op === '<'): {
+        // phase<=N:从起步到阶段 N 结束
+        const p = CODE_PHASE[String(value)];
+        if (p !== undefined) {
+          onlyRestrictive = false;
+          setAnchor(80, { kind: 'raceStart', withinPct: [0, PHASE_PCT[p][1]] });
+        }
+        break;
+      }
+      case name === 'phase_firsthalf' || name === 'phase_laterhalf': {
+        const p = CODE_PHASE[String(value)];
+        if (p !== undefined) {
+          phaseRange = PHASE_PCT[p];
+          setAnchor(70, {
+            kind: 'phase',
+            phase: p,
+            part: name === 'phase_firsthalf' ? 'firstHalf' : 'laterHalf',
+          });
+        }
+        break;
+      }
+      case name === 'phase_random' || name === 'phase_firsthalf_random' || name === 'phase_laterhalf_random' || name === 'phase_firstquarter_random': {
+        approx = true;
+        const p = CODE_PHASE[String(value)];
+        if (p !== undefined) {
+          phaseRange = PHASE_PCT[p];
+          const part =
+            name === 'phase_firsthalf_random' ? 'firstHalf'
+              : name === 'phase_laterhalf_random' ? 'laterHalf'
+                : name === 'phase_firstquarter_random' ? 'firstQuarter'
+                  : undefined;
+          setAnchor(70, { kind: 'phase', phase: p, ...(part !== undefined ? { part } : {}) });
+        }
+        break;
+      }
+      // ---- 距离窗口 ----
+      case name === 'distance_rate': {
+        if (op === '>=' || op === '>') rateLo = Math.max(rateLo ?? -Infinity, value);
+        else if (op === '<=' || op === '<') rateHi = Math.min(rateHi ?? Infinity, value);
+        else if (op === '==') { rateLo = value; rateHi = value; }
+        setAnchor(60, { kind: 'distanceRate', fromPct: 0, toPct: 100 });
+        break;
+      }
+      case name === 'distance_rate_after_random':
+        // 到达 N% 之后的随机位置
+        approx = true;
+        setAnchor(60, { kind: 'distanceRate', fromPct: value, toPct: 100 });
+        break;
+      case name === 'remain_distance': {
+        if (op === '>=' || op === '>') leftLo = Math.max(leftLo ?? -Infinity, value);
+        else if (op === '<=' || op === '<') leftHi = Math.min(leftHi ?? Infinity, value);
+        else if (op === '==') { leftLo = value; leftHi = value; }
+        setAnchor(60, { kind: 'distanceLeft', fromMeters: 0, toMeters: Infinity });
+        break;
+      }
+      case name === 'accumulatetime' && (op === '>=' || op === '>'):
+        setAnchor(80, { kind: 'elapsedSec', seconds: value, base: 'start' });
+        break;
+      // ---- 装配限制 ----
+      case name === 'running_style' && op === '==': {
+        const t = CODE_TACTIC[String(value)];
+        if (t !== undefined) restriction.tactics.add(t);
+        else notes.push(`running_style=${value} 未知`);
+        break;
+      }
+      case name === 'distance_type' && op === '==': {
+        const d = CODE_DISTTYPE[String(value)];
+        if (d !== undefined) restriction.distanceTypes.add(d);
+        break;
+      }
+      case name === 'distance_type' && op === '!=':
+        // distance_type!=N:排除某一档
+        for (const [k, v] of Object.entries(CODE_DISTTYPE)) if (k !== String(value)) restriction.distanceTypes.add(v);
+        break;
+      case name === 'ground_type' && op === '==':
+        restriction.surfaces.add(value === 1 ? 'turf' : 'dirt');
+        break;
+      case name === 'ground_condition' && op === '==':
+        restriction.grounds.add(value - 1);
+        break;
+      case name === 'track_id' && op === '==': {
+        const v = TRACK_VENUES[value];
+        if (v !== undefined) restriction.venues.add(v);
+        else notes.push(`track_id=${value} 未知赛场`);
+        break;
+      }
+      case name === 'track_id' && (op === '>=' || op === '<='):
+        // 范围需成对合并(如 track_id>=10001&track_id<=10010 = JRA 十场),循环后统一枚举
+        if (op === '>=') trackMin = Math.max(trackMin ?? -Infinity, value);
+        else trackMax = Math.min(trackMax ?? Infinity, value);
+        break;
+      case name === 'course_distance' && op === '==':
+        restriction.distances.add(value);
+        break;
+      case name === 'course_distance' && op === '>=':
+        restriction.distanceMin = value;
+        break;
+      case name === 'course_distance' && op === '<=':
+        restriction.distanceMax = value;
+        break;
+      // ---- 近似/环境 ----
+      case APPROX_NAME_RE.test(name):
+        approx = true;
+        onlyRestrictive = false;
+        break;
+      case ENV_TOKENS.has(name):
+        notes.push(`${name}${op}${value}(环境前提,视为满足)`);
+        break;
+      default:
+        approx = true;
+        onlyRestrictive = false;
+        notes.push(`未识别token:${tk.raw}`);
+    }
+  }
+
+  // 组装条件:锚点 + 阶段/窗口裁剪 + 末脚标记
+  // track_id 范围成对合并(>=10001 & <=10010 = JRA 十场)
+  if (trackMin !== null || trackMax !== null) {
+    const lo = trackMin ?? -Infinity;
+    const hi = trackMax ?? Infinity;
+    let found = false;
+    for (const [k, v] of Object.entries(TRACK_VENUES)) {
+      const n = Number.parseInt(k, 10);
+      if (n >= lo && n <= hi) { restriction.venues.add(v); found = true; }
+    }
+    if (!found) notes.push(`track_id 范围 ${lo}~${hi} 无已知赛场`);
+  }
+  let condition: Record<string, unknown> | null = null;
+  if (anchor !== null) {
+    condition = { ...anchor.cond };
+    const kind = condition.kind as string;
+    // 直线/弯道与坡道条件叠加时,几何交集无法表达,保留区段锚并标近似
+    if (slopeSign !== 0 && (kind === 'straightFastest' || kind === 'cornerFastest')) {
+      approx = true;
+      notes.push('直线/弯道与坡道条件叠加,未取交集(近似)');
+    }
+    if (kind === 'cornerFastest' || kind === 'straightFastest' || kind === 'uphillFastest' || kind === 'downhillFastest') {
+      if (phaseFilter !== null) condition.phaseFilter = phaseFilter;
+      else if (phaseRange !== null) condition.withinPct = phaseRange;
+    } else if (phaseRange !== null && kind !== 'phase' && kind !== 'lastSpurt' && kind !== 'raceStart') {
+      condition.withinPct = phaseRange;
+    }
+    if (rateLo !== null || rateHi !== null) {
+      const lo = Math.max(0, rateLo ?? 0);
+      const hi = Math.min(100, rateHi ?? 100);
+      if (kind === 'distanceRate') {
+        condition.fromPct = Math.round(lo * 100) / 100;
+        condition.toPct = Math.round(hi * 100) / 100;
+      } else if (lo > 0 || hi < 100) {
+        condition.withinPct = [Math.round(lo * 100) / 100, Math.round(hi * 100) / 100];
+      }
+    }
+    if (leftLo !== null || leftHi !== null) {
+      const lo = Math.max(0, leftLo ?? 0);
+      const hi = leftHi ?? Infinity;
+      if (kind === 'distanceLeft') {
+        condition.fromMeters = Math.round(lo);
+        condition.toMeters = Number.isFinite(hi) ? Math.round(hi) : 10000;
+      } else {
+        condition.withinLeftM = [Math.round(lo), Number.isFinite(hi) ? Math.round(hi) : 10000];
+      }
+    }
+    if (spurtFlag) {
+      if (kind === 'lastSpurt' || kind === 'raceStart') {
+        if (kind === 'raceStart') { condition = { kind: 'lastSpurt' }; }
+      } else {
+        condition.spurt = true;
+      }
+    }
+    if (phaseAfter !== null && kind !== 'phaseAfter' && kind !== 'phase') {
+      // phase>=N 与其他锚联用:窗口为该阶段起点到终点
+      const p = CODE_PHASE[String(phaseAfter)];
+      if (p !== undefined) condition.withinPct = [PHASE_PCT[p][0], 100];
+    }
+  } else if (spurtFlag) {
+    condition = { kind: 'lastSpurt' };
+  } else if (onlyRestrictive && tokens.length > 0) {
+    // 全部 token 都是装配限制/环境前提(如 track_id==10008、season==4):限制满足即常驻
+    condition = { kind: 'raceStart' };
+  }
+
+  return { condition, approx, restriction, notes };
+}
+
+/** 完整条件字符串(可能含 @ 变体)→ 条件对象 + 并集限制 */
+function parseCode(code: string): CodeParse {
+  const notes: string[] = [];
+  const variants = code.split('@').map(v => v.trim()).filter(Boolean);
+  const first = parseVariant(tokenize(variants[0] ?? ''), notes);
+  const restriction = first.restriction;
+  let approx = first.approx;
+  const firstKind = first.condition?.kind;
+  for (const v of variants.slice(1)) {
+    const pv = parseVariant(tokenize(v), notes);
+    mergeRestriction(restriction, pv.restriction);
+    approx = approx || pv.approx;
+    if (pv.condition?.kind !== firstKind) {
+      approx = true;
+      notes.push(`变体锚点不同(${String(firstKind)} / ${String(pv.condition?.kind)}),取首个变体`);
+    }
+  }
+  if (variants.length > 1) approx = true;
+  return { condition: first.condition, approx, restriction, notes };
+}
+
+/** 触发代码效果槽(ability_type_s_e)→ 效果列表 */
+const CODE_EFFECT_TYPE: Record<string, string> = { '27': 'targetSpeed', '21': 'targetSpeed', '31': 'acceleration', '22': 'currentSpeed', '9': 'heal' };
+const CODE_PASSIVE_STAT: Record<string, string> = { '1': 'speed', '2': 'stamina', '3': 'power', '4': 'guts', '5': 'wisdom' };
+
+function effectsFromLua(lua: Record<string, string>, slot: 1 | 2): { effects: OutEffect[]; hasUnsupported: boolean; allPassive: boolean } {
+  const effects: OutEffect[] = [];
+  let hasUnsupported = false;
+  let allPassive = true;
+  for (const e of [1, 2, 3] as const) {
+    const type = lua[`ability_type_${slot}_${e}`];
+    if (type === undefined || type === '' || type === '0') continue;
+    const rawValue = Number.parseFloat(lua[`float_ability_value_${slot}_${e}`] ?? '0');
+    const target = lua[`target_type_${slot}_${e}`] ?? '1';
+    const value = Math.round((rawValue / 10000) * 10000) / 10000;
+    if (target !== '1') {
+      hasUnsupported = true;
+      allPassive = false;
+      effects.push({ type: 'unsupported', label: `妨害/他人(目标${target})`, value });
+      continue;
+    }
+    const t = CODE_EFFECT_TYPE[type];
+    if (t !== undefined) {
+      allPassive = false;
+      effects.push({ type: t, value });
+    } else {
+      const stat = CODE_PASSIVE_STAT[type];
+      if (stat !== undefined) {
+        effects.push({ type: 'passive', stat, value });
+      } else {
+        hasUnsupported = true;
+        allPassive = false;
+        effects.push({ type: 'unsupported', label: `效果类型${type}`, value });
+      }
+    }
+  }
+  return { effects, hasUnsupported, allPassive };
+}
+
+// =====================================================================
+// 文本兜底解析(原规则)
+// =====================================================================
 
 // ---------- 效果解析 ----------
 const STAT_MAP: Record<string, string> = { 速度: 'speed', 耐力: 'stamina', 力量: 'power', 毅力: 'guts', 智力: 'wisdom' };
@@ -291,7 +760,7 @@ function parseCondition(text: string, fallbackFilter: string): CondParse {
   } else if (kind === 'distanceRun') {
     condition = { kind: 'distanceRun', meters: (anchor as unknown as { meters?: number }).meters ?? 100, base: 'start' };
   } else if (kind === 'distanceLeft') {
-    condition = { kind: 'distanceLeft', meters: (anchor as unknown as { meters?: number }).meters ?? 200 };
+    condition = { kind: 'distanceLeft', fromMeters: (anchor as unknown as { meters?: number }).meters ?? 200, toMeters: (anchor as unknown as { meters?: number }).meters ?? 200 };
   } else {
     condition = SEGMENT_KINDS.has(kind)
       ? spurtContext
@@ -314,6 +783,8 @@ function buildRestriction(rawTexts: readonly string[]): Record<string, unknown> 
   const venues = new Set<string>();
   const grounds = new Set<number>();
   const distances = new Set<number>();
+  let distanceMin: number | undefined;
+  let distanceMax: number | undefined;
   for (const s of rawTexts) {
     if (!s.includes('数量')) {
       // 「追马数量≥1」这类说的是场上其他马,不是自身脚质限制
@@ -325,12 +796,18 @@ function buildRestriction(rawTexts: readonly string[]): Record<string, unknown> 
     for (const v of VENUE_LIST) if (s.includes(v)) venues.add(v);
     const dm = s.match(/比赛距离[=＝](\d+)\s*m?/);
     if (dm !== null) distances.add(Number.parseInt(dm[1]!, 10));
+    const dmin = s.match(/比赛距离[≥>]=?\s*(\d+)\s*m/);
+    if (dmin !== null) distanceMin = Number.parseInt(dmin[1]!, 10);
+    const dmax = s.match(/比赛距离[≤<]=?\s*(\d+)\s*m/);
+    if (dmax !== null) distanceMax = Number.parseInt(dmax[1]!, 10);
+    // 注意:文本里「1600m≤比赛距离≤2000m」的左界也是 比赛距离≥ 形式,上面两条正则可各取一边
     if (/重马场或不良/.test(s)) { grounds.add(2); grounds.add(3); }
     else if (s.includes('不良马场')) grounds.add(3);
     else if (s.includes('稍重')) grounds.add(2);
+    else if (s.includes('重马场')) grounds.add(2);
     else if (s.includes('良场')) grounds.add(0);
   }
-  if (tactics.size + dts.size + surfaces.size + venues.size + grounds.size + distances.size === 0) return undefined;
+  if (tactics.size + dts.size + surfaces.size + venues.size + grounds.size + distances.size === 0 && distanceMin === undefined && distanceMax === undefined) return undefined;
   const out: Record<string, unknown> = {};
   if (tactics.size > 0) out.tactics = [...tactics];
   if (dts.size > 0) out.distanceTypes = [...dts];
@@ -338,17 +815,65 @@ function buildRestriction(rawTexts: readonly string[]): Record<string, unknown> 
   if (venues.size > 0) out.venues = [...venues];
   if (grounds.size > 0) out.grounds = [...grounds].sort();
   if (distances.size > 0) out.distances = [...distances];
+  if (distanceMin !== undefined) out.distanceMin = distanceMin;
+  if (distanceMax !== undefined) out.distanceMax = distanceMax;
   return out;
 }
 
-// ---------- 主流程 ----------
-const stats = { raw: 0, excludedEvolution: 0, out: 0, precise: 0, approx: 0, unsupported: 0, branchEntries: 0 };
-const out: OutSkill[] = [];
+/** 代码限制 + 文本限制合并(并集) */
+function mergeRestrictionObj(code: CodeRestriction, textObj: Record<string, unknown> | undefined): Record<string, unknown> | undefined {
+  if (textObj === undefined) {
+    if (code.tactics.size + code.distanceTypes.size + code.surfaces.size + code.venues.size + code.grounds.size + code.distances.size === 0 && code.distanceMin === undefined && code.distanceMax === undefined) return undefined;
+    const out: Record<string, unknown> = {};
+    if (code.tactics.size > 0) out.tactics = [...code.tactics];
+    if (code.distanceTypes.size > 0) out.distanceTypes = [...code.distanceTypes];
+    if (code.surfaces.size > 0) out.surfaces = [...code.surfaces];
+    if (code.venues.size > 0) out.venues = [...code.venues];
+    if (code.grounds.size > 0) out.grounds = [...code.grounds].sort();
+    if (code.distances.size > 0) out.distances = [...code.distances].sort();
+    if (code.distanceMin !== undefined) out.distanceMin = code.distanceMin;
+    if (code.distanceMax !== undefined) out.distanceMax = code.distanceMax;
+    return out;
+  }
+  // 文本限制存在 → 把代码限制并进去
+  const merged = emptyRestriction();
+  for (const t of (textObj.tactics as string[] | undefined) ?? []) merged.tactics.add(t);
+  for (const t of (textObj.distanceTypes as string[] | undefined) ?? []) merged.distanceTypes.add(t);
+  for (const t of (textObj.surfaces as string[] | undefined) ?? []) merged.surfaces.add(t);
+  for (const t of (textObj.venues as string[] | undefined) ?? []) merged.venues.add(t);
+  for (const t of (textObj.grounds as number[] | undefined) ?? []) merged.grounds.add(t);
+  for (const t of (textObj.distances as number[] | undefined) ?? []) merged.distances.add(t);
+  mergeRestriction(merged, code);
+  const out: Record<string, unknown> = {};
+  if (merged.tactics.size > 0) out.tactics = [...merged.tactics];
+  if (merged.distanceTypes.size > 0) out.distanceTypes = [...merged.distanceTypes];
+  if (merged.surfaces.size > 0) out.surfaces = [...merged.surfaces];
+  if (merged.venues.size > 0) out.venues = [...merged.venues];
+  if (merged.grounds.size > 0) out.grounds = [...merged.grounds].sort();
+  if (merged.distances.size > 0) out.distances = [...merged.distances].sort();
+  if (merged.distanceMin !== undefined) out.distanceMin = merged.distanceMin;
+  if (merged.distanceMax !== undefined) out.distanceMax = merged.distanceMax;
+  return Object.keys(out).length > 0 ? out : undefined;
+}
 
+// =====================================================================
+// 主流程
+// =====================================================================
+const stats = { raw: 0, excludedEvolution: 0, out: 0, precise: 0, approx: 0, unsupported: 0, branchEntries: 0, codeParsed: 0, textFallback: 0 };
+const out: OutSkill[] = [];
+/** 信息性备注(环境前提/前置条件原文等),单独存放不进复核清单 */
+const infoNotes: Array<{ id: string; page: string; reasons: string[] }> = [];
+
+// 按 ID 去重(速查表每技能一行)
+const rowsById = new Map<string, RawEntry>();
 for (const e of raw.results) {
+  const id = prop(e, 'ID') || e.page;
+  if (!rowsById.has(id)) rowsById.set(id, e);
+}
+
+for (const [id, e] of rowsById) {
   stats.raw++;
   const rarityCn = prop(e, '稀有度');
-  const id = prop(e, 'ID') || e.page;
   if (rarityCn === '进化') { stats.excludedEvolution++; continue; }
 
   const rarity = rarityCn === '普通' ? 'normal' : rarityCn === '传说' ? 'rareEvolved' : 'unique5';
@@ -360,15 +885,102 @@ for (const e of raw.results) {
   const tradName = /^(（?\(?未[实實]裝\)?）?)$/.test(tradRaw) || tradRaw === '' ? '' : tradRaw;
   const restrictionBase = prop(e, '条件限制');
   const filterHint = prop(e, '速查筛选');
+  const condText = prop(e, '触发条件');
+  /** 文本侧限制(条件限制 + 全文中场地/脚质语境) */
+  const textRestrictionObj = buildRestriction([
+    ...[restrictionBase !== '' && restrictionBase !== '通用' ? restrictionBase : ''],
+    ...splitBranches(condText).filter(p => CONTEXT_RE.test(p.text)).map(p => p.text),
+  ]);
 
-  // 分支标签来自技能类型
+  const lua = luaById.get(id);
+  if (lua !== undefined) {
+    // ---- 触发代码路径 ----
+    stats.codeParsed++;
+    const branchCodes: Array<{ slot: 1 | 2; code: string; pre: string }> = [];
+    if (lua.condition_1 !== '') branchCodes.push({ slot: 1, code: lua.condition_1, pre: lua.precondition_1 ?? '' });
+    if (lua.condition_2 !== '') branchCodes.push({ slot: 2, code: lua.condition_2, pre: lua.precondition_2 ?? '' });
+    const multiB = branchCodes.length > 1;
+
+    branchCodes.forEach((b, bi) => {
+      const reasons: string[] = [];
+      const info: string[] = [];
+      const suffix = multiB ? `-b${bi + 1}` : '';
+      if (multiB) stats.branchEntries++;
+
+      const cp = parseCode(b.code);
+      for (const n of cp.notes) {
+        (n.startsWith('未识别token') || n.includes('未知赛场') || n.includes('无已知赛场') ? reasons : info).push(n);
+      }
+      // 前置条件:限制并入,近似/未知 token 标记
+      if (b.pre !== '') {
+        const pp = parseCode(b.pre);
+        mergeRestriction(cp.restriction, pp.restriction);
+        if (pp.approx) cp.approx = true;
+        info.push(`前置条件:${b.pre}`);
+      }
+
+      const { effects, hasUnsupported, allPassive } = effectsFromLua(lua, b.slot);
+      if (effects.length === 0) reasons.push('无效果');
+      const rawDur = Number.parseFloat(lua[`float_ability_time_${b.slot}`] ?? '0');
+      const durationSec = allPassive || rawDur <= 0 ? null : Math.round((rawDur / 10000) * 1000) / 1000;
+      // heal/即时速度 为瞬时(时长 0)属正常;速度/加速度无持续才是问题
+      if (!allPassive && rawDur <= 0 && effects.some(e => e.type === 'targetSpeed' || e.type === 'acceleration' || e.type === 'lastSpurtExtension')) {
+        reasons.push('速度/加速度类效果持续时间为 0');
+      }
+      const rawCd = Number.parseFloat(lua[`float_cooldown_${b.slot}`] ?? lua[`float_cooldown_time_${b.slot}`] ?? '0');
+      const cdSec = Math.round((rawCd / 10000) * 10) / 10;
+      // 500s = 一次性(一场比赛最长不超过 ~4 分钟);仅短冷却(如 弧线大师 30s)允许同场再次发动
+      const cooldownSec = cdSec > 0 && cdSec < 400 ? cdSec : null;
+      if (lua[`ability_time_usage_${b.slot}`] !== undefined && lua[`ability_time_usage_${b.slot}`] !== '1') {
+        reasons.push(`ability_time_usage=${lua[`ability_time_usage_${b.slot}`]}`);
+      }
+
+      const restrictionObj = mergeRestrictionObj(cp.restriction, textRestrictionObj);
+
+      let precision: OutSkill['precision'];
+      if (hasUnsupported || cp.condition === null || effects.length === 0 || allPassive) {
+        precision = 'unsupported';
+        if (cp.condition === null) reasons.push(`无可解析发动位置(${b.code})`);
+        if (allPassive && effects.length > 0) reasons.push('纯被动(前提值,不参与比赛过程)');
+      } else {
+        precision = cp.approx ? 'approx' : 'precise';
+      }
+
+      if (reasons.length > 0) review.push({ id: id + suffix, page: e.page, reasons: [...reasons, ...info] });
+      else if (info.length > 0) infoNotes.push({ id: id + suffix, page: e.page, reasons: info });
+
+      const skill: OutSkill = {
+        id: id + suffix,
+        name: multiB ? `${baseName}(${bi + 1})` : baseName,
+        nameJa,
+        nameTrad: tradName !== '' ? tradName : undefined,
+        cnReleased: official !== undefined ? true : undefined,
+        rarity,
+        precision,
+        effects,
+        durationSec,
+        ...(cooldownSec !== null ? { cooldownSec } : {}),
+        condition: cp.condition ?? { kind: 'raceStart' },
+        restriction: restrictionObj,
+        restrictionText: restrictionBase !== '' && restrictionBase !== '通用' ? restrictionBase : undefined,
+        wisdomScaled: rarity !== 'normal',
+        source: 'BWIKI 速查表 + 触发代码(模块:技能数据库内容)',
+        fetchedAt: raw.fetchedAt.slice(0, 10),
+      };
+      out.push(skill);
+      stats[precision]++;
+    });
+    continue;
+  }
+
+  // ---- 文本兜底路径(Lua 未收录的技能) ----
+  stats.textFallback++;
   const typeParts = splitBranches(prop(e, '技能类型')).filter(p => p.label !== null && !p.premise);
   const labels = typeParts.map(p => p.label!);
   const multi = labels.length > 1;
   const typeFields = fieldByBranch(prop(e, '技能类型'), labels.length ? labels : [null]);
   const valueFields = fieldByBranch(prop(e, '技能数值'), labels.length ? labels : [null]);
   const durFields = fieldByBranch(prop(e, '持续时间'), labels.length ? labels : [null]);
-  const condText = prop(e, '触发条件');
   const condParts = splitBranches(condText);
   const condByLabel = new Map(condParts.filter(p => p.label !== null).map(p => [p.label!, p]));
   const condPlain = condParts.filter(p => p.label === null && !p.premise).map(p => p.text).join(',');
@@ -422,6 +1034,7 @@ for (const e of raw.results) {
     const restrictionObj = buildRestriction(restrictions);
     let approx = cp.approx || prem.approx;
     if (branchCond === '' && condPremise === '') reasons.push('触发条件为空');
+    reasons.push('Lua 未收录,文本解析');
 
     let precision: OutSkill['precision'];
     if (hasUnsupported || cp.condition === null || effects.length === 0 || allPassive) {
@@ -448,7 +1061,7 @@ for (const e of raw.results) {
       restriction: restrictionObj,
       restrictionText: restrictions.length > 0 ? restrictions.join(',') : undefined,
       wisdomScaled: rarity !== 'normal',
-      source: 'BWIKI 技能速查表',
+      source: 'BWIKI 技能速查表(文本解析)',
       fetchedAt: raw.fetchedAt.slice(0, 10),
     };
     out.push(skill);
@@ -459,5 +1072,6 @@ for (const e of raw.results) {
 stats.out = out.length;
 writeFileSync('data/skills.json', JSON.stringify(out, null, 1), 'utf8');
 writeFileSync('data/skill-review.json', JSON.stringify({ generatedAt: new Date().toISOString(), items: review }, null, 1), 'utf8');
+writeFileSync('data/skill-notes.json', JSON.stringify({ generatedAt: new Date().toISOString(), items: infoNotes }, null, 1), 'utf8');
 console.log(JSON.stringify(stats, null, 2));
-console.log(`复核清单:${review.length} 条 → data/skill-review.json`);
+console.log(`复核清单:${review.length} 条 → data/skill-review.json;信息备注:${infoNotes.length} 条 → data/skill-notes.json`);

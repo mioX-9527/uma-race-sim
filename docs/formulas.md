@@ -58,6 +58,39 @@
 | 末脚延展 | 折算为冲刺额外加速度 ×0.1 | 614tools(Excel AA79) |
 | 脚色充分 | 最终盘开始起 3 秒 accel += √((力量−1200)×130)×0.001 | 614tools(sim1!M104) |
 
+### 触发代码(✅ 2026-10-24 起,条件解析的权威来源)
+
+数据源:BWIKI「模块:技能数据库内容」(游戏解包,`tools/parse-skill-lua.js` 转存)。
+每个技能含 `condition_1/condition_2`(OR 双分支)、`precondition_*`、每分支最多 3 个效果槽
+(`ability_type_s_e` / `float_ability_value_s_e` ×10000 / `target_type_s_e`)、
+`float_ability_time_s`(持续,×10000 秒)、`float_cooldown_time_s`(冷却,×10000 秒)。
+
+**条件 token → 引擎条件映射**(语义经中文触发条件全文交叉验证):
+
+| token | 映射 | 层级 |
+|---|---|---|
+| `always==1` | raceStart | 精确 |
+| `corner==N` / `corner==0` / `corner!=0` | 第N弯道 / 任意直线 / 任意弯道 | 精确 |
+| `is_finalcorner==1` / `is_finalcorner_laterhalf==1` | finalCorner / finalCorner后半 | 精确 |
+| `is_last_straight==1` | finalStraight | 精确 |
+| `is_lastspurt==1` / `lastspurt==1` | 末脚状态标记(spurt,动态起点) | 精确 |
+| `lastspurt==2` | lastSpurt("最大冲刺距离时冲刺"=体力预算解算的起点) | 精确 |
+| `slope==1/2` | 上坡 / 下坡 | 精确 |
+| `straight_front_type==2` | backStraight(看台对面直线,依 straights.frontType) | 精确 |
+| `phase==N` / `phase>=N` / `phase<=N` | 阶段 N / 阶段 N 起 / 至阶段 N 止 | 精确 |
+| `phase_random` / `phase_firsthalf_random` / `phase_laterhalf_random` / `phase_firstquarter_random` | 阶段(前半/后半/前四分之一),随机点 | 近似 |
+| `phase_corner_random==N` / `phase_straight_random==N` / `corner_random` / `straight_random` / `up/down_slope_random` | 阶段内弯道/直线、任意弯道/直线/坡 | 近似 |
+| `distance_rate>=a&<=b` / `remain_distance>=a&<=b` | 行进%窗口 / 剩余距离窗口(数值精确) | 精确* |
+| `accumulatetime>=S` | 开赛 S 秒后 | 精确 |
+| `distance_type==N`(1短2英里3中4长)、`running_style==N`(1逃2先3差4追)、`ground_type==N`(1草2泥)、`ground_condition==N`(1良~4不良,枚举=代码−1)、`track_id`(=赛场编号,范围成对合并)、`course_distance`(==/≥/≤) | 结构化装配限制 | — |
+| `order/order_rate/bashin_*/near_*/is_overtake/blocked_*/compete_*/temptation_*/hp_per/...` | 单马期望模型视为满足,按几何位置发动 | 近似 |
+| `base_speed/stamina/power/guts/wiz`、`weather/season/rotation/popularity/...` | 环境前提,视为满足(记录于 data/skill-notes.json) | — |
+
+\* 窗口本身精确;同技能若还含名次/随机条款,整体仍标近似。`@` 分隔"或"变体:限制取并集、区段取首个变体并标近似。
+
+**冷却语义**:`float_cooldown_time` 全库仅两档——500s(一次性)与 30s(弧线大师型,20 个技能)。
+带冷却技能在每个满足段再次发动(中山2500 实测:100m/875m/1700m 三次);一次性技能行为不变。
+
 ### 校准基准
 
 - 无技能东京草 2400 ≈ **116.987s**(误差 <0.5s;614tools 页脚)

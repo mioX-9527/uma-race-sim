@@ -76,7 +76,7 @@ export const PHASE_DECEL: readonly [number, number, number] = [-1.2, -0.8, -1.0]
 /** 体力耗尽后的固定减速 */
 export const EXHAUST_DECEL = -1.2;
 
-/** 场地状态对体力消耗的系数(下标=良/好/稍重/不良) */
+/** 场地状态对体力消耗的系数(下标=良/稍重/重/不良) */
 export const GROUND_HP_COEF: Readonly<Record<'turf' | 'dirt', readonly [number, number, number, number]>> = {
   turf: [1.0, 1.0, 1.02, 1.02],
   dirt: [1.0, 1.0, 1.01, 1.02],

@@ -1,16 +1,23 @@
 {
-  "version": "0.1.0-d2d3",
+  "version": "0.2.0-triggercode",
   "generatedAt": "2026-10-24",
   "sources": [
     "BWIKI 技能速查表(api.php action=ask,1907 条原始;tools/scrape-once.ts)",
-    "uma-skill-tools data/course_data.json(游戏解包;tools/make-courses.ts 转换)"
+    "BWIKI 模块:技能数据库内容(游戏解包触发代码/效果/冷却;tools/parse-skill-lua.js 转存为 data/raw/skill-data-lua.json)",
+    "BWIKI 简中技能速查表(国服官方译名;tools/scrape-cn-names.js)",
+    "uma-skill-tools data/course_data.json(游戏解包;tools/make-courses.ts 转换,含 straights frontType)"
   ],
   "counts": { "courses": 138, "skills": 1432 },
-  "skillPrecision": { "precise": 269, "approx": 742, "unsupported": 421, "excludedEvolution": 681 },
+  "skillPrecision": { "precise": 51, "approx": 1059, "unsupported": 322, "excludedEvolution": 680, "codeParsed": 1224, "textFallback": 2 },
   "notes": [
-    "技能:进化稀有度 681 条按 v0.1 范围排除;固有双分支拆为 -b1/-b2;子条件变体(条件N.M)取基础值;复核清单 data/skill-review.json",
+    "技能条件以触发代码优先解析(1224 条命中解包数据,2 条回退中文文本规则):distance_rate/remain_distance 数值窗口、corner 序号、is_finalcorner/_laterhalf、is_last_straight、is_lastspurt、straight_front_type==2(看台对面直线)、@ 分隔的\"或\"变体(限制取并集)",
+    "效果取解包效果槽(最多 3 个/条件):21/27→速度、31→加速度、22→即时速度、9→耐力恢复(含负值=消耗体力)、1-5→被动前提值;target_type≠1 标记不支持",
+    "冷却时间来自解包 float_cooldown_time;<400s 的技能(如 弧线大师 30s)同场可多次发动;500s 视为一次性",
+    "近似层变多(1059 条)为如实标注:触发代码暴露了文本解析此前漏看的名次/随机条款(order_rate 出现于约 766 个技能)",
+    "进化稀有度 680 条按范围排除;固有双分支(condition_1/condition_2)拆为 -b1/-b2;复核清单 data/skill-review.json(228 条,多为纯被动与纯名次条件)",
     "技能持续时间为基准值,运行期按 距离/1000 缩放(解包模型)",
-    "赛道:阶段分界=距离的 1/6、2/3、5/6;基准速度=20−(距离−2000)/1000;坡度已换算为百分比(原始值/10000)",
+    "赛道:阶段分界=距离的 1/6、2/3、5/6;基准速度=20−(距离−2000)/1000;坡度已换算为百分比;straights.frontType 1=看台前 2=看台对面",
+    "场地状态枚举修正为 0良/1稍重/2重/3不良(触发代码 ground_condition 1良~4不良 映射为代码−1)",
     "赛场映射:10001-10010=JRA 十场(东京 10006/中山 10005/京都 10008 已用坡度指纹验证);地方 10101-10105 与海外 10201-10203 按游戏内顺序映射,精度中等,待与 BWIKI 抽查确认"
   ]
 }

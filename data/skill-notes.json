@@ -1,0 +1,1107 @@
+{
+ "generatedAt": "2026-10-24T11:09:58.753Z",
+ "items": [
+  {
+   "id": "100031-b1",
+   "page": "究極テイオーステップ",
+   "reasons": [
+    "前置条件:phase>=2&order_rate<=50&bashin_diff_infront<=1&is_overtake==1"
+   ]
+  },
+  {
+   "id": "100031-b2",
+   "page": "究極テイオーステップ",
+   "reasons": [
+    "前置条件:phase>=2&order_rate<=50&bashin_diff_infront<=1&is_overtake==1"
+   ]
+  },
+  {
+   "id": "100051",
+   "page": "煌星のヴォードヴィル",
+   "reasons": [
+    "前置条件:phase>=2&order_rate<=40&behind_near_lane_time_set1>=1"
+   ]
+  },
+  {
+   "id": "100121",
+   "page": "タイマン！デッドヒート！",
+   "reasons": [
+    "前置条件:is_finalcorner==1&is_behind_in==1&change_order_onetime<0&order_rate>=40"
+   ]
+  },
+  {
+   "id": "100161-b1",
+   "page": "Shadow Break",
+   "reasons": [
+    "前置条件:phase==1&blocked_side_continuetime>=2"
+   ]
+  },
+  {
+   "id": "100301",
+   "page": "ブルーローズチェイサー",
+   "reasons": [
+    "前置条件:phase>=2&order<=4&change_order_onetime<0"
+   ]
+  },
+  {
+   "id": "100311-b1",
+   "page": "チャージ完了！全速前進！",
+   "reasons": [
+    "slope==0(非坡道)按全场近似",
+    "变体锚点不同(distanceLeft / downhillFastest),取首个变体",
+    "前置条件:remain_distance<=305&remain_distance>=300&slope==1"
+   ]
+  },
+  {
+   "id": "100351",
+   "page": "勝利のチケットを、君にッ！",
+   "reasons": [
+    "前置条件:is_finalcorner==1&blocked_side_continuetime>=2"
+   ]
+  },
+  {
+   "id": "100361",
+   "page": "Trigger:BEAT",
+   "reasons": [
+    "前置条件:is_finalcorner==1&order_rate>=40&order_rate<=75&lane_type==0"
+   ]
+  },
+  {
+   "id": "100441",
+   "page": "いただき☆ストレリチア！",
+   "reasons": [
+    "前置条件:order_rate_out50_continue==1&temptation_count==0&is_finalcorner==1"
+   ]
+  },
+  {
+   "id": "100471-b1",
+   "page": "掲げよ、己が魂の剣を！",
+   "reasons": [
+    "grade==100(环境前提,视为满足)",
+    "popularity<=3(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "100491-b1",
+   "page": "剣ヶ峰より、狂気に嗤え",
+   "reasons": [
+    "popularity>=4(环境前提,视为满足)",
+    "前置条件:is_finalcorner==1&is_overtake==1"
+   ]
+  },
+  {
+   "id": "100491-b2",
+   "page": "剣ヶ峰より、狂気に嗤え",
+   "reasons": [
+    "popularity<4(环境前提,视为满足)",
+    "前置条件:is_finalcorner==1&is_overtake==1"
+   ]
+  },
+  {
+   "id": "100511",
+   "page": "つぼみ、ほころぶ時",
+   "reasons": [
+    "前置条件:phase==1&blocked_side_continuetime>=2&corner!=0"
+   ]
+  },
+  {
+   "id": "100541",
+   "page": "疾風爆走ペガサスダッシュ！",
+   "reasons": [
+    "前置条件:order_rate>=45&distance_rate>=50&change_order_onetime<0"
+   ]
+  },
+  {
+   "id": "100551-b1",
+   "page": "万彩☆マーベラス★世界",
+   "reasons": [
+    "visiblehorse>=4(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "100701-b1",
+   "page": "セイリオス",
+   "reasons": [
+    "popularity<=3(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "100721",
+   "page": "烈火繚乱、無敵之舞",
+   "reasons": [
+    "前置条件:is_finalcorner==1&change_order_onetime<0"
+   ]
+  },
+  {
+   "id": "100771-b1",
+   "page": "Road to Glory",
+   "reasons": [
+    "前置条件:distance_rate>=60&phase==1&order>=2&order_rate<=40"
+   ]
+  },
+  {
+   "id": "100771-b2",
+   "page": "Road to Glory",
+   "reasons": [
+    "前置条件:distance_rate>=60&phase==1&order>=2&order_rate<=40"
+   ]
+  },
+  {
+   "id": "100781-b1",
+   "page": "風光る",
+   "reasons": [
+    "前置条件:distance_rate>=50&order_rate_out20_continue==1"
+   ]
+  },
+  {
+   "id": "100781-b2",
+   "page": "風光る",
+   "reasons": [
+    "前置条件:distance_rate>=50&order_rate_out20_continue==1"
+   ]
+  },
+  {
+   "id": "100791-b1",
+   "page": "『船橋最強！』",
+   "reasons": [
+    "前置条件:phase==1&order_rate<=50&blocked_side_continuetime>=2"
+   ]
+  },
+  {
+   "id": "100791-b2",
+   "page": "『船橋最強！』",
+   "reasons": [
+    "前置条件:phase==1&order_rate<=50&blocked_side_continuetime>=2"
+   ]
+  },
+  {
+   "id": "100831-b1",
+   "page": "Mission: Triumph",
+   "reasons": [
+    "直线/弯道与坡道条件叠加,未取交集(近似)"
+   ]
+  },
+  {
+   "id": "100841-b1",
+   "page": "霹靂のアウフヘーベン",
+   "reasons": [
+    "前置条件:phase>=2&order_rate>=50"
+   ]
+  },
+  {
+   "id": "100841-b2",
+   "page": "霹靂のアウフヘーベン",
+   "reasons": [
+    "前置条件:phase>=2&order_rate>=50"
+   ]
+  },
+  {
+   "id": "100881-b1",
+   "page": "Reversal Illusion",
+   "reasons": [
+    "前置条件:change_order_up_middle>=1&is_finalcorner==1&corner!=0&order_rate<=70&order_rate>=40"
+   ]
+  },
+  {
+   "id": "100881-b2",
+   "page": "Reversal Illusion",
+   "reasons": [
+    "前置条件:is_finalcorner==1&corner!=0&order_rate<=70&order_rate>=40"
+   ]
+  },
+  {
+   "id": "100911-b1",
+   "page": "デラックス☆ファウンテン",
+   "reasons": [
+    "前置条件:phase>=2&is_last_straight_onetime==1&order_rate>=30&order_rate<=70&temptation_count==0"
+   ]
+  },
+  {
+   "id": "100911-b2",
+   "page": "デラックス☆ファウンテン",
+   "reasons": [
+    "前置条件:phase>=2&is_last_straight_onetime==1&order_rate>=30&order_rate<=70"
+   ]
+  },
+  {
+   "id": "100991-b1",
+   "page": "かがやけ☆とまこまい",
+   "reasons": [
+    "前置条件:phase==1&blocked_side_continuetime>=2&corner!=0"
+   ]
+  },
+  {
+   "id": "100991-b2",
+   "page": "かがやけ☆とまこまい",
+   "reasons": [
+    "前置条件:phase==1&blocked_side_continuetime>=2&corner!=0"
+   ]
+  },
+  {
+   "id": "101061-b1",
+   "page": "Bang☆ミラクるわせ！",
+   "reasons": [
+    "popularity>=4(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "101101-b1",
+   "page": "Guiding Sea",
+   "reasons": [
+    "is_basis_distance==1(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "101151-b1",
+   "page": "我が覇道、阻むものなし",
+   "reasons": [
+    "base_speed>=1000(环境前提,视为满足)",
+    "base_stamina>=1000(环境前提,视为满足)",
+    "base_power>=1000(环境前提,视为满足)",
+    "base_guts>=1000(环境前提,视为满足)",
+    "base_wiz>=1000(环境前提,视为满足)",
+    "前置条件:distance_type==3@distance_type==4"
+   ]
+  },
+  {
+   "id": "101171-b1",
+   "page": "鋭気のアレグロ",
+   "reasons": [
+    "前置条件:running_style==4&phase>=2"
+   ]
+  },
+  {
+   "id": "101171-b2",
+   "page": "鋭気のアレグロ",
+   "reasons": [
+    "前置条件:phase>=2"
+   ]
+  },
+  {
+   "id": "101211-b1",
+   "page": "Lame de vent",
+   "reasons": [
+    "前置条件:is_finalcorner==1&corner!=0&change_order_onetime<0"
+   ]
+  },
+  {
+   "id": "101211-b2",
+   "page": "Lame de vent",
+   "reasons": [
+    "前置条件:is_finalcorner==1&corner!=0&change_order_onetime<0"
+   ]
+  },
+  {
+   "id": "101301-b1",
+   "page": "咲う花形",
+   "reasons": [
+    "前置条件:distance_type==2&ground_type==1@distance_type==3&ground_type==1"
+   ]
+  },
+  {
+   "id": "101321-b1",
+   "page": "Circulating Love♡",
+   "reasons": [
+    "前置条件:distance_type==3&running_style==3&ground_type==1"
+   ]
+  },
+  {
+   "id": "101341-b1",
+   "page": "いずれあなたに咲くフローラ",
+   "reasons": [
+    "前置条件:distance_type==3@distance_type==4"
+   ]
+  },
+  {
+   "id": "101351-b1",
+   "page": "黄金を訪ねて",
+   "reasons": [
+    "前置条件:running_style==3@running_style==4"
+   ]
+  },
+  {
+   "id": "101361-b1",
+   "page": "無垢の祈り・ホーリーライト",
+   "reasons": [
+    "前置条件:distance_type==2@distance_type==3"
+   ]
+  },
+  {
+   "id": "101371-b1",
+   "page": "想像×創造＝∞",
+   "reasons": [
+    "前置条件:distance_type==3@distance_type==4"
+   ]
+  },
+  {
+   "id": "101371-b2",
+   "page": "想像×創造＝∞",
+   "reasons": [
+    "前置条件:distance_type==3@distance_type==4"
+   ]
+  },
+  {
+   "id": "101411-b1",
+   "page": "光れ！弾けろ！超新星爆発！",
+   "reasons": [
+    "前置条件:running_style==1@running_style==2"
+   ]
+  },
+  {
+   "id": "101431-b1",
+   "page": "Ring-a-Link",
+   "reasons": [
+    "前置条件:distance_rate>=16&distance_rate<=18&order_rate>=50"
+   ]
+  },
+  {
+   "id": "101451-b2",
+   "page": "冠絶タクティクス",
+   "reasons": [
+    "前置条件:running_style==2@running_style==4"
+   ]
+  },
+  {
+   "id": "101491-b1",
+   "page": "烈々と咲く",
+   "reasons": [
+    "前置条件:running_style==2@running_style==3"
+   ]
+  },
+  {
+   "id": "10351",
+   "page": "全力Vサインッ！",
+   "reasons": [
+    "前置条件:is_finalcorner==1&blocked_side_continuetime>=2"
+   ]
+  },
+  {
+   "id": "10541",
+   "page": "ペガサスフルパワー！",
+   "reasons": [
+    "前置条件:order_rate>=45&distance_rate>=50&change_order_onetime<0"
+   ]
+  },
+  {
+   "id": "110021-b1",
+   "page": "水平線のその先へ",
+   "reasons": [
+    "前置条件:phase==1&bashin_diff_behind>=3&order==1"
+   ]
+  },
+  {
+   "id": "110031",
+   "page": "絶対は、ボクだ",
+   "reasons": [
+    "前置条件:is_finalcorner==1&is_overtake==1&order<=5&order_rate<=50&overtake_target_no_order_up_time>=2"
+   ]
+  },
+  {
+   "id": "110081-b1",
+   "page": "Into High Gear!",
+   "reasons": [
+    "slope==0(非坡道)按全场近似",
+    "变体锚点不同(raceStart / uphillFastest),取首个变体",
+    "前置条件:phase>=1&slope==2&order_rate>=50&order_rate<=80&track_id==10006"
+   ]
+  },
+  {
+   "id": "110081-b2",
+   "page": "Into High Gear!",
+   "reasons": [
+    "slope==0(非坡道)按全场近似",
+    "变体锚点不同(raceStart / uphillFastest),取首个变体",
+    "前置条件:phase>=1&slope==2&order_rate>=50&order_rate<=80"
+   ]
+  },
+  {
+   "id": "110121",
+   "page": "大盛り！ファーストバイト！",
+   "reasons": [
+    "前置条件:change_order_up_middle>=3"
+   ]
+  },
+  {
+   "id": "110161-b1",
+   "page": "灰色の臨界点",
+   "reasons": [
+    "前置条件:phase==1&blocked_side_continuetime>=2"
+   ]
+  },
+  {
+   "id": "110171",
+   "page": "翳り退く、さざめきの矢",
+   "reasons": [
+    "前置条件:phase>=2&order_rate<=50&overtake_target_time>=2"
+   ]
+  },
+  {
+   "id": "110251-b1",
+   "page": "心からのおもてにゃし",
+   "reasons": [
+    "前置条件:distance_rate>=50&order_rate_out40_continue==1"
+   ]
+  },
+  {
+   "id": "110251-b2",
+   "page": "心からのおもてにゃし",
+   "reasons": [
+    "前置条件:distance_rate>=50&order_rate_out40_continue==1"
+   ]
+  },
+  {
+   "id": "110341",
+   "page": "灯穂",
+   "reasons": [
+    "前置条件:phase>=2&corner!=0&order_rate>=60&is_overtake==1"
+   ]
+  },
+  {
+   "id": "110361-b1",
+   "page": "...found you.",
+   "reasons": [
+    "前置条件:phase==1&change_order_onetime>0&order_rate>=50&order_rate<=80"
+   ]
+  },
+  {
+   "id": "110391",
+   "page": "快なる剛力",
+   "reasons": [
+    "slope==0(非坡道)按全场近似",
+    "变体锚点不同(raceStart / downhillFastest),取首个变体",
+    "前置条件:phase>=1&slope==1&order_rate>=40&order_rate<=80"
+   ]
+  },
+  {
+   "id": "110441-b2",
+   "page": "とっておきmaterialize",
+   "reasons": [
+    "motivation>=4(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "110481-b1",
+   "page": "GALmem.ふぉーえば♪",
+   "reasons": [
+    "motivation==5(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "110551-b1",
+   "page": "喝采☆ワンダードール！",
+   "reasons": [
+    "motivation==5(环境前提,视为满足)",
+    "前置条件:phase>=2&is_finalcorner==1&corner!=0&near_count>=1&order_rate>=30&order_rate<=70"
+   ]
+  },
+  {
+   "id": "110551-b2",
+   "page": "喝采☆ワンダードール！",
+   "reasons": [
+    "前置条件:phase>=2&is_finalcorner==1&corner!=0&near_count>=1&order_rate>=30&order_rate<=70"
+   ]
+  },
+  {
+   "id": "110601-b1",
+   "page": "Go☆Go☆for it!",
+   "reasons": [
+    "popularity>=4(环境前提,视为满足)",
+    "前置条件:is_finalcorner==1&change_order_onetime<0"
+   ]
+  },
+  {
+   "id": "110601-b2",
+   "page": "Go☆Go☆for it!",
+   "reasons": [
+    "popularity<4(环境前提,视为满足)",
+    "前置条件:is_finalcorner==1&change_order_onetime<0"
+   ]
+  },
+  {
+   "id": "110611",
+   "page": "轟！トレセン応援団！！",
+   "reasons": [
+    "前置条件:distance_rate>=50&order_rate_out70_continue==1&temptation_count==0"
+   ]
+  },
+  {
+   "id": "110691",
+   "page": "咲け咲け！私！",
+   "reasons": [
+    "前置条件:phase==1&blocked_side_continuetime>=2"
+   ]
+  },
+  {
+   "id": "110701-b1",
+   "page": "駆るは光、狩るは星々",
+   "reasons": [
+    "base_power>=1200(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "110721-b1",
+   "page": "剛勇果断、烈火之刀",
+   "reasons": [
+    "lane_type==0(环境前提,视为满足)",
+    "前置条件:distance_rate>=40&distance_rate<=50&blocked_side_continuetime>=2"
+   ]
+  },
+  {
+   "id": "110721-b2",
+   "page": "剛勇果断、烈火之刀",
+   "reasons": [
+    "前置条件:distance_rate>=40&distance_rate<=50&blocked_side_continuetime>=2"
+   ]
+  },
+  {
+   "id": "110741-b2",
+   "page": "Illuminate you",
+   "reasons": [
+    "base_stamina>=1200(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "110761-b1",
+   "page": "春光・Bon appétit",
+   "reasons": [
+    "前置条件:phase==1&blocked_side_continuetime>=2"
+   ]
+  },
+  {
+   "id": "110771-b1",
+   "page": "Joy to the World",
+   "reasons": [
+    "前置条件:phase_firsthalf==1&is_activate_heal_skill==1"
+   ]
+  },
+  {
+   "id": "110771-b2",
+   "page": "Joy to the World",
+   "reasons": [
+    "前置条件:phase_firsthalf==1&is_activate_heal_skill==1"
+   ]
+  },
+  {
+   "id": "110831-b1",
+   "page": "Immortal Work",
+   "reasons": [
+    "前置条件:distance_rate>=50&distance_rate<=51&order_rate>=40&order_rate<=80"
+   ]
+  },
+  {
+   "id": "110831-b2",
+   "page": "Immortal Work",
+   "reasons": [
+    "前置条件:distance_rate>=50&distance_rate<=51&order_rate>=40&order_rate<=80"
+   ]
+  },
+  {
+   "id": "110871-b1",
+   "page": "ふわもこアワー",
+   "reasons": [
+    "base_wiz>=1200(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "110931-b1",
+   "page": "きせき・おもい・かなで",
+   "reasons": [
+    "前置条件:phase==1&order_rate<=70&order_rate>=20&blocked_side_continuetime>=2"
+   ]
+  },
+  {
+   "id": "110931-b2",
+   "page": "きせき・おもい・かなで",
+   "reasons": [
+    "前置条件:phase==1&order_rate<=70&order_rate>=20&blocked_side_continuetime>=2"
+   ]
+  },
+  {
+   "id": "111021-b1",
+   "page": "ケ・ピアチェーヴォレ！",
+   "reasons": [
+    "前置条件:distance_rate>=50&order_rate_in50_continue==1"
+   ]
+  },
+  {
+   "id": "111021-b2",
+   "page": "ケ・ピアチェーヴォレ！",
+   "reasons": [
+    "前置条件:distance_rate>=50&order_rate_in50_continue==1"
+   ]
+  },
+  {
+   "id": "111091-b1",
+   "page": "ずっとずっと輝いて",
+   "reasons": [
+    "直线/弯道与坡道条件叠加,未取交集(近似)",
+    "前置条件:track_id==10009&course_distance==1600@track_id==10008&course_distance==2000@track_id==10006&course_distance==2400"
+   ]
+  },
+  {
+   "id": "111091-b2",
+   "page": "ずっとずっと輝いて",
+   "reasons": [
+    "前置条件:track_id==10009&course_distance==1600@track_id==10008&course_distance==2000@track_id==10006&course_distance==2400"
+   ]
+  },
+  {
+   "id": "111131-b1",
+   "page": "渚のヴィーナスタイム♡",
+   "reasons": [
+    "motivation==5(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "111161-b1",
+   "page": "不凋なるCattleya",
+   "reasons": [
+    "前置条件:distance_rate>=50&distance_rate<=51&order_rate<=80&order_rate>=40&distance_type==3"
+   ]
+  },
+  {
+   "id": "111161-b2",
+   "page": "不凋なるCattleya",
+   "reasons": [
+    "前置条件:distance_rate>=50&distance_rate<=51&order_rate<=80&order_rate>=40&distance_type==3"
+   ]
+  },
+  {
+   "id": "111191-b2",
+   "page": "夢寐に見る銀世界",
+   "reasons": [
+    "前置条件:distance_type==4&phase>=2&corner!=0&change_order_onetime<0&is_activate_other_skill_detail==1"
+   ]
+  },
+  {
+   "id": "111271-b1",
+   "page": "剛心鉄壁ガーディアン",
+   "reasons": [
+    "前置条件:distance_rate>=50&overtake_target_time>=2"
+   ]
+  },
+  {
+   "id": "111321-b1",
+   "page": "Watch Us Flourish",
+   "reasons": [
+    "is_abroad==1(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "120011-b1",
+   "page": "威風堂々、夢錦！",
+   "reasons": [
+    "前置条件:track_id==10005"
+   ]
+  },
+  {
+   "id": "120031-b1",
+   "page": "歌舞歓楽や、ああをかし",
+   "reasons": [
+    "前置条件:distance_rate>=50&order_rate<=50&overtake_target_time>=2"
+   ]
+  },
+  {
+   "id": "120031-b2",
+   "page": "歌舞歓楽や、ああをかし",
+   "reasons": [
+    "前置条件:distance_rate>=50&order_rate<=50&overtake_target_time>=2"
+   ]
+  },
+  {
+   "id": "120061-b1",
+   "page": "灰の光跡：シンデレラグレイ",
+   "reasons": [
+    "前置条件:course_distance==2500&track_id==10005&fan_count>=146738@distance_type==2"
+   ]
+  },
+  {
+   "id": "120111-b1",
+   "page": "演舞・撫子大薙刀",
+   "reasons": [
+    "is_basis_distance==0(环境前提,视为满足)",
+    "前置条件:distance_rate>=50&order_rate<=70&order_rate>=30&overtake_target_time>=1@distance_rate>=50&order_rate<=70&order_rate>=30&is_overtake==1"
+   ]
+  },
+  {
+   "id": "120111-b2",
+   "page": "演舞・撫子大薙刀",
+   "reasons": [
+    "前置条件:distance_rate>=50&order_rate<=70&order_rate>=30&overtake_target_time>=1@distance_rate>=50&order_rate<=70&order_rate>=30&is_overtake==1"
+   ]
+  },
+  {
+   "id": "120171-b1",
+   "page": "Cascading Might",
+   "reasons": [
+    "前置条件:running_style==2@running_style==3"
+   ]
+  },
+  {
+   "id": "120171-b2",
+   "page": "Cascading Might",
+   "reasons": [
+    "前置条件:running_style==2@running_style==3"
+   ]
+  },
+  {
+   "id": "120231-b1",
+   "page": "勝利ヘ至ル累積",
+   "reasons": [
+    "前置条件:blocked_side_continuetime>=2&corner!=0"
+   ]
+  },
+  {
+   "id": "120351-b1",
+   "page": "GO! Full-send",
+   "reasons": [
+    "popularity<=3(环境前提,视为满足)",
+    "前置条件:phase==1&change_order_onetime<0&order_rate>=40&order_rate<=80"
+   ]
+  },
+  {
+   "id": "120351-b2",
+   "page": "GO! Full-send",
+   "reasons": [
+    "前置条件:phase==1&change_order_onetime<0&order_rate>=40&order_rate<=80"
+   ]
+  },
+  {
+   "id": "120401-b2",
+   "page": "Silent Sunset Gold",
+   "reasons": [
+    "前置条件:phase>=2&blocked_side_continuetime>=2&corner!=0&is_activate_other_skill_detail==1"
+   ]
+  },
+  {
+   "id": "120411-b1",
+   "page": "桜吹雪くスプリントバースト",
+   "reasons": [
+    "前置条件:running_style==1@running_style==2"
+   ]
+  },
+  {
+   "id": "120411-b2",
+   "page": "桜吹雪くスプリントバースト",
+   "reasons": [
+    "前置条件:running_style==1@running_style==2"
+   ]
+  },
+  {
+   "id": "120481",
+   "page": "ヤバ技☆ジャグルビート",
+   "reasons": [
+    "slope==0(非坡道)按全场近似",
+    "变体锚点不同(raceStart / uphillFastest),取首个变体",
+    "slope==0(非坡道)按全场近似",
+    "变体锚点不同(raceStart / uphillFastest),取首个变体",
+    "前置条件:phase>=1&slope==2&order_rate>=30&order_rate<=70"
+   ]
+  },
+  {
+   "id": "120611",
+   "page": "理想へのwinding road",
+   "reasons": [
+    "前置条件:remain_distance<=600&order_rate>=40&order_rate<=80&is_behind_in==1&change_order_onetime<0"
+   ]
+  },
+  {
+   "id": "120741-b1",
+   "page": "夕凪のリトリート・メモリー",
+   "reasons": [
+    "前置条件:distance_type==3&phase==1&change_order_onetime>0@distance_type==4&phase==1&change_order_onetime>0"
+   ]
+  },
+  {
+   "id": "200631",
+   "page": "疾風怒濤",
+   "reasons": [
+    "前置条件:phase==2&distance_diff_rate>=50"
+   ]
+  },
+  {
+   "id": "200632",
+   "page": "仕掛け抜群",
+   "reasons": [
+    "前置条件:phase==2&distance_diff_rate>=50"
+   ]
+  },
+  {
+   "id": "200751",
+   "page": "内的体験",
+   "reasons": [
+    "lane_type==0(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "200752",
+   "page": "内弁慶",
+   "reasons": [
+    "lane_type==0(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "201141",
+   "page": "神業ステップ",
+   "reasons": [
+    "is_move_lane==1(环境前提,视为满足)",
+    "is_move_lane==2(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "201142",
+   "page": "軽やかステップ",
+   "reasons": [
+    "is_move_lane==1(环境前提,视为满足)",
+    "is_move_lane==2(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "201331",
+   "page": "技巧派",
+   "reasons": [
+    "is_move_lane==1(环境前提,视为满足)",
+    "is_move_lane==2(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "201332",
+   "page": "巧みなステップ",
+   "reasons": [
+    "is_move_lane==1(环境前提,视为满足)",
+    "is_move_lane==2(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "201471",
+   "page": "視界良好！異常なし！",
+   "reasons": [
+    "is_move_lane==1(环境前提,视为满足)",
+    "is_move_lane==2(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "201472",
+   "page": "お見通し",
+   "reasons": [
+    "is_move_lane==1(环境前提,视为满足)",
+    "is_move_lane==2(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "202481",
+   "page": "怪物",
+   "reasons": [
+    "前置条件:distance_diff_top<=10&distance_rate>=60&phase==1"
+   ]
+  },
+  {
+   "id": "202482",
+   "page": "本領発揮",
+   "reasons": [
+    "前置条件:distance_diff_top<=10&distance_rate>=60&phase==1"
+   ]
+  },
+  {
+   "id": "202491",
+   "page": "抜群の切れ味",
+   "reasons": [
+    "前置条件:distance_rate>=66&order_rate_out50_continue==1&temptation_count==0"
+   ]
+  },
+  {
+   "id": "202492",
+   "page": "切れ味",
+   "reasons": [
+    "前置条件:distance_rate>=66&order_rate_out50_continue==1&temptation_count==0"
+   ]
+  },
+  {
+   "id": "203061-b1",
+   "page": "無二",
+   "reasons": [
+    "furlong==1(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "203071-b1",
+   "page": "無三",
+   "reasons": [
+    "furlong==2(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "203151",
+   "page": "本能の解放",
+   "reasons": [
+    "前置条件:compete_fight_count>0"
+   ]
+  },
+  {
+   "id": "203152",
+   "page": "むきだしの情熱",
+   "reasons": [
+    "前置条件:compete_fight_count>0"
+   ]
+  },
+  {
+   "id": "203212-b1",
+   "page": "気の向くままに",
+   "reasons": [
+    "motivation>=4(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "203471",
+   "page": "猛烈激走",
+   "reasons": [
+    "前置条件:compete_fight_count>0"
+   ]
+  },
+  {
+   "id": "203472",
+   "page": "みなぎる闘志",
+   "reasons": [
+    "前置条件:compete_fight_count>0"
+   ]
+  },
+  {
+   "id": "203822-b1",
+   "page": "内なる獣",
+   "reasons": [
+    "前置条件:distance_rate>=66&order_rate_out40_continue==1"
+   ]
+  },
+  {
+   "id": "204161",
+   "page": "猪突猛進",
+   "reasons": [
+    "前置条件:running_style==1@running_style==2"
+   ]
+  },
+  {
+   "id": "204162",
+   "page": "押しの一手",
+   "reasons": [
+    "前置条件:running_style==1@running_style==2"
+   ]
+  },
+  {
+   "id": "204322-b1",
+   "page": "阿吽の呼吸",
+   "reasons": [
+    "前置条件:distance_type==2@distance_type==3"
+   ]
+  },
+  {
+   "id": "204322-b2",
+   "page": "阿吽の呼吸",
+   "reasons": [
+    "前置条件:distance_type==2@distance_type==3"
+   ]
+  },
+  {
+   "id": "204362",
+   "page": "大立ち回り",
+   "reasons": [
+    "前置条件:running_style==2@running_style==3"
+   ]
+  },
+  {
+   "id": "204372",
+   "page": "流れに任せて",
+   "reasons": [
+    "前置条件:running_style==2@running_style==3"
+   ]
+  },
+  {
+   "id": "204391",
+   "page": "悠々自適",
+   "reasons": [
+    "前置条件:distance_type==3@distance_type==4"
+   ]
+  },
+  {
+   "id": "204392",
+   "page": "息抜き上手",
+   "reasons": [
+    "前置条件:distance_type==3@distance_type==4"
+   ]
+  },
+  {
+   "id": "204622-b1",
+   "page": "連綿",
+   "reasons": [
+    "succession_skill_count>=3(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "204691",
+   "page": "剣抜弩張",
+   "reasons": [
+    "前置条件:distance_type==2@distance_type==3"
+   ]
+  },
+  {
+   "id": "204692",
+   "page": "立ち合い",
+   "reasons": [
+    "前置条件:distance_type==2@distance_type==3"
+   ]
+  },
+  {
+   "id": "210311-b1",
+   "page": "アスリート魂",
+   "reasons": [
+    "base_guts>=1200(环境前提,视为满足)",
+    "base_guts>=1200(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "210311-b2",
+   "page": "アスリート魂",
+   "reasons": [
+    "base_guts<1200(环境前提,视为满足)",
+    "base_guts<1200(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "210331-b1",
+   "page": "食の極意",
+   "reasons": [
+    "base_power>=1200(环境前提,视为满足)",
+    "base_power>=1200(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "300071",
+   "page": "未知への走りを見せてくれ",
+   "reasons": [
+    "is_exist_chara_id==1002(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "300081",
+   "page": "ほんにゃか快走祈願！",
+   "reasons": [
+    "is_exist_chara_id==1002(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "300091",
+   "page": "友として、ライバルとして",
+   "reasons": [
+    "is_exist_chara_id==1002(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "300101",
+   "page": "憧れのエール",
+   "reasons": [
+    "is_exist_chara_id==1002(环境前提,视为满足)",
+    "remain_distance_viewer_id>=800(环境前提,视为满足)",
+    "remain_distance_viewer_id<=850(环境前提,视为满足)"
+   ]
+  }
+ ]
+}

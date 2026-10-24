@@ -42,6 +42,26 @@ function phaseEndOf(course: Course, phase: PhaseId): number {
   }
 }
 
+/** 阶段内部按 part(前半/后半/前四分之一)裁剪 */
+function clipPart(from: number, to: number, part: 'firstHalf' | 'laterHalf' | 'firstQuarter' | undefined): Region {
+  if (part === undefined) return [from, to];
+  const len = to - from;
+  if (part === 'firstHalf') return [from, from + len / 2];
+  if (part === 'laterHalf') return [from + len / 2, to];
+  return [from, from + len / 4];
+}
+
+/** 区段与窗口的交集;空交集丢弃 */
+function intersect(rs: readonly Region[], win: Region): Region[] {
+  const out: Region[] = [];
+  for (const r of rs) {
+    const lo = Math.max(r[0], win[0]);
+    const hi = Math.min(r[1], win[1]);
+    if (hi >= lo) out.push([lo, hi]);
+  }
+  return out;
+}
+
 /** 赛道直线段(弯道之间的空隙) */
 export function straightGaps(course: Course): readonly Region[] {
   const gaps: Region[] = [];
@@ -54,129 +74,168 @@ export function straightGaps(course: Course): readonly Region[] {
   return gaps;
 }
 
+/** 看台对面的直线段(frontType===2);无该数据时回退为最长的非最终直线 */
+function backStraightRegions(course: Course): readonly Region[] {
+  const named = (course.straights ?? []).filter(s => s.frontType === 2).map(s => [s.start, s.end] as Region);
+  if (named.length > 0) return named;
+  const gaps = straightGaps(course).slice(0, -1);
+  const longest = gaps.reduce<Region | null>((a, g) => (a === null || g[1] - g[0] > a[1] - a[0] ? g : a), null);
+  return longest ? [longest] : [];
+}
+
 /**
  * 静态条件 → 赛道上的可发动区间(设计思路参考 uma-skill-tools ConditionParser,见 THIRD_PARTY.md)。
- * 无法静态化的时间类条件返回全区间,交给 dynamicSatisfied 逐帧判定。
+ * 区段类条件(corner/straight/slope 等)返回全部满足段:一次性技能在首个命中段发动,
+ * 带冷却的技能(如 弧线大师 30s)可在后续段再次发动。
+ * withinPct / withinLeftM 窗口(触发代码 distance_rate / remain_distance 与区段条件联用时)对区段取交集。
  */
 export function activationRegions(cond: SkillCondition, course: Course): readonly Region[] {
   const L = course.distance;
   const late = course.phaseBounds.lateStart;
   const phaseFilter = 'phaseFilter' in cond ? cond.phaseFilter : undefined;
   const spurtFilter = 'spurt' in cond ? cond.spurt === true : false;
+
+  let regions: Region[];
   switch (cond.kind) {
     case 'raceStart':
-      return [[0, 0]];
+      regions = [[0, 0]];
+      break;
     /** 末脚(动态起点):可发动区间为 [终盘分界, 终点],配合逐帧 isSpurt 判定 */
     case 'lastSpurt':
-      return [[late, L]];
+      regions = [[late, L]];
+      break;
     case 'phase': {
       const from = boundOf(course, cond.phase);
       const to = cond.phase < 3 ? boundOf(course, (cond.phase + 1) as PhaseId) : L;
-      return [[from, to]];
+      regions = [clipPart(from, to, cond.part)];
+      break;
     }
     case 'phaseAfter':
-      return [[boundOf(course, cond.phase), L]];
+      regions = [[boundOf(course, cond.phase), L]];
+      break;
     case 'cornerN': {
       const c = course.corners[cond.n - 1];
-      return c ? [[c.start, c.end]] : [];
+      regions = c ? [[c.start, c.end]] : [];
+      break;
     }
     case 'cornerFastest': {
-      if (spurtFilter) {
-        return course.corners.filter(c => c.end > late).map(c => [c.start, c.end] as Region);
-      }
-      if (phaseFilter !== undefined) {
+      let cs = course.corners.map(c => [c.start, c.end] as Region);
+      if (spurtFilter) cs = cs.filter(([, end]) => end > late);
+      else if (phaseFilter !== undefined) {
         const lo = boundOf(course, phaseFilter);
         const hi = phaseEndOf(course, phaseFilter);
-        const c = course.corners.find(c => c.end > lo && c.start < hi);
-        return c ? [[Math.max(c.start, lo), Math.min(c.end, hi)]] : [];
+        cs = intersect(cs, [lo, hi]);
       }
-      const c = course.corners[0];
-      return c ? [[c.start, c.end]] : [];
+      regions = cs;
+      break;
     }
     case 'finalCorner': {
       const c = course.corners[course.corners.length - 1];
-      return c ? [[c.start, c.end]] : [];
+      regions = c ? [clipPart(c.start, c.end, cond.part === 'laterHalf' ? 'laterHalf' : undefined)] : [];
+      break;
     }
     case 'finalCornerOnward': {
       const c = course.corners[course.corners.length - 1];
-      return c ? [[c.start, L]] : [];
+      regions = c ? [[c.start, L]] : [];
+      break;
     }
     case 'thirdCornerFromEnd': {
       const c = course.corners[course.corners.length - 3];
-      return c ? [[c.start, c.end]] : [];
+      regions = c ? [[c.start, c.end]] : [];
+      break;
     }
     case 'lateCorner': {
       const c = course.corners.find(c => c.end > late);
-      return c ? [[Math.max(c.start, late), c.end]] : [];
+      regions = c ? [[Math.max(c.start, late), c.end]] : [];
+      break;
     }
     case 'midCorner': {
       const mid = course.phaseBounds.midStart;
       const c = course.corners.find(c => c.end > mid);
-      return c ? [[Math.max(c.start, mid), c.end]] : [];
+      regions = c ? [[Math.max(c.start, mid), c.end]] : [];
+      break;
     }
     case 'finalStraight': {
       const last = course.corners[course.corners.length - 1];
       const from = last ? last.end : 0;
-      return from < L ? [[from, L]] : [];
+      regions = from < L ? [[from, L]] : [];
+      break;
     }
     case 'straightFastest': {
-      if (spurtFilter) {
-        return straightGaps(course).filter(g => g[1] > late);
-      }
-      if (phaseFilter !== undefined) {
+      let gs = straightGaps(course);
+      if (spurtFilter) gs = gs.filter(([, end]) => end > late);
+      else if (phaseFilter !== undefined) {
         const lo = boundOf(course, phaseFilter);
         const hi = phaseEndOf(course, phaseFilter);
-        const g = straightGaps(course).find(g => g[1] > lo && g[0] < hi);
-        return g ? [[Math.max(g[0], lo), Math.min(g[1], hi)]] : [];
+        gs = intersect(gs, [lo, hi]);
       }
-      const g = straightGaps(course)[0];
-      return g ? [g] : [];
+      regions = [...gs];
+      break;
     }
+    case 'backStraight':
+      regions = [...backStraightRegions(course)];
+      break;
     case 'lateStraight': {
       const g = straightGaps(course).find(g => g[1] > late);
-      return g ? [[Math.max(g[0], late), g[1]]] : [];
+      regions = g ? [[Math.max(g[0], late), g[1]]] : [];
+      break;
     }
     case 'uphillFastest': {
-      if (spurtFilter) {
-        return course.slopes.filter(s => s.gradient > 0 && s.end > late).map(s => [s.start, s.end] as Region);
-      }
-      if (phaseFilter !== undefined) {
+      let ss = course.slopes.filter(s => s.gradient > 0).map(s => [s.start, s.end] as Region);
+      if (spurtFilter) ss = ss.filter(([, end]) => end > late);
+      else if (phaseFilter !== undefined) {
         const lo = boundOf(course, phaseFilter);
         const hi = phaseEndOf(course, phaseFilter);
-        const s = course.slopes.find(s => s.gradient > 0 && s.end > lo && s.start < hi);
-        return s ? [[Math.max(s.start, lo), Math.min(s.end, hi)]] : [];
+        ss = intersect(ss, [lo, hi]);
       }
-      const s = course.slopes.find(s => s.gradient > 0);
-      return s ? [[s.start, s.end]] : [];
+      regions = ss;
+      break;
     }
     case 'downhillFastest': {
-      if (spurtFilter) {
-        return course.slopes.filter(s => s.gradient < 0 && s.end > late).map(s => [s.start, s.end] as Region);
-      }
-      if (phaseFilter !== undefined) {
+      let ss = course.slopes.filter(s => s.gradient < 0).map(s => [s.start, s.end] as Region);
+      if (spurtFilter) ss = ss.filter(([, end]) => end > late);
+      else if (phaseFilter !== undefined) {
         const lo = boundOf(course, phaseFilter);
         const hi = phaseEndOf(course, phaseFilter);
-        const s = course.slopes.find(s => s.gradient < 0 && s.end > lo && s.start < hi);
-        return s ? [[Math.max(s.start, lo), Math.min(s.end, hi)]] : [];
+        ss = intersect(ss, [lo, hi]);
       }
-      const s = course.slopes.find(s => s.gradient < 0);
-      return s ? [[s.start, s.end]] : [];
+      regions = ss;
+      break;
     }
     case 'distanceRun': {
       const p = Math.min(boundOf(course, cond.base) + cond.meters, L);
-      return [[p, p]];
+      regions = [[p, p]];
+      break;
     }
     case 'distanceLeft': {
-      const p = Math.max(L - cond.meters, 0);
-      return [[p, p]];
+      const from = Math.max(L - cond.toMeters, 0);
+      const to = Math.max(L - cond.fromMeters, 0);
+      regions = [[Math.min(from, to), Math.max(from, to)]];
+      break;
+    }
+    case 'distanceRate': {
+      const from = Math.min((L * cond.fromPct) / 100, L);
+      const to = Math.min((L * cond.toPct) / 100, L);
+      regions = [[from, Math.max(from, to)]];
+      break;
     }
     case 'elapsedSec':
-      return [[0, L]];
+      regions = [[0, L]];
+      break;
     case 'positionPct': {
       const p = (L * cond.pct) / 100;
-      return [[p, p]];
+      regions = [[p, p]];
+      break;
     }
   }
+
+  if ('withinPct' in cond && cond.withinPct !== undefined) {
+    regions = intersect(regions, [(L * cond.withinPct[0]) / 100, (L * cond.withinPct[1]) / 100]);
+  }
+  if ('withinLeftM' in cond && cond.withinLeftM !== undefined) {
+    regions = intersect(regions, [L - cond.withinLeftM[1], L - cond.withinLeftM[0]]);
+  }
+  return regions;
 }
 
 export function inRegion(r: Region, x: number): boolean {
@@ -191,12 +250,8 @@ export function dynamicSatisfied(cond: SkillCondition, s: FrameState): boolean {
       return cond.base === 'start' && s.t >= cond.seconds;
     case 'lastSpurt':
       return s.isSpurt;
-    case 'cornerFastest':
-    case 'straightFastest':
-    case 'uphillFastest':
-    case 'downhillFastest':
-      return cond.spurt === true ? s.isSpurt : true;
     default:
-      return true;
+      // 任何带 spurt 标记的条件(区段/窗口)都要求处于末脚状态
+      return 'spurt' in cond && cond.spurt === true ? s.isSpurt : true;
   }
 }

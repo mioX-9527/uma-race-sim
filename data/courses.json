@@ -18,6 +18,18 @@
     "end": 934
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 400,
+    "frontType": 2
+   },
+   {
+    "start": 934,
+    "end": 1200,
+    "frontType": 1
+   }
+  ],
   "slopes": [],
   "phaseBounds": {
    "midStart": 200,
@@ -49,6 +61,18 @@
     "n": 3,
     "start": 975,
     "end": 1234
+   }
+  ],
+  "straights": [
+   {
+    "start": 425,
+    "end": 700,
+    "frontType": 2
+   },
+   {
+    "start": 1234,
+    "end": 1500,
+    "frontType": 1
    }
   ],
   "slopes": [],
@@ -89,6 +113,23 @@
     "end": 1534
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 175,
+    "frontType": 1
+   },
+   {
+    "start": 725,
+    "end": 1000,
+    "frontType": 2
+   },
+   {
+    "start": 1534,
+    "end": 1800,
+    "frontType": 1
+   }
+  ],
   "slopes": [],
   "phaseBounds": {
    "midStart": 300,
@@ -125,6 +166,23 @@
     "n": 4,
     "start": 1475,
     "end": 1734
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 375,
+    "frontType": 1
+   },
+   {
+    "start": 925,
+    "end": 1200,
+    "frontType": 2
+   },
+   {
+    "start": 1734,
+    "end": 2000,
+    "frontType": 1
    }
   ],
   "slopes": [],
@@ -177,6 +235,28 @@
     "end": 2334
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 175,
+    "frontType": 2
+   },
+   {
+    "start": 725,
+    "end": 975,
+    "frontType": 1
+   },
+   {
+    "start": 1525,
+    "end": 1800,
+    "frontType": 2
+   },
+   {
+    "start": 2334,
+    "end": 2600,
+    "frontType": 1
+   }
+  ],
   "slopes": [],
   "phaseBounds": {
    "midStart": 433,
@@ -205,6 +285,18 @@
     "n": 2,
     "start": 510,
     "end": 736
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 280,
+    "frontType": 2
+   },
+   {
+    "start": 736,
+    "end": 1000,
+    "frontType": 1
    }
   ],
   "slopes": [],
@@ -243,6 +335,23 @@
     "n": 4,
     "start": 1210,
     "end": 1436
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 240,
+    "frontType": 1
+   },
+   {
+    "start": 700,
+    "end": 980,
+    "frontType": 2
+   },
+   {
+    "start": 1436,
+    "end": 1700,
+    "frontType": 1
    }
   ],
   "slopes": [],
@@ -295,6 +404,28 @@
     "end": 2136
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 200,
+    "frontType": 2
+   },
+   {
+    "start": 660,
+    "end": 940,
+    "frontType": 1
+   },
+   {
+    "start": 1408,
+    "end": 1680,
+    "frontType": 2
+   },
+   {
+    "start": 2136,
+    "end": 2400,
+    "frontType": 1
+   }
+  ],
   "slopes": [],
   "phaseBounds": {
    "midStart": 400,
@@ -321,6 +452,18 @@
     "n": 2,
     "start": 530,
     "end": 738
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 310,
+    "frontType": 2
+   },
+   {
+    "start": 738,
+    "end": 1000,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -355,6 +498,18 @@
     "n": 2,
     "start": 730,
     "end": 938
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 510,
+    "frontType": 2
+   },
+   {
+    "start": 938,
+    "end": 1200,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -399,6 +554,23 @@
     "n": 4,
     "start": 1330,
     "end": 1538
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 320,
+    "frontType": 1
+   },
+   {
+    "start": 760,
+    "end": 1110,
+    "frontType": 2
+   },
+   {
+    "start": 1538,
+    "end": 1800,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -450,6 +622,23 @@
     "n": 4,
     "start": 1530,
     "end": 1738
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 520,
+    "frontType": 1
+   },
+   {
+    "start": 960,
+    "end": 1310,
+    "frontType": 2
+   },
+   {
+    "start": 1738,
+    "end": 2000,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -513,6 +702,28 @@
     "end": 2338
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 260,
+    "frontType": 2
+   },
+   {
+    "start": 730,
+    "end": 1120,
+    "frontType": 1
+   },
+   {
+    "start": 1560,
+    "end": 1910,
+    "frontType": 2
+   },
+   {
+    "start": 2338,
+    "end": 2600,
+    "frontType": 1
+   }
+  ],
   "slopes": [
    {
     "start": 0,
@@ -559,6 +770,18 @@
     "end": 740
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 370,
+    "frontType": 2
+   },
+   {
+    "start": 740,
+    "end": 1000,
+    "frontType": 1
+   }
+  ],
   "slopes": [],
   "phaseBounds": {
    "midStart": 167,
@@ -595,6 +818,23 @@
     "n": 4,
     "start": 1260,
     "end": 1440
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 350,
+    "frontType": 1
+   },
+   {
+    "start": 730,
+    "end": 1070,
+    "frontType": 2
+   },
+   {
+    "start": 1440,
+    "end": 1700,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -656,6 +896,28 @@
     "end": 2140
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 292,
+    "frontType": 2
+   },
+   {
+    "start": 672,
+    "end": 1040,
+    "frontType": 1
+   },
+   {
+    "start": 1420,
+    "end": 1770,
+    "frontType": 2
+   },
+   {
+    "start": 2140,
+    "end": 2400,
+    "frontType": 1
+   }
+  ],
   "slopes": [],
   "phaseBounds": {
    "midStart": 400,
@@ -675,6 +937,13 @@
   "surface": "turf",
   "distanceType": "short",
   "corners": [],
+  "straights": [
+   {
+    "start": 0,
+    "end": 1000,
+    "frontType": 1
+   }
+  ],
   "slopes": [
    {
     "start": 0,
@@ -716,6 +985,18 @@
     "end": 842
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 450,
+    "frontType": 2
+   },
+   {
+    "start": 842,
+    "end": 1200,
+    "frontType": 1
+   }
+  ],
   "slopes": [],
   "phaseBounds": {
    "midStart": 200,
@@ -744,6 +1025,18 @@
     "end": 1042
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 650,
+    "frontType": 2
+   },
+   {
+    "start": 1042,
+    "end": 1400,
+    "frontType": 1
+   }
+  ],
   "slopes": [],
   "phaseBounds": {
    "midStart": 233,
@@ -770,6 +1063,18 @@
     "n": 2,
     "start": 750,
     "end": 942
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 550,
+    "frontType": 2
+   },
+   {
+    "start": 942,
+    "end": 1600,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -809,6 +1114,18 @@
     "n": 2,
     "start": 950,
     "end": 1142
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 750,
+    "frontType": 2
+   },
+   {
+    "start": 1142,
+    "end": 1800,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -862,6 +1179,23 @@
     "end": 1642
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 420,
+    "frontType": 1
+   },
+   {
+    "start": 820,
+    "end": 1250,
+    "frontType": 2
+   },
+   {
+    "start": 1642,
+    "end": 2000,
+    "frontType": 1
+   }
+  ],
   "slopes": [],
   "phaseBounds": {
    "midStart": 333,
@@ -891,6 +1225,18 @@
     "n": 2,
     "start": 1150,
     "end": 1342
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 950,
+    "frontType": 2
+   },
+   {
+    "start": 1342,
+    "end": 2000,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -945,6 +1291,23 @@
     "end": 1842
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 650,
+    "frontType": 1
+   },
+   {
+    "start": 1050,
+    "end": 1450,
+    "frontType": 2
+   },
+   {
+    "start": 1842,
+    "end": 2200,
+    "frontType": 1
+   }
+  ],
   "slopes": [],
   "phaseBounds": {
    "midStart": 367,
@@ -985,6 +1348,23 @@
     "end": 2042
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 810,
+    "frontType": 1
+   },
+   {
+    "start": 1210,
+    "end": 1650,
+    "frontType": 2
+   },
+   {
+    "start": 2042,
+    "end": 2400,
+    "frontType": 1
+   }
+  ],
   "slopes": [],
   "phaseBounds": {
    "midStart": 400,
@@ -1011,6 +1391,18 @@
     "n": 2,
     "start": 700,
     "end": 847
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 540,
+    "frontType": 2
+   },
+   {
+    "start": 847,
+    "end": 1200,
+    "frontType": 1
    }
   ],
   "slopes": [],
@@ -1049,6 +1441,23 @@
     "n": 4,
     "start": 1300,
     "end": 1447
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 400,
+    "frontType": 1
+   },
+   {
+    "start": 720,
+    "end": 1140,
+    "frontType": 2
+   },
+   {
+    "start": 1447,
+    "end": 1800,
+    "frontType": 1
    }
   ],
   "slopes": [],
@@ -1101,6 +1510,28 @@
     "end": 2170
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 380,
+    "frontType": 2
+   },
+   {
+    "start": 700,
+    "end": 1120,
+    "frontType": 1
+   },
+   {
+    "start": 1440,
+    "end": 1850,
+    "frontType": 2
+   },
+   {
+    "start": 2170,
+    "end": 2500,
+    "frontType": 1
+   }
+  ],
   "slopes": [],
   "phaseBounds": {
    "midStart": 417,
@@ -1127,6 +1558,18 @@
     "n": 2,
     "start": 720,
     "end": 908
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 420,
+    "frontType": 2
+   },
+   {
+    "start": 908,
+    "end": 1200,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -1173,6 +1616,23 @@
     "end": 1508
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 330,
+    "frontType": 1
+   },
+   {
+    "start": 730,
+    "end": 1020,
+    "frontType": 2
+   },
+   {
+    "start": 1508,
+    "end": 1800,
+    "frontType": 1
+   }
+  ],
   "slopes": [
    {
     "start": 780,
@@ -1217,6 +1677,23 @@
     "n": 4,
     "start": 1520,
     "end": 1708
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 530,
+    "frontType": 1
+   },
+   {
+    "start": 930,
+    "end": 1220,
+    "frontType": 2
+   },
+   {
+    "start": 1708,
+    "end": 2000,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -1275,6 +1752,28 @@
     "end": 2308
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 220,
+    "frontType": 2
+   },
+   {
+    "start": 720,
+    "end": 1130,
+    "frontType": 1
+   },
+   {
+    "start": 1530,
+    "end": 1820,
+    "frontType": 2
+   },
+   {
+    "start": 2308,
+    "end": 2600,
+    "frontType": 1
+   }
+  ],
   "slopes": [
    {
     "start": 0,
@@ -1314,6 +1813,18 @@
     "end": 855
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 500,
+    "frontType": 2
+   },
+   {
+    "start": 855,
+    "end": 1150,
+    "frontType": 1
+   }
+  ],
   "slopes": [],
   "phaseBounds": {
    "midStart": 192,
@@ -1350,6 +1861,23 @@
     "n": 4,
     "start": 1260,
     "end": 1405
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 360,
+    "frontType": 1
+   },
+   {
+    "start": 700,
+    "end": 1050,
+    "frontType": 2
+   },
+   {
+    "start": 1405,
+    "end": 1700,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -1408,6 +1936,28 @@
     "end": 2105
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 310,
+    "frontType": 2
+   },
+   {
+    "start": 680,
+    "end": 1060,
+    "frontType": 1
+   },
+   {
+    "start": 1400,
+    "end": 1750,
+    "frontType": 2
+   },
+   {
+    "start": 2105,
+    "end": 2400,
+    "frontType": 1
+   }
+  ],
   "slopes": [],
   "phaseBounds": {
    "midStart": 400,
@@ -1436,6 +1986,13 @@
     "n": 2,
     "start": 650,
     "end": 890
+   }
+  ],
+  "straights": [
+   {
+    "start": 890,
+    "end": 1200,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -1480,6 +2037,13 @@
     "n": 3,
     "start": 1050,
     "end": 1290
+   }
+  ],
+  "straights": [
+   {
+    "start": 1290,
+    "end": 1600,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -1531,6 +2095,23 @@
     "n": 4,
     "start": 1250,
     "end": 1490
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 175,
+    "frontType": 1
+   },
+   {
+    "start": 675,
+    "end": 1000,
+    "frontType": 2
+   },
+   {
+    "start": 1490,
+    "end": 1800,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -1592,6 +2173,23 @@
     "end": 1690
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 375,
+    "frontType": 1
+   },
+   {
+    "start": 875,
+    "end": 1200,
+    "frontType": 2
+   },
+   {
+    "start": 1690,
+    "end": 2000,
+    "frontType": 1
+   }
+  ],
   "slopes": [
    {
     "start": 125,
@@ -1651,6 +2249,18 @@
     "n": 4,
     "start": 1650,
     "end": 1890
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 403,
+    "frontType": 1
+   },
+   {
+    "start": 1890,
+    "end": 2200,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -1723,6 +2333,23 @@
     "n": 6,
     "start": 1950,
     "end": 2190
+   }
+  ],
+  "straights": [
+   {
+    "start": 496,
+    "end": 875,
+    "frontType": 1
+   },
+   {
+    "start": 1375,
+    "end": 1700,
+    "frontType": 2
+   },
+   {
+    "start": 2190,
+    "end": 2500,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -1807,6 +2434,33 @@
     "end": 3290
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 290,
+    "frontType": 1
+   },
+   {
+    "start": 790,
+    "end": 1115,
+    "frontType": 2
+   },
+   {
+    "start": 1615,
+    "end": 1975,
+    "frontType": 1
+   },
+   {
+    "start": 2475,
+    "end": 2800,
+    "frontType": 2
+   },
+   {
+    "start": 3290,
+    "end": 3600,
+    "frontType": 1
+   }
+  ],
   "slopes": [
    {
     "start": 40,
@@ -1873,6 +2527,18 @@
     "end": 892
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 500,
+    "frontType": 2
+   },
+   {
+    "start": 892,
+    "end": 1200,
+    "frontType": 1
+   }
+  ],
   "slopes": [
    {
     "start": 175,
@@ -1922,6 +2588,23 @@
     "n": 4,
     "start": 1300,
     "end": 1492
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 350,
+    "frontType": 1
+   },
+   {
+    "start": 750,
+    "end": 1100,
+    "frontType": 1
+   },
+   {
+    "start": 1492,
+    "end": 1800,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -1995,6 +2678,28 @@
     "end": 2092
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 200,
+    "frontType": 2
+   },
+   {
+    "start": 600,
+    "end": 950,
+    "frontType": 1
+   },
+   {
+    "start": 1350,
+    "end": 1700,
+    "frontType": 2
+   },
+   {
+    "start": 2092,
+    "end": 2400,
+    "frontType": 1
+   }
+  ],
   "slopes": [],
   "phaseBounds": {
    "midStart": 400,
@@ -2045,6 +2750,28 @@
     "end": 2192
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 300,
+    "frontType": 2
+   },
+   {
+    "start": 700,
+    "end": 1050,
+    "frontType": 1
+   },
+   {
+    "start": 1450,
+    "end": 1800,
+    "frontType": 2
+   },
+   {
+    "start": 2192,
+    "end": 2500,
+    "frontType": 1
+   }
+  ],
   "slopes": [],
   "phaseBounds": {
    "midStart": 417,
@@ -2071,6 +2798,18 @@
     "n": 2,
     "start": 625,
     "end": 875
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 350,
+    "frontType": 2
+   },
+   {
+    "start": 875,
+    "end": 1400,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -2118,6 +2857,18 @@
     "n": 2,
     "start": 825,
     "end": 1075
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 550,
+    "frontType": 2
+   },
+   {
+    "start": 1075,
+    "end": 1600,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -2172,6 +2923,18 @@
     "end": 1275
    }
   ],
+  "straights": [
+   {
+    "start": 325,
+    "end": 750,
+    "frontType": 2
+   },
+   {
+    "start": 1275,
+    "end": 1800,
+    "frontType": 1
+   }
+  ],
   "slopes": [
    {
     "start": 525,
@@ -2221,6 +2984,18 @@
     "n": 3,
     "start": 1225,
     "end": 1475
+   }
+  ],
+  "straights": [
+   {
+    "start": 400,
+    "end": 950,
+    "frontType": 2
+   },
+   {
+    "start": 1475,
+    "end": 2000,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -2277,6 +3052,23 @@
     "end": 1775
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 225,
+    "frontType": 1
+   },
+   {
+    "start": 800,
+    "end": 1250,
+    "frontType": 2
+   },
+   {
+    "start": 1775,
+    "end": 2300,
+    "frontType": 1
+   }
+  ],
   "slopes": [
    {
     "start": 1025,
@@ -2331,6 +3123,23 @@
     "n": 4,
     "start": 1625,
     "end": 1875
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 325,
+    "frontType": 1
+   },
+   {
+    "start": 900,
+    "end": 1350,
+    "frontType": 2
+   },
+   {
+    "start": 1875,
+    "end": 2400,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -2390,6 +3199,23 @@
     "n": 4,
     "start": 1725,
     "end": 1975
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 425,
+    "frontType": 1
+   },
+   {
+    "start": 1000,
+    "end": 1450,
+    "frontType": 2
+   },
+   {
+    "start": 1975,
+    "end": 2500,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -2463,6 +3289,28 @@
     "end": 2875
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 292,
+    "frontType": 2
+   },
+   {
+    "start": 842,
+    "end": 1325,
+    "frontType": 1
+   },
+   {
+    "start": 1900,
+    "end": 2350,
+    "frontType": 2
+   },
+   {
+    "start": 2875,
+    "end": 3400,
+    "frontType": 1
+   }
+  ],
   "slopes": [
    {
     "start": 67,
@@ -2522,6 +3370,18 @@
     "end": 799
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 350,
+    "frontType": 2
+   },
+   {
+    "start": 799,
+    "end": 1300,
+    "frontType": 1
+   }
+  ],
   "slopes": [
    {
     "start": 275,
@@ -2563,6 +3423,18 @@
     "end": 899
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 450,
+    "frontType": 2
+   },
+   {
+    "start": 899,
+    "end": 1400,
+    "frontType": 1
+   }
+  ],
   "slopes": [
    {
     "start": 375,
@@ -2602,6 +3474,18 @@
     "n": 2,
     "start": 875,
     "end": 1099
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 650,
+    "frontType": 2
+   },
+   {
+    "start": 1099,
+    "end": 1600,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -2654,6 +3538,23 @@
     "n": 4,
     "start": 1375,
     "end": 1599
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 200,
+    "frontType": 1
+   },
+   {
+    "start": 700,
+    "end": 1150,
+    "frontType": 2
+   },
+   {
+    "start": 1599,
+    "end": 2100,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -2710,6 +3611,23 @@
     "end": 2848
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 500,
+    "frontType": 1
+   },
+   {
+    "start": 1000,
+    "end": 1450,
+    "frontType": 2
+   },
+   {
+    "start": 1900,
+    "end": 2400,
+    "frontType": 1
+   }
+  ],
   "slopes": [],
   "phaseBounds": {
    "midStart": 400,
@@ -2738,6 +3656,18 @@
     "n": 2,
     "start": 550,
     "end": 788
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 300,
+    "frontType": 2
+   },
+   {
+    "start": 788,
+    "end": 1200,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -2777,6 +3707,18 @@
     "n": 2,
     "start": 750,
     "end": 988
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 500,
+    "frontType": 2
+   },
+   {
+    "start": 988,
+    "end": 1400,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -2821,6 +3763,18 @@
     "n": 3,
     "start": 950,
     "end": 1188
+   }
+  ],
+  "straights": [
+   {
+    "start": 300,
+    "end": 700,
+    "frontType": 2
+   },
+   {
+    "start": 1188,
+    "end": 1600,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -2872,6 +3826,23 @@
     "n": 4,
     "start": 1350,
     "end": 1588
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 300,
+    "frontType": 1
+   },
+   {
+    "start": 700,
+    "end": 1100,
+    "frontType": 2
+   },
+   {
+    "start": 1588,
+    "end": 2000,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -2928,6 +3899,23 @@
     "end": 1788
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 500,
+    "frontType": 1
+   },
+   {
+    "start": 900,
+    "end": 1300,
+    "frontType": 2
+   },
+   {
+    "start": 1788,
+    "end": 2200,
+    "frontType": 1
+   }
+  ],
   "slopes": [
    {
     "start": 0,
@@ -2979,6 +3967,18 @@
     "end": 790
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 400,
+    "frontType": 2
+   },
+   {
+    "start": 790,
+    "end": 1200,
+    "frontType": 1
+   }
+  ],
   "slopes": [],
   "phaseBounds": {
    "midStart": 200,
@@ -3005,6 +4005,18 @@
     "n": 2,
     "start": 800,
     "end": 990
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 600,
+    "frontType": 2
+   },
+   {
+    "start": 990,
+    "end": 1400,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -3054,6 +4066,23 @@
     "n": 4,
     "start": 1200,
     "end": 1390
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 270,
+    "frontType": 1
+   },
+   {
+    "start": 600,
+    "end": 1000,
+    "frontType": 2
+   },
+   {
+    "start": 1390,
+    "end": 1800,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -3112,6 +4141,23 @@
     "end": 1490
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 370,
+    "frontType": 1
+   },
+   {
+    "start": 700,
+    "end": 1100,
+    "frontType": 2
+   },
+   {
+    "start": 1490,
+    "end": 1900,
+    "frontType": 1
+   }
+  ],
   "slopes": [],
   "phaseBounds": {
    "midStart": 317,
@@ -3138,6 +4184,18 @@
     "n": 2,
     "start": 595,
     "end": 872
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 320,
+    "frontType": 2
+   },
+   {
+    "start": 872,
+    "end": 1200,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -3179,6 +4237,18 @@
     "end": 1072
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 520,
+    "frontType": 2
+   },
+   {
+    "start": 1072,
+    "end": 1400,
+    "frontType": 1
+   }
+  ],
   "slopes": [
    {
     "start": 320,
@@ -3216,6 +4286,18 @@
     "n": 2,
     "start": 750,
     "end": 997
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 500,
+    "frontType": 2
+   },
+   {
+    "start": 997,
+    "end": 1400,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -3262,6 +4344,18 @@
     "end": 1272
    }
   ],
+  "straights": [
+   {
+    "start": 200,
+    "end": 720,
+    "frontType": 2
+   },
+   {
+    "start": 1272,
+    "end": 1600,
+    "frontType": 1
+   }
+  ],
   "slopes": [
    {
     "start": 520,
@@ -3301,6 +4395,18 @@
     "n": 2,
     "start": 950,
     "end": 1197
+   }
+  ],
+  "straights": [
+   {
+    "start": 200,
+    "end": 700,
+    "frontType": 2
+   },
+   {
+    "start": 1197,
+    "end": 1600,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -3347,6 +4453,18 @@
     "n": 2,
     "start": 1150,
     "end": 1397
+   }
+  ],
+  "straights": [
+   {
+    "start": 400,
+    "end": 900,
+    "frontType": 2
+   },
+   {
+    "start": 1397,
+    "end": 1800,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -3403,6 +4521,23 @@
     "end": 1672
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 400,
+    "frontType": 1
+   },
+   {
+    "start": 770,
+    "end": 1120,
+    "frontType": 2
+   },
+   {
+    "start": 1672,
+    "end": 2000,
+    "frontType": 1
+   }
+  ],
   "slopes": [
    {
     "start": 970,
@@ -3452,6 +4587,23 @@
     "n": 4,
     "start": 1550,
     "end": 1797
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 400,
+    "frontType": 1
+   },
+   {
+    "start": 800,
+    "end": 1300,
+    "frontType": 2
+   },
+   {
+    "start": 1797,
+    "end": 2200,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -3508,6 +4660,23 @@
     "n": 4,
     "start": 1750,
     "end": 1997
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 600,
+    "frontType": 1
+   },
+   {
+    "start": 1000,
+    "end": 1500,
+    "frontType": 2
+   },
+   {
+    "start": 1997,
+    "end": 2400,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -3574,6 +4743,28 @@
     "n": 6,
     "start": 2350,
     "end": 2597
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 261,
+    "frontType": 2
+   },
+   {
+    "start": 761,
+    "end": 1250,
+    "frontType": 1
+   },
+   {
+    "start": 1650,
+    "end": 2100,
+    "frontType": 2
+   },
+   {
+    "start": 2597,
+    "end": 3000,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -3658,6 +4849,28 @@
     "end": 2797
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 458,
+    "frontType": 2
+   },
+   {
+    "start": 958,
+    "end": 1450,
+    "frontType": 1
+   },
+   {
+    "start": 1850,
+    "end": 2300,
+    "frontType": 2
+   },
+   {
+    "start": 2797,
+    "end": 3200,
+    "frontType": 1
+   }
+  ],
   "slopes": [
    {
     "start": 208,
@@ -3717,6 +4930,18 @@
     "end": 871
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 400,
+    "frontType": 2
+   },
+   {
+    "start": 871,
+    "end": 1200,
+    "frontType": 1
+   }
+  ],
   "slopes": [
    {
     "start": 175,
@@ -3754,6 +4979,18 @@
     "n": 2,
     "start": 825,
     "end": 1071
+   }
+  ],
+  "straights": [
+   {
+    "start": 100,
+    "end": 600,
+    "frontType": 2
+   },
+   {
+    "start": 1071,
+    "end": 1400,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -3805,6 +5042,23 @@
     "end": 1471
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 300,
+    "frontType": 1
+   },
+   {
+    "start": 600,
+    "end": 1000,
+    "frontType": 2
+   },
+   {
+    "start": 1471,
+    "end": 1800,
+    "frontType": 1
+   }
+  ],
   "slopes": [
    {
     "start": 775,
@@ -3854,6 +5108,23 @@
     "end": 1571
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 400,
+    "frontType": 1
+   },
+   {
+    "start": 700,
+    "end": 1100,
+    "frontType": 2
+   },
+   {
+    "start": 1571,
+    "end": 1900,
+    "frontType": 1
+   }
+  ],
   "slopes": [
    {
     "start": 875,
@@ -3891,6 +5162,18 @@
     "n": 2,
     "start": 550,
     "end": 844
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 250,
+    "frontType": 2
+   },
+   {
+    "start": 844,
+    "end": 1200,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -3932,6 +5215,18 @@
     "end": 1044
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 450,
+    "frontType": 2
+   },
+   {
+    "start": 1044,
+    "end": 1400,
+    "frontType": 1
+   }
+  ],
   "slopes": [
    {
     "start": 600,
@@ -3969,6 +5264,18 @@
     "n": 2,
     "start": 800,
     "end": 1127
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 450,
+    "frontType": 2
+   },
+   {
+    "start": 1127,
+    "end": 1600,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -4010,6 +5317,18 @@
     "n": 2,
     "start": 1000,
     "end": 1327
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 650,
+    "frontType": 2
+   },
+   {
+    "start": 1327,
+    "end": 1800,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -4061,6 +5380,23 @@
     "n": 4,
     "start": 1350,
     "end": 1644
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 320,
+    "frontType": 1
+   },
+   {
+    "start": 700,
+    "end": 1050,
+    "frontType": 2
+   },
+   {
+    "start": 1644,
+    "end": 2000,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -4124,6 +5460,23 @@
     "end": 1844
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 520,
+    "frontType": 1
+   },
+   {
+    "start": 900,
+    "end": 1250,
+    "frontType": 2
+   },
+   {
+    "start": 1844,
+    "end": 2200,
+    "frontType": 1
+   }
+  ],
   "slopes": [
    {
     "start": 0,
@@ -4185,6 +5538,23 @@
     "end": 1927
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 370,
+    "frontType": 1
+   },
+   {
+    "start": 750,
+    "end": 1250,
+    "frontType": 2
+   },
+   {
+    "start": 1927,
+    "end": 2400,
+    "frontType": 1
+   }
+  ],
   "slopes": [
    {
     "start": 0,
@@ -4244,6 +5614,23 @@
     "n": 4,
     "start": 1800,
     "end": 2127
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 570,
+    "frontType": 1
+   },
+   {
+    "start": 950,
+    "end": 1450,
+    "frontType": 2
+   },
+   {
+    "start": 2127,
+    "end": 2600,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -4315,6 +5702,28 @@
     "end": 2644
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 345,
+    "frontType": 2
+   },
+   {
+    "start": 939,
+    "end": 1320,
+    "frontType": 1
+   },
+   {
+    "start": 1700,
+    "end": 2050,
+    "frontType": 2
+   },
+   {
+    "start": 2644,
+    "end": 3000,
+    "frontType": 1
+   }
+  ],
   "slopes": [
    {
     "start": 495,
@@ -4366,6 +5775,18 @@
     "end": 848
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 350,
+    "frontType": 2
+   },
+   {
+    "start": 848,
+    "end": 1200,
+    "frontType": 1
+   }
+  ],
   "slopes": [
    {
     "start": 200,
@@ -4403,6 +5824,18 @@
     "n": 2,
     "start": 800,
     "end": 1048
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 550,
+    "frontType": 2
+   },
+   {
+    "start": 1048,
+    "end": 1400,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -4452,6 +5885,23 @@
     "n": 4,
     "start": 1200,
     "end": 1448
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 300,
+    "frontType": 1
+   },
+   {
+    "start": 600,
+    "end": 950,
+    "frontType": 2
+   },
+   {
+    "start": 1448,
+    "end": 1800,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -4506,6 +5956,23 @@
     "n": 4,
     "start": 1400,
     "end": 1648
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 500,
+    "frontType": 1
+   },
+   {
+    "start": 800,
+    "end": 1150,
+    "frontType": 2
+   },
+   {
+    "start": 1648,
+    "end": 2000,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -4580,6 +6047,28 @@
     "end": 2844
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 370,
+    "frontType": 2
+   },
+   {
+    "start": 1070,
+    "end": 1520,
+    "frontType": 1
+   },
+   {
+    "start": 1900,
+    "end": 2250,
+    "frontType": 2
+   },
+   {
+    "start": 2844,
+    "end": 3200,
+    "frontType": 1
+   }
+  ],
   "slopes": [
    {
     "start": 870,
@@ -4629,6 +6118,18 @@
     "end": 907
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 500,
+    "frontType": 2
+   },
+   {
+    "start": 907,
+    "end": 1200,
+    "frontType": 1
+   }
+  ],
   "slopes": [
    {
     "start": 0,
@@ -4675,6 +6176,23 @@
     "end": 1507
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 290,
+    "frontType": 1
+   },
+   {
+    "start": 700,
+    "end": 1100,
+    "frontType": 2
+   },
+   {
+    "start": 1507,
+    "end": 1800,
+    "frontType": 1
+   }
+  ],
   "slopes": [
    {
     "start": 280,
@@ -4717,6 +6235,23 @@
     "n": 4,
     "start": 1505,
     "end": 1707
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 490,
+    "frontType": 1
+   },
+   {
+    "start": 900,
+    "end": 1300,
+    "frontType": 2
+   },
+   {
+    "start": 1707,
+    "end": 2000,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -4775,6 +6310,28 @@
     "end": 2307
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 309,
+    "frontType": 2
+   },
+   {
+    "start": 719,
+    "end": 1110,
+    "frontType": 1
+   },
+   {
+    "start": 1520,
+    "end": 1900,
+    "frontType": 2
+   },
+   {
+    "start": 2307,
+    "end": 2600,
+    "frontType": 1
+   }
+  ],
   "slopes": [
    {
     "start": 1100,
@@ -4809,6 +6366,18 @@
     "n": 2,
     "start": 540,
     "end": 709
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 360,
+    "frontType": 2
+   },
+   {
+    "start": 709,
+    "end": 1000,
+    "frontType": 1
    }
   ],
   "slopes": [],
@@ -4849,6 +6418,23 @@
     "n": 4,
     "start": 1240,
     "end": 1409
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 340,
+    "frontType": 1
+   },
+   {
+    "start": 700,
+    "end": 1060,
+    "frontType": 2
+   },
+   {
+    "start": 1409,
+    "end": 1700,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -4905,6 +6491,28 @@
     "end": 2109
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 312,
+    "frontType": 2
+   },
+   {
+    "start": 672,
+    "end": 1040,
+    "frontType": 1
+   },
+   {
+    "start": 1400,
+    "end": 1760,
+    "frontType": 2
+   },
+   {
+    "start": 2109,
+    "end": 2400,
+    "frontType": 1
+   }
+  ],
   "slopes": [],
   "phaseBounds": {
    "midStart": 400,
@@ -4931,6 +6539,18 @@
     "n": 2,
     "start": 650,
     "end": 814
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 500,
+    "frontType": 2
+   },
+   {
+    "start": 814,
+    "end": 1200,
+    "frontType": 1
    }
   ],
   "slopes": [],
@@ -4974,6 +6594,23 @@
     "end": 1414
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 300,
+    "frontType": 1
+   },
+   {
+    "start": 600,
+    "end": 1100,
+    "frontType": 2
+   },
+   {
+    "start": 1414,
+    "end": 1800,
+    "frontType": 1
+   }
+  ],
   "slopes": [],
   "phaseBounds": {
    "midStart": 300,
@@ -5014,6 +6651,23 @@
     "end": 1614
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 500,
+    "frontType": 1
+   },
+   {
+    "start": 800,
+    "end": 1300,
+    "frontType": 2
+   },
+   {
+    "start": 1614,
+    "end": 2000,
+    "frontType": 1
+   }
+  ],
   "slopes": [],
   "phaseBounds": {
    "midStart": 333,
@@ -5042,6 +6696,23 @@
     "n": 2,
     "start": 1417,
     "end": 1617
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 1000,
+    "frontType": 2
+   },
+   {
+    "start": 1617,
+    "end": 1867,
+    "frontType": 3
+   },
+   {
+    "start": 1867,
+    "end": 2400,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -5101,6 +6772,23 @@
     "end": 1100
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 300,
+    "frontType": 1
+   },
+   {
+    "start": 500,
+    "end": 900,
+    "frontType": 2
+   },
+   {
+    "start": 1100,
+    "end": 1400,
+    "frontType": 1
+   }
+  ],
   "slopes": [],
   "phaseBounds": {
    "midStart": 233,
@@ -5139,6 +6827,23 @@
     "n": 4,
     "start": 1200,
     "end": 1300
+   }
+  ],
+  "straights": [
+   {
+    "start": 100,
+    "end": 500,
+    "frontType": 1
+   },
+   {
+    "start": 700,
+    "end": 1100,
+    "frontType": 2
+   },
+   {
+    "start": 1300,
+    "end": 1600,
+    "frontType": 1
    }
   ],
   "slopes": [],
@@ -5191,6 +6896,28 @@
     "end": 1800
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 400,
+    "frontType": 2
+   },
+   {
+    "start": 600,
+    "end": 1000,
+    "frontType": 1
+   },
+   {
+    "start": 1200,
+    "end": 1600,
+    "frontType": 2
+   },
+   {
+    "start": 1800,
+    "end": 2100,
+    "frontType": 1
+   }
+  ],
   "slopes": [],
   "phaseBounds": {
    "midStart": 350,
@@ -5220,6 +6947,18 @@
     "n": 2,
     "start": 540,
     "end": 692
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 370,
+    "frontType": 2
+   },
+   {
+    "start": 692,
+    "end": 1000,
+    "frontType": 1
    }
   ],
   "slopes": [],
@@ -5262,6 +7001,23 @@
     "end": 1292
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 260,
+    "frontType": 1
+   },
+   {
+    "start": 600,
+    "end": 970,
+    "frontType": 2
+   },
+   {
+    "start": 1292,
+    "end": 1600,
+    "frontType": 1
+   }
+  ],
   "slopes": [],
   "phaseBounds": {
    "midStart": 267,
@@ -5298,6 +7054,23 @@
     "n": 4,
     "start": 1340,
     "end": 1492
+   }
+  ],
+  "straights": [
+   {
+    "start": 90,
+    "end": 460,
+    "frontType": 1
+   },
+   {
+    "start": 800,
+    "end": 1170,
+    "frontType": 2
+   },
+   {
+    "start": 1492,
+    "end": 1800,
+    "frontType": 1
    }
   ],
   "slopes": [],
@@ -5348,6 +7121,28 @@
     "end": 2092
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 370,
+    "frontType": 2
+   },
+   {
+    "start": 690,
+    "end": 1060,
+    "frontType": 1
+   },
+   {
+    "start": 1400,
+    "end": 1770,
+    "frontType": 2
+   },
+   {
+    "start": 2092,
+    "end": 2400,
+    "frontType": 1
+   }
+  ],
   "slopes": [],
   "phaseBounds": {
    "midStart": 400,
@@ -5376,6 +7171,18 @@
     "n": 2,
     "start": 700,
     "end": 900
+   }
+  ],
+  "straights": [
+   {
+    "start": 100,
+    "end": 500,
+    "frontType": 2
+   },
+   {
+    "start": 900,
+    "end": 1200,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -5422,6 +7229,18 @@
     "n": 2,
     "start": 1100,
     "end": 1300
+   }
+  ],
+  "straights": [
+   {
+    "start": 500,
+    "end": 900,
+    "frontType": 2
+   },
+   {
+    "start": 1300,
+    "end": 1600,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -5481,6 +7300,23 @@
     "end": 1500
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 300,
+    "frontType": 1
+   },
+   {
+    "start": 700,
+    "end": 1100,
+    "frontType": 2
+   },
+   {
+    "start": 1500,
+    "end": 1800,
+    "frontType": 1
+   }
+  ],
   "slopes": [
    {
     "start": 0,
@@ -5536,6 +7372,23 @@
     "n": 4,
     "start": 1500,
     "end": 1700
+   }
+  ],
+  "straights": [
+   {
+    "start": 100,
+    "end": 500,
+    "frontType": 1
+   },
+   {
+    "start": 900,
+    "end": 1300,
+    "frontType": 2
+   },
+   {
+    "start": 1700,
+    "end": 2000,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -5599,6 +7452,23 @@
     "end": 1700
    }
   ],
+  "straights": [
+   {
+    "start": 100,
+    "end": 500,
+    "frontType": 1
+   },
+   {
+    "start": 900,
+    "end": 1300,
+    "frontType": 2
+   },
+   {
+    "start": 1700,
+    "end": 2000,
+    "frontType": 1
+   }
+  ],
   "slopes": [
    {
     "start": 175,
@@ -5650,6 +7520,18 @@
     "end": 700
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 400,
+    "frontType": 2
+   },
+   {
+    "start": 700,
+    "end": 1000,
+    "frontType": 1
+   }
+  ],
   "slopes": [],
   "phaseBounds": {
    "midStart": 167,
@@ -5689,6 +7571,23 @@
     "n": 4,
     "start": 1150,
     "end": 1300
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 300,
+    "frontType": 1
+   },
+   {
+    "start": 600,
+    "end": 1000,
+    "frontType": 2
+   },
+   {
+    "start": 1300,
+    "end": 1600,
+    "frontType": 1
    }
   ],
   "slopes": [],
@@ -5734,6 +7633,23 @@
     "n": 5,
     "start": 1550,
     "end": 1700
+   }
+  ],
+  "straights": [
+   {
+    "start": 300,
+    "end": 700,
+    "frontType": 1
+   },
+   {
+    "start": 1000,
+    "end": 1400,
+    "frontType": 2
+   },
+   {
+    "start": 1700,
+    "end": 2000,
+    "frontType": 1
    }
   ],
   "slopes": [
@@ -5788,6 +7704,23 @@
     "end": 2100
    }
   ],
+  "straights": [
+   {
+    "start": 700,
+    "end": 1100,
+    "frontType": 1
+   },
+   {
+    "start": 1400,
+    "end": 1800,
+    "frontType": 2
+   },
+   {
+    "start": 2100,
+    "end": 2400,
+    "frontType": 1
+   }
+  ],
   "slopes": [
    {
     "start": 350,
@@ -5825,6 +7758,18 @@
     "end": 890
    }
   ],
+  "straights": [
+   {
+    "start": 90,
+    "end": 500,
+    "frontType": 2
+   },
+   {
+    "start": 890,
+    "end": 1200,
+    "frontType": 1
+   }
+  ],
   "slopes": [],
   "phaseBounds": {
    "midStart": 200,
@@ -5854,6 +7799,18 @@
     "n": 2,
     "start": 895,
     "end": 1090
+   }
+  ],
+  "straights": [
+   {
+    "start": 290,
+    "end": 700,
+    "frontType": 2
+   },
+   {
+    "start": 1090,
+    "end": 1400,
+    "frontType": 1
    }
   ],
   "slopes": [],
@@ -5894,6 +7851,23 @@
     "n": 4,
     "start": 1145,
     "end": 1340
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 150,
+    "frontType": 1
+   },
+   {
+    "start": 540,
+    "end": 950,
+    "frontType": 2
+   },
+   {
+    "start": 1340,
+    "end": 1650,
+    "frontType": 1
    }
   ],
   "slopes": [],
@@ -5937,6 +7911,23 @@
     "end": 1490
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 300,
+    "frontType": 1
+   },
+   {
+    "start": 690,
+    "end": 1100,
+    "frontType": 2
+   },
+   {
+    "start": 1490,
+    "end": 1800,
+    "frontType": 1
+   }
+  ],
   "slopes": [],
   "phaseBounds": {
    "midStart": 300,
@@ -5977,6 +7968,23 @@
     "end": 1690
    }
   ],
+  "straights": [
+   {
+    "start": 90,
+    "end": 500,
+    "frontType": 1
+   },
+   {
+    "start": 890,
+    "end": 1300,
+    "frontType": 2
+   },
+   {
+    "start": 1690,
+    "end": 2000,
+    "frontType": 1
+   }
+  ],
   "slopes": [],
   "phaseBounds": {
    "midStart": 333,
@@ -6006,6 +8014,18 @@
     "n": 2,
     "start": 566,
     "end": 751
+   }
+  ],
+  "straights": [
+   {
+    "start": 31,
+    "end": 381,
+    "frontType": 2
+   },
+   {
+    "start": 751,
+    "end": 1000,
+    "frontType": 1
    }
   ],
   "slopes": [],
@@ -6047,6 +8067,23 @@
     "n": 4,
     "start": 1166,
     "end": 1351
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 261,
+    "frontType": 1
+   },
+   {
+    "start": 631,
+    "end": 981,
+    "frontType": 2
+   },
+   {
+    "start": 1351,
+    "end": 1600,
+    "frontType": 1
    }
   ],
   "slopes": [],
@@ -6097,6 +8134,28 @@
     "n": 6,
     "start": 1766,
     "end": 1951
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 141,
+    "frontType": 2
+   },
+   {
+    "start": 511,
+    "end": 861,
+    "frontType": 1
+   },
+   {
+    "start": 1231,
+    "end": 1581,
+    "frontType": 2
+   },
+   {
+    "start": 1951,
+    "end": 2200,
+    "frontType": 1
    }
   ],
   "slopes": [],
@@ -6150,6 +8209,28 @@
     "end": 2151
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 341,
+    "frontType": 2
+   },
+   {
+    "start": 711,
+    "end": 1061,
+    "frontType": 1
+   },
+   {
+    "start": 1431,
+    "end": 1781,
+    "frontType": 2
+   },
+   {
+    "start": 2151,
+    "end": 2400,
+    "frontType": 1
+   }
+  ],
   "slopes": [],
   "phaseBounds": {
    "midStart": 400,
@@ -6181,6 +8262,18 @@
     "end": 920
    }
   ],
+  "straights": [
+   {
+    "start": 120,
+    "end": 500,
+    "frontType": 2
+   },
+   {
+    "start": 920,
+    "end": 1200,
+    "frontType": 1
+   }
+  ],
   "slopes": [],
   "phaseBounds": {
    "midStart": 200,
@@ -6210,6 +8303,18 @@
     "n": 2,
     "start": 910,
     "end": 1120
+   }
+  ],
+  "straights": [
+   {
+    "start": 320,
+    "end": 700,
+    "frontType": 2
+   },
+   {
+    "start": 1120,
+    "end": 1400,
+    "frontType": 1
    }
   ],
   "slopes": [],
@@ -6250,6 +8355,23 @@
     "n": 4,
     "start": 1170,
     "end": 1380
+   }
+  ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 160,
+    "frontType": 1
+   },
+   {
+    "start": 580,
+    "end": 960,
+    "frontType": 2
+   },
+   {
+    "start": 1380,
+    "end": 1660,
+    "frontType": 1
    }
   ],
   "slopes": [],
@@ -6293,6 +8415,23 @@
     "end": 1520
    }
   ],
+  "straights": [
+   {
+    "start": 0,
+    "end": 300,
+    "frontType": 1
+   },
+   {
+    "start": 720,
+    "end": 1100,
+    "frontType": 2
+   },
+   {
+    "start": 1520,
+    "end": 1800,
+    "frontType": 1
+   }
+  ],
   "slopes": [],
   "phaseBounds": {
    "midStart": 300,
@@ -6331,6 +8470,23 @@
     "n": 4,
     "start": 1510,
     "end": 1720
+   }
+  ],
+  "straights": [
+   {
+    "start": 120,
+    "end": 500,
+    "frontType": 1
+   },
+   {
+    "start": 920,
+    "end": 1300,
+    "frontType": 2
+   },
+   {
+    "start": 1720,
+    "end": 2000,
+    "frontType": 1
    }
   ],
   "slopes": [],

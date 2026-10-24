@@ -26,33 +26,50 @@ const STAT_LABEL: Record<string, string> = { speed: '速度', stamina: '耐力',
 export function describeCondition(c: SkillConfig['condition']): string {
   const seg = SEGMENT_LABEL[c.kind];
   if (seg !== undefined && 'spurt' in c && c.spurt === true) {
-    return `末脚内首个${seg}(末脚为动态起点)`;
+    return `末脚内${seg}(末脚为动态起点)`;
   }
+  const pctWin = 'withinPct' in c && c.withinPct !== undefined ? `(${c.withinPct[0]}~${c.withinPct[1]}%处)` : '';
+  const leftWin = 'withinLeftM' in c && c.withinLeftM !== undefined ? `(剩${c.withinLeftM[0]}~${c.withinLeftM[1]}m)` : '';
+  const win = pctWin !== '' ? pctWin : leftWin;
   switch (c.kind) {
     case 'raceStart': return '起步时';
     case 'lastSpurt': return '末脚期间(动态起点)';
-    case 'phase': return `仅${PHASE_LABEL[c.phase]}`;
+    case 'phase': {
+      const part = c.part === 'firstHalf' ? '前半' : c.part === 'laterHalf' ? '后半' : c.part === 'firstQuarter' ? '前四分之一' : '';
+      return `${PHASE_LABEL[c.phase]}${part}`;
+    }
     case 'phaseAfter': return `${PHASE_LABEL[c.phase]}起`;
-    case 'cornerN': return `第${c.n}个弯道`;
-    case 'cornerFastest': return `首个弯道${c.phaseFilter !== undefined ? `(限${PHASE_LABEL[c.phaseFilter]})` : ''}`;
-    case 'finalCorner': return '最终弯道';
+    case 'cornerN': return `第${c.n}个弯道${win}`;
+    case 'cornerFastest': return `弯道${win}`;
+    case 'finalCorner': return c.part === 'laterHalf' ? '最终弯道后半' : '最终弯道';
     case 'finalCornerOnward': return '最终弯道及往后';
     case 'thirdCornerFromEnd': return '最终第3弯道';
     case 'lateCorner': return '终盘弯道';
     case 'midCorner': return '中盘弯道';
-    case 'finalStraight': return '最终直线';
-    case 'straightFastest': return `首个直线${c.phaseFilter !== undefined ? `(限${PHASE_LABEL[c.phaseFilter]})` : ''}`;
+    case 'finalStraight': return `最终直线${win}`;
+    case 'straightFastest': return `直线${win}`;
+    case 'backStraight': return `看台对面直线${win}`;
     case 'lateStraight': return '终盘直线';
-    case 'uphillFastest': return `首个上坡${c.phaseFilter !== undefined ? `(限${PHASE_LABEL[c.phaseFilter]})` : ''}`;
-    case 'downhillFastest': return `首个下坡${c.phaseFilter !== undefined ? `(限${PHASE_LABEL[c.phaseFilter]})` : ''}`;
+    case 'uphillFastest': return `上坡${win}`;
+    case 'downhillFastest': return `下坡${win}`;
     case 'distanceRun': return `行驶${c.meters}m后(${BASE_LABEL[c.base]})`;
-    case 'distanceLeft': return `剩余${c.meters}m时`;
+    case 'distanceLeft':
+      return c.fromMeters === c.toMeters
+        ? `剩余${c.fromMeters}m时`
+        : c.fromMeters === 0
+          ? `剩余≤${c.toMeters}m`
+          : `剩余${c.fromMeters}~${c.toMeters}m`;
+    case 'distanceRate': {
+      const from = Math.round(c.fromPct);
+      const to = Math.round(c.toPct);
+      return from === to ? `行进${from}%处` : `行进${from}~${Math.min(to, 100)}%`;
+    }
     case 'elapsedSec': return `开赛${c.seconds}s后`;
     case 'positionPct': return `地点${c.pct}%`;
   }
 }
 
-/** 效果列表 → 中文短描述(含基准持续时间) */
+/** 效果列表 → 中文短描述(含基准持续时间与冷却) */
 export function describeEffects(skill: SkillConfig): string {
   const parts = skill.effects.map(e => {
     switch (e.type) {
@@ -66,7 +83,8 @@ export function describeEffects(skill: SkillConfig): string {
     }
   });
   const dur = skill.durationSec === null ? '' : `·${skill.durationSec}s`;
-  return parts.join(' / ') + dur;
+  const cd = skill.cooldownSec != null && skill.cooldownSec > 0 ? `·冷却${skill.cooldownSec}s` : '';
+  return parts.join(' / ') + dur + cd;
 }
 
 export interface UiConfig {

@@ -8,6 +8,8 @@ export interface AblationRow {
   readonly activated: boolean;
   readonly activatedAtMeter: number | null;
   readonly activatedAtSec: number | null;
+  /** 发动次数(带冷却的技能如 弧线大师 可逐弯道多次发动) */
+  readonly activationCount: number;
   /** 去掉该技能后完赛变慢的秒数;>0 表示该技能带来正收益 */
   readonly deltaSec: number;
   /** 距离收益(米),按 Δ时间 × 末速近似 */
@@ -40,15 +42,16 @@ export function ablate(course: Course, runner: RunnerConfig): AblationReport {
       ...runner,
       skills: runner.skills.filter(s => s.id !== skill.id),
     });
-    const act = full.activations.find(a => a.skillId === skill.id);
+    const acts = full.activations.filter(a => a.skillId === skill.id);
     const deltaSec = without.finishTimeSec - full.finishTimeSec;
     const deltaMeter = deltaSec * endV;
     return {
       skillId: skill.id,
       name: skill.name,
-      activated: act !== undefined,
-      activatedAtMeter: act?.atMeter ?? null,
-      activatedAtSec: act?.atSec ?? null,
+      activated: acts.length > 0,
+      activatedAtMeter: acts[0]?.atMeter ?? null,
+      activatedAtSec: acts[0]?.atSec ?? null,
+      activationCount: acts.length,
       deltaSec,
       deltaMeter,
       deltaBody: deltaMeter / BODY_LENGTH_METERS,

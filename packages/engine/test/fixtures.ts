@@ -19,6 +19,14 @@ export const TOKYO_TURF_2400: Course = {
     { n: 4, start: 1760, end: 1980 },
   ],
   slopes: [{ start: 1250, end: 1500, gradient: -1.5 }],
+  // 直线段 frontType:1=看台前(正面)、2=看台对面(与 course_data.json 同源)
+  straights: [
+    { start: 0, end: 160, frontType: 1 },
+    { start: 420, end: 620, frontType: 2 },
+    { start: 830, end: 1230, frontType: 2 },
+    { start: 1470, end: 1760, frontType: 1 },
+    { start: 1980, end: 2400, frontType: 1 },
+  ],
   // TODO(calibration): 阶段分界为占位
   phaseBounds: { midStart: 480, lateStart: 1440, finalStart: 1920 },
   baseSpeed: 19.6,

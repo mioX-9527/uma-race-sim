@@ -51,6 +51,10 @@ const out = Object.entries(raw).map(([courseId, c]) => {
     corners: c.corners
       .map((x, i) => ({ n: i + 1, start: Math.round(x.start), end: Math.round(x.start + x.length) }))
       .sort((a, b) => a.start - b.start),
+    // 直线段(含 frontType:1=看台前/正面直线、2=看台对面直线,对应触发代码 straight_front_type)
+    straights: (c.straights ?? [])
+      .map(x => ({ start: Math.round(x.start), end: Math.round(x.end), frontType: x.frontType }))
+      .sort((a, b) => a.start - b.start),
     slopes: c.slopes
       .map(x => ({
         start: Math.round(x.start),

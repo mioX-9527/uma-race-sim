@@ -107,7 +107,10 @@ export function simulate(course: Course, runner: RunnerConfig): SimResult {
   let exhaustedAtMeter: number | null = null;
   const buffs: Buff[] = [];
   const activations: Activation[] = [];
+  /** 一次性技能的已发动标记(冷却缺失或 ≥ 一场最长冷却 500s) */
   const activated = new Set<string>();
+  /** 带冷却技能的下次可发动时刻(秒) */
+  const readyAt = new Map<string, number>();
 
   const record = (): void => {
     tArr.push(t);
@@ -187,12 +190,15 @@ export function simulate(course: Course, runner: RunnerConfig): SimResult {
     // ---- 技能发动 ----
     const frame: FrameState = { t, x, phase, isSpurt: spurtOn };
     for (const s of runner.skills) {
-      if (activated.has(s.id) || s.precision === 'unsupported') continue;
+      if (s.precision === 'unsupported') continue;
+      const once = s.cooldownSec === null || s.cooldownSec === undefined;
+      if (once ? activated.has(s.id) : (readyAt.get(s.id) ?? 0) > t) continue;
       if (s.restriction !== undefined && !restrictionSatisfied(s.restriction, runner, course)) continue;
       const hit = activationRegions(s.condition, course).some(r => inRegion(r, x));
       if (!hit) continue;
       if (!dynamicSatisfied(s.condition, frame)) continue;
-      activated.add(s.id);
+      if (once) activated.add(s.id);
+      else readyAt.set(s.id, t + s.cooldownSec);
       activations.push({ skillId: s.id, name: s.name, atSec: t, atMeter: x, precision: s.precision });
       const dur = s.durationSec !== null && s.durationSec > 0 ? s.durationSec * distScale : 0;
       if (dur > 0) buffs.push({ skill: s, untilSec: t + dur });

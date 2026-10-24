@@ -22,6 +22,13 @@ export interface Slope {
   readonly gradient: number;
 }
 
+/** 直线段(弯道之间的路段);frontType:1=看台前(正面)直线、2=看台对面直线(触发代码 straight_front_type) */
+export interface Straight {
+  readonly start: number;
+  readonly end: number;
+  readonly frontType: number;
+}
+
 export interface Course {
   readonly id: string;
   readonly name: string;
@@ -32,6 +39,7 @@ export interface Course {
   readonly distanceType?: 'short' | 'mile' | 'mid' | 'long';
   readonly corners: readonly Corner[];
   readonly slopes: readonly Slope[];
+  readonly straights?: readonly Straight[];
   /** 阶段分界(米);按 中盘=1/6、终盘=2/3、最终盘=5/6(解包公式) */
   readonly phaseBounds: {
     readonly midStart: number;
@@ -83,30 +91,43 @@ export type SkillEffect =
 export type ConditionBase = 'start' | 'midStart' | 'lateStart' | 'finalStart';
 
 /**
- * 发动条件(v0.1 精确层可静态解析的 24 种中的核心集;
- * 依赖他马的条件(序位/累积时间/被阻挡)属近似层,由数据侧换算后进入本枚举或标记 approx/unsupported)。
+ * 发动条件。精确层来源为 BWIKI「模块:技能数据库内容」的游戏解包触发代码
+ * (如 running_style==4&is_lastspurt==1&corner==0),区段类条件可附加
+ * 行进距离百分比 / 剩余距离窗口(withinPct / withinLeftM)对区段做联合裁剪。
  */
+interface RegionExtras {
+  readonly withinPct?: readonly [number, number];
+  readonly withinLeftM?: readonly [number, number];
+  /** 处于末脚(最终冲刺)状态时才可发动(触发代码 is_lastspurt==1) */
+  readonly spurt?: boolean;
+}
+
 export type SkillCondition =
   | { readonly kind: 'raceStart' }
-  | { readonly kind: 'phase'; readonly phase: PhaseId }
+  | ({ readonly kind: 'phase'; readonly phase: PhaseId; readonly part?: 'firstHalf' | 'laterHalf' | 'firstQuarter' } & RegionExtras)
   | { readonly kind: 'phaseAfter'; readonly phase: PhaseId }
-  | { readonly kind: 'cornerN'; readonly n: number }
-  | { readonly kind: 'cornerFastest'; readonly phaseFilter?: PhaseId; readonly spurt?: boolean }
-  | { readonly kind: 'finalCorner' }
+  | ({ readonly kind: 'cornerN'; readonly n: number } & RegionExtras)
+  | ({ readonly kind: 'cornerFastest'; readonly phaseFilter?: PhaseId; readonly spurt?: boolean } & RegionExtras)
+  | ({ readonly kind: 'finalCorner'; readonly part?: 'laterHalf' } & RegionExtras)
   /** 最终弯道及往后(最终弯道起点直至终点) */
   | { readonly kind: 'finalCornerOnward' }
   | { readonly kind: 'thirdCornerFromEnd' }
   | { readonly kind: 'lateCorner' }
   | { readonly kind: 'midCorner' }
-  | { readonly kind: 'finalStraight' }
-  | { readonly kind: 'straightFastest'; readonly phaseFilter?: PhaseId; readonly spurt?: boolean }
+  | ({ readonly kind: 'finalStraight' } & RegionExtras)
+  | ({ readonly kind: 'straightFastest'; readonly phaseFilter?: PhaseId; readonly spurt?: boolean } & RegionExtras)
+  /** 看台对面的直线(触发代码 straight_front_type==2) */
+  | ({ readonly kind: 'backStraight' } & RegionExtras)
   | { readonly kind: 'lateStraight' }
-  | { readonly kind: 'uphillFastest'; readonly phaseFilter?: PhaseId; readonly spurt?: boolean }
-  | { readonly kind: 'downhillFastest'; readonly phaseFilter?: PhaseId; readonly spurt?: boolean }
+  | ({ readonly kind: 'uphillFastest'; readonly phaseFilter?: PhaseId; readonly spurt?: boolean } & RegionExtras)
+  | ({ readonly kind: 'downhillFastest'; readonly phaseFilter?: PhaseId; readonly spurt?: boolean } & RegionExtras)
   /** 末脚(最终冲刺)期间:动态起点(体力预算解算,≥ 终盘分界),非固定 5/6 */
   | { readonly kind: 'lastSpurt' }
   | { readonly kind: 'distanceRun'; readonly meters: number; readonly base: ConditionBase }
-  | { readonly kind: 'distanceLeft'; readonly meters: number }
+  /** 剩余距离落在 [fromMeters, toMeters] 区间(点条件时 from === to) */
+  | ({ readonly kind: 'distanceLeft'; readonly fromMeters: number; readonly toMeters: number } & RegionExtras)
+  /** 行进距离百分比落在 [fromPct, toPct] 区间(触发代码 distance_rate) */
+  | ({ readonly kind: 'distanceRate'; readonly fromPct: number; readonly toPct: number } & RegionExtras)
   | { readonly kind: 'elapsedSec'; readonly seconds: number; readonly base: ConditionBase }
   | { readonly kind: 'positionPct'; readonly pct: number };
 
@@ -118,6 +139,11 @@ export interface SkillConfig {
   readonly effects: readonly SkillEffect[];
   /** 效果持续时间(秒);null=瞬时(heal 等) */
   readonly durationSec: number | null;
+  /**
+   * 冷却时间(秒),来自解包 float_cooldown_time;<600s 时允许同场再次发动
+   * (如 弧线大师 冷却 30s,每个弯道各发动一次);null=一次性技能
+   */
+  readonly cooldownSec?: number | null;
   readonly condition: SkillCondition;
   /** 脚质/场地/赛场等装配型限制 */
   readonly restriction?: SkillRestriction;
@@ -125,7 +151,7 @@ export interface SkillConfig {
   readonly wisdomScaled: boolean;
 }
 
-/** 场地状态:0=良 1=好 2=稍重 3=不良 */
+/** 场地状态:0=良 1=稍重 2=重 3=不良(触发代码 ground_condition 1良~4不良,映射为代码−1) */
 export type GroundCondition = 0 | 1 | 2 | 3;
 
 /** 技能的脚质/场地/赛场等装配型限制(不满足则整场不发动) */
@@ -138,6 +164,9 @@ export interface SkillRestriction {
   readonly grounds?: readonly GroundCondition[];
   /** 精确比赛距离(米) */
   readonly distances?: readonly number[];
+  /** 比赛距离范围(米,触发代码 course_distance>=/<=) */
+  readonly distanceMin?: number;
+  readonly distanceMax?: number;
   /** 原始限制文本(展示用) */
   readonly rawText?: string;
 }

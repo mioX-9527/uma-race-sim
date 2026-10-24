@@ -69,6 +69,37 @@ describe('技能发动', () => {
     expect(res.activations).toHaveLength(0);
   });
 
+  test('冷却 30s 的弯道技能(弧线大师型)逐弯道多次发动;无冷却技能只发动一次', () => {
+    const maestro = {
+      ...speedSkill('maestro', 0.35, 2.4, { condition: { kind: 'cornerFastest' } as never }),
+      cooldownSec: 30,
+    };
+    const once = speedSkill('once', 0.35, 2.4, { condition: { kind: 'cornerFastest' } as never });
+    const res = simulate(C, freshRunner([maestro, once]));
+    const maestroFires = res.activations.filter(a => a.skillId === 'maestro');
+    const onceFires = res.activations.filter(a => a.skillId === 'once');
+    // 东京 2400 四个弯道(160/620/1230/1760),30s 冷却不足以全部跳过 → 至少 2 次
+    expect(maestroFires.length).toBeGreaterThanOrEqual(2);
+    expect(onceFires).toHaveLength(1);
+    // 每次发动都在某个弯道区内
+    for (const a of maestroFires) {
+      expect(C.corners.some(c => a.atMeter >= c.start && a.atMeter <= c.end)).toBe(true);
+    }
+  });
+
+  test('多效果槽技能(速度+加速度)同时生效', () => {
+    const combo = {
+      ...speedSkill('combo', 0, 3, { condition: { kind: 'phase', phase: 3 } as never }),
+      effects: [
+        { type: 'targetSpeed' as const, value: 0.3 },
+        { type: 'acceleration' as const, value: 0.4 },
+      ],
+    };
+    const res = simulate(C, freshRunner([combo]));
+    expect(res.activations).toHaveLength(1);
+    expect(res.finishTimeSec).toBeLessThan(simulate(C, freshRunner()).finishTimeSec);
+  });
+
   test('回体技能可推迟体力归零点', () => {
     const healSkill = {
       ...speedSkill('heal', 0, 0),

@@ -21,6 +21,12 @@ export const slopeSchema = z.object({
   gradient: z.number(),
 });
 
+export const straightSchema = z.object({
+  start: nonneg,
+  end: z.number().positive(),
+  frontType: z.number().int(),
+});
+
 export const courseSchema = z.object({
   id: z.string().min(1),
   name: z.string().min(1),
@@ -30,6 +36,7 @@ export const courseSchema = z.object({
   distanceType: z.enum(['short', 'mile', 'mid', 'long']).optional(),
   corners: z.array(cornerSchema),
   slopes: z.array(slopeSchema),
+  straights: z.array(straightSchema).optional(),
   phaseBounds: z.object({ midStart: nonneg, lateStart: nonneg, finalStart: nonneg }),
   baseSpeed: z.number().positive().optional(),
   courseSetStatus: z.array(passiveStat).optional(),
@@ -37,6 +44,13 @@ export const courseSchema = z.object({
 
 const conditionBase = z.enum(['start', 'midStart', 'lateStart', 'finalStart']);
 const phaseId = z.union([z.literal(0), z.literal(1), z.literal(2), z.literal(3)]);
+const phasePart = z.enum(['firstHalf', 'laterHalf', 'firstQuarter']);
+/** 区段类条件与 distance_rate / remain_distance 联用时的窗口裁剪(触发代码语法) */
+const regionExtras = {
+  withinPct: z.tuple([z.number(), z.number()]).optional(),
+  withinLeftM: z.tuple([z.number(), z.number()]).optional(),
+  spurt: z.boolean().optional(),
+};
 
 const restrictionSchema = z.object({
   tactics: z.array(z.enum(['nige', 'senko', 'sashi', 'oikomi'])).optional(),
@@ -45,28 +59,32 @@ const restrictionSchema = z.object({
   venues: z.array(z.string()).optional(),
   grounds: z.array(z.union([z.literal(0), z.literal(1), z.literal(2), z.literal(3)])).optional(),
   distances: z.array(z.number().int().positive()).optional(),
+  distanceMin: z.number().int().positive().optional(),
+  distanceMax: z.number().int().positive().optional(),
   rawText: z.string().optional(),
 });
 
 export const skillConditionSchema = z.discriminatedUnion('kind', [
   z.object({ kind: z.literal('raceStart') }),
-  z.object({ kind: z.literal('phase'), phase: z.union([z.literal(0), z.literal(1), z.literal(2), z.literal(3)]) }),
-  z.object({ kind: z.literal('phaseAfter'), phase: z.union([z.literal(0), z.literal(1), z.literal(2), z.literal(3)]) }),
-  z.object({ kind: z.literal('cornerN'), n: z.number().int().positive() }),
-  z.object({ kind: z.literal('cornerFastest'), phaseFilter: phaseId.optional(), spurt: z.boolean().optional() }),
-  z.object({ kind: z.literal('finalCorner') }),
+  z.object({ kind: z.literal('phase'), phase: phaseId, part: phasePart.optional() }).extend(regionExtras),
+  z.object({ kind: z.literal('phaseAfter'), phase: phaseId }),
+  z.object({ kind: z.literal('cornerN'), n: z.number().int().positive() }).extend(regionExtras),
+  z.object({ kind: z.literal('cornerFastest'), phaseFilter: phaseId.optional(), spurt: z.boolean().optional() }).extend(regionExtras),
+  z.object({ kind: z.literal('finalCorner'), part: z.literal('laterHalf').optional() }).extend(regionExtras),
   z.object({ kind: z.literal('finalCornerOnward') }),
   z.object({ kind: z.literal('thirdCornerFromEnd') }),
   z.object({ kind: z.literal('lateCorner') }),
   z.object({ kind: z.literal('midCorner') }),
-  z.object({ kind: z.literal('finalStraight') }),
-  z.object({ kind: z.literal('straightFastest'), phaseFilter: phaseId.optional(), spurt: z.boolean().optional() }),
+  z.object({ kind: z.literal('finalStraight') }).extend(regionExtras),
+  z.object({ kind: z.literal('straightFastest'), phaseFilter: phaseId.optional(), spurt: z.boolean().optional() }).extend(regionExtras),
+  z.object({ kind: z.literal('backStraight') }).extend(regionExtras),
   z.object({ kind: z.literal('lateStraight') }),
-  z.object({ kind: z.literal('uphillFastest'), phaseFilter: phaseId.optional(), spurt: z.boolean().optional() }),
-  z.object({ kind: z.literal('downhillFastest'), phaseFilter: phaseId.optional(), spurt: z.boolean().optional() }),
+  z.object({ kind: z.literal('uphillFastest'), phaseFilter: phaseId.optional(), spurt: z.boolean().optional() }).extend(regionExtras),
+  z.object({ kind: z.literal('downhillFastest'), phaseFilter: phaseId.optional(), spurt: z.boolean().optional() }).extend(regionExtras),
   z.object({ kind: z.literal('lastSpurt') }),
   z.object({ kind: z.literal('distanceRun'), meters: z.number().positive(), base: conditionBase }),
-  z.object({ kind: z.literal('distanceLeft'), meters: z.number().positive() }),
+  z.object({ kind: z.literal('distanceLeft'), fromMeters: nonneg, toMeters: z.number().positive() }).extend(regionExtras),
+  z.object({ kind: z.literal('distanceRate'), fromPct: nonneg, toPct: z.number().positive() }).extend(regionExtras),
   z.object({ kind: z.literal('elapsedSec'), seconds: z.number().positive(), base: conditionBase }),
   z.object({ kind: z.literal('positionPct'), pct: z.number().min(0).max(100) }),
 ]);
@@ -91,6 +109,8 @@ export const skillSchema = z.object({
   precision: z.enum(['precise', 'approx', 'unsupported']),
   effects: z.array(skillEffectSchema).min(1),
   durationSec: z.number().positive().nullable(),
+  /** 冷却时间(秒);<600 时引擎允许同场再次发动,null/缺省=一次性 */
+  cooldownSec: z.number().positive().nullable().optional(),
   condition: skillConditionSchema,
   restriction: restrictionSchema.optional(),
   /** 条件限制原始描述(装配时已过滤,数据层保留原始描述) */

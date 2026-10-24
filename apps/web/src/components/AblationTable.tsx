@@ -43,7 +43,13 @@ export function AblationTable({ report }: { report: AblationReport }): JSX.Eleme
                     '—'
                   )}
                 </td>
-                <td>{r.activatedAtMeter === null ? '—' : `${Math.round(r.activatedAtMeter)}m`}</td>
+                <td>
+                  {r.activatedAtMeter === null
+                    ? '—'
+                    : r.activationCount > 1
+                      ? `${Math.round(r.activatedAtMeter)}m ×${r.activationCount}次`
+                      : `${Math.round(r.activatedAtMeter)}m`}
+                </td>
                 <td>{r.activatedAtSec === null ? '—' : `${r.activatedAtSec.toFixed(2)}s`}</td>
                 <td className={r.deltaSec > 0 ? 'pos' : 'neg'}>{r.deltaSec >= 0 ? '+' : ''}{r.deltaSec.toFixed(3)}s</td>
                 <td className={r.deltaMeter > 0 ? 'pos' : 'neg'}>{r.deltaMeter >= 0 ? '+' : ''}{r.deltaMeter.toFixed(1)}m</td>

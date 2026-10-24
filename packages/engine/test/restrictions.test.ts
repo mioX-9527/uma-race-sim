@@ -34,4 +34,12 @@ describe('装配型限制(脚质/场地/距离档)判定', () => {
     expect(simulate(C, freshRunner([exact])).activations).toHaveLength(1);
     expect(simulate({ ...C, distance: 2300 }, freshRunner([exact])).activations).toHaveLength(0);
   });
+
+  test('距离范围限制(触发代码 course_distance>=/<=):≥2400 与 ≤2500 各自拦截', () => {
+    const min2400 = { ...midSkill, restriction: { distanceMin: 2400 } };
+    expect(simulate(C, freshRunner([min2400])).activations).toHaveLength(1);
+    expect(simulate({ ...C, distance: 2000, distanceType: 'mile' as const }, freshRunner([min2400])).activations).toHaveLength(0);
+    const max2200 = { ...midSkill, restriction: { distanceMax: 2200 } };
+    expect(simulate(C, freshRunner([max2200])).activations).toHaveLength(0);
+  });
 });
