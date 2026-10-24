@@ -60,8 +60,46 @@ export function TrackBar({ course, activations, exhaustedAtMeter, align }: Props
 
     // 真实直线段(解包 straights;既非直线也非弯道的过渡区保持裸轨道)
     for (const s of realStraights(course)) {
-      ctx.fillStyle = '#94a8cc33';
+      ctx.fillStyle = 'rgba(127, 179, 227, 0.55)';
       ctx.fillRect(px(s[0]), 37, Math.max(px(s[1]) - px(s[0]), 2), 14);
+    }
+
+    // 过渡区(既非直线也非弯道,如 有馬記念 起跑后 100m):琥珀色斜纹,与直线明显区分
+    const covered = [
+      ...course.corners.map(c => [c.start, c.end] as [number, number]),
+      ...realStraights(course).map(r => [r[0], r[1]] as [number, number]),
+    ].sort((a, b) => a[0] - b[0]);
+    const orphans: Array<[number, number]> = [];
+    let cursorM = 0;
+    for (const [s, e] of covered) {
+      if (s > cursorM + 1) orphans.push([cursorM, Math.min(s, D)]);
+      cursorM = Math.max(cursorM, e);
+    }
+    if (D > cursorM + 1) orphans.push([cursorM, D]);
+    if (orphans.length > 0) {
+      const pat = document.createElement('canvas');
+      pat.width = 8;
+      pat.height = 8;
+      const pc = pat.getContext('2d');
+      if (pc !== null) {
+        pc.fillStyle = 'rgba(224, 134, 60, 0.30)';
+        pc.fillRect(0, 0, 8, 8);
+        pc.strokeStyle = 'rgba(200, 100, 30, 0.95)';
+        pc.lineWidth = 2;
+        pc.beginPath();
+        pc.moveTo(-2, 10);
+        pc.lineTo(10, -2);
+        pc.moveTo(-4, 4);
+        pc.lineTo(4, -4);
+        pc.moveTo(4, 12);
+        pc.lineTo(12, 4);
+        pc.stroke();
+        const pattern = ctx.createPattern(pat, 'repeat');
+        if (pattern !== null) {
+          ctx.fillStyle = pattern;
+          for (const [s, e] of orphans) ctx.fillRect(px(s), 37, Math.max(px(e) - px(s), 2), 14);
+        }
+      }
     }
 
     // 坡道带(上坡红/下坡蓝)
@@ -175,8 +213,8 @@ export function TrackBar({ course, activations, exhaustedAtMeter, align }: Props
       <div className="track-tooltip" ref={tipRef} />
       <div className="legend">
         <span><i className="k" style={{ background: '#52607d' }} />弯道</span>
-        <span><i className="k" style={{ background: '#94a8cc55' }} />直线</span>
-        <span><i className="k" style={{ background: '#3a465e' }} />过渡区</span>
+        <span><i className="k" style={{ background: 'rgba(127,179,227,0.8)' }} />直线</span>
+        <span><i className="k" style={{ background: 'repeating-linear-gradient(45deg, rgba(200,100,30,0.9) 0 2px, rgba(224,134,60,0.45) 2px 6px)' }} />过渡区</span>
         <span><i className="k" style={{ background: '#d6454566' }} />上坡</span>
         <span><i className="k" style={{ background: '#3d8bfd66' }} />下坡</span>
         <span><i className="k" style={{ background: '#2563eb' }} />技能发动</span>
