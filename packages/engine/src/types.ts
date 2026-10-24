@@ -63,6 +63,7 @@ export interface Stats {
 export type SkillRarity =
   | 'normal'
   | 'rareEvolved'
+  | 'evolved'
   | 'unique1'
   | 'unique2'
   | 'unique3'

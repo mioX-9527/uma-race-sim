@@ -53,6 +53,7 @@ export function SkillPicker({ selected, onChange }: Props): JSX.Element {
                 <span className="name">{s.name}</span>
                 <span>
                   {s.rarity === 'uniqueHeir' && <span className="badge cn" title="继承固有:数值/持续时间与本体(大招)不同,智力增幅系数恒 1.0">继承</span>}
+                  {s.rarity === 'evolved' && <span className="badge cn" title="进化技能:本体技能进化后的强化版,数值与发动条件以进化后为准">进化</span>}
                   {s.cnReleased === true && <span className="badge cn">国服</span>}
                   <span className={`badge ${s.precision}`}>{PRECISION_LABEL[s.precision]}</span>
                 </span>

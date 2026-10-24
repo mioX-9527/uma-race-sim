@@ -105,7 +105,7 @@ export const skillSchema = z.object({
   nameJa: z.string().optional(),
   nameTrad: z.string().optional(),
   cnReleased: z.boolean().optional(),
-  rarity: z.enum(['normal', 'rareEvolved', 'unique1', 'unique2', 'unique3', 'unique4', 'unique5', 'unique6', 'uniqueHeir']),
+  rarity: z.enum(['normal', 'rareEvolved', 'evolved', 'unique1', 'unique2', 'unique3', 'unique4', 'unique5', 'unique6', 'uniqueHeir']),
   precision: z.enum(['precise', 'approx', 'unsupported']),
   effects: z.array(skillEffectSchema).min(1),
   durationSec: z.number().positive().nullable(),

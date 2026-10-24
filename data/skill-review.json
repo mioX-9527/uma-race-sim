@@ -1,11 +1,38 @@
 {
- "generatedAt": "2026-10-24T15:21:25.238Z",
+ "generatedAt": "2026-10-24T17:21:28.258Z",
  "items": [
   {
    "id": "100191",
    "page": "尊み☆ﾗｽﾄｽﾊﾟ—(ﾟ∀ﾟ)—ﾄ!",
    "reasons": [
     "无可解析发动位置(change_order_up_end_after>=2)"
+   ]
+  },
+  {
+   "id": "100201311-b1",
+   "page": "私だけの世界",
+   "reasons": [
+    "纯被动(前提值,不参与比赛过程)",
+    "rotation==2(环境前提,视为满足)",
+    "前置条件:track_id==10006&course_distance==1800"
+   ]
+  },
+  {
+   "id": "100201311-b2",
+   "page": "私だけの世界",
+   "reasons": [
+    "纯被动(前提值,不参与比赛过程)",
+    "rotation==2(环境前提,视为满足)",
+    "前置条件:track_id==10006&course_distance!=1800@track_id!=10006&course_distance==1800@track_id!=10006&course_distance!=1800"
+   ]
+  },
+  {
+   "id": "100303111-b2",
+   "page": "天賦の身ごなし",
+   "reasons": [
+    "未识别token:course_distance<2400",
+    "未识别token:course_distance>2500",
+    "base_stamina<1000(环境前提,视为满足)"
    ]
   },
   {
@@ -28,6 +55,22 @@
    "page": "Ding Dong Boo",
    "reasons": [
     "无可解析发动位置(compete_fight_count>0)"
+   ]
+  },
+  {
+   "id": "100503111-b2",
+   "page": "響け、万雷の喝采よ",
+   "reasons": [
+    "无可解析发动位置(is_activate_other_skill_detail==1&run_at_full_speed_random==1&track_id==10005&base_stamina>=1000)",
+    "base_stamina>=1000(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "100503211-b1",
+   "page": "光輝なるは白き王",
+   "reasons": [
+    "未识别token:track_id!=10005",
+    "变体锚点不同(finalCorner / cornerFastest),取首个变体"
    ]
   },
   {
@@ -76,6 +119,17 @@
    ]
   },
   {
+   "id": "101003211",
+   "page": "Sheep Stampede!",
+   "reasons": [
+    "未识别token:phase_firstquarter==2",
+    "未识别token:phase_firstquarter==2",
+    "无可解析发动位置(phase_firstquarter==2&order==1@phase_firstquarter==2&is_overtake==1@phase_firstquarter_random==2)",
+    "变体锚点不同(undefined / phase),取首个变体",
+    "前置条件:running_style==2&distance_type==2"
+   ]
+  },
+  {
    "id": "101031-b2",
    "page": "絶対最強☆アピール宣言！",
    "reasons": [
@@ -121,10 +175,486 @@
    ]
   },
   {
+   "id": "101702211",
+   "page": "風霜高潔",
+   "reasons": [
+    "纯被动(前提值,不参与比赛过程)",
+    "season==3(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "101703111-b2",
+   "page": "大望は煌めきとなりて",
+   "reasons": [
+    "无可解析发动位置(is_activate_other_skill_detail==1&ground_type==1&order_rate<=70&run_at_full_speed_random==1&track_id>=10001&track_id<=10010)"
+   ]
+  },
+  {
+   "id": "102101211",
+   "page": "尻尾の有頂天",
+   "reasons": [
+    "无可解析发动位置(activate_count_middle>=3)"
+   ]
+  },
+  {
+   "id": "102503111",
+   "page": "超常体験",
+   "reasons": [
+    "ability_time_usage=8"
+   ]
+  },
+  {
+   "id": "103003111",
+   "page": "山頂でイタダキマス",
+   "reasons": [
+    "未识别token:up_slope_random_later_half==1",
+    "无可解析发动位置(up_slope_random_later_half==1&running_style==2)"
+   ]
+  },
+  {
+   "id": "103003211",
+   "page": "淀の祝福",
+   "reasons": [
+    "纯被动(前提值,不参与比赛过程)"
+   ]
+  },
+  {
+   "id": "103202111-b1",
+   "page": "ラプラスの悪魔",
+   "reasons": [
+    "纯被动(前提值,不参与比赛过程)",
+    "base_speed>=1200(环境前提,视为满足)",
+    "base_wiz>=1200(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "103202111-b2",
+   "page": "ラプラスの悪魔",
+   "reasons": [
+    "纯被动(前提值,不参与比赛过程)",
+    "base_speed>=1200(环境前提,视为满足)",
+    "base_wiz<1200(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "103401111",
+   "page": "火消の梯子登り",
+   "reasons": [
+    "无可解析发动位置(activate_count_middle>=3)"
+   ]
+  },
+  {
+   "id": "103703111",
+   "page": "Ritter von Fuchu",
+   "reasons": [
+    "纯被动(前提值,不参与比赛过程)"
+   ]
+  },
+  {
+   "id": "104103211",
+   "page": "猛進、桜吹雪の如く",
+   "reasons": [
+    "未识别token:phase_firstquarter==2",
+    "未识别token:phase_firstquarter==2",
+    "无可解析发动位置(phase_firstquarter==2&order==1@order_rate<=50&phase_firstquarter==2&is_overtake==1@phase_firstquarter_random==2&order_rate<=50)",
+    "变体锚点不同(undefined / phase),取首个变体",
+    "前置条件:distance_type==1"
+   ]
+  },
+  {
+   "id": "104202111-b1",
+   "page": "ミストラルに乗って",
+   "reasons": [
+    "未识别token:phase_first_half_straight_random==2",
+    "未识别token:phase_first_half_straight_random==2",
+    "无可解析发动位置(phase_first_half_straight_random==2&track_id==10006&distance_type==1@phase_first_half_straight_random==2&track_id==10006&distance_type==2)"
+   ]
+  },
+  {
+   "id": "104202111-b2",
+   "page": "ミストラルに乗って",
+   "reasons": [
+    "未识别token:track_id!=10006",
+    "未识别token:track_id!=10006"
+   ]
+  },
+  {
+   "id": "104301211",
+   "page": "いたずらマイスター",
+   "reasons": [
+    "纯被动(前提值,不参与比赛过程)"
+   ]
+  },
+  {
+   "id": "104301221-b1",
+   "page": "泥んこ魔王様",
+   "reasons": [
+    "未识别token:ground_condition>=3",
+    "无可解析发动位置(ground_type==2&ground_condition>=3)"
+   ]
+  },
+  {
+   "id": "104301221-b2",
+   "page": "泥んこ魔王様",
+   "reasons": [
+    "未识别token:ground_condition<=2",
+    "无可解析发动位置(ground_type==2&ground_condition<=2)",
+    "纯被动(前提值,不参与比赛过程)"
+   ]
+  },
+  {
+   "id": "104402111-b2",
+   "page": "シルフィード・マギア",
+   "reasons": [
+    "未识别token:course_distance!=2200"
+   ]
+  },
+  {
+   "id": "104702111",
+   "page": "勇躍閃々",
+   "reasons": [
+    "未识别token:phase_latter_half_straight_random==1",
+    "无可解析发动位置(phase_latter_half_straight_random==1&running_style==2)"
+   ]
+  },
+  {
+   "id": "104702211",
+   "page": "嵐纏いし英雄は往く",
+   "reasons": [
+    "纯被动(前提值,不参与比赛过程)",
+    "season==3(环境前提,视为满足)",
+    "season==4(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "104802111-b2",
+   "page": "ワンチャンまくったる！",
+   "reasons": [
+    "未识别token:track_id!=10006"
+   ]
+  },
+  {
+   "id": "104802211-b2",
+   "page": "あたししか勝たん！",
+   "reasons": [
+    "未识别token:track_id!=10006",
+    "未识别token:track_id!=10006"
+   ]
+  },
+  {
+   "id": "104901211-b1",
+   "page": "鉄火のギャンブラー",
+   "reasons": [
+    "纯被动(前提值,不参与比赛过程)",
+    "popularity>=4(环境前提,视为满足)",
+    "random_lot_shared==60(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "104901211-b2",
+   "page": "鉄火のギャンブラー",
+   "reasons": [
+    "纯被动(前提值,不参与比赛过程)",
+    "popularity<=3(环境前提,视为满足)",
+    "random_lot_shared==30(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "104901311-b2",
+   "page": "All-in!!",
+   "reasons": [
+    "纯被动(前提值,不参与比赛过程)"
+   ]
+  },
+  {
+   "id": "105502111-b1",
+   "page": "煌めき☆ドーリィステージ",
+   "reasons": [
+    "无可解析发动位置(activate_count_all>=13&course_distance>=2000&running_style==3&weather==1)",
+    "weather==1(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "105502111-b2",
+   "page": "煌めき☆ドーリィステージ",
+   "reasons": [
+    "无可解析发动位置(activate_count_all>=13&course_distance>=2000&running_style==3)"
+   ]
+  },
+  {
+   "id": "105502211-b1",
+   "page": "いざ、ショーベラスタイム♪",
+   "reasons": [
+    "纯被动(前提值,不参与比赛过程)",
+    "base_wiz>=1200(环境前提,视为满足)",
+    "base_wiz>=1200(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "105502211-b2",
+   "page": "いざ、ショーベラスタイム♪",
+   "reasons": [
+    "未识别token:ground_condition!=1",
+    "未识别token:ground_condition!=1",
+    "无可解析发动位置(base_wiz>=1200&distance_type==3&ground_condition!=1@base_wiz>=1200&distance_type==4&ground_condition!=1)",
+    "纯被动(前提值,不参与比赛过程)",
+    "base_wiz>=1200(环境前提,视为满足)",
+    "base_wiz>=1200(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "105601211",
+   "page": "七福即生",
+   "reasons": [
+    "纯被动(前提值,不参与比赛过程)",
+    "post_number==7(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "105701221",
+   "page": "踊る脚色",
+   "reasons": [
+    "未识别token:phase_firstquarter==2",
+    "变体锚点不同(straightFastest / phase),取首个变体"
+   ]
+  },
+  {
+   "id": "105901211",
+   "page": "淀の女王",
+   "reasons": [
+    "纯被动(前提值,不参与比赛过程)"
+   ]
+  },
+  {
+   "id": "106102211",
+   "page": "春風吹きて、桜舞う",
+   "reasons": [
+    "纯被动(前提值,不参与比赛过程)",
+    "season==1(环境前提,视为满足)",
+    "season==5(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "106402211-b2",
+   "page": "メリ☆クリ↑パーリー",
+   "reasons": [
+    "未识别token:track_id!=10005",
+    "motivation<=4(环境前提,视为满足)"
+   ]
+  },
+  {
    "id": "10661-b2",
    "page": "エンジン点火！",
    "reasons": [
     "速度/加速度类效果持续时间为 0"
+   ]
+  },
+  {
+   "id": "106701211",
+   "page": "右回りの輪舞曲",
+   "reasons": [
+    "纯被动(前提值,不参与比赛过程)",
+    "rotation==1(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "106703211-b2",
+   "page": "ダンス・デ・レぺ",
+   "reasons": [
+    "未识别token:track_id!=10201",
+    "motivation<=4(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "106901211",
+   "page": "けふ九重に満開です",
+   "reasons": [
+    "纯被动(前提值,不参与比赛过程)",
+    "season==1(环境前提,视为满足)",
+    "season==5(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "107002111-b1",
+   "page": "悪路のほうが好みでね",
+   "reasons": [
+    "纯被动(前提值,不参与比赛过程)"
+   ]
+  },
+  {
+   "id": "107002111-b2",
+   "page": "悪路のほうが好みでね",
+   "reasons": [
+    "纯被动(前提值,不参与比赛过程)"
+   ]
+  },
+  {
+   "id": "107002121-b1",
+   "page": "すべてを焼き焦がす星",
+   "reasons": [
+    "纯被动(前提值,不参与比赛过程)"
+   ]
+  },
+  {
+   "id": "107602111",
+   "page": "初空高く、花宴",
+   "reasons": [
+    "纯被动(前提值,不参与比赛过程)",
+    "base_stamina>=1200(环境前提,视为满足)",
+    "前置条件:distance_type==3@distance_type==4"
+   ]
+  },
+  {
+   "id": "107701111-b1",
+   "page": "ターフの主人公",
+   "reasons": [
+    "纯被动(前提值,不参与比赛过程)"
+   ]
+  },
+  {
+   "id": "107701111-b2",
+   "page": "ターフの主人公",
+   "reasons": [
+    "未识别token:ground_condition!=1",
+    "无可解析发动位置(ground_condition!=1&ground_type==1)",
+    "纯被动(前提值,不参与比赛过程)"
+   ]
+  },
+  {
+   "id": "108001111-b1",
+   "page": "情報強者",
+   "reasons": [
+    "无可解析发动位置(distance_type==2&activate_count_start>=3@distance_type==3&activate_count_start>=3)"
+   ]
+  },
+  {
+   "id": "108001111-b2",
+   "page": "情報強者",
+   "reasons": [
+    "无可解析发动位置(distance_type==1&activate_count_start>=3@distance_type==4&activate_count_start>=3)"
+   ]
+  },
+  {
+   "id": "108002111-b1",
+   "page": "勝ち筋ドミネーション",
+   "reasons": [
+    "无可解析发动位置(activate_count_start>=3&distance_type==2@activate_count_start>=3&distance_type==3)"
+   ]
+  },
+  {
+   "id": "108002211-b2",
+   "page": "ここ、逃す手はないってね☆",
+   "reasons": [
+    "无可解析发动位置(is_activate_other_skill_detail==1&is_other_character_activate_advantage_skill==27@is_activate_other_skill_detail==1&is_other_character_activate_advantage_skill==22)"
+   ]
+  },
+  {
+   "id": "108101111-b2",
+   "page": "ベッコベコに凹ます！",
+   "reasons": [
+    "未识别token:course_distance>1800"
+   ]
+  },
+  {
+   "id": "108401211",
+   "page": "酔い痴れよ、世界",
+   "reasons": [
+    "纯被动(前提值,不参与比赛过程)",
+    "base_speed>=1000(环境前提,视为满足)",
+    "base_power>=1000(环境前提,视为满足)",
+    "base_speed>=1000(环境前提,视为满足)",
+    "base_power>=1000(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "108801211-b2",
+   "page": "ミリオンカード",
+   "reasons": [
+    "未识别token:course_distance<2200",
+    "未识别token:course_distance>2400"
+   ]
+  },
+  {
+   "id": "108901111-b2",
+   "page": "偉大なる踏破",
+   "reasons": [
+    "未识别token:course_distance!=2400"
+   ]
+  },
+  {
+   "id": "109001211-b1",
+   "page": "『お姉ちゃん、だもの』",
+   "reasons": [
+    "无可解析发动位置(distance_type==2&activate_count_start>=1)"
+   ]
+  },
+  {
+   "id": "109001211-b2",
+   "page": "『お姉ちゃん、だもの』",
+   "reasons": [
+    "无可解析发动位置(distance_type!=2&activate_count_start>=1)"
+   ]
+  },
+  {
+   "id": "109201111-b2",
+   "page": "わたしだって、勝ちたい！！",
+   "reasons": [
+    "无可解析发动位置(distance_type==3&is_activate_other_skill_detail==1&compete_fight_count>0)"
+   ]
+  },
+  {
+   "id": "109801211-b1",
+   "page": "龍脈の波濤",
+   "reasons": [
+    "纯被动(前提值,不参与比赛过程)",
+    "base_power>=1200(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "109801211-b2",
+   "page": "龍脈の波濤",
+   "reasons": [
+    "纯被动(前提值,不参与比赛过程)",
+    "base_power>=1000(环境前提,视为满足)",
+    "base_power<1200(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "109802211-b1",
+   "page": "走る縁起物",
+   "reasons": [
+    "纯被动(前提值,不参与比赛过程)",
+    "is_dirtgrade==1(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "109802211-b2",
+   "page": "走る縁起物",
+   "reasons": [
+    "纯被动(前提值,不参与比赛过程)",
+    "is_dirtgrade!=1(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "109802221-b2",
+   "page": "盛運のドラムロール",
+   "reasons": [
+    "纯被动(前提值,不参与比赛过程)",
+    "motivation<=4(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "109902211-b2",
+   "page": "突き進め北の海",
+   "reasons": [
+    "未识别token:course_distance<1800"
+   ]
+  },
+  {
+   "id": "110202111",
+   "page": "ムジカ・シンティッランテ",
+   "reasons": [
+    "无可解析发动位置(distance_type==3&activate_count_all>=13)"
    ]
   },
   {
@@ -139,6 +669,28 @@
    "page": "CHERRY☆スクランブル",
    "reasons": [
     "ability_time_usage=5"
+   ]
+  },
+  {
+   "id": "110501211",
+   "page": "星の海を駆けて",
+   "reasons": [
+    "无可解析发动位置(distance_type==3&activate_count_all>=13)"
+   ]
+  },
+  {
+   "id": "110502111",
+   "page": "ルミナス・スペクトラム",
+   "reasons": [
+    "无可解析发动位置(distance_type==3&activate_count_all>=13)"
+   ]
+  },
+  {
+   "id": "110502211",
+   "page": "“METI”レゾナンス",
+   "reasons": [
+    "未识别token:is_exist_skill_id==201631",
+    "无可解析发动位置(ground_type==1&distance_type==3&is_exist_skill_id==201631)"
    ]
   },
   {
@@ -170,10 +722,115 @@
    ]
   },
   {
+   "id": "110701211",
+   "page": "Smooth Sailing!",
+   "reasons": [
+    "无可解析发动位置(activate_count_middle>=3&order==1)"
+   ]
+  },
+  {
+   "id": "110801211-b1",
+   "page": "赫焉",
+   "reasons": [
+    "未识别token:track_id!=10005",
+    "变体锚点不同(finalCorner / cornerFastest),取首个变体"
+   ]
+  },
+  {
    "id": "110891-b1",
    "page": "Tidebreaker",
    "reasons": [
     "未识别token:course_distance<3000"
+   ]
+  },
+  {
+   "id": "111301211-b2",
+   "page": "ぜーったい譲って♡",
+   "reasons": [
+    "未识别token:course_distance!=2200"
+   ]
+  },
+  {
+   "id": "111302111-b2",
+   "page": "愛されすぎてマジごめん♡",
+   "reasons": [
+    "纯被动(前提值,不参与比赛过程)",
+    "base_speed>=1200(环境前提,视为满足)",
+    "motivation<=4(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "111601111",
+   "page": "――お退きなさい",
+   "reasons": [
+    "未识别token:phase_firstquarter==2",
+    "无可解析发动位置(running_style==2&course_distance>=2000&infront_near_lane_time>=1&phase_firstquarter==2@running_style==2&course_distance>=2000&phase_firstquarter_random==2)",
+    "变体锚点不同(undefined / phase),取首个变体"
+   ]
+  },
+  {
+   "id": "111801111-b2",
+   "page": "雪魄氷姿",
+   "reasons": [
+    "无可解析发动位置(is_activate_other_skill_detail==1&run_at_full_speed_random==1&order_rate>=20&order_rate<=50)"
+   ]
+  },
+  {
+   "id": "111801211-b2",
+   "page": "無比なる六花",
+   "reasons": [
+    "无可解析发动位置(is_activate_other_skill_detail==1&run_at_full_speed_random==1&order_rate>=20&order_rate<=50)"
+   ]
+  },
+  {
+   "id": "111901111",
+   "page": "果てへの面舵",
+   "reasons": [
+    "纯被动(前提值,不参与比赛过程)",
+    "rotation==1(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "113202211-b1",
+   "page": "海を越える神回！",
+   "reasons": [
+    "未识别token:phase_latter_half_straight_random==1",
+    "无可解析发动位置(phase_latter_half_straight_random==1&running_style==2&distance_type==3&order_rate<=50&is_abroad==1)",
+    "is_abroad==1(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "113202211-b2",
+   "page": "海を越える神回！",
+   "reasons": [
+    "未识别token:phase_latter_half_straight_random==1",
+    "无可解析发动位置(phase_latter_half_straight_random==1&running_style==2&distance_type==3)"
+   ]
+  },
+  {
+   "id": "113301211",
+   "page": "創世の一頁",
+   "reasons": [
+    "未识别token:phase_firstquarter==2",
+    "无可解析发动位置(running_style==2&course_distance>=2000&course_distance<=2500&is_overtake==1&phase_firstquarter==2@running_style==2&course_distance>=2000&course_distance<=2500&phase_firstquarter_random==2)",
+    "变体锚点不同(undefined / phase),取首个变体"
+   ]
+  },
+  {
+   "id": "113401211-b1",
+   "page": "想い束ね、前へ",
+   "reasons": [
+    "未识别token:is_popularity_top_character_activate_advantage_skill==-1",
+    "base_wiz>=1200(环境前提,视为满足)",
+    "前置条件:distance_type==3@distance_type==4"
+   ]
+  },
+  {
+   "id": "113401211-b2",
+   "page": "想い束ね、前へ",
+   "reasons": [
+    "未识别token:is_popularity_top_character_activate_advantage_skill==-1",
+    "前置条件:distance_type==3@distance_type==4"
    ]
   },
   {

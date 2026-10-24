@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-24T15:21:25.240Z",
+ "generatedAt": "2026-10-24T17:21:28.260Z",
  "items": [
   {
    "id": "100031-b1",
@@ -23,6 +23,20 @@
    ]
   },
   {
+   "id": "100101111",
+   "page": "はらぺこ大将",
+   "reasons": [
+    "前置条件:running_style==2@running_style==3"
+   ]
+  },
+  {
+   "id": "100101311-b1",
+   "page": "強襲のラン",
+   "reasons": [
+    "前置条件:track_id==10006&course_distance==2400"
+   ]
+  },
+  {
    "id": "100121",
    "page": "タイマン！デッドヒート！",
    "reasons": [
@@ -41,6 +55,29 @@
    "page": "ブルーローズチェイサー",
    "reasons": [
     "前置条件:phase>=2&order<=4&change_order_onetime<0"
+   ]
+  },
+  {
+   "id": "100301111",
+   "page": "天才的技巧",
+   "reasons": [
+    "is_move_lane==1(环境前提,视为满足)",
+    "is_move_lane==2(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "100302211",
+   "page": "地平の彼方まで",
+   "reasons": [
+    "is_move_lane==1(环境前提,视为满足)",
+    "is_move_lane==2(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "100303111-b1",
+   "page": "天賦の身ごなし",
+   "reasons": [
+    "base_stamina>=1000(环境前提,视为满足)"
    ]
   },
   {
@@ -119,10 +156,53 @@
    ]
   },
   {
+   "id": "100602211",
+   "page": "クリスマスの奇跡体験",
+   "reasons": [
+    "lane_type==0(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "100603111-b1",
+   "page": "尽きぬ炎",
+   "reasons": [
+    "前置条件:distance_type==2@distance_type==4"
+   ]
+  },
+  {
+   "id": "100603211-b1",
+   "page": "天地を揺らせ君の名で",
+   "reasons": [
+    "前置条件:distance_diff_top<=10&distance_rate>=60&phase==1"
+   ]
+  },
+  {
+   "id": "100603221-b1",
+   "page": "灰の怪物",
+   "reasons": [
+    "前置条件:distance_diff_top<=10&distance_rate>=60&phase==1"
+   ]
+  },
+  {
    "id": "100701-b1",
    "page": "セイリオス",
    "reasons": [
     "popularity<=3(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "100701111",
+   "page": "564アイズで視界クッキリ！",
+   "reasons": [
+    "is_move_lane==1(环境前提,视为满足)",
+    "is_move_lane==2(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "100702111",
+   "page": "神秘体験！ゴルシワープ",
+   "reasons": [
+    "lane_type==0(环境前提,视为满足)"
    ]
   },
   {
@@ -278,6 +358,27 @@
    ]
   },
   {
+   "id": "101201121",
+   "page": "タイマンにかける執念",
+   "reasons": [
+    "前置条件:is_finalcorner==1&change_order_onetime<0"
+   ]
+  },
+  {
+   "id": "101201211",
+   "page": "怒濤のポロロッカ",
+   "reasons": [
+    "前置条件:phase>=2&distance_diff_rate>=50"
+   ]
+  },
+  {
+   "id": "101202211",
+   "page": "闘魂入刀！",
+   "reasons": [
+    "前置条件:distance_rate>=66&temptation_count==0"
+   ]
+  },
+  {
    "id": "101211-b1",
    "page": "Lame de vent",
    "reasons": [
@@ -341,6 +442,13 @@
    ]
   },
   {
+   "id": "101401311-b1",
+   "page": "怪鳥は飛んでいく",
+   "reasons": [
+    "前置条件:course_distance==2400"
+   ]
+  },
+  {
    "id": "101411-b1",
    "page": "光れ！弾けろ！超新星爆発！",
    "reasons": [
@@ -369,6 +477,62 @@
    ]
   },
   {
+   "id": "101602211",
+   "page": "渇望する怪物",
+   "reasons": [
+    "前置条件:distance_diff_top<=10&distance_rate>=60&phase==1"
+   ]
+  },
+  {
+   "id": "101703111-b1",
+   "page": "大望は煌めきとなりて",
+   "reasons": [
+    "前置条件:distance_type==3@distance_type==4"
+   ]
+  },
+  {
+   "id": "101703211-b1",
+   "page": "熱烈峻厳",
+   "reasons": [
+    "前置条件:running_style==2@running_style==3"
+   ]
+  },
+  {
+   "id": "101703211-b2",
+   "page": "熱烈峻厳",
+   "reasons": [
+    "前置条件:running_style==2@running_style==3"
+   ]
+  },
+  {
+   "id": "102003211-b1",
+   "page": "夏風フロントランナー",
+   "reasons": [
+    "base_wiz>=1000(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "102602121",
+   "page": "甘さ控えめエスケープ",
+   "reasons": [
+    "base_wiz>=1200(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "103301211",
+   "page": "己身焦がすほうき星",
+   "reasons": [
+    "前置条件:phase>=2&distance_diff_rate>=50"
+   ]
+  },
+  {
+   "id": "103402111",
+   "page": "扇ノ舞",
+   "reasons": [
+    "lane_type==0(环境前提,视为满足)"
+   ]
+  },
+  {
    "id": "10351",
    "page": "全力Vサインッ！",
    "reasons": [
@@ -376,10 +540,239 @@
    ]
   },
   {
+   "id": "103602211",
+   "page": "刑苦",
+   "reasons": [
+    "lane_type==0(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "104003211-b1",
+   "page": "黄金の炎陽",
+   "reasons": [
+    "base_power>=1200(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "104003211-b2",
+   "page": "黄金の炎陽",
+   "reasons": [
+    "base_power>=1200(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "104503211",
+   "page": "神仙蝶変の術",
+   "reasons": [
+    "前置条件:distance_diff_top<=15&distance_rate>=60&phase==1"
+   ]
+  },
+  {
+   "id": "104901111-b1",
+   "page": "乾坤一擲の大博打",
+   "reasons": [
+    "前置条件:track_id==10009&course_distance==2200&popularity>=4@track_id==10201&popularity>=4"
+   ]
+  },
+  {
+   "id": "104901311-b1",
+   "page": "All-in!!",
+   "reasons": [
+    "前置条件:track_id==10009&course_distance==2200@track_id==10201"
+   ]
+  },
+  {
+   "id": "105003221-b1",
+   "page": "不屈のRebellion",
+   "reasons": [
+    "前置条件:distance_type==3&running_style==4&distance_diff_top>=15&distance_rate>=60&phase==1"
+   ]
+  },
+  {
+   "id": "105003221-b2",
+   "page": "不屈のRebellion",
+   "reasons": [
+    "前置条件:distance_type==3&running_style==4"
+   ]
+  },
+  {
    "id": "10541",
    "page": "ペガサスフルパワー！",
    "reasons": [
     "前置条件:order_rate>=45&distance_rate>=50&change_order_onetime<0"
+   ]
+  },
+  {
+   "id": "105602211",
+   "page": "ばっちり開運体験！",
+   "reasons": [
+    "lane_type==0(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "105702111-b1",
+   "page": "奪目の宙乗り",
+   "reasons": [
+    "前置条件:distance_rate>=50&change_order_onetime<0"
+   ]
+  },
+  {
+   "id": "106302111",
+   "page": "梅仰ぎ、漕ぐ計路",
+   "reasons": [
+    "base_speed>=1000(环境前提,视为满足)",
+    "base_power>=1000(环境前提,视为满足)",
+    "base_speed>=1000(环境前提,视为满足)",
+    "base_power>=1000(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "106402211-b1",
+   "page": "メリ☆クリ↑パーリー",
+   "reasons": [
+    "motivation==5(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "106703211-b1",
+   "page": "ダンス・デ・レぺ",
+   "reasons": [
+    "motivation==5(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "107002121-b2",
+   "page": "すべてを焼き焦がす星",
+   "reasons": [
+    "popularity<=3(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "107002211-b1",
+   "page": "Beat the Stars",
+   "reasons": [
+    "前置条件:ground_condition==2@ground_condition==3@ground_condition==4"
+   ]
+  },
+  {
+   "id": "107002211-b2",
+   "page": "Beat the Stars",
+   "reasons": [
+    "前置条件:ground_condition==1"
+   ]
+  },
+  {
+   "id": "107202211-b1",
+   "page": "無双の追撃",
+   "reasons": [
+    "lane_type==0(环境前提,视为满足)",
+    "lane_type==0(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "107402111-b1",
+   "page": "聖夜の天路",
+   "reasons": [
+    "base_stamina>=1200(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "107402111-b2",
+   "page": "聖夜の天路",
+   "reasons": [
+    "base_stamina<1200(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "107402211-b1",
+   "page": "雪華の追い上げ",
+   "reasons": [
+    "base_stamina>=1200(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "107403111",
+   "page": "浜辺の追いかけっこ",
+   "reasons": [
+    "前置条件:distance_type==3@distance_type==4"
+   ]
+  },
+  {
+   "id": "107901211",
+   "page": "勇船直往",
+   "reasons": [
+    "前置条件:compete_fight_count>0"
+   ]
+  },
+  {
+   "id": "108201111-b1",
+   "page": "ココロ、キラめくままに！",
+   "reasons": [
+    "base_wiz>=1200(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "108202211-b1",
+   "page": "春風、蒼穹を駆ける",
+   "reasons": [
+    "前置条件:distance_rate>=50&order_rate_out50_continue==1"
+   ]
+  },
+  {
+   "id": "108401111",
+   "page": "嵐を呼ぶ破壊神",
+   "reasons": [
+    "前置条件:phase>=2&distance_diff_rate>=50"
+   ]
+  },
+  {
+   "id": "108502111",
+   "page": "霹靂閃電",
+   "reasons": [
+    "变体锚点不同(distanceRate / phase),取首个变体"
+   ]
+  },
+  {
+   "id": "108802211-b1",
+   "page": "波上のラストトリック",
+   "reasons": [
+    "base_wiz>=1200(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "109102211-b1",
+   "page": "いざ征かん！マリンロード",
+   "reasons": [
+    "base_wiz>=1200(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "109401111-b1",
+   "page": "猛襲の牙",
+   "reasons": [
+    "base_power>=1200(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "109402211-b1",
+   "page": "“最強”の焔",
+   "reasons": [
+    "前置条件:distance_type==3&running_style==3&phase==1&blocked_side_continuetime>=2"
+   ]
+  },
+  {
+   "id": "109802221-b1",
+   "page": "盛運のドラムロール",
+   "reasons": [
+    "motivation==5(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "110002211-b1",
+   "page": "風まかせ、お湯まかせ",
+   "reasons": [
+    "base_guts>=1200(环境前提,视为满足)",
+    "base_guts>=1200(环境前提,视为满足)"
    ]
   },
   {
@@ -450,6 +843,15 @@
    ]
   },
   {
+   "id": "110301111",
+   "page": "巧みなるファントム",
+   "reasons": [
+    "is_move_lane==1(环境前提,视为满足)",
+    "is_move_lane==2(环境前提,视为满足)",
+    "前置条件:distance_type==3&running_style==2"
+   ]
+  },
+  {
    "id": "110341",
    "page": "灯穂",
    "reasons": [
@@ -470,6 +872,20 @@
     "slope==0(非坡道)按全场近似",
     "变体锚点不同(raceStart / downhillFastest),取首个变体",
     "前置条件:phase>=1&slope==1&order_rate>=40&order_rate<=80"
+   ]
+  },
+  {
+   "id": "110401211-b1",
+   "page": "逃げっ切りの1人旅",
+   "reasons": [
+    "前置条件:phase==1&bashin_diff_behind>=3&order==1"
+   ]
+  },
+  {
+   "id": "110401211-b2",
+   "page": "逃げっ切りの1人旅",
+   "reasons": [
+    "前置条件:phase==1&bashin_diff_behind>=3&order==1"
    ]
   },
   {
@@ -582,6 +998,34 @@
    ]
   },
   {
+   "id": "110802111-b1",
+   "page": "魔の刻、来たれり",
+   "reasons": [
+    "前置条件:running_style==3@running_style==4"
+   ]
+  },
+  {
+   "id": "110802111-b2",
+   "page": "魔の刻、来たれり",
+   "reasons": [
+    "前置条件:running_style==3@running_style==4"
+   ]
+  },
+  {
+   "id": "110802211-b1",
+   "page": "喰らえども、喰らえども",
+   "reasons": [
+    "前置条件:running_style==3@running_style==4"
+   ]
+  },
+  {
+   "id": "110802211-b2",
+   "page": "喰らえども、喰らえども",
+   "reasons": [
+    "前置条件:running_style==3@running_style==4"
+   ]
+  },
+  {
    "id": "110831-b1",
    "page": "Immortal Work",
    "reasons": [
@@ -646,6 +1090,13 @@
    ]
   },
   {
+   "id": "111101111-b1",
+   "page": "母の面影を追って",
+   "reasons": [
+    "base_wiz>=1200(环境前提,视为满足)"
+   ]
+  },
+  {
    "id": "111131-b1",
    "page": "渚のヴィーナスタイム♡",
    "reasons": [
@@ -681,10 +1132,218 @@
    ]
   },
   {
+   "id": "111302111-b1",
+   "page": "愛されすぎてマジごめん♡",
+   "reasons": [
+    "base_speed>=1200(环境前提,视为满足)",
+    "motivation==5(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "111302211-b1",
+   "page": "秘める気のない才気",
+   "reasons": [
+    "motivation==5(环境前提,视为满足)"
+   ]
+  },
+  {
    "id": "111321-b1",
    "page": "Watch Us Flourish",
    "reasons": [
     "is_abroad==1(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "111401111-b1",
+   "page": "ふたりの約束、とどく時",
+   "reasons": [
+    "is_basis_distance==1(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "111401211",
+   "page": "誠心たる光燿",
+   "reasons": [
+    "变体锚点不同(phase / finalCorner),取首个变体"
+   ]
+  },
+  {
+   "id": "111601221-b1",
+   "page": "淑女の独擅場",
+   "reasons": [
+    "base_power>=1200(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "111602111-b1",
+   "page": "――さあ、踊りましょう",
+   "reasons": [
+    "前置条件:distance_type==2@distance_type==3"
+   ]
+  },
+  {
+   "id": "111602111-b2",
+   "page": "――さあ、踊りましょう",
+   "reasons": [
+    "前置条件:distance_type==2@distance_type==3"
+   ]
+  },
+  {
+   "id": "111901211-b1",
+   "page": "夢見心地",
+   "reasons": [
+    "base_wiz>=1200(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "111902111-b1",
+   "page": "雪暗れに微笑む",
+   "reasons": [
+    "base_wiz>=1200(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "112402111-b1",
+   "page": "風上に立て",
+   "reasons": [
+    "前置条件:distance_type==2@distance_type==3"
+   ]
+  },
+  {
+   "id": "112702111-b1",
+   "page": "王道刑事、強面派",
+   "reasons": [
+    "base_stamina>=1000(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "112702211-b1",
+   "page": "トドメのかつ丼！",
+   "reasons": [
+    "base_guts>=1000(环境前提,视为满足)",
+    "前置条件:distance_type==3@distance_type==4"
+   ]
+  },
+  {
+   "id": "112702211-b2",
+   "page": "トドメのかつ丼！",
+   "reasons": [
+    "前置条件:distance_type==3@distance_type==4"
+   ]
+  },
+  {
+   "id": "112901111-b1",
+   "page": "The Next Phase",
+   "reasons": [
+    "base_speed>=1200(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "112901221-b1",
+   "page": "革新された未来",
+   "reasons": [
+    "base_guts>=1200(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "113001211-b1",
+   "page": "霞薙ぐ花形",
+   "reasons": [
+    "变体锚点不同(uphillFastest / downhillFastest),取首个变体",
+    "前置条件:running_style==2&distance_type==2@running_style==2&distance_type==3@running_style==3&distance_type==2@running_style==3&distance_type==3"
+   ]
+  },
+  {
+   "id": "113001211-b2",
+   "page": "霞薙ぐ花形",
+   "reasons": [
+    "前置条件:running_style==2@running_style==3"
+   ]
+  },
+  {
+   "id": "113201211-b1",
+   "page": "応援コメントよろしく！",
+   "reasons": [
+    "base_wiz>=1200(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "113202111-b1",
+   "page": "ロッツオブラヴ♡",
+   "reasons": [
+    "is_abroad==1(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "113202111-b2",
+   "page": "ロッツオブラヴ♡",
+   "reasons": [
+    "is_abroad==0(环境前提,视为满足)",
+    "is_abroad==1(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "113501111-b1",
+   "page": "見果てぬ旅路",
+   "reasons": [
+    "motivation==5(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "113501211-b2",
+   "page": "針が交わる時",
+   "reasons": [
+    "前置条件:is_activate_other_skill_detail==1&is_finalcorner==1&is_overtake==1"
+   ]
+  },
+  {
+   "id": "114401111-b1",
+   "page": "Impeccable",
+   "reasons": [
+    "前置条件:distance_type==2@distance_type==3"
+   ]
+  },
+  {
+   "id": "114501211-b1",
+   "page": "強襲トリック",
+   "reasons": [
+    "前置条件:running_style==2&distance_type==3&distance_rate>=50&change_order_onetime<0@running_style==4&distance_type==3&distance_rate>=50&change_order_onetime<0"
+   ]
+  },
+  {
+   "id": "114501211-b2",
+   "page": "強襲トリック",
+   "reasons": [
+    "前置条件:running_style==2@running_style==4"
+   ]
+  },
+  {
+   "id": "114901111-b1",
+   "page": "妙技・坂落とし",
+   "reasons": [
+    "前置条件:running_style==2@running_style==3"
+   ]
+  },
+  {
+   "id": "114901111-b2",
+   "page": "妙技・坂落とし",
+   "reasons": [
+    "前置条件:running_style==2@running_style==3"
+   ]
+  },
+  {
+   "id": "114901211-b1",
+   "page": "寄らば斬る！",
+   "reasons": [
+    "前置条件:distance_type==2@distance_type==3"
+   ]
+  },
+  {
+   "id": "114901211-b2",
+   "page": "寄らば斬る！",
+   "reasons": [
+    "base_power>=1000(环境前提,视为满足)",
+    "base_guts>=1000(环境前提,视为满足)"
    ]
   },
   {

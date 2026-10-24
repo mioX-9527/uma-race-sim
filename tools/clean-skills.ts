@@ -62,10 +62,11 @@ const luaSkills = existsSync('data/raw/skill-data-lua.json')
   ? (JSON.parse(readFileSync('data/raw/skill-data-lua.json', 'utf8')) as Array<Record<string, string>>)
   : [];
 const luaById = new Map(luaSkills.map(r => [r.id!, r]));
-/** 游戏解包技能数据其二(模块:技能数据库内容2):继承技(900xxx,本体 = unique_skill_id_1)与进化等 */
+/** 游戏解包技能数据其二(模块:技能数据库内容2):继承技(900xxx,本体 = unique_skill_id_1)与进化(1M+) */
 const lua2Skills = existsSync('data/raw/skill-data-lua2.json')
   ? (JSON.parse(readFileSync('data/raw/skill-data-lua2.json', 'utf8')) as Array<Record<string, string>>)
   : [];
+const lua2ById = new Map(lua2Skills.map(r => [r.id!, r]));
 /** 继承技三语名称(BWIKI 继承技/* 页面,fetch-heir-names.mjs 抓取);缺简中 = 国服未实装 */
 const heirNames = existsSync('data/raw/heir-skill-names.json')
   ? (JSON.parse(readFileSync('data/raw/heir-skill-names.json', 'utf8')) as {
@@ -955,7 +956,7 @@ function mergeRestrictionObj(code: CodeRestriction, textObj: Record<string, unkn
 // =====================================================================
 // 主流程
 // =====================================================================
-const stats = { raw: 0, excludedEvolution: 0, out: 0, precise: 0, approx: 0, unsupported: 0, branchEntries: 0, codeParsed: 0, textFallback: 0, heirEntries: 0 };
+const stats = { raw: 0, excludedEvolution: 0, out: 0, precise: 0, approx: 0, unsupported: 0, branchEntries: 0, codeParsed: 0, textFallback: 0, heirEntries: 0, evolutionEntries: 0 };
 const out: OutSkill[] = [];
 /** 信息性备注(环境前提/前置条件原文等),单独存放不进复核清单 */
 const infoNotes: Array<{ id: string; page: string; reasons: string[] }> = [];
@@ -972,9 +973,12 @@ for (const e of raw.results) {
 for (const [id, e] of rowsById) {
   stats.raw++;
   const rarityCn = prop(e, '稀有度');
-  if (rarityCn === '进化') { stats.excludedEvolution++; continue; }
+  // 进化技能:速查表行 ID 与「模块:技能数据库内容2」(1M+ 段)对齐的走触发代码路径;
+  // 无解包数据的(剧本技能等)维持排除
+  const isEvolution = rarityCn === '进化';
+  if (isEvolution && !lua2ById.has(id)) { stats.excludedEvolution++; continue; }
 
-  const rarity = rarityCn === '普通' ? 'normal' : rarityCn === '传说' ? 'rareEvolved' : 'unique5';
+  const rarity = isEvolution ? 'evolved' : rarityCn === '普通' ? 'normal' : rarityCn === '传说' ? 'rareEvolved' : 'unique5';
   const nameJa = prop(e, '技能名') || e.page;
   // 名称优先级:国服官方译名(简中技能速查表)> wiki 中文名(社区译名)> 日文原名
   const official = cnNames.map[id];
@@ -991,7 +995,7 @@ for (const [id, e] of rowsById) {
     ...splitBranches(condText).filter(p => CONTEXT_RE.test(p.text)).map(p => p.text),
   ]);
 
-  const lua = luaById.get(id);
+  const lua = luaById.get(id) ?? (isEvolution ? lua2ById.get(id) : undefined);
   if (lua !== undefined) {
     // ---- 触发代码路径 ----
     stats.codeParsed++;
@@ -1003,6 +1007,7 @@ for (const [id, e] of rowsById) {
     branchCodes.forEach((b, bi) => {
       const suffix = multiB ? `-b${bi + 1}` : '';
       if (multiB) stats.branchEntries++;
+      if (isEvolution) stats.evolutionEntries++;
       const { skill, reasons, info } = skillFromLuaBranch(lua, b.slot, {
         id: id + suffix,
         name: multiB ? `${baseName}(${bi + 1})` : baseName,
@@ -1011,7 +1016,9 @@ for (const [id, e] of rowsById) {
         cnReleased: official !== undefined ? true : undefined,
         rarity,
         wisdomScaled: rarity !== 'normal',
-        source: 'BWIKI 速查表 + 触发代码(模块:技能数据库内容)',
+        source: isEvolution
+          ? 'BWIKI 速查表 + 触发代码(模块:技能数据库内容2)'
+          : 'BWIKI 速查表 + 触发代码(模块:技能数据库内容)',
         textRestrictionObj,
         restrictionText: restrictionBase !== '' && restrictionBase !== '通用' ? restrictionBase : undefined,
       });

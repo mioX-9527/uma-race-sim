@@ -141,6 +141,8 @@ export function staminaFightDistCoef(distance: number): number {
 export const RARITY_LEVEL_FACTOR: Readonly<Record<SkillRarity, number>> = {
   normal: 0,
   rareEvolved: 1.0,
+  // 进化技能:本体技能进化后的强化版,等级系数按 1.0
+  evolved: 1.0,
   unique1: 1.0,
   unique2: 1.01,
   unique3: 1.04,
