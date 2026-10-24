@@ -63,6 +63,13 @@ export function ConfigPanel({ config, onChange }: Props): JSX.Element {
           <select id="cfg-mot" value={config.motivation} onChange={e => set({ motivation: e.target.value as Motivation })}>
             {MOTIVATIONS.map(m => <option key={m} value={m}>{MOTIVATION_LABEL[m]}</option>)}
           </select>
+          <label htmlFor="cfg-fix" title="有效速度 ×赛道补正:最大=1.2、标准=1(与 614tools 一致,默认最大)">
+            赛道补正
+          </label>
+          <select id="cfg-fix" value={config.courseFix ?? 1.2} onChange={e => set({ courseFix: Number(e.target.value) })}>
+            <option value={1.2}>最大(×1.2)</option>
+            <option value={1}>标准(×1.0)</option>
+          </select>
         </div>
       </section>
 

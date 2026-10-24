@@ -174,13 +174,21 @@ export interface SkillRestriction {
 
 export interface RunnerConfig {
   readonly stats: Stats;
-  /** 绿技能提供的前提值 */
+  /** 绿技能提供的前提值(不参与软上限/干劲,仅按面板口径加算) */
   readonly greenBonus: Readonly<Partial<Stats>>;
   readonly tactic: Tactic;
   readonly distanceAptitude: Aptitude;
   readonly surfaceAptitude: Aptitude;
   readonly motivation: Motivation;
   readonly groundCondition?: GroundCondition;
+  /** 赛道补正对有效速度的乘数(最大=1.2,标准/无=1;缺省=最大,与 614tools 默认一致) */
+  readonly courseFix?: number;
+  /** 前提:脚色充分(终盘起 3 秒加速度,面板力量;默认开) */
+  readonly assumeAshiiro?: boolean;
+  /** 前提:耐力对决(终盘起速度,参照耐力=面板×干劲;默认开) */
+  readonly assumeStaminaFight?: boolean;
+  /** 全开冲刺(面板速度≥2001 时末脚达速后额外速度渐增至 +1m/s;默认开) */
+  readonly fullSpurtEnabled?: boolean;
   readonly skills: readonly SkillConfig[];
 }
 
@@ -195,6 +203,8 @@ export interface Activation {
 export interface SimResult {
   /** 完赛时间(秒,冲线帧线性插值) */
   readonly finishTimeSec: number;
+  /** 末脚目标速度(m/s,有效属性口径);马身差换算基准(614tools 口径) */
+  readonly spurtTargetSpeed: number;
   /** 逐帧序列(下标对齐);用 Float64 保存体力等大数值的帧间精度 */
   readonly t: Float64Array;
   readonly x: Float64Array;

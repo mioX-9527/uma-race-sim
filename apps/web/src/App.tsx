@@ -32,7 +32,7 @@ export function App(): JSX.Element {
     const distA = simulate(course, { ...runner, distanceAptitude: 'A' });
     const surfS = simulate(course, { ...runner, surfaceAptitude: 'S' });
     const surfA = simulate(course, { ...runner, surfaceAptitude: 'A' });
-    const endV = distS.v[distS.v.length - 1] ?? 20;
+    const endV = distS.spurtTargetSpeed;
     const diff = (s: SimResult, a: SimResult) => {
       const deltaSec = a.finishTimeSec - s.finishTimeSec; // >0 = S 更快
       return { deltaSec, deltaBody: (deltaSec * endV) / BODY_LENGTH_METERS };
@@ -47,7 +47,7 @@ export function App(): JSX.Element {
       <header className="app-header">
         <h1>uma-race-sim · 赛马娘赛道模拟器</h1>
         <span className="sub">
-          单马确定性期望模型 · 校准基准:东京草2400 无技能 116.747s(参考 116.987s)· v0.1 开发版
+          单马确定性期望模型 · 与 614tools 实算对拍 116.366s(差 0.038s;游戏参考 116.987s)· v0.2 开发版
         </span>
       </header>
 

@@ -1,5 +1,12 @@
-import { LAST_SPURT_EXT_ACCEL_SCALE, MOTIVATION_WISDOM_MULT, RARITY_LEVEL_FACTOR } from './constants';
-import type { Course, RunnerConfig, SkillConfig, SkillRestriction } from './types';
+import { LAST_SPURT_EXT_ACCEL_SCALE, MOTIVATION_WISDOM_MULT, RARITY_LEVEL_FACTOR, WISDOM_BASE_MULT } from './constants';
+import type { Course, PhaseId, RunnerConfig, SkillConfig, SkillRestriction } from './types';
+
+export interface Buff {
+  readonly skill: SkillConfig;
+  readonly untilSec: number;
+  /** 发动时刻(阶段)锁定的智力增幅乘数 */
+  readonly mult: number;
+}
 
 /** 装配型限制(脚质/距离档/场地/赛场/场地状态/精确距离/距离范围)是否满足;不满足则整场不发动 */
 export function restrictionSatisfied(r: SkillRestriction, runner: RunnerConfig, course: Course): boolean {
@@ -14,12 +21,7 @@ export function restrictionSatisfied(r: SkillRestriction, runner: RunnerConfig, 
   return true;
 }
 
-export interface Buff {
-  readonly skill: SkillConfig;
-  readonly untilSec: number;
-}
-
-/** 参照智力 =(面板+绿技能)×干劲(614tools:面板+绿,不含软上限) */
+/** 参照智力 =(面板+绿技能)×干劲(614tools 说明文字口径;干劲表见 constants) */
 export function referenceWisdom(runner: RunnerConfig): number {
   return (runner.stats.wisdom + (runner.greenBonus.wisdom ?? 0)) * MOTIVATION_WISDOM_MULT[runner.motivation];
 }
@@ -40,42 +42,53 @@ export function wisdomCorrection(w: number): number {
   return Math.ceil(c * 100) / 100;
 }
 
-/** 固有/レア 技能的目标速度·即时速度效果乘数:×(1 + 0.21 × 智力补正 × 等级系数) */
-export function effectMultiplier(skill: SkillConfig, runner: RunnerConfig): number {
+/**
+ * 智力增幅乘数:×(1 + 基准乘数[脚质×发动阶段] × 智力补正 × 等级系数)。
+ * 基准乘数为 脚质×阶段 矩阵(614tools Ce 表:逃[.26,.23,.19,.16] 先[.21×4]
+ * 差[.19,.18,.23,.24] 追[.15,.17,.25,.27]),按发动时的阶段锁定;
+ * 仅对正值的目标/即时速度效果生效(负值不缩放)。
+ */
+export function effectMultiplier(skill: SkillConfig, runner: RunnerConfig, phase: PhaseId): number {
   if (!skill.wisdomScaled || skill.rarity === 'normal') return 1;
-  return 1 + 0.21 * wisdomCorrection(referenceWisdom(runner)) * RARITY_LEVEL_FACTOR[skill.rarity];
+  const base = WISDOM_BASE_MULT[runner.tactic][phase];
+  return 1 + base * wisdomCorrection(referenceWisdom(runner)) * RARITY_LEVEL_FACTOR[skill.rarity];
+}
+
+/** 正值按增幅缩放,负值原样(614tools 口径) */
+function scaled(value: number, mult: number): number {
+  return value > 0 ? value * mult : value;
 }
 
 /** 激活中的目标速度加成(m/s);「即时速度上升」在持续期内同时抬高目标速度(614tools) */
-export function targetSpeedBonus(buffs: readonly Buff[], t: number, runner: RunnerConfig): number {
+export function targetSpeedBonus(buffs: readonly Buff[], t: number): number {
   let sum = 0;
   for (const b of buffs) {
     if (t >= b.untilSec) continue;
     for (const e of b.skill.effects) {
-      if (e.type === 'targetSpeed' || e.type === 'currentSpeed') sum += e.value * effectMultiplier(b.skill, runner);
+      if (e.type === 'targetSpeed' || e.type === 'currentSpeed') sum += scaled(e.value, b.mult);
     }
   }
   return sum;
 }
 
-export function accelerationBonus(buffs: readonly Buff[], t: number, runner: RunnerConfig): number {
+export function accelerationBonus(buffs: readonly Buff[], t: number): number {
   let sum = 0;
   for (const b of buffs) {
     if (t >= b.untilSec) continue;
     for (const e of b.skill.effects) {
-      if (e.type === 'acceleration') sum += e.value * effectMultiplier(b.skill, runner);
+      if (e.type === 'acceleration') sum += e.value;
     }
   }
   return sum;
 }
 
-/** 末脚延展折算为最终冲刺的额外加速度(×0.1,Excel AA79,614tools) */
-export function spurtExtensionAccel(buffs: readonly Buff[], t: number, runner: RunnerConfig): number {
+/** 激活中的末脚延展合计(×0.1 后作为全开冲刺的额外增速速率,614tools growthEffect) */
+export function spurtExtensionGrowth(buffs: readonly Buff[], t: number): number {
   let sum = 0;
   for (const b of buffs) {
     if (t >= b.untilSec) continue;
     for (const e of b.skill.effects) {
-      if (e.type === 'lastSpurtExtension') sum += e.value * LAST_SPURT_EXT_ACCEL_SCALE * effectMultiplier(b.skill, runner);
+      if (e.type === 'lastSpurtExtension') sum += e.value * LAST_SPURT_EXT_ACCEL_SCALE;
     }
   }
   return sum;
@@ -87,11 +100,11 @@ export interface InstantState {
   readonly maxHp: number;
 }
 
-/** 发动瞬间的一次性效果:即时速度提升、体力回复 */
-export function applyInstant(skill: SkillConfig, s: InstantState, runner: RunnerConfig): InstantState {
+/** 发动瞬间的一次性效果:即时速度提升(正值受增幅)、体力回复 */
+export function applyInstant(skill: SkillConfig, s: InstantState, mult: number): InstantState {
   let { v, hp } = s;
   for (const e of skill.effects) {
-    if (e.type === 'currentSpeed') v += e.value * effectMultiplier(skill, runner);
+    if (e.type === 'currentSpeed') v += scaled(e.value, mult);
     else if (e.type === 'heal') {
       // TODO(calibration): 真实回复量与智力/干劲相关;v0.1 按体力上限 × value
       hp = Math.min(s.maxHp, hp + s.maxHp * e.value);

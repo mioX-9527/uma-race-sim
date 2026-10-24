@@ -35,7 +35,8 @@ export interface AblationReport {
 export function ablate(course: Course, runner: RunnerConfig): AblationReport {
   const full = simulate(course, runner);
   const none = simulate(course, { ...runner, skills: [] });
-  const endV = full.v[full.v.length - 1] ?? 1;
+  // 马身差换算基准 = 末脚(冲刺)目标速度(614tools 口径)
+  const endV = full.spurtTargetSpeed;
 
   const rows: AblationRow[] = runner.skills.map(skill => {
     const without = simulate(course, {

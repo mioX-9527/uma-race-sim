@@ -76,31 +76,77 @@ export const PHASE_DECEL: readonly [number, number, number] = [-1.2, -0.8, -1.0]
 /** 体力耗尽后的固定减速 */
 export const EXHAUST_DECEL = -1.2;
 
+/**
+ * 序盘 PDM(取位放缓)系数:目标速度 ×0.915(614tools sim1!AG2)。
+ * 区间 0~int(d/24)m,仅非逃马(逃马改为 位置取り争い,期望模型不启用);发动目标/即时速度技能时提前解除。
+ */
+export const PDM_SLOWDOWN_RATIO = 0.915;
+
 /** 场地状态对体力消耗的系数(下标=良/稍重/重/不良) */
 export const GROUND_HP_COEF: Readonly<Record<'turf' | 'dirt', readonly [number, number, number, number]>> = {
   turf: [1.0, 1.0, 1.02, 1.02],
   dirt: [1.0, 1.0, 1.01, 1.02],
 };
 
-/** 干劲对参照智力的乘数——仅绝好调=1.0 有据,其余为占位 TODO(calibration) */
+/**
+ * 干劲对有效属性的乘数(614tools worker:{绝好调1.04,好调1.02,普通1,不调0.98,绝不调0.96};
+ * 最低速度实验逐步验证:√(200×根性×干劲)×0.001)
+ */
 export const MOTIVATION_WISDOM_MULT: Readonly<Record<Motivation, number>> = {
-  best: 1.0,
-  good: 0.98,
-  normal: 0.95,
-  bad: 0.92,
-  worst: 0.9,
+  best: 1.04,
+  good: 1.02,
+  normal: 1.0,
+  bad: 0.98,
+  worst: 0.96,
 };
 
-/** 智力增幅的等级系数——占位 1.0,TODO(calibration) */
+/** 属性软上限:超过 1200 的部分减半(614tools E(stat)=1200+(stat−1200)/2) */
+export const STAT_SOFT_CAP = 1200;
+
+/**
+ * 干劲(智力)增幅的基准乘数,按 脚质×发动阶段(614tools Ce 表):
+ * 逃[.26,.23,.19,.16] 先[.21,.21,.21,.21] 差[.19,.18,.23,.24] 追[.15,.17,.25,.27](序/中/终/最终)
+ */
+export const WISDOM_BASE_MULT: Readonly<Record<Tactic, readonly [number, number, number, number]>> = {
+  nige: [0.26, 0.23, 0.19, 0.16],
+  senko: [0.21, 0.21, 0.21, 0.21],
+  sashi: [0.19, 0.18, 0.23, 0.24],
+  oikomi: [0.15, 0.17, 0.25, 0.27],
+};
+
+/** 赛道补正对有效速度的乘数(614tools xe:最大=1.2,标准/无=1) */
+export const COURSE_FIX_MAX = 1.2;
+
+/** 全开冲刺:面板速度门槛、增速系数、额外速度上限(614tools F/_e/ve) */
+export const FULL_SPURT_SPEED_GATE = 2001;
+export const FULL_SPURT_RATE = 0.068;
+export const FULL_SPURT_CAP = 1.0;
+
+/** 脚色充分(前提):终盘开始起 3 秒,加速度 += √((力量−1200)×130)×0.001(面板力量,不软上限) */
+export const ASHIIRO_DURATION_SEC = 3;
+
+/** 耐力对决(前提):终盘起速度 += √(参照耐力−1200)×0.0085×距离系数(参照耐力=面板×干劲,不软上限) */
+export function staminaFightDistCoef(distance: number): number {
+  if (distance < 2101) return 0;
+  if (distance < 2201) return 0.5;
+  if (distance < 2401) return 1;
+  if (distance < 2601) return 1.5;
+  return 1.8;
+}
+
+/**
+ * 智力增幅的等级系数(614tools:{固有Lv.2:1.01,Lv.3:1.04,Lv.4:1.07,Lv.5:1.1,Lv.6:1.13};
+ * 通常/レア=1,固有Lv.1 推定 1)。normal(通常白技)为 0 = 不受智力增幅。
+ */
 export const RARITY_LEVEL_FACTOR: Readonly<Record<SkillRarity, number>> = {
   normal: 0,
   rareEvolved: 1.0,
   unique1: 1.0,
-  unique2: 1.0,
-  unique3: 1.0,
-  unique4: 1.0,
-  unique5: 1.0,
-  unique6: 1.0,
+  unique2: 1.01,
+  unique3: 1.04,
+  unique4: 1.07,
+  unique5: 1.1,
+  unique6: 1.13,
 };
 
 /** 末脚延展折算为冲刺额外加速度的比例(Excel AA79,614tools) */

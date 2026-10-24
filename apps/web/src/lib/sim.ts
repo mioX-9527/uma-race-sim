@@ -95,6 +95,8 @@ export interface UiConfig {
   readonly distanceAptitude: Aptitude;
   readonly surfaceAptitude: Aptitude;
   readonly motivation: Motivation;
+  /** 赛道补正:有效速度 ×1.2(最大)或 ×1(标准);缺省=最大,与 614tools 默认一致 */
+  readonly courseFix?: number;
   readonly courseId: string;
   readonly skillIds: readonly string[];
 }
@@ -124,6 +126,7 @@ export function buildRunner(cfg: UiConfig): RunnerConfig {
     distanceAptitude: cfg.distanceAptitude,
     surfaceAptitude: cfg.surfaceAptitude,
     motivation: cfg.motivation,
+    courseFix: cfg.courseFix ?? 1.2,
     skills,
   };
 }
