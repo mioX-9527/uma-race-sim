@@ -69,7 +69,7 @@ describe('技能发动', () => {
     expect(res.activations).toHaveLength(0);
   });
 
-  test('冷却 30s 的弯道技能(弧线大师型)逐弯道多次发动;无冷却技能只发动一次', () => {
+  test('冷却技能(弧线大师型,基准30s)按 距离/1000 缩放冷却并逐弯道再发动;无冷却技能只发动一次', () => {
     const maestro = {
       ...speedSkill('maestro', 0.35, 2.4, { condition: { kind: 'cornerFastest' } as never }),
       cooldownSec: 30,
@@ -78,10 +78,10 @@ describe('技能发动', () => {
     const res = simulate(C, freshRunner([maestro, once]));
     const maestroFires = res.activations.filter(a => a.skillId === 'maestro');
     const onceFires = res.activations.filter(a => a.skillId === 'once');
-    // 东京 2400 四个弯道(160/620/1230/1760),30s 冷却不足以全部跳过 → 至少 2 次
-    expect(maestroFires.length).toBeGreaterThanOrEqual(2);
+    // 东京2400 实际冷却 = 30×2.4 = 72s:首弯道(160m,t≈9s)发动,72s 后仅剩第4弯道(1760m)可再发动 → 恰好 2 次
+    // (若漏乘距离系数,30s 冷却会在第3弯道额外发动 → 恰好可捕获该回归)
+    expect(maestroFires.length).toBe(2);
     expect(onceFires).toHaveLength(1);
-    // 每次发动都在某个弯道区内
     for (const a of maestroFires) {
       expect(C.corners.some(c => a.atMeter >= c.start && a.atMeter <= c.end)).toBe(true);
     }

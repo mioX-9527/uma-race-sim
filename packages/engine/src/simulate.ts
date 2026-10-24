@@ -198,7 +198,7 @@ export function simulate(course: Course, runner: RunnerConfig): SimResult {
       if (!hit) continue;
       if (!dynamicSatisfied(s.condition, frame)) continue;
       if (once) activated.add(s.id);
-      else readyAt.set(s.id, t + s.cooldownSec);
+      else readyAt.set(s.id, t + s.cooldownSec * distScale);
       activations.push({ skillId: s.id, name: s.name, atSec: t, atMeter: x, precision: s.precision });
       const dur = s.durationSec !== null && s.durationSec > 0 ? s.durationSec * distScale : 0;
       if (dur > 0) buffs.push({ skill: s, untilSec: t + dur });

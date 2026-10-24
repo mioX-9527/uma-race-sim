@@ -140,8 +140,9 @@ export interface SkillConfig {
   /** 效果持续时间(秒);null=瞬时(heal 等) */
   readonly durationSec: number | null;
   /**
-   * 冷却时间(秒),来自解包 float_cooldown_time;<600s 时允许同场再次发动
-   * (如 弧线大师 冷却 30s,每个弯道各发动一次);null=一次性技能
+   * 冷却时间(秒,基准值),来自解包 float_cooldown_time;运行期按 距离/1000 缩放
+   * (实际冷却 = 基准 × 距离/1000,与持续时间同规则)。<400s 基准的技能允许同场再次发动
+   * (如 弧线大师 基准 30s,东京2400 实际 72s);null=一次性技能(基准 500s)
    */
   readonly cooldownSec?: number | null;
   readonly condition: SkillCondition;
