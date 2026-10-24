@@ -159,6 +159,7 @@ export function ConfigPanel({ config, onChange }: Props): JSX.Element {
         <p className="note">
           「近似」= 发动条件依赖名次/间距/随机时刻,单马期望模型按期望位置发动;
           「不支持」(进化技能/干扰/被动等)不参与模拟。绿技能(前提值)计入待 v0.2。
+          「继承」角标 = 继承固有(数值/持续时间与本体大招不同,增幅系数恒 1.0)。
         </p>
       </section>
     </div>

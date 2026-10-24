@@ -9,6 +9,9 @@
  *    代码内「@」分隔"或"变体(对应速查表 条件N.M):限制取并集,区段取首个变体并标记 approx。
  * 2. 文本兜底 —— Lua 数据缺失的技能沿用中文文本规则解析(锚点表 + 近似词表)。
  *
+ * 继承技:固有技能的继承版(模块:技能数据库内容2,900xxx,本体 = unique_skill_id_1)
+ * 单独生成条目(rarity uniqueHeir,名称「XXX(继承)」)—— 数值/持续时间/触发条件与本体不同。
+ *
  * 精度分层:所有 token 可精确映射 → precise;含随机位置(_random)/名次/他马相关 token → approx;
  * 无可发动区段或效果不支持 → unsupported(灰显可搜索)。
  */
@@ -59,6 +62,16 @@ const luaSkills = existsSync('data/raw/skill-data-lua.json')
   ? (JSON.parse(readFileSync('data/raw/skill-data-lua.json', 'utf8')) as Array<Record<string, string>>)
   : [];
 const luaById = new Map(luaSkills.map(r => [r.id!, r]));
+/** 游戏解包技能数据其二(模块:技能数据库内容2):继承技(900xxx,本体 = unique_skill_id_1)与进化等 */
+const lua2Skills = existsSync('data/raw/skill-data-lua2.json')
+  ? (JSON.parse(readFileSync('data/raw/skill-data-lua2.json', 'utf8')) as Array<Record<string, string>>)
+  : [];
+/** 继承技三语名称(BWIKI 继承技/* 页面,fetch-heir-names.mjs 抓取);缺简中 = 国服未实装 */
+const heirNames = existsSync('data/raw/heir-skill-names.json')
+  ? (JSON.parse(readFileSync('data/raw/heir-skill-names.json', 'utf8')) as {
+      map: Record<string, { cn?: string; trad?: string; ja?: string }>;
+    }).map
+  : {};
 
 const review: Array<{ id: string; page: string; reasons: string[] }> = [];
 
@@ -554,6 +567,89 @@ function effectsFromLua(lua: Record<string, string>, slot: 1 | 2): { effects: Ou
   return { effects, hasUnsupported, allPassive };
 }
 
+/** 触发代码路径的输出元数据(本体走速查表,继承技走名称映射) */
+interface LuaSkillMeta {
+  readonly id: string;
+  readonly name: string;
+  readonly nameJa?: string;
+  readonly nameTrad?: string;
+  readonly cnReleased?: boolean;
+  readonly rarity: string;
+  readonly wisdomScaled: boolean;
+  readonly source: string;
+  readonly textRestrictionObj?: Record<string, unknown>;
+  readonly restrictionText?: string;
+}
+
+/** 解包数据单分支 → OutSkill(本体与继承技共用;review/info 由调用方落盘) */
+function skillFromLuaBranch(
+  lua: Record<string, string>,
+  slot: 1 | 2,
+  meta: LuaSkillMeta,
+): { skill: OutSkill; reasons: string[]; info: string[] } {
+  const reasons: string[] = [];
+  const info: string[] = [];
+  const cp = parseCode(lua[`condition_${slot}`] ?? '');
+  for (const n of cp.notes) {
+    (n.startsWith('未识别token') || n.includes('未知赛场') || n.includes('无已知赛场') ? reasons : info).push(n);
+  }
+  // 前置条件:限制并入,近似/未知 token 标记
+  const pre = lua[`precondition_${slot}`] ?? '';
+  if (pre !== '') {
+    const pp = parseCode(pre);
+    mergeRestriction(cp.restriction, pp.restriction);
+    if (pp.approx) cp.approx = true;
+    info.push(`前置条件:${pre}`);
+  }
+
+  const { effects, hasUnsupported, allPassive } = effectsFromLua(lua, slot);
+  if (effects.length === 0) reasons.push('无效果');
+  const rawDur = Number.parseFloat(lua[`float_ability_time_${slot}`] ?? '0');
+  const durationSec = allPassive || rawDur <= 0 ? null : Math.round((rawDur / 10000) * 1000) / 1000;
+  // heal/即时速度 为瞬时(时长 0)属正常;速度/加速度无持续才是问题
+  if (!allPassive && rawDur <= 0 && effects.some(e => e.type === 'targetSpeed' || e.type === 'acceleration' || e.type === 'lastSpurtExtension')) {
+    reasons.push('速度/加速度类效果持续时间为 0');
+  }
+  const rawCd = Number.parseFloat(lua[`float_cooldown_${slot}`] ?? lua[`float_cooldown_time_${slot}`] ?? '0');
+  const cdSec = Math.round((rawCd / 10000) * 10) / 10;
+  // 500s = 一次性(一场比赛最长不超过 ~4 分钟);仅短冷却(如 弧线大师 30s)允许同场再次发动
+  const cooldownSec = cdSec > 0 && cdSec < 400 ? cdSec : null;
+  if (lua[`ability_time_usage_${slot}`] !== undefined && lua[`ability_time_usage_${slot}`] !== '1') {
+    reasons.push(`ability_time_usage=${lua[`ability_time_usage_${slot}`]}`);
+  }
+
+  const restrictionObj = mergeRestrictionObj(cp.restriction, meta.textRestrictionObj);
+
+  let precision: OutSkill['precision'];
+  if (hasUnsupported || cp.condition === null || effects.length === 0 || allPassive) {
+    precision = 'unsupported';
+    if (cp.condition === null) reasons.push(`无可解析发动位置(${lua[`condition_${slot}`] ?? ''})`);
+    if (allPassive && effects.length > 0) reasons.push('纯被动(前提值,不参与比赛过程)');
+  } else {
+    precision = cp.approx ? 'approx' : 'precise';
+  }
+
+  const skill: OutSkill = {
+    id: meta.id,
+    name: meta.name,
+    nameJa: meta.nameJa,
+    nameTrad: meta.nameTrad,
+    cnReleased: meta.cnReleased,
+    rarity: meta.rarity,
+    precision,
+    effects,
+    durationSec,
+    ...(cooldownSec !== null ? { cooldownSec } : {}),
+    condition: cp.condition ?? { kind: 'raceStart' },
+    restriction: restrictionObj,
+    restrictionText: meta.restrictionText,
+    wisdomScaled: meta.wisdomScaled,
+    source: meta.source,
+    fetchedAt: raw.fetchedAt.slice(0, 10),
+  };
+  return { skill, reasons, info };
+}
+
 // =====================================================================
 // 文本兜底解析(原规则)
 // =====================================================================
@@ -859,10 +955,12 @@ function mergeRestrictionObj(code: CodeRestriction, textObj: Record<string, unkn
 // =====================================================================
 // 主流程
 // =====================================================================
-const stats = { raw: 0, excludedEvolution: 0, out: 0, precise: 0, approx: 0, unsupported: 0, branchEntries: 0, codeParsed: 0, textFallback: 0 };
+const stats = { raw: 0, excludedEvolution: 0, out: 0, precise: 0, approx: 0, unsupported: 0, branchEntries: 0, codeParsed: 0, textFallback: 0, heirEntries: 0 };
 const out: OutSkill[] = [];
 /** 信息性备注(环境前提/前置条件原文等),单独存放不进复核清单 */
 const infoNotes: Array<{ id: string; page: string; reasons: string[] }> = [];
+/** 本体技能名称(供继承技派生命名) */
+const baseInfo = new Map<string, { name: string; nameJa: string; nameTrad: string }>();
 
 // 按 ID 去重(速查表每技能一行)
 const rowsById = new Map<string, RawEntry>();
@@ -883,6 +981,7 @@ for (const [id, e] of rowsById) {
   const baseName = official || cleanName(prop(e, '中文名')) || nameJa;
   const tradRaw = cleanName(prop(e, '繁译名'));
   const tradName = /^(（?\(?未[实實]裝\)?）?)$/.test(tradRaw) || tradRaw === '' ? '' : tradRaw;
+  baseInfo.set(id, { name: baseName, nameJa, nameTrad: tradName || nameJa });
   const restrictionBase = prop(e, '条件限制');
   const filterHint = prop(e, '速查筛选');
   const condText = prop(e, '触发条件');
@@ -896,79 +995,30 @@ for (const [id, e] of rowsById) {
   if (lua !== undefined) {
     // ---- 触发代码路径 ----
     stats.codeParsed++;
-    const branchCodes: Array<{ slot: 1 | 2; code: string; pre: string }> = [];
-    if (lua.condition_1 !== '') branchCodes.push({ slot: 1, code: lua.condition_1, pre: lua.precondition_1 ?? '' });
-    if (lua.condition_2 !== '') branchCodes.push({ slot: 2, code: lua.condition_2, pre: lua.precondition_2 ?? '' });
+    const branchCodes: Array<{ slot: 1 | 2; code: string }> = [];
+    if (lua.condition_1 !== '') branchCodes.push({ slot: 1, code: lua.condition_1 });
+    if (lua.condition_2 !== '') branchCodes.push({ slot: 2, code: lua.condition_2 });
     const multiB = branchCodes.length > 1;
 
     branchCodes.forEach((b, bi) => {
-      const reasons: string[] = [];
-      const info: string[] = [];
       const suffix = multiB ? `-b${bi + 1}` : '';
       if (multiB) stats.branchEntries++;
-
-      const cp = parseCode(b.code);
-      for (const n of cp.notes) {
-        (n.startsWith('未识别token') || n.includes('未知赛场') || n.includes('无已知赛场') ? reasons : info).push(n);
-      }
-      // 前置条件:限制并入,近似/未知 token 标记
-      if (b.pre !== '') {
-        const pp = parseCode(b.pre);
-        mergeRestriction(cp.restriction, pp.restriction);
-        if (pp.approx) cp.approx = true;
-        info.push(`前置条件:${b.pre}`);
-      }
-
-      const { effects, hasUnsupported, allPassive } = effectsFromLua(lua, b.slot);
-      if (effects.length === 0) reasons.push('无效果');
-      const rawDur = Number.parseFloat(lua[`float_ability_time_${b.slot}`] ?? '0');
-      const durationSec = allPassive || rawDur <= 0 ? null : Math.round((rawDur / 10000) * 1000) / 1000;
-      // heal/即时速度 为瞬时(时长 0)属正常;速度/加速度无持续才是问题
-      if (!allPassive && rawDur <= 0 && effects.some(e => e.type === 'targetSpeed' || e.type === 'acceleration' || e.type === 'lastSpurtExtension')) {
-        reasons.push('速度/加速度类效果持续时间为 0');
-      }
-      const rawCd = Number.parseFloat(lua[`float_cooldown_${b.slot}`] ?? lua[`float_cooldown_time_${b.slot}`] ?? '0');
-      const cdSec = Math.round((rawCd / 10000) * 10) / 10;
-      // 500s = 一次性(一场比赛最长不超过 ~4 分钟);仅短冷却(如 弧线大师 30s)允许同场再次发动
-      const cooldownSec = cdSec > 0 && cdSec < 400 ? cdSec : null;
-      if (lua[`ability_time_usage_${b.slot}`] !== undefined && lua[`ability_time_usage_${b.slot}`] !== '1') {
-        reasons.push(`ability_time_usage=${lua[`ability_time_usage_${b.slot}`]}`);
-      }
-
-      const restrictionObj = mergeRestrictionObj(cp.restriction, textRestrictionObj);
-
-      let precision: OutSkill['precision'];
-      if (hasUnsupported || cp.condition === null || effects.length === 0 || allPassive) {
-        precision = 'unsupported';
-        if (cp.condition === null) reasons.push(`无可解析发动位置(${b.code})`);
-        if (allPassive && effects.length > 0) reasons.push('纯被动(前提值,不参与比赛过程)');
-      } else {
-        precision = cp.approx ? 'approx' : 'precise';
-      }
-
-      if (reasons.length > 0) review.push({ id: id + suffix, page: e.page, reasons: [...reasons, ...info] });
-      else if (info.length > 0) infoNotes.push({ id: id + suffix, page: e.page, reasons: info });
-
-      const skill: OutSkill = {
+      const { skill, reasons, info } = skillFromLuaBranch(lua, b.slot, {
         id: id + suffix,
         name: multiB ? `${baseName}(${bi + 1})` : baseName,
         nameJa,
         nameTrad: tradName !== '' ? tradName : undefined,
         cnReleased: official !== undefined ? true : undefined,
         rarity,
-        precision,
-        effects,
-        durationSec,
-        ...(cooldownSec !== null ? { cooldownSec } : {}),
-        condition: cp.condition ?? { kind: 'raceStart' },
-        restriction: restrictionObj,
-        restrictionText: restrictionBase !== '' && restrictionBase !== '通用' ? restrictionBase : undefined,
         wisdomScaled: rarity !== 'normal',
         source: 'BWIKI 速查表 + 触发代码(模块:技能数据库内容)',
-        fetchedAt: raw.fetchedAt.slice(0, 10),
-      };
+        textRestrictionObj,
+        restrictionText: restrictionBase !== '' && restrictionBase !== '通用' ? restrictionBase : undefined,
+      });
+      if (reasons.length > 0) review.push({ id: skill.id, page: e.page, reasons: [...reasons, ...info] });
+      else if (info.length > 0) infoNotes.push({ id: skill.id, page: e.page, reasons: info });
       out.push(skill);
-      stats[precision]++;
+      stats[skill.precision]++;
     });
     continue;
   }
@@ -1067,6 +1117,52 @@ for (const [id, e] of rowsById) {
     out.push(skill);
     stats[precision]++;
   }
+}
+
+// =====================================================================
+// 继承技(模块:技能数据库内容2):固有技能的继承版(900xxx,本体 = unique_skill_id_1)
+// 数值/持续时间/触发条件均与本体不同(如 流星:本体 6s 0.35/0.10 → 继承 3.6s 0.15/0.05);
+// 固有等级不可升级 → 智力增幅等级系数恒 1.0(rarity uniqueHeir)。
+// =====================================================================
+for (const lua of lua2Skills) {
+  const id = lua.id ?? '';
+  const idNum = Number(id);
+  if (!(idNum >= 900000 && idNum < 1000000)) continue;
+  stats.heirEntries++;
+  const baseId = lua.unique_skill_id_1 ?? '';
+  const base = baseInfo.get(baseId);
+  const nm = heirNames[id] ?? {};
+  const heirJa = nm.ja ?? base?.nameJa ?? id;
+  const heirName = nm.cn !== undefined ? `${nm.cn}(继承)` : `${base?.name ?? heirJa}(继承)`;
+  const heirTrad = nm.trad ?? base?.nameTrad ?? heirJa;
+  const page = `继承技/${heirJa}`;
+
+  const branchCodes: Array<{ slot: 1 | 2 }> = [];
+  if ((lua.condition_1 ?? '') !== '') branchCodes.push({ slot: 1 });
+  if ((lua.condition_2 ?? '') !== '') branchCodes.push({ slot: 2 });
+  if (branchCodes.length === 0) {
+    review.push({ id, page, reasons: ['无触发条件'] });
+    continue;
+  }
+  const multiB = branchCodes.length > 1;
+  branchCodes.forEach((b, bi) => {
+    if (multiB) stats.branchEntries++;
+    const { skill, reasons, info } = skillFromLuaBranch(lua, b.slot, {
+      id: id + (multiB ? `-b${bi + 1}` : ''),
+      name: multiB ? `${heirName}(${bi + 1})` : heirName,
+      nameJa: `${heirJa}(継承)`,
+      nameTrad: `${heirTrad}(繼承)`,
+      // 有简中「继承技/」页面 = 国服已实装该继承技
+      cnReleased: nm.cn !== undefined ? true : false,
+      rarity: 'uniqueHeir',
+      wisdomScaled: true,
+      source: 'BWIKI 继承技页面 + 触发代码(模块:技能数据库内容2)',
+    });
+    if (reasons.length > 0) review.push({ id: skill.id, page, reasons: [...reasons, ...info] });
+    else if (info.length > 0) infoNotes.push({ id: skill.id, page, reasons: info });
+    out.push(skill);
+    stats[skill.precision]++;
+  });
 }
 
 stats.out = out.length;

@@ -68,7 +68,9 @@ export type SkillRarity =
   | 'unique3'
   | 'unique4'
   | 'unique5'
-  | 'unique6';
+  | 'unique6'
+  /** 继承固有(900xxx):数值/时长与本体不同,等级固定,智力增幅系数恒 1.0 */
+  | 'uniqueHeir';
 
 /** 条件精度层级:精确 / 近似(依赖他马,UI 需角标) / 不支持 */
 export type Precision = 'precise' | 'approx' | 'unsupported';

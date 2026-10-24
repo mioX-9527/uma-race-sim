@@ -28,7 +28,7 @@ describe('体力探针模式(ignoreExhaustion)', () => {
 
   test('回体技能推迟体力归零点并加快完赛(体力预算重算→全程末脚)', () => {
     const base = { stats: { speed: 2400, stamina: 400, power: 1700, guts: 1200, wisdom: 1800 } };
-    const heal = { ...speedSkill('h', 0, 0), effects: [{ type: 'heal' as const, value: 0.35 }], durationSec: null, condition: { kind: 'phase' as const, phase: 1 } };
+    const heal = { ...speedSkill('h', 0, 0), effects: [{ type: 'heal' as const, value: 0.35 }], durationSec: null, condition: { kind: 'phase' as const, phase: 1 as const } };
     const noHeal = simulate(C, makeRunner(base));
     const withHeal = simulate(C, makeRunner({ ...base, skills: [heal] }));
     expect(withHeal.exhaustedAtMeter === null || withHeal.exhaustedAtMeter > noHeal.exhaustedAtMeter!).toBe(true);

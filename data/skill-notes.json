@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-24T11:09:58.753Z",
+ "generatedAt": "2026-10-24T15:21:25.240Z",
  "items": [
   {
    "id": "100031-b1",
@@ -1101,6 +1101,642 @@
     "is_exist_chara_id==1002(环境前提,视为满足)",
     "remain_distance_viewer_id>=800(环境前提,视为满足)",
     "remain_distance_viewer_id<=850(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "900031",
+   "page": "继承技/究極テイオーステップ",
+   "reasons": [
+    "前置条件:phase>=2&order_rate<=50&bashin_diff_infront<=1&is_overtake==1"
+   ]
+  },
+  {
+   "id": "900051",
+   "page": "继承技/煌星のヴォードヴィル",
+   "reasons": [
+    "前置条件:phase>=2&order_rate<=40&behind_near_lane_time_set1>=1"
+   ]
+  },
+  {
+   "id": "900121",
+   "page": "继承技/タイマン！デッドヒート！",
+   "reasons": [
+    "前置条件:is_finalcorner==1&is_behind_in==1&change_order_onetime<0&order_rate>=40"
+   ]
+  },
+  {
+   "id": "900161-b1",
+   "page": "继承技/Shadow Break",
+   "reasons": [
+    "前置条件:phase==1&blocked_side_continuetime>=2"
+   ]
+  },
+  {
+   "id": "900301",
+   "page": "继承技/ブルーローズチェイサー",
+   "reasons": [
+    "前置条件:phase>=2&order<=4&change_order_onetime<0"
+   ]
+  },
+  {
+   "id": "900311-b1",
+   "page": "继承技/チャージ完了！全速前進！",
+   "reasons": [
+    "slope==0(非坡道)按全场近似",
+    "变体锚点不同(distanceLeft / downhillFastest),取首个变体",
+    "前置条件:remain_distance<=305&remain_distance>=300&slope==1"
+   ]
+  },
+  {
+   "id": "900351",
+   "page": "继承技/勝利のチケットを、君にッ！",
+   "reasons": [
+    "前置条件:is_finalcorner==1&blocked_side_continuetime>=2"
+   ]
+  },
+  {
+   "id": "900361",
+   "page": "继承技/trigger:BEAT",
+   "reasons": [
+    "前置条件:is_finalcorner==1&order_rate>=40&order_rate<=75&lane_type==0"
+   ]
+  },
+  {
+   "id": "900441",
+   "page": "继承技/いただき☆ストレリチア！",
+   "reasons": [
+    "前置条件:order_rate_out50_continue==1&temptation_count==0&is_finalcorner==1"
+   ]
+  },
+  {
+   "id": "900471-b1",
+   "page": "继承技/掲げよ、己が魂の剣を！",
+   "reasons": [
+    "grade==100(环境前提,视为满足)",
+    "popularity<=3(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "900491-b1",
+   "page": "继承技/剣ヶ峰より、狂気に嗤え",
+   "reasons": [
+    "popularity>=4(环境前提,视为满足)",
+    "前置条件:is_finalcorner==1&is_overtake==1"
+   ]
+  },
+  {
+   "id": "900491-b2",
+   "page": "继承技/剣ヶ峰より、狂気に嗤え",
+   "reasons": [
+    "popularity<4(环境前提,视为满足)",
+    "前置条件:is_finalcorner==1&is_overtake==1"
+   ]
+  },
+  {
+   "id": "900511",
+   "page": "继承技/つぼみ、ほころぶ時",
+   "reasons": [
+    "前置条件:phase==1&blocked_side_continuetime>=2&corner!=0"
+   ]
+  },
+  {
+   "id": "900541",
+   "page": "继承技/疾風爆走ペガサスダッシュ！",
+   "reasons": [
+    "前置条件:order_rate>=45&distance_rate>=50&change_order_onetime<0"
+   ]
+  },
+  {
+   "id": "900551-b1",
+   "page": "继承技/万彩☆マーベラス★世界",
+   "reasons": [
+    "visiblehorse>=4(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "900701-b1",
+   "page": "继承技/セイリオス",
+   "reasons": [
+    "popularity<=3(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "900721",
+   "page": "继承技/烈火繚乱、無敵之舞",
+   "reasons": [
+    "前置条件:is_finalcorner==1&change_order_onetime<0"
+   ]
+  },
+  {
+   "id": "900771",
+   "page": "继承技/Road to Glory",
+   "reasons": [
+    "前置条件:distance_rate>=60&phase==1&order>=2&order_rate<=40"
+   ]
+  },
+  {
+   "id": "900781-b1",
+   "page": "继承技/風光る",
+   "reasons": [
+    "前置条件:distance_rate>=50&order_rate_out20_continue==1"
+   ]
+  },
+  {
+   "id": "900781-b2",
+   "page": "继承技/風光る",
+   "reasons": [
+    "前置条件:distance_rate>=50&order_rate_out20_continue==1"
+   ]
+  },
+  {
+   "id": "900791-b1",
+   "page": "继承技/『船橋最強！』",
+   "reasons": [
+    "前置条件:phase==1&order_rate<=50&blocked_side_continuetime>=2"
+   ]
+  },
+  {
+   "id": "900791-b2",
+   "page": "继承技/『船橋最強！』",
+   "reasons": [
+    "前置条件:phase==1&order_rate<=50&blocked_side_continuetime>=2"
+   ]
+  },
+  {
+   "id": "900831-b1",
+   "page": "继承技/Mission: Triumph",
+   "reasons": [
+    "直线/弯道与坡道条件叠加,未取交集(近似)"
+   ]
+  },
+  {
+   "id": "900841",
+   "page": "继承技/霹靂のアウフヘーベン",
+   "reasons": [
+    "前置条件:phase>=2&order_rate>=50"
+   ]
+  },
+  {
+   "id": "900881-b1",
+   "page": "继承技/Reversal Illusion",
+   "reasons": [
+    "前置条件:change_order_up_middle>=1&is_finalcorner==1&corner!=0&order_rate<=70&order_rate>=40"
+   ]
+  },
+  {
+   "id": "900881-b2",
+   "page": "继承技/Reversal Illusion",
+   "reasons": [
+    "前置条件:is_finalcorner==1&corner!=0&order_rate<=70&order_rate>=40"
+   ]
+  },
+  {
+   "id": "900911-b1",
+   "page": "继承技/デラックス☆ファウンテン",
+   "reasons": [
+    "前置条件:phase>=2&is_last_straight_onetime==1&order_rate>=30&order_rate<=70&temptation_count==0"
+   ]
+  },
+  {
+   "id": "900911-b2",
+   "page": "继承技/デラックス☆ファウンテン",
+   "reasons": [
+    "前置条件:phase>=2&is_last_straight_onetime==1&order_rate>=30&order_rate<=70"
+   ]
+  },
+  {
+   "id": "900991",
+   "page": "继承技/かがやけ☆とまこまい",
+   "reasons": [
+    "前置条件:phase==1&blocked_side_continuetime>=2&corner!=0"
+   ]
+  },
+  {
+   "id": "901061-b1",
+   "page": "继承技/Bang☆ミラクるわせ！",
+   "reasons": [
+    "popularity>=4(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "901101-b1",
+   "page": "继承技/Guiding Sea",
+   "reasons": [
+    "is_basis_distance==1(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "901171-b1",
+   "page": "继承技/鋭気のアレグロ",
+   "reasons": [
+    "前置条件:running_style==4&phase>=2"
+   ]
+  },
+  {
+   "id": "901171-b2",
+   "page": "继承技/鋭気のアレグロ",
+   "reasons": [
+    "前置条件:phase>=2"
+   ]
+  },
+  {
+   "id": "901211-b1",
+   "page": "继承技/Lame de vent",
+   "reasons": [
+    "前置条件:is_finalcorner==1&corner!=0&change_order_onetime<0"
+   ]
+  },
+  {
+   "id": "901211-b2",
+   "page": "继承技/Lame de vent",
+   "reasons": [
+    "前置条件:is_finalcorner==1&corner!=0&change_order_onetime<0"
+   ]
+  },
+  {
+   "id": "901351-b1",
+   "page": "继承技/黄金を訪ねて",
+   "reasons": [
+    "前置条件:running_style==3@running_style==4"
+   ]
+  },
+  {
+   "id": "901361",
+   "page": "继承技/無垢の祈り・ホーリーライト",
+   "reasons": [
+    "前置条件:distance_type==2@distance_type==3"
+   ]
+  },
+  {
+   "id": "901371",
+   "page": "继承技/想像×創造＝∞",
+   "reasons": [
+    "前置条件:distance_type==3@distance_type==4"
+   ]
+  },
+  {
+   "id": "901411-b1",
+   "page": "继承技/光れ！弾けろ！超新星爆発！",
+   "reasons": [
+    "前置条件:running_style==1@running_style==2"
+   ]
+  },
+  {
+   "id": "901431-b1",
+   "page": "继承技/Ring-a-Link",
+   "reasons": [
+    "前置条件:distance_rate>=16&distance_rate<=18&order_rate>=50"
+   ]
+  },
+  {
+   "id": "901491-b1",
+   "page": "继承技/烈々と咲く",
+   "reasons": [
+    "前置条件:running_style==2@running_style==3"
+   ]
+  },
+  {
+   "id": "910021-b1",
+   "page": "继承技/水平線のその先へ",
+   "reasons": [
+    "前置条件:phase==1&bashin_diff_behind>=3&order==1"
+   ]
+  },
+  {
+   "id": "910031",
+   "page": "继承技/絶対は、ボクだ",
+   "reasons": [
+    "前置条件:is_finalcorner==1&is_overtake==1&order<=5&order_rate<=50&overtake_target_no_order_up_time>=2"
+   ]
+  },
+  {
+   "id": "910081-b1",
+   "page": "继承技/Into High Gear!",
+   "reasons": [
+    "slope==0(非坡道)按全场近似",
+    "变体锚点不同(raceStart / uphillFastest),取首个变体",
+    "前置条件:phase>=1&slope==2&order_rate>=50&order_rate<=80&track_id==10006"
+   ]
+  },
+  {
+   "id": "910081-b2",
+   "page": "继承技/Into High Gear!",
+   "reasons": [
+    "slope==0(非坡道)按全场近似",
+    "变体锚点不同(raceStart / uphillFastest),取首个变体",
+    "前置条件:phase>=1&slope==2&order_rate>=50&order_rate<=80"
+   ]
+  },
+  {
+   "id": "910121",
+   "page": "继承技/大盛り！ファーストバイト！",
+   "reasons": [
+    "前置条件:change_order_up_middle>=3"
+   ]
+  },
+  {
+   "id": "910171",
+   "page": "继承技/翳り退く、さざめきの矢",
+   "reasons": [
+    "前置条件:phase>=2&order_rate<=50&overtake_target_time>=2"
+   ]
+  },
+  {
+   "id": "910251-b1",
+   "page": "继承技/心からのおもてにゃし",
+   "reasons": [
+    "前置条件:distance_rate>=50&order_rate_out40_continue==1"
+   ]
+  },
+  {
+   "id": "910251-b2",
+   "page": "继承技/心からのおもてにゃし",
+   "reasons": [
+    "前置条件:distance_rate>=50&order_rate_out40_continue==1"
+   ]
+  },
+  {
+   "id": "910341",
+   "page": "继承技/灯穂",
+   "reasons": [
+    "前置条件:phase>=2&corner!=0&order_rate>=60&is_overtake==1"
+   ]
+  },
+  {
+   "id": "910361-b1",
+   "page": "继承技/...found you.",
+   "reasons": [
+    "前置条件:phase==1&change_order_onetime>0&order_rate>=50&order_rate<=80"
+   ]
+  },
+  {
+   "id": "910391",
+   "page": "继承技/快なる剛力",
+   "reasons": [
+    "slope==0(非坡道)按全场近似",
+    "变体锚点不同(raceStart / downhillFastest),取首个变体",
+    "前置条件:phase>=1&slope==1&order_rate>=40&order_rate<=80"
+   ]
+  },
+  {
+   "id": "910481-b1",
+   "page": "继承技/GALmem.ふぉーえば♪",
+   "reasons": [
+    "motivation==5(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "910551-b1",
+   "page": "继承技/喝采☆ワンダードール！",
+   "reasons": [
+    "motivation==5(环境前提,视为满足)",
+    "前置条件:phase>=2&is_finalcorner==1&corner!=0&near_count>=1&order_rate>=30&order_rate<=70"
+   ]
+  },
+  {
+   "id": "910551-b2",
+   "page": "继承技/喝采☆ワンダードール！",
+   "reasons": [
+    "前置条件:phase>=2&is_finalcorner==1&corner!=0&near_count>=1&order_rate>=30&order_rate<=70"
+   ]
+  },
+  {
+   "id": "910601-b1",
+   "page": "继承技/Go☆Go☆for it!",
+   "reasons": [
+    "popularity>=4(环境前提,视为满足)",
+    "前置条件:is_finalcorner==1&change_order_onetime<0"
+   ]
+  },
+  {
+   "id": "910601-b2",
+   "page": "继承技/Go☆Go☆for it!",
+   "reasons": [
+    "popularity<4(环境前提,视为满足)",
+    "前置条件:is_finalcorner==1&change_order_onetime<0"
+   ]
+  },
+  {
+   "id": "910611",
+   "page": "继承技/轟！トレセン応援団！！",
+   "reasons": [
+    "前置条件:distance_rate>=50&order_rate_out70_continue==1&temptation_count==0"
+   ]
+  },
+  {
+   "id": "910691",
+   "page": "继承技/咲け咲け！私！",
+   "reasons": [
+    "前置条件:phase==1&blocked_side_continuetime>=2"
+   ]
+  },
+  {
+   "id": "910701-b1",
+   "page": "继承技/駆るは光、狩るは星々",
+   "reasons": [
+    "base_power>=1200(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "910721",
+   "page": "继承技/剛勇果断、烈火之刀",
+   "reasons": [
+    "前置条件:distance_rate>=40&distance_rate<=50&blocked_side_continuetime>=2"
+   ]
+  },
+  {
+   "id": "910741-b2",
+   "page": "继承技/Illuminate you",
+   "reasons": [
+    "base_stamina>=1200(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "910771-b1",
+   "page": "继承技/Joy to the World",
+   "reasons": [
+    "前置条件:phase_firsthalf==1&is_activate_heal_skill==1"
+   ]
+  },
+  {
+   "id": "910771-b2",
+   "page": "继承技/Joy to the World",
+   "reasons": [
+    "前置条件:phase_firsthalf==1&is_activate_heal_skill==1"
+   ]
+  },
+  {
+   "id": "910831",
+   "page": "继承技/Immortal Work",
+   "reasons": [
+    "前置条件:distance_rate>=50&distance_rate<=51&order_rate>=40&order_rate<=80"
+   ]
+  },
+  {
+   "id": "910871-b1",
+   "page": "继承技/ふわもこアワー",
+   "reasons": [
+    "base_wiz>=1200(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "910931-b1",
+   "page": "继承技/きせき・おもい・かなで",
+   "reasons": [
+    "前置条件:phase==1&order_rate<=70&order_rate>=20&blocked_side_continuetime>=2"
+   ]
+  },
+  {
+   "id": "910931-b2",
+   "page": "继承技/きせき・おもい・かなで",
+   "reasons": [
+    "前置条件:phase==1&order_rate<=70&order_rate>=20&blocked_side_continuetime>=2"
+   ]
+  },
+  {
+   "id": "911021",
+   "page": "继承技/ケ・ピアチェーヴォレ！",
+   "reasons": [
+    "前置条件:distance_rate>=50&order_rate_in50_continue==1"
+   ]
+  },
+  {
+   "id": "911091",
+   "page": "继承技/ずっとずっと輝いて",
+   "reasons": [
+    "前置条件:track_id==10009&course_distance==1600@track_id==10008&course_distance==2000@track_id==10006&course_distance==2400"
+   ]
+  },
+  {
+   "id": "911161-b1",
+   "page": "继承技/不凋なるCattleya",
+   "reasons": [
+    "前置条件:distance_rate>=50&distance_rate<=51&order_rate<=80&order_rate>=40&distance_type==3"
+   ]
+  },
+  {
+   "id": "911161-b2",
+   "page": "继承技/不凋なるCattleya",
+   "reasons": [
+    "前置条件:distance_rate>=50&distance_rate<=51&order_rate<=80&order_rate>=40&distance_type==3"
+   ]
+  },
+  {
+   "id": "911191-b2",
+   "page": "继承技/夢寐に見る銀世界",
+   "reasons": [
+    "前置条件:distance_type==4&phase>=2&corner!=0&change_order_onetime<0&is_activate_other_skill_detail==1"
+   ]
+  },
+  {
+   "id": "911271-b1",
+   "page": "继承技/剛心鉄壁ガーディアン",
+   "reasons": [
+    "前置条件:distance_rate>=50&overtake_target_time>=2"
+   ]
+  },
+  {
+   "id": "920011-b1",
+   "page": "继承技/威風堂々、夢錦！",
+   "reasons": [
+    "前置条件:track_id==10005"
+   ]
+  },
+  {
+   "id": "920031-b1",
+   "page": "继承技/歌舞歓楽や、ああをかし",
+   "reasons": [
+    "前置条件:distance_rate>=50&order_rate<=50&overtake_target_time>=2"
+   ]
+  },
+  {
+   "id": "920031-b2",
+   "page": "继承技/歌舞歓楽や、ああをかし",
+   "reasons": [
+    "前置条件:distance_rate>=50&order_rate<=50&overtake_target_time>=2"
+   ]
+  },
+  {
+   "id": "920111-b1",
+   "page": "继承技/演舞・撫子大薙刀",
+   "reasons": [
+    "is_basis_distance==0(环境前提,视为满足)",
+    "前置条件:distance_rate>=50&order_rate<=70&order_rate>=30&overtake_target_time>=1@distance_rate>=50&order_rate<=70&order_rate>=30&is_overtake==1"
+   ]
+  },
+  {
+   "id": "920111-b2",
+   "page": "继承技/演舞・撫子大薙刀",
+   "reasons": [
+    "前置条件:distance_rate>=50&order_rate<=70&order_rate>=30&overtake_target_time>=1@distance_rate>=50&order_rate<=70&order_rate>=30&is_overtake==1"
+   ]
+  },
+  {
+   "id": "920171",
+   "page": "继承技/Cascading Might",
+   "reasons": [
+    "前置条件:running_style==2@running_style==3"
+   ]
+  },
+  {
+   "id": "920351-b1",
+   "page": "继承技/GO! Full-send",
+   "reasons": [
+    "popularity<=3(环境前提,视为满足)",
+    "前置条件:phase==1&change_order_onetime<0&order_rate>=40&order_rate<=80"
+   ]
+  },
+  {
+   "id": "920351-b2",
+   "page": "继承技/GO! Full-send",
+   "reasons": [
+    "前置条件:phase==1&change_order_onetime<0&order_rate>=40&order_rate<=80"
+   ]
+  },
+  {
+   "id": "920401-b2",
+   "page": "继承技/Silent Sunset Gold",
+   "reasons": [
+    "前置条件:phase>=2&blocked_side_continuetime>=2&corner!=0&is_activate_other_skill_detail==1"
+   ]
+  },
+  {
+   "id": "920411-b1",
+   "page": "继承技/桜吹雪くスプリントバースト",
+   "reasons": [
+    "前置条件:running_style==1@running_style==2"
+   ]
+  },
+  {
+   "id": "920411-b2",
+   "page": "继承技/桜吹雪くスプリントバースト",
+   "reasons": [
+    "前置条件:running_style==1@running_style==2"
+   ]
+  },
+  {
+   "id": "920481",
+   "page": "继承技/ヤバ技☆ジャグルビート",
+   "reasons": [
+    "slope==0(非坡道)按全场近似",
+    "变体锚点不同(raceStart / uphillFastest),取首个变体",
+    "slope==0(非坡道)按全场近似",
+    "变体锚点不同(raceStart / uphillFastest),取首个变体",
+    "前置条件:phase>=1&slope==2&order_rate>=30&order_rate<=70"
+   ]
+  },
+  {
+   "id": "920611",
+   "page": "继承技/理想へのwinding road",
+   "reasons": [
+    "前置条件:remain_distance<=600&order_rate>=40&order_rate<=80&is_behind_in==1&change_order_onetime<0"
+   ]
+  },
+  {
+   "id": "920741-b1",
+   "page": "继承技/夕凪のリトリート・メモリー",
+   "reasons": [
+    "前置条件:distance_type==3&phase==1&change_order_onetime>0@distance_type==4&phase==1&change_order_onetime>0"
    ]
   }
  ]

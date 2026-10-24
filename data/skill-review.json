@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-24T11:09:58.751Z",
+ "generatedAt": "2026-10-24T15:21:25.238Z",
  "items": [
   {
    "id": "100191",
@@ -1746,6 +1746,151 @@
    "page": "匣の抑圧",
    "reasons": [
     "纯被动(前提值,不参与比赛过程)"
+   ]
+  },
+  {
+   "id": "900191",
+   "page": "继承技/尊み☆ﾗｽﾄｽﾊﾟ—(ﾟ∀ﾟ)—ﾄ!",
+   "reasons": [
+    "无可解析发动位置(change_order_up_end_after>=2)"
+   ]
+  },
+  {
+   "id": "900341",
+   "page": "继承技/快走かな、快走かな！",
+   "reasons": [
+    "无可解析发动位置(compete_fight_count>0)",
+    "前置条件:distance_rate>=50&order_rate_out40_continue==1"
+   ]
+  },
+  {
+   "id": "900431-b1",
+   "page": "继承技/Ding Dong Boo",
+   "reasons": [
+    "无可解析发动位置(compete_fight_count>0&ground_type==2)"
+   ]
+  },
+  {
+   "id": "900431-b2",
+   "page": "继承技/Ding Dong Boo",
+   "reasons": [
+    "无可解析发动位置(compete_fight_count>0)"
+   ]
+  },
+  {
+   "id": "900531",
+   "page": "继承技/熱血！！風紀アタック",
+   "reasons": [
+    "ability_time_usage=4"
+   ]
+  },
+  {
+   "id": "900591",
+   "page": "继承技/彼方、その先へ…",
+   "reasons": [
+    "未识别token:is_finalcorner==0",
+    "变体锚点不同(cornerFastest / finalCorner),取首个变体"
+   ]
+  },
+  {
+   "id": "900661-b2",
+   "page": "继承技/エンジン全開！大噴射！",
+   "reasons": [
+    "速度/加速度类效果持续时间为 0"
+   ]
+  },
+  {
+   "id": "900741",
+   "page": "继承技/麗しき花信風",
+   "reasons": [
+    "ability_time_usage=3"
+   ]
+  },
+  {
+   "id": "900801",
+   "page": "继承技/Info: Acquired",
+   "reasons": [
+    "无可解析发动位置(is_other_character_activate_advantage_skill==31)",
+    "前置条件:distance_rate>=50&order_rate_in20_continue==1"
+   ]
+  },
+  {
+   "id": "901031-b2",
+   "page": "继承技/絶対最強☆アピール宣言！",
+   "reasons": [
+    "无可解析发动位置(is_activate_other_skill_detail==1&compete_fight_count>0)"
+   ]
+  },
+  {
+   "id": "901201",
+   "page": "继承技/無二無三なる一条の路",
+   "reasons": [
+    "无可解析发动位置(furlong==3&order_rate<=50)",
+    "furlong==3(环境前提,视为满足)"
+   ]
+  },
+  {
+   "id": "901451",
+   "page": "继承技/冠絶タクティクス",
+   "reasons": [
+    "无可解析发动位置(is_goodstart==1)",
+    "前置条件:running_style==2@running_style==4"
+   ]
+  },
+  {
+   "id": "910211",
+   "page": "继承技/火神鳴",
+   "reasons": [
+    "无可解析发动位置(activate_count_middle>=2)"
+   ]
+  },
+  {
+   "id": "910411",
+   "page": "继承技/CHERRY☆スクランブル",
+   "reasons": [
+    "ability_time_usage=5"
+   ]
+  },
+  {
+   "id": "910521",
+   "page": "继承技/113転び114起き",
+   "reasons": [
+    "ability_time_usage=2"
+   ]
+  },
+  {
+   "id": "910571",
+   "page": "继承技/爛然闊歩",
+   "reasons": [
+    "ability_time_usage=3"
+   ]
+  },
+  {
+   "id": "910621-b1",
+   "page": "继承技/ごろりん！？パワードライブ",
+   "reasons": [
+    "ability_time_usage=7"
+   ]
+  },
+  {
+   "id": "910621-b2",
+   "page": "继承技/ごろりん！？パワードライブ",
+   "reasons": [
+    "ability_time_usage=7"
+   ]
+  },
+  {
+   "id": "920051",
+   "page": "继承技/Gloire à toi!",
+   "reasons": [
+    "无可解析发动位置(activate_count_later_half>=1)"
+   ]
+  },
+  {
+   "id": "920131",
+   "page": "继承技/きらめくは海、まばゆきは君",
+   "reasons": [
+    "ability_time_usage=3"
    ]
   }
  ]

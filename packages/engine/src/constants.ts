@@ -147,6 +147,8 @@ export const RARITY_LEVEL_FACTOR: Readonly<Record<SkillRarity, number>> = {
   unique4: 1.07,
   unique5: 1.1,
   unique6: 1.13,
+  // 继承固有(900xxx)不可升级,按 Lv.1 = 1.0
+  uniqueHeir: 1.0,
 };
 
 /** 末脚延展折算为冲刺额外加速度的比例(Excel AA79,614tools) */
