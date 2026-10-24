@@ -85,6 +85,10 @@ export function activationRegions(cond: SkillCondition, course: Course): readonl
       const c = course.corners[course.corners.length - 1];
       return c ? [[c.start, c.end]] : [];
     }
+    case 'finalCornerOnward': {
+      const c = course.corners[course.corners.length - 1];
+      return c ? [[c.start, L]] : [];
+    }
     case 'thirdCornerFromEnd': {
       const c = course.corners[course.corners.length - 3];
       return c ? [[c.start, c.end]] : [];

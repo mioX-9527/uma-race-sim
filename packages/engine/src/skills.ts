@@ -1,5 +1,16 @@
 import { LAST_SPURT_EXT_ACCEL_SCALE, MOTIVATION_WISDOM_MULT, RARITY_LEVEL_FACTOR } from './constants';
-import type { RunnerConfig, SkillConfig } from './types';
+import type { Course, RunnerConfig, SkillConfig, SkillRestriction } from './types';
+
+/** 装配型限制(脚质/距离档/场地/赛场/场地状态/精确距离)是否满足;不满足则整场不发动 */
+export function restrictionSatisfied(r: SkillRestriction, runner: RunnerConfig, course: Course): boolean {
+  if (r.tactics !== undefined && !r.tactics.includes(runner.tactic)) return false;
+  if (r.distanceTypes !== undefined && (course.distanceType === undefined || !r.distanceTypes.includes(course.distanceType))) return false;
+  if (r.surfaces !== undefined && !r.surfaces.includes(course.surface)) return false;
+  if (r.venues !== undefined && !r.venues.includes(course.venue)) return false;
+  if (r.grounds !== undefined && !r.grounds.includes(runner.groundCondition ?? 0)) return false;
+  if (r.distances !== undefined && !r.distances.includes(course.distance)) return false;
+  return true;
+}
 
 export interface Buff {
   readonly skill: SkillConfig;

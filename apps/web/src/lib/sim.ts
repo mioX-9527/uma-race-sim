@@ -1,4 +1,4 @@
-import type { Course, Motivation, RunnerConfig, SkillConfig, Stats, Tactic, Aptitude } from '@uma-race-sim/engine';
+import type { Course, Motivation, RunnerConfig, SkillConfig, SkillRestriction, Stats, Tactic, Aptitude } from '@uma-race-sim/engine';
 import coursesJson from '../../../../data/courses.json';
 import skillsJson from '../../../../data/skills.json';
 
@@ -6,7 +6,7 @@ export interface SkillEntry extends SkillConfig {
   readonly nameJa?: string;
   readonly nameTrad?: string;
   readonly cnReleased?: boolean;
-  readonly restriction?: string;
+  readonly restrictionText?: string;
 }
 
 export const COURSES = coursesJson as unknown as Course[];
@@ -25,6 +25,7 @@ export function describeCondition(c: SkillConfig['condition']): string {
     case 'cornerN': return `第${c.n}个弯道`;
     case 'cornerFastest': return `首个弯道${c.phaseFilter !== undefined ? `(限${PHASE_LABEL[c.phaseFilter]})` : ''}`;
     case 'finalCorner': return '最终弯道';
+    case 'finalCornerOnward': return '最终弯道及往后';
     case 'thirdCornerFromEnd': return '最终第3弯道';
     case 'lateCorner': return '终盘弯道';
     case 'midCorner': return '中盘弯道';
@@ -109,4 +110,21 @@ export const APTITUDES: readonly Aptitude[] = ['S', 'A', 'B', 'C', 'D', 'E', 'F'
 
 export function fmtSec(v: number): string {
   return `${Math.floor(v / 60)}:${(v % 60).toFixed(2).padStart(5, '0')}`;
+}
+
+const DISTTYPE_LABEL: Record<string, string> = { short: '短距离', mile: '英里', mid: '中距离', long: '长距离' };
+const GROUND_LABEL: Record<number, string> = { 0: '良场', 1: '好场', 2: '稍重', 3: '不良' };
+
+/** 装配型限制 → 中文短描述 */
+export function describeRestriction(s: SkillConfig): string {
+  const r = s.restriction;
+  if (r === undefined) return '';
+  const parts: string[] = [];
+  if (r.tactics !== undefined) parts.push(r.tactics.map(t => TACTIC_LABEL[t]).join('/'));
+  if (r.distanceTypes !== undefined) parts.push(r.distanceTypes.map(d => DISTTYPE_LABEL[d] ?? d).join('/'));
+  if (r.surfaces !== undefined) parts.push(r.surfaces.map(x => (x === 'turf' ? '草地' : '泥地')).join('/'));
+  if (r.venues !== undefined) parts.push(`${r.venues.join('/')}赛场`);
+  if (r.distances !== undefined) parts.push(r.distances.map(d => `${d}m`).join('/'));
+  if (r.grounds !== undefined) parts.push(r.grounds.map(g => GROUND_LABEL[g] ?? `${g}`).join('/'));
+  return parts.join(' · ');
 }

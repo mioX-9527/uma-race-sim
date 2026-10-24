@@ -35,7 +35,8 @@ interface OutSkill {
   effects: OutEffect[];
   durationSec: number | null;
   condition: Record<string, unknown>;
-  restriction?: string;
+  restriction?: Record<string, unknown>;
+  restrictionText?: string;
   wisdomScaled: boolean;
   source: string;
   fetchedAt: string;
@@ -125,6 +126,8 @@ function parseDuration(s: string, reasons: string[]): number | null {
 const ANCHORS: Array<{ re: RegExp; kind: string; approxHint?: boolean }> = [
   { re: /最终第?三弯道/, kind: 'thirdCornerFromEnd' },
   { re: /最终直线/, kind: 'finalStraight' },
+  { re: /最终弯道及(往后|以后)/, kind: 'finalCornerOnward' },
+  { re: /最终弯道后半/, kind: 'finalCorner', approxHint: true },
   { re: /最终弯道/, kind: 'finalCorner' },
   { re: /终盘直线/, kind: 'lateStraight' },
   { re: /终盘弯道/, kind: 'lateCorner' },
@@ -136,7 +139,7 @@ const ANCHORS: Array<{ re: RegExp; kind: string; approxHint?: boolean }> = [
   { re: /直线/, kind: 'straightFastest' },
   { re: /最后冲刺|最终冲刺状态/, kind: 'phase3', approxHint: true },
   { re: /最终盘/, kind: 'phase3' },
-  { re: /终盘前半|终盘后半|终盘四分之三|终盘前四分之一|终盘中后/, kind: 'phase2', approxHint: true },
+  { re: /终盘前半|终盘后半|终盘四分之三|终盘前四分之一|终盘中后|终盘前八分之一/, kind: 'phase2', approxHint: true },
   { re: /终盘/, kind: 'phase2' },
   { re: /中盘后半|中盘前半/, kind: 'phase1', approxHint: true },
   { re: /中盘/, kind: 'phase1' },
@@ -144,7 +147,7 @@ const ANCHORS: Array<{ re: RegExp; kind: string; approxHint?: boolean }> = [
 ];
 const PHASE_OF = { phase0: 0, phase1: 1, phase2: 2, phase3: 3 } as const;
 const SEGMENT_KINDS = new Set(['cornerFastest', 'straightFastest', 'uphillFastest', 'downhillFastest']);
-const APPROX_RE = /名次|超过|紧跟|贴[近着]|距离前|距离后|内道|外道|侧面阻挡|包围|随机|队伍位置|最大冲刺|冲刺状态|对手|马身|体力[≥<＝=]|发动技能|发动第一段|焦躁|仕掛|先后|保持/;
+const APPROX_RE = /名次|超过|紧跟|贴[近着]|距离前|距离后|内道|外道|侧面阻挡|包围|随机|队伍位置|最大冲刺|冲刺状态|比拼|对手|马身|体力[≥<＝=]|发动技能|发动第一段|焦躁|仕掛|先后|保持|数量|人气|力量数值|智力数值/;
 const CONTEXT_RE = /逃马|大逃|先行|差行|差马|追马|短距离|英里|中距离|长距离|泥地|草地|比赛距离=\d+|[场競马場]|春天|夏天|秋天|冬天|良场|重马场|不良马场|稍重|马场状态/;
 
 interface CondParse {
@@ -160,23 +163,64 @@ function parseCondition(text: string, fallbackFilter: string): CondParse {
   let approx = false;
   let anchor: { kind: string; n?: number; approxHint?: boolean } | null = null;
   let phaseWord: number | null = null;
+  let remainLo: number | null = null;
+  let remainHi: number | null = null;
 
-  const segments = text.split(/[，,。;；、]/).map(s => s.trim()).filter(Boolean);
+  const segments = text
+    .split(/[，,。;；、]/)
+    .map(s => s.replace(/^(前置条件|触发条件|条件)\s*[:：]\s*/, '').trim())
+    .filter(Boolean);
   for (const seg of segments) {
     if (seg === '') continue;
     if (CONTEXT_RE.test(seg)) { restrictions.push(seg); continue; }
-    // 数值条件
+    // 距离/时间类数值条件
     let m = seg.match(/行进距离[≥>]=?\s*(\d+(?:\.\d+)?)\s*[％%]/);
-    if (m) { anchor = anchor && anchor.kind !== 'raceStart' ? anchor : { kind: 'positionPct' }; (anchor as Record<string, unknown>).pct = Number.parseFloat(m[1]!); continue; }
+    if (m) {
+      if (anchor === null || anchor.kind === 'raceStart') anchor = { kind: 'positionPct', n: undefined };
+      (anchor as Record<string, unknown>).pct = Number.parseFloat(m[1]!);
+      continue;
+    }
+    m = seg.match(/(\d+)\s*%\s*≤\s*行进距离\s*≤\s*(\d+)\s*%/);
+    if (m) {
+      anchor = { kind: 'positionPct' };
+      (anchor as Record<string, unknown>).pct = (Number.parseFloat(m[1]!) + Number.parseFloat(m[2]!)) / 2;
+      approx = true;
+      continue;
+    }
+    m = seg.match(/(\d+)\s*m?\s*≤\s*剩余距离\s*≤\s*(\d+)\s*m?/) ?? seg.match(/剩余距离[≥>]=?\s*(\d+)\s*m/);
+    if (m === null) m = seg.match(/剩余距离[≤<]=?\s*(\d+)\s*m/);
+    if (m !== null && m.length >= 2) {
+      if (m.length >= 3 && m[2] !== undefined && m[1] !== undefined && /≤\s*剩余距离/.test(seg)) {
+        remainLo = Number.parseFloat(m[1]!);
+        remainHi = Number.parseFloat(m[2]!);
+      } else {
+        const v = Number.parseFloat((m[1] ?? m[2])!);
+        if (/剩余距离[≤<]/.test(seg) && !/≤\s*剩余距离/.test(seg)) remainHi = v;
+        else remainLo = v;
+      }
+      continue;
+    }
+    m = seg.match(/行进距离[≥>]=?\s*(\d+)\s*m/);
+    if (m) {
+      if (anchor === null || anchor.kind === 'raceStart') anchor = { kind: 'distanceRun' };
+      (anchor as Record<string, unknown>).meters = Number.parseFloat(m[1]!);
+      (anchor as Record<string, unknown>).base = 'start';
+      continue;
+    }
     m = seg.match(/(?:赛事|比赛)?进行时间[≥>]=?\s*(\d+(?:\.\d+)?)/);
-    if (m) { approx = true; anchor = anchor && anchor.kind !== 'raceStart' ? anchor : { kind: 'elapsedSec' }; (anchor as Record<string, unknown>).seconds = Number.parseFloat(m[1]!); (anchor as Record<string, unknown>).base = 'start'; continue; }
+    if (m) {
+      approx = true;
+      if (anchor === null || anchor.kind === 'raceStart') anchor = { kind: 'elapsedSec' };
+      (anchor as Record<string, unknown>).seconds = Number.parseFloat(m[1]!);
+      (anchor as Record<string, unknown>).base = 'start';
+      continue;
+    }
     // 锚点(表按特异性从高到低,命中即可能覆盖之前的宽泛锚点)
     let matched = false;
     for (let i = 0; i < ANCHORS.length; i++) {
       const a = ANCHORS[i]!;
       const am = seg.match(a.re);
       if (am) {
-        // 只有更特异(下标更小)或尚无锚点时覆盖
         const curIdx = anchor ? ANCHORS.findIndex(x => x.kind === anchor!.kind) : -1;
         if (curIdx === -1 || i < curIdx) {
           const nm = a.kind === 'cornerN' ? am[1] : undefined;
@@ -198,13 +242,23 @@ function parseCondition(text: string, fallbackFilter: string): CondParse {
     reasons.push(seg);
   }
 
+  // 剩余距离范围(两点夹逼取中点;单侧上限取该点)
+  if (remainLo !== null || remainHi !== null) {
+    const mid = remainLo !== null && remainHi !== null ? (remainLo + remainHi) / 2 : (remainHi ?? remainLo)!;
+    anchor = { kind: 'distanceLeft' };
+    (anchor as Record<string, unknown>).meters = Math.round(mid);
+    approx = true;
+  }
+
+  // 无条件类:必定触发/常时 → 起步时(不标近似)
+  if (anchor === null && /必定触发|无特殊条件|常时|无条件/.test(text)) {
+    return { condition: { kind: 'raceStart' }, approx, restrictions, unresolved: reasons };
+  }
+
   // 主条件没解析出锚点时,用速查筛选字段兜底
   if (anchor === null && fallbackFilter !== '') {
     const fb = parseCondition(fallbackFilter, '');
     if (fb.condition !== null) {
-      anchor = fb.condition as unknown as { kind: string };
-      approx = approx;
-      // 兜底视为期望发动(approx)
       return { condition: fb.condition, approx: true, restrictions, unresolved: reasons };
     }
   }
@@ -223,12 +277,55 @@ function parseCondition(text: string, fallbackFilter: string): CondParse {
     condition = { kind: 'positionPct', pct: (anchor as unknown as { pct?: number }).pct ?? 50 };
   } else if (kind === 'elapsedSec') {
     condition = { kind: 'elapsedSec', seconds: (anchor as unknown as { seconds?: number }).seconds ?? 5, base: 'start' };
+  } else if (kind === 'distanceRun') {
+    condition = { kind: 'distanceRun', meters: (anchor as unknown as { meters?: number }).meters ?? 100, base: 'start' };
+  } else if (kind === 'distanceLeft') {
+    condition = { kind: 'distanceLeft', meters: (anchor as unknown as { meters?: number }).meters ?? 200 };
   } else {
     condition = SEGMENT_KINDS.has(kind)
       ? { kind, ...(phaseWord !== null ? { phaseFilter: phaseWord } : {}) }
       : { kind };
   }
   return { condition, approx: approx || (anchor.approxHint === true), restrictions, unresolved: reasons };
+}
+
+// ---------- 限制(脚质/场地/赛场)结构化 ----------
+const TACTIC_MAP: Record<string, string> = { 逃马: 'nige', 大逃: 'nige', 先行: 'senko', 差行: 'sashi', 差马: 'sashi', 追马: 'oikomi' };
+const DISTTYPE_MAP: Record<string, string> = { 短距离: 'short', 英里: 'mile', 中距离: 'mid', 长距离: 'long' };
+const VENUE_LIST = ['东京', '中山', '京都', '阪神', '札幌', '函馆', '新潟', '福岛', '中京', '小仓', '大井', '川崎', '船桥', '盛冈', '隆尚', '圣安妮塔公园', '德尔马'];
+
+function buildRestriction(rawTexts: readonly string[]): Record<string, unknown> | undefined {
+  const tactics = new Set<string>();
+  const dts = new Set<string>();
+  const surfaces = new Set<string>();
+  const venues = new Set<string>();
+  const grounds = new Set<number>();
+  const distances = new Set<number>();
+  for (const s of rawTexts) {
+    if (!s.includes('数量')) {
+      // 「追马数量≥1」这类说的是场上其他马,不是自身脚质限制
+      for (const [k, v] of Object.entries(TACTIC_MAP)) if (s.includes(k)) tactics.add(v);
+    }
+    for (const [k, v] of Object.entries(DISTTYPE_MAP)) if (s.includes(k)) dts.add(v);
+    if (s.includes('泥地')) surfaces.add('dirt');
+    if (s.includes('草地')) surfaces.add('turf');
+    for (const v of VENUE_LIST) if (s.includes(v)) venues.add(v);
+    const dm = s.match(/比赛距离[=＝](\d+)\s*m?/);
+    if (dm !== null) distances.add(Number.parseInt(dm[1]!, 10));
+    if (/重马场或不良/.test(s)) { grounds.add(2); grounds.add(3); }
+    else if (s.includes('不良马场')) grounds.add(3);
+    else if (s.includes('稍重')) grounds.add(2);
+    else if (s.includes('良场')) grounds.add(0);
+  }
+  if (tactics.size + dts.size + surfaces.size + venues.size + grounds.size + distances.size === 0) return undefined;
+  const out: Record<string, unknown> = {};
+  if (tactics.size > 0) out.tactics = [...tactics];
+  if (dts.size > 0) out.distanceTypes = [...dts];
+  if (surfaces.size > 0) out.surfaces = [...surfaces];
+  if (venues.size > 0) out.venues = [...venues];
+  if (grounds.size > 0) out.grounds = [...grounds].sort();
+  if (distances.size > 0) out.distances = [...distances];
+  return out;
 }
 
 // ---------- 主流程 ----------
@@ -309,6 +406,7 @@ for (const e of raw.results) {
     const cp = parseCondition(branchCond || filterHint, filterHint);
     const prem = parseCondition(condPremise, '');
     const restrictions = [...new Set([...cp.restrictions, ...prem.restrictions, ...(restrictionBase !== '' && restrictionBase !== '通用' ? [restrictionBase] : [])])];
+    const restrictionObj = buildRestriction(restrictions);
     let approx = cp.approx || prem.approx;
     if (branchCond === '' && condPremise === '') reasons.push('触发条件为空');
 
@@ -334,7 +432,8 @@ for (const e of raw.results) {
       effects,
       durationSec,
       condition: cp.condition ?? { kind: 'raceStart' },
-      restriction: restrictions.length > 0 ? restrictions.join(',') : undefined,
+      restriction: restrictionObj,
+      restrictionText: restrictions.length > 0 ? restrictions.join(',') : undefined,
       wisdomScaled: rarity !== 'normal',
       source: 'BWIKI 技能速查表',
       fetchedAt: raw.fetchedAt.slice(0, 10),

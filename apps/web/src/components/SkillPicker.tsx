@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { PRECISION_LABEL, SKILLS, describeCondition, describeEffects, type SkillEntry } from '../lib/sim';
+import { PRECISION_LABEL, SKILLS, describeCondition, describeEffects, describeRestriction, type SkillEntry } from '../lib/sim';
 
 interface Props {
   selected: readonly string[];
@@ -60,7 +60,10 @@ export function SkillPicker({ selected, onChange }: Props): JSX.Element {
               </div>
               <div className="meta">
                 {describeCondition(s.condition)} · {describeEffects(s)}
-                {s.restriction !== undefined && s.restriction !== '' ? ` · 限${s.restriction}` : ''}
+                {(() => {
+                  const rst = describeRestriction(s);
+                  return rst !== '' ? ` · 限:${rst}` : '';
+                })()}
                 {s.nameJa !== undefined && s.nameJa !== s.name ? ` · 原名:${s.nameJa}` : ''}
               </div>
             </div>

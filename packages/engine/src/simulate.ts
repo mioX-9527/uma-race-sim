@@ -13,7 +13,7 @@ import {
 import { activationRegions, dynamicSatisfied, inRegion, type FrameState } from './conditions';
 import { phaseAt } from './phase';
 import { baseAccelOf, baseSpeedOf, lastSpurtSpeedOf, minSpeedOf, phaseTargetSpeed } from './speed';
-import { accelerationBonus, applyInstant, spurtExtensionAccel, targetSpeedBonus, type Buff } from './skills';
+import { accelerationBonus, applyInstant, restrictionSatisfied, spurtExtensionAccel, targetSpeedBonus, type Buff } from './skills';
 import { gutsDrainModifier, maxHpOf, staminaDrainPerSecond } from './stamina';
 import type { Activation, Course, RunnerConfig, SimResult, Slope } from './types';
 
@@ -188,6 +188,7 @@ export function simulate(course: Course, runner: RunnerConfig): SimResult {
     const frame: FrameState = { t, x, phase };
     for (const s of runner.skills) {
       if (activated.has(s.id) || s.precision === 'unsupported') continue;
+      if (s.restriction !== undefined && !restrictionSatisfied(s.restriction, runner, course)) continue;
       const hit = activationRegions(s.condition, course).some(r => inRegion(r, x));
       if (!hit) continue;
       if (!dynamicSatisfied(s.condition, frame)) continue;

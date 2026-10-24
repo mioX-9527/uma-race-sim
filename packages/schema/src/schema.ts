@@ -38,6 +38,16 @@ export const courseSchema = z.object({
 const conditionBase = z.enum(['start', 'midStart', 'lateStart', 'finalStart']);
 const phaseId = z.union([z.literal(0), z.literal(1), z.literal(2), z.literal(3)]);
 
+const restrictionSchema = z.object({
+  tactics: z.array(z.enum(['nige', 'senko', 'sashi', 'oikomi'])).optional(),
+  distanceTypes: z.array(z.enum(['short', 'mile', 'mid', 'long'])).optional(),
+  surfaces: z.array(z.enum(['turf', 'dirt'])).optional(),
+  venues: z.array(z.string()).optional(),
+  grounds: z.array(z.union([z.literal(0), z.literal(1), z.literal(2), z.literal(3)])).optional(),
+  distances: z.array(z.number().int().positive()).optional(),
+  rawText: z.string().optional(),
+});
+
 export const skillConditionSchema = z.discriminatedUnion('kind', [
   z.object({ kind: z.literal('raceStart') }),
   z.object({ kind: z.literal('phase'), phase: z.union([z.literal(0), z.literal(1), z.literal(2), z.literal(3)]) }),
@@ -45,6 +55,7 @@ export const skillConditionSchema = z.discriminatedUnion('kind', [
   z.object({ kind: z.literal('cornerN'), n: z.number().int().positive() }),
   z.object({ kind: z.literal('cornerFastest'), phaseFilter: phaseId.optional() }),
   z.object({ kind: z.literal('finalCorner') }),
+  z.object({ kind: z.literal('finalCornerOnward') }),
   z.object({ kind: z.literal('thirdCornerFromEnd') }),
   z.object({ kind: z.literal('lateCorner') }),
   z.object({ kind: z.literal('midCorner') }),
@@ -80,8 +91,9 @@ export const skillSchema = z.object({
   effects: z.array(skillEffectSchema).min(1),
   durationSec: z.number().positive().nullable(),
   condition: skillConditionSchema,
-  /** 条件限制(距离/跑法)装配时已过滤,数据层保留原始描述 */
-  restriction: z.string().optional(),
+  restriction: restrictionSchema.optional(),
+  /** 条件限制原始描述(装配时已过滤,数据层保留原始描述) */
+  restrictionText: z.string().optional(),
   wisdomScaled: z.boolean(),
   /** 数据来源与抓取日期,供追溯 */
   source: z.string().optional(),

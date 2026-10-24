@@ -11,6 +11,7 @@ export const TOKYO_TURF_2400: Course = {
   venue: '东京',
   distance: 2400,
   surface: 'turf',
+  distanceType: 'mid',
   corners: [
     { n: 1, start: 160, end: 420 },
     { n: 2, start: 620, end: 830 },

@@ -93,6 +93,8 @@ export type SkillCondition =
   | { readonly kind: 'cornerN'; readonly n: number }
   | { readonly kind: 'cornerFastest'; readonly phaseFilter?: PhaseId }
   | { readonly kind: 'finalCorner' }
+  /** 最终弯道及往后(最终弯道起点直至终点) */
+  | { readonly kind: 'finalCornerOnward' }
   | { readonly kind: 'thirdCornerFromEnd' }
   | { readonly kind: 'lateCorner' }
   | { readonly kind: 'midCorner' }
@@ -115,12 +117,28 @@ export interface SkillConfig {
   /** 效果持续时间(秒);null=瞬时(heal 等) */
   readonly durationSec: number | null;
   readonly condition: SkillCondition;
+  /** 脚质/场地/赛场等装配型限制 */
+  readonly restriction?: SkillRestriction;
   /** 是否受智力增幅(固有/レア) */
   readonly wisdomScaled: boolean;
 }
 
 /** 场地状态:0=良 1=好 2=稍重 3=不良 */
 export type GroundCondition = 0 | 1 | 2 | 3;
+
+/** 技能的脚质/场地/赛场等装配型限制(不满足则整场不发动) */
+export interface SkillRestriction {
+  /** 脚质(大逃并入逃马) */
+  readonly tactics?: readonly Tactic[];
+  readonly distanceTypes?: readonly ('short' | 'mile' | 'mid' | 'long')[];
+  readonly surfaces?: readonly ('turf' | 'dirt')[];
+  readonly venues?: readonly string[];
+  readonly grounds?: readonly GroundCondition[];
+  /** 精确比赛距离(米) */
+  readonly distances?: readonly number[];
+  /** 原始限制文本(展示用) */
+  readonly rawText?: string;
+}
 
 export interface RunnerConfig {
   readonly stats: Stats;
