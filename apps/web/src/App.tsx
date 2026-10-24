@@ -66,7 +66,7 @@ export function App(): JSX.Element {
       <header className="app-header">
         <h1>uma-race-sim · 赛马娘赛道模拟器</h1>
         <span className="sub">
-          单马确定性期望模型 · 赛道补正按门槛属性自动计算 · 对拍 614tools(×1.2 档)差 0.038s / 游戏实录差 0.26s · v0.3 开发版
+          单马确定性期望模型 · 赛道补正按门槛属性自动计算 · 与游戏实录基准偏差 0.26s · v0.3 开发版
         </span>
       </header>
 
@@ -97,7 +97,7 @@ export function App(): JSX.Element {
         <span
           className={`item ${staminaJudge.verdict === 'safe' ? '' : 'warn'}`}
           title={
-            '耐力温存判定(614tools 耐力计算器口径):不温存跑完全程所需 HP ' +
+            '耐力温存判定(温存回避口径):不温存跑完全程所需 HP ' +
             `${Math.round(staminaJudge.required)} × 1.04(判定余量) × 1.05(安全余量) = 回避线 ` +
             `${Math.round(staminaJudge.avoidLine)};体力上限 ${Math.round(result.maxHp)};` +
             '到达度 = 上限/回避线,≥100% 判定余量充足。'
@@ -138,7 +138,7 @@ export function App(): JSX.Element {
 
       <p className="disclaimer">
         非官方同人开源工具(GPL-3.0),与 Cygames/bilibili 无关;《赛马娘 Pretty Derby》名称与商标归各权利方所有。
-        数据来源:BWIKI 技能速查表与社区解包研究;数值仅作育成参考。随机机制(焦躁/追比/多马阻挡等)不参与 v0.1 计算,近似项已在界面标注。
+        数据来源:公开解包数据与社区攻略资料整理;数值仅作育成参考。随机机制(焦躁/追比/多马阻挡等)不参与 v0.1 计算,近似项已在界面标注。
       </p>
     </div>
   );
