@@ -1916,8 +1916,7 @@
   ],
   "durationSec": 6,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "wisdomScaled": true,
   "source": "BWIKI 技能速查表",
@@ -4538,8 +4537,7 @@
   ],
   "durationSec": 5,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "restriction": {
    "distanceTypes": [
@@ -4567,8 +4565,7 @@
   ],
   "durationSec": 5,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "wisdomScaled": true,
   "source": "BWIKI 技能速查表",
@@ -4822,8 +4819,7 @@
   ],
   "durationSec": 3,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "restriction": {
    "distanceTypes": [
@@ -5073,8 +5069,7 @@
   ],
   "durationSec": 2,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "restriction": {
    "tactics": [
@@ -5275,8 +5270,7 @@
   ],
   "durationSec": 2,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "restriction": {
    "tactics": [
@@ -5834,8 +5828,7 @@
   ],
   "durationSec": 6,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "wisdomScaled": true,
   "source": "BWIKI 技能速查表",
@@ -9280,8 +9273,7 @@
   ],
   "durationSec": 5,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "restriction": {
    "distanceTypes": [
@@ -9308,8 +9300,7 @@
   ],
   "durationSec": 5,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "wisdomScaled": true,
   "source": "BWIKI 技能速查表",
@@ -9866,8 +9857,7 @@
   ],
   "durationSec": 4,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "restriction": {
    "tactics": [
@@ -9897,8 +9887,7 @@
   ],
   "durationSec": 4,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "restriction": {
    "tactics": [
@@ -11860,8 +11849,7 @@
   ],
   "durationSec": 5,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "wisdomScaled": true,
   "source": "BWIKI 技能速查表",
@@ -11882,8 +11870,7 @@
   ],
   "durationSec": 4,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "wisdomScaled": true,
   "source": "BWIKI 技能速查表",
@@ -15164,8 +15151,7 @@
   ],
   "durationSec": 3,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "restrictionText": "紧跟前方马娘时间≥1",
   "wisdomScaled": true,
@@ -15193,8 +15179,7 @@
   ],
   "durationSec": 3,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "restrictionText": "紧跟前方马娘时间≥1",
   "wisdomScaled": false,
@@ -15265,8 +15250,7 @@
   ],
   "durationSec": 2.4,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "wisdomScaled": true,
   "source": "BWIKI 技能速查表",
@@ -15288,8 +15272,7 @@
   ],
   "durationSec": 2.4,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "wisdomScaled": false,
   "source": "BWIKI 技能速查表",
@@ -15910,8 +15893,7 @@
   ],
   "durationSec": 3,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "restriction": {
    "tactics": [
@@ -15939,8 +15921,7 @@
   ],
   "durationSec": 3,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "restriction": {
    "tactics": [
@@ -15969,7 +15950,7 @@
   "durationSec": 0.9,
   "condition": {
    "kind": "straightFastest",
-   "phaseFilter": 3
+   "spurt": true
   },
   "restriction": {
    "tactics": [
@@ -15998,7 +15979,7 @@
   "durationSec": 0.9,
   "condition": {
    "kind": "straightFastest",
-   "phaseFilter": 3
+   "spurt": true
   },
   "restriction": {
    "tactics": [
@@ -23764,8 +23745,7 @@
   ],
   "durationSec": 3,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "restriction": {
    "surfaces": [
@@ -24773,8 +24753,7 @@
   ],
   "durationSec": 1.5,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "restriction": {
    "tactics": [
@@ -24809,8 +24788,7 @@
   ],
   "durationSec": 1.5,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "restriction": {
    "tactics": [
@@ -27174,7 +27152,7 @@
   "durationSec": 0.9,
   "condition": {
    "kind": "straightFastest",
-   "phaseFilter": 3
+   "spurt": true
   },
   "restriction": {
    "tactics": [
@@ -27206,7 +27184,7 @@
   "durationSec": 0.9,
   "condition": {
    "kind": "straightFastest",
-   "phaseFilter": 3
+   "spurt": true
   },
   "restriction": {
    "tactics": [
@@ -30576,8 +30554,7 @@
   ],
   "durationSec": 3,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "restriction": {
    "tactics": [
@@ -30604,8 +30581,7 @@
   ],
   "durationSec": 3,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "restriction": {
    "tactics": [
@@ -30632,8 +30608,7 @@
   ],
   "durationSec": 3,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "restriction": {
    "distanceTypes": [
@@ -30660,8 +30635,7 @@
   ],
   "durationSec": 3,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "restriction": {
    "distanceTypes": [
@@ -31270,8 +31244,7 @@
   ],
   "durationSec": 3,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "restriction": {
    "distanceTypes": [
@@ -31298,8 +31271,7 @@
   ],
   "durationSec": 3,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "restriction": {
    "distanceTypes": [
@@ -31438,8 +31410,7 @@
   ],
   "durationSec": 3,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "restriction": {
    "tactics": [
@@ -31466,8 +31437,7 @@
   ],
   "durationSec": 3,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "restriction": {
    "tactics": [
@@ -31552,8 +31522,7 @@
   ],
   "durationSec": 3,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "restriction": {
    "surfaces": [
@@ -31580,8 +31549,7 @@
   ],
   "durationSec": 3,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "restriction": {
    "surfaces": [
@@ -32160,7 +32128,7 @@
   "durationSec": 0.9,
   "condition": {
    "kind": "straightFastest",
-   "phaseFilter": 3
+   "spurt": true
   },
   "restriction": {
    "tactics": [
@@ -32188,7 +32156,7 @@
   "durationSec": 0.9,
   "condition": {
    "kind": "straightFastest",
-   "phaseFilter": 3
+   "spurt": true
   },
   "restriction": {
    "tactics": [
@@ -32427,8 +32395,7 @@
   ],
   "durationSec": 3,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "restriction": {
    "tactics": [
@@ -32455,8 +32422,7 @@
   ],
   "durationSec": 3,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "restriction": {
    "tactics": [
@@ -34252,8 +34218,7 @@
   ],
   "durationSec": 3,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "restriction": {
    "surfaces": [
@@ -34279,8 +34244,7 @@
   ],
   "durationSec": 3,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "restriction": {
    "surfaces": [
@@ -34665,8 +34629,7 @@
   ],
   "durationSec": 3,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "restriction": {
    "distanceTypes": [
@@ -34692,8 +34655,7 @@
   ],
   "durationSec": 3,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "restriction": {
    "distanceTypes": [
@@ -35781,7 +35743,7 @@
   "durationSec": 0.9,
   "condition": {
    "kind": "straightFastest",
-   "phaseFilter": 3
+   "spurt": true
   },
   "restriction": {
    "tactics": [
@@ -35808,7 +35770,7 @@
   "durationSec": 0.9,
   "condition": {
    "kind": "straightFastest",
-   "phaseFilter": 3
+   "spurt": true
   },
   "restriction": {
    "tactics": [
@@ -36424,8 +36386,7 @@
   ],
   "durationSec": 3,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "restriction": {
    "tactics": [
@@ -36748,8 +36709,7 @@
   ],
   "durationSec": 3,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "restriction": {
    "surfaces": [
@@ -36775,8 +36735,7 @@
   ],
   "durationSec": 3,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "restriction": {
    "surfaces": [
@@ -37569,8 +37528,7 @@
   ],
   "durationSec": 2.4,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "wisdomScaled": true,
   "source": "BWIKI 技能速查表",
@@ -37592,8 +37550,7 @@
   ],
   "durationSec": 2.4,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "wisdomScaled": false,
   "source": "BWIKI 技能速查表",
@@ -37642,8 +37599,7 @@
   ],
   "durationSec": 3,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "wisdomScaled": false,
   "source": "BWIKI 技能速查表",
@@ -37665,8 +37621,7 @@
   ],
   "durationSec": 4,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "wisdomScaled": false,
   "source": "BWIKI 技能速查表",
@@ -38064,8 +38019,7 @@
   ],
   "durationSec": 2.4,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "restriction": {
    "distanceTypes": [
@@ -38093,8 +38047,7 @@
   ],
   "durationSec": 2.4,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "restriction": {
    "distanceTypes": [
@@ -38236,8 +38189,7 @@
   ],
   "durationSec": 2.4,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "wisdomScaled": true,
   "source": "BWIKI 技能速查表",
@@ -38258,8 +38210,7 @@
   ],
   "durationSec": 2.4,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "wisdomScaled": false,
   "source": "BWIKI 技能速查表",
@@ -38335,8 +38286,7 @@
   ],
   "durationSec": 2.4,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "wisdomScaled": true,
   "source": "BWIKI 技能速查表",
@@ -38356,8 +38306,7 @@
   ],
   "durationSec": 2.4,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "wisdomScaled": false,
   "source": "BWIKI 技能速查表",
@@ -38377,8 +38326,7 @@
   ],
   "durationSec": 2.4,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "wisdomScaled": true,
   "source": "BWIKI 技能速查表",
@@ -38398,8 +38346,7 @@
   ],
   "durationSec": 2.4,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "wisdomScaled": false,
   "source": "BWIKI 技能速查表",
@@ -38419,8 +38366,7 @@
   ],
   "durationSec": 2.4,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "wisdomScaled": true,
   "source": "BWIKI 技能速查表",
@@ -38440,8 +38386,7 @@
   ],
   "durationSec": 2.4,
   "condition": {
-   "kind": "phase",
-   "phase": 3
+   "kind": "lastSpurt"
   },
   "wisdomScaled": false,
   "source": "BWIKI 技能速查表",

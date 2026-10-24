@@ -7,6 +7,8 @@ export interface FrameState {
   readonly t: number;
   readonly x: number;
   readonly phase: PhaseId;
+  /** 是否处于末脚(最终冲刺)状态 */
+  readonly isSpurt: boolean;
 }
 
 function boundOf(course: Course, key: ConditionBase | PhaseId): number {
@@ -60,9 +62,13 @@ export function activationRegions(cond: SkillCondition, course: Course): readonl
   const L = course.distance;
   const late = course.phaseBounds.lateStart;
   const phaseFilter = 'phaseFilter' in cond ? cond.phaseFilter : undefined;
+  const spurtFilter = 'spurt' in cond ? cond.spurt === true : false;
   switch (cond.kind) {
     case 'raceStart':
       return [[0, 0]];
+    /** 末脚(动态起点):可发动区间为 [终盘分界, 终点],配合逐帧 isSpurt 判定 */
+    case 'lastSpurt':
+      return [[late, L]];
     case 'phase': {
       const from = boundOf(course, cond.phase);
       const to = cond.phase < 3 ? boundOf(course, (cond.phase + 1) as PhaseId) : L;
@@ -75,6 +81,9 @@ export function activationRegions(cond: SkillCondition, course: Course): readonl
       return c ? [[c.start, c.end]] : [];
     }
     case 'cornerFastest': {
+      if (spurtFilter) {
+        return course.corners.filter(c => c.end > late).map(c => [c.start, c.end] as Region);
+      }
       if (phaseFilter !== undefined) {
         const lo = boundOf(course, phaseFilter);
         const hi = phaseEndOf(course, phaseFilter);
@@ -111,6 +120,9 @@ export function activationRegions(cond: SkillCondition, course: Course): readonl
       return from < L ? [[from, L]] : [];
     }
     case 'straightFastest': {
+      if (spurtFilter) {
+        return straightGaps(course).filter(g => g[1] > late);
+      }
       if (phaseFilter !== undefined) {
         const lo = boundOf(course, phaseFilter);
         const hi = phaseEndOf(course, phaseFilter);
@@ -125,6 +137,9 @@ export function activationRegions(cond: SkillCondition, course: Course): readonl
       return g ? [[Math.max(g[0], late), g[1]]] : [];
     }
     case 'uphillFastest': {
+      if (spurtFilter) {
+        return course.slopes.filter(s => s.gradient > 0 && s.end > late).map(s => [s.start, s.end] as Region);
+      }
       if (phaseFilter !== undefined) {
         const lo = boundOf(course, phaseFilter);
         const hi = phaseEndOf(course, phaseFilter);
@@ -135,6 +150,9 @@ export function activationRegions(cond: SkillCondition, course: Course): readonl
       return s ? [[s.start, s.end]] : [];
     }
     case 'downhillFastest': {
+      if (spurtFilter) {
+        return course.slopes.filter(s => s.gradient < 0 && s.end > late).map(s => [s.start, s.end] as Region);
+      }
       if (phaseFilter !== undefined) {
         const lo = boundOf(course, phaseFilter);
         const hi = phaseEndOf(course, phaseFilter);
@@ -171,6 +189,13 @@ export function dynamicSatisfied(cond: SkillCondition, s: FrameState): boolean {
     case 'elapsedSec':
       // v0.1 精确层仅支持基准=起步;其余基准属近似层,由数据侧标记 approx
       return cond.base === 'start' && s.t >= cond.seconds;
+    case 'lastSpurt':
+      return s.isSpurt;
+    case 'cornerFastest':
+    case 'straightFastest':
+    case 'uphillFastest':
+    case 'downhillFastest':
+      return cond.spurt === true ? s.isSpurt : true;
     default:
       return true;
   }

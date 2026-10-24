@@ -185,7 +185,7 @@ export function simulate(course: Course, runner: RunnerConfig): SimResult {
     }
 
     // ---- 技能发动 ----
-    const frame: FrameState = { t, x, phase };
+    const frame: FrameState = { t, x, phase, isSpurt: spurtOn };
     for (const s of runner.skills) {
       if (activated.has(s.id) || s.precision === 'unsupported') continue;
       if (s.restriction !== undefined && !restrictionSatisfied(s.restriction, runner, course)) continue;

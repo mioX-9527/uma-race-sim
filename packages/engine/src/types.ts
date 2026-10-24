@@ -91,7 +91,7 @@ export type SkillCondition =
   | { readonly kind: 'phase'; readonly phase: PhaseId }
   | { readonly kind: 'phaseAfter'; readonly phase: PhaseId }
   | { readonly kind: 'cornerN'; readonly n: number }
-  | { readonly kind: 'cornerFastest'; readonly phaseFilter?: PhaseId }
+  | { readonly kind: 'cornerFastest'; readonly phaseFilter?: PhaseId; readonly spurt?: boolean }
   | { readonly kind: 'finalCorner' }
   /** 最终弯道及往后(最终弯道起点直至终点) */
   | { readonly kind: 'finalCornerOnward' }
@@ -99,10 +99,12 @@ export type SkillCondition =
   | { readonly kind: 'lateCorner' }
   | { readonly kind: 'midCorner' }
   | { readonly kind: 'finalStraight' }
-  | { readonly kind: 'straightFastest'; readonly phaseFilter?: PhaseId }
+  | { readonly kind: 'straightFastest'; readonly phaseFilter?: PhaseId; readonly spurt?: boolean }
   | { readonly kind: 'lateStraight' }
-  | { readonly kind: 'uphillFastest'; readonly phaseFilter?: PhaseId }
-  | { readonly kind: 'downhillFastest'; readonly phaseFilter?: PhaseId }
+  | { readonly kind: 'uphillFastest'; readonly phaseFilter?: PhaseId; readonly spurt?: boolean }
+  | { readonly kind: 'downhillFastest'; readonly phaseFilter?: PhaseId; readonly spurt?: boolean }
+  /** 末脚(最终冲刺)期间:动态起点(体力预算解算,≥ 终盘分界),非固定 5/6 */
+  | { readonly kind: 'lastSpurt' }
   | { readonly kind: 'distanceRun'; readonly meters: number; readonly base: ConditionBase }
   | { readonly kind: 'distanceLeft'; readonly meters: number }
   | { readonly kind: 'elapsedSec'; readonly seconds: number; readonly base: ConditionBase }

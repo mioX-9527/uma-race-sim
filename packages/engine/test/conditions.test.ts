@@ -29,6 +29,14 @@ describe('发动条件 → 可发动区间(静态预解析)', () => {
     expect(activationRegions({ kind: 'straightFastest', phaseFilter: 3 }, C)).toEqual([[1980, 2400]]);
   });
 
+  test('末脚(动态) → 区间为 [终盘分界, 终点]', () => {
+    expect(activationRegions({ kind: 'lastSpurt' }, C)).toEqual([[1440, 2400]]);
+  });
+
+  test('直线最快·末脚内 → 返回终盘分界后的所有直线段(运行时按 isSpurt 判定)', () => {
+    expect(activationRegions({ kind: 'straightFastest', spurt: true }, C)).toEqual([[1470, 1760], [1980, 2400]]);
+  });
+
   test('下坡最快 → 首个下坡段', () => {
     expect(activationRegions({ kind: 'downhillFastest' }, C)).toEqual([[1250, 1500]]);
   });

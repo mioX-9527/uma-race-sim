@@ -137,7 +137,7 @@ const ANCHORS: Array<{ re: RegExp; kind: string; approxHint?: boolean }> = [
   { re: /下坡/, kind: 'downhillFastest' },
   { re: /弯道/, kind: 'cornerFastest' },
   { re: /直线/, kind: 'straightFastest' },
-  { re: /最后冲刺|最终冲刺/, kind: 'phase3', approxHint: true },
+  { re: /最后冲刺|最终冲刺/, kind: 'lastSpurt', approxHint: true },
   { re: /最终盘/, kind: 'phase3' },
   { re: /终盘前半|终盘后半|终盘四分之三|终盘前四分之一|终盘中后|终盘前八分之一/, kind: 'phase2', approxHint: true },
   { re: /终盘/, kind: 'phase2' },
@@ -251,9 +251,11 @@ function parseCondition(text: string, fallbackFilter: string): CondParse {
   }
 
   // 阶段语境兜底:锚点分句本身不含阶段词时,从全文推断
-  // (如「最后冲刺，直线」→ 直线应限最终盘,而非比赛首个直线)
+  // 「最后冲刺/最终冲刺」= 末脚(动态起点,体力预算解算);「最终盘」= 固定 5/6;其余为固定阶段
+  let spurtContext = false;
   if (anchor !== null && phaseWord === null && SEGMENT_KINDS.has(anchor.kind)) {
-    if (/最终盘|最后冲刺|最终冲刺/.test(text)) phaseWord = 3;
+    if (/最后冲刺|最终冲刺/.test(text)) spurtContext = true;
+    else if (/最终盘/.test(text)) phaseWord = 3;
     else if (/终盘/.test(text)) phaseWord = 2;
     else if (/中盘/.test(text)) phaseWord = 1;
     else if (/序盘/.test(text)) phaseWord = 0;
@@ -292,7 +294,9 @@ function parseCondition(text: string, fallbackFilter: string): CondParse {
     condition = { kind: 'distanceLeft', meters: (anchor as unknown as { meters?: number }).meters ?? 200 };
   } else {
     condition = SEGMENT_KINDS.has(kind)
-      ? { kind, ...(phaseWord !== null ? { phaseFilter: phaseWord } : {}) }
+      ? spurtContext
+        ? { kind, spurt: true }
+        : { kind, ...(phaseWord !== null ? { phaseFilter: phaseWord } : {}) }
       : { kind };
   }
   return { condition, approx: approx || (anchor.approxHint === true), restrictions, unresolved: reasons };

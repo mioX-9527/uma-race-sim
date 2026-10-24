@@ -13,13 +13,24 @@ export const COURSES = coursesJson as unknown as Course[];
 export const SKILLS = skillsJson as unknown as SkillEntry[];
 
 const PHASE_LABEL: Record<number, string> = { 0: '序盘', 1: '中盘', 2: '终盘', 3: '最终盘' };
+const SEGMENT_LABEL: Record<string, string> = {
+  cornerFastest: '弯道',
+  straightFastest: '直线',
+  uphillFastest: '上坡',
+  downhillFastest: '下坡',
+};
 const BASE_LABEL: Record<string, string> = { start: '起点', midStart: '中盘起', lateStart: '终盘起', finalStart: '最终盘起' };
 const STAT_LABEL: Record<string, string> = { speed: '速度', stamina: '耐力', power: '力量', guts: '根性', wisdom: '智力' };
 
 /** 发动条件 → 中文短描述 */
 export function describeCondition(c: SkillConfig['condition']): string {
+  const seg = SEGMENT_LABEL[c.kind];
+  if (seg !== undefined && 'spurt' in c && c.spurt === true) {
+    return `末脚内首个${seg}(末脚为动态起点)`;
+  }
   switch (c.kind) {
     case 'raceStart': return '起步时';
+    case 'lastSpurt': return '末脚期间(动态起点)';
     case 'phase': return `仅${PHASE_LABEL[c.phase]}`;
     case 'phaseAfter': return `${PHASE_LABEL[c.phase]}起`;
     case 'cornerN': return `第${c.n}个弯道`;
