@@ -35,8 +35,13 @@ tools              抓取/清洗/构建后处理脚本(见下表)
    精确距离与范围/**场地状态(含 !=、>=、<=)**/回转方向 rotation/天气 weather/季节 season/**干劲 motivation**/
    **海外 is_abroad**/**面板属性 base_speed 等**)——不满足则整场不生效(绿技能不计入起跑属性)。
    环境类缺省口径:场地状态 良(0)、天气 晴(1)、季节 春(1)。
+   ⚠ **`is_basis_distance` 不是距离档**:1 = 赛程全长为 **400 米整数倍**(标准距离/根干距离),0 = 非倍数;
+   与「短/英里/中/长」互相穿插(1600 属英里但为倍数、2500 属长距离但非倍数)。存为 `restriction.basisDistance` 布尔,
+   引擎判 `course.distance % 400 === 0`。**按中文技能名猜语义会全反**(2026-10-25 实际发生过,见 parity-log 二次勘误)。
    **语义分层(改 clean-skills 必读)**:同一支(`&`)= 与,同字段多次出现取**交集**(`putSet`);
-   `@` 变体与 `condition_1/condition_2` = 或,每支单独成子句,输出 `restriction.anyOf`(任一满足即生效)。
+   **`@` 分隔的变体 = 或**,每支单独成子句,输出 `restriction.anyOf`(任一满足即生效);
+   `precondition_N`(前提)与 `condition_N`(发动条件)= 与;`condition_1`/`condition_2` 是两组独立效果块(拆 -b1/-b2),
+   **不是**同一技能的或分支。
    只有真正异构的分支才留 `anyOf`;单字段差异会被 `simplifyClauseObjs` 化简回扁平结构
    ((A∧X)∨(A∧Y) ≡ A∧(X∨Y)),被支配的子句由 `dropDominated` 剔除。
    **不要退回「一层并集」**:那会把「A 支限短距离、B 支不限」压成「限短距离」,全库约 400 条技能会错。
@@ -146,14 +151,17 @@ node tools/clean-skills.ts    # 重新生成 skills.json(node 24 直跑 TS)
   不匹配则不计入;消融表绿技能行 位置=「常时」,收益来自去掉它后的属性差;
   **不满足限制的技能在技能列表/消融表标「不生效」**(AblationRow.applicable=false,收益恒 0)。
   调用链务必传 course:`effectiveStatsOf` / `courseFixOf` / `passiveBonusOf` / `gutsDrainModifier`
-  —— 传 undefined 会把带限制的绿技能当成不生效(2026-10-25 踩过,代价是全库 157 条绿技能归零);
+  —— 传 undefined 会把带限制的绿技能当成不生效(2026-10-25 踩过,当时 164 条带限制绿技能全部归零);
 - 随机机制不建模:焦躁/追比/取位争夺/多马阻挡/下坡模式/智力 24 区间修正(614tools 也仅显示);
   天气/季节虽可选,但除技能条件外不参与任何计算(见 §6);场地状态参与体力消耗;
 - 仍未建模的触发代码 token(单马模型无法判断,按满足处理并记入 `data/skill-notes.json`):
-  `popularity`/`post_number`/`fan_count`/`grade`/`is_dirtgrade`/`is_tight_track`/`lane_type`/`furlong`/`time`/
+  `popularity`/`post_number`/`fan_count`/`grade`(100=G1)/`is_dirtgrade`(交流重赏)/`lane_type`/`furlong`/`time`/
   `visiblehorse`/`random_lot(_shared)`/`succession_skill_count`/`is_exist_chara_id`/`is_move_lane`/
   `remain_distance_viewer_id`。要新增建模时:clean-skills 加 token 分支 → types/schema 加字段 →
   restriction.ts 判定 → 文档表格同步(清单见 docs/formulas.md「仍未建模」行);
+  **新增映射前必须先找到语义出处**(BWIKI 技能页「触发条件」原文 / 解包字段 / 与技能名可自证的等价物),
+  禁止按中文技能名推测(「标准距离」并不等于中长距离);`is_tight_track`(小回り)无需建模 ——
+  触发条文明文列出 6 场比赛(札幌/函馆/福岛/小仓/川崎/船桥),文本侧已落成 `venues`;
   近似层技能按"期望位置"发动,已在 UI 角标;
 - 47 条剧本型"进化"行无解包数据,维持排除(skill-data-lua2 里 25 条无名称的占位条目同样不入库);
 - 复核清单 `data/skill-review.json`(约 190 条)与 `data/skill-notes.json`

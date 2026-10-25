@@ -194,6 +194,13 @@ export interface RestrictionClause {
   /** 比赛距离范围(米,触发代码 course_distance>=/<=) */
   readonly distanceMin?: number;
   readonly distanceMax?: number;
+  /**
+   * 是否为「标准距离」赛道(触发代码 is_basis_distance==1/0)。
+   * 游戏定义:赛程全长是 **400 米的整数倍** ⇒ 标准距离(如 1200/1600/2000/2400/3200);
+   * 否则为非标准距离(如 1400/1800/2200/2500)。注意它**不是距离档**(短/英里/中/长),
+   * 2500 属长距离但非 400 倍数,1600 属英里但是 400 倍数。
+   */
+  readonly basisDistance?: boolean;
   /** 赛场回转方向(触发代码 rotation==N:1=顺时针,2=逆时针;直線赛道不匹配) */
   readonly rotations?: readonly number[];
   /** 天气(触发代码 weather==N:1晴/2阴/3雨/4雪) */

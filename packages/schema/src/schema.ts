@@ -74,6 +74,8 @@ const clauseSchema = z.object({
   distances: z.array(z.number().int().positive()).optional(),
   distanceMin: z.number().int().positive().optional(),
   distanceMax: z.number().int().positive().optional(),
+  /** 标准距离(触发代码 is_basis_distance:1=赛程全长为 400 米整数倍,0=非倍数;非距离档) */
+  basisDistance: z.boolean().optional(),
   /** 赛场回转方向(触发代码 rotation==N:1=顺时针,2=逆时针) */
   rotations: z.array(z.union([z.literal(1), z.literal(2)])).optional(),
   /** 天气(触发代码 weather==N:1晴/2阴/3雨/4雪) */

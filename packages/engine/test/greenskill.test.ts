@@ -132,19 +132,36 @@ describe('触发代码严格执行(数据驱动:标准距离 / 面板属性 / �
     return c;
   };
 
-  test('标准距离◎ 只在中/长距离计入起跑属性', () => {
+  // 标准距离 = 赛程全长为 400 米整数倍(游戏内定义),与距离档无关:
+  //   1600(英里) / 2400(中) 是倍数;1800(英里) / 2500(长) 不是倍数。
+  const byDistance = (d: number): Course => {
+    const c = courses.find(x => x.distance === d && x.surface === 'turf');
+    if (!c) throw new Error('赛道未找到:' + d + 'm');
+    return c;
+  };
+
+  test('标准距离◎ 按 400 倍数判定,不看距离档', () => {
     const s = byId('200131'); // 耐力 +60
     const runner = makeRunner({ skills: [s] });
-    for (const t of ['mid', 'long']) expect(passiveBonusOf(runner, byType(t)).stamina).toBe(60);
-    for (const t of ['short', 'mile']) expect(passiveBonusOf(runner, byType(t)).stamina).toBe(0);
-    expect(skillApplicable(s, byType('short'), runner)).toBe(false);
+    // 400 倍数:1600(英里档)、2400(中距离档)
+    for (const d of [1600, 2400]) {
+      expect(d % 400).toBe(0);
+      expect(passiveBonusOf(runner, byDistance(d)).stamina).toBe(60);
+    }
+    // 非倍数:1800(英里档)、2500(长距离档)
+    for (const d of [1800, 2500]) {
+      expect(d % 400).not.toBe(0);
+      expect(passiveBonusOf(runner, byDistance(d)).stamina).toBe(0);
+    }
+    expect(skillApplicable(s, byDistance(2500), runner)).toBe(false);
+    expect(skillApplicable(s, byDistance(1600), runner)).toBe(true);
   });
 
-  test('非标准距离◎ 只在短/英里计入', () => {
+  test('非标准距离◎ 与非 400 倍数一一对应', () => {
     const s = byId('200141'); // 耐力 +60
     const runner = makeRunner({ skills: [s] });
-    for (const t of ['short', 'mile']) expect(passiveBonusOf(runner, byType(t)).stamina).toBe(60);
-    for (const t of ['mid', 'long']) expect(passiveBonusOf(runner, byType(t)).stamina).toBe(0);
+    for (const d of [1800, 2500]) expect(passiveBonusOf(runner, byDistance(d)).stamina).toBe(60);
+    for (const d of [1600, 2400]) expect(passiveBonusOf(runner, byDistance(d)).stamina).toBe(0);
   });
 
   test('拉普拉斯妖(1)/(2) 按面板 速度/智力 分流(先行·中距离)', () => {

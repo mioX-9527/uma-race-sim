@@ -1,5 +1,5 @@
 {
-  "version": "0.7.0-strict",
+  "version": "0.7.1-basis",
   "generatedAt": "2026-10-25",
   "sources": [
     "BWIKI 技能速查表(api.php action=ask,1907 条原始;tools/scrape-once.ts)",
@@ -41,8 +41,11 @@
     "赛场映射:10001-10010=JRA 十场(东京 10006/中山 10005/京都 10008 已用坡度指纹验证);地方 10101-10105 与海外 10201-10203 按游戏内顺序映射,精度中等,待与 BWIKI 抽查确认",
     "赛道补正默认自动计算(uma-skill-tools CourseHelpers.courseSpeedModifier):1 + 平均((1+floor(min(参照属性,901)/300.01))×0.05),参照属性 = 门槛属性种类(courseSetStatus)上的 (面板+绿)×干劲;空门槛赛道(52 条,含东京2400)→ ×1.0;UI 可手动覆盖 ×1.2/×1.0。东京2400 自动档与游戏实录偏差由 −0.62s 收敛至 −0.26s",
     "注:引擎 v0.2 的双马对比等次级功能沿用 simulate 输出;courseSetStatus 的门槛属性种类由 make-courses.ts 从 stat-kind ID(1速度/2耐力/3力量/4根性/5智力)映射为属性名",
-    "装配限制(绿技能与其他技能同用):触发代码 running_style/distance_type/ground_type/track_id/course_distance/ground_condition(含 !=、>=、<=)/rotation/weather/season 解析为 restriction,不满足则整场不生效;场地状态(25 条)、天气(10 条)、季节(21 条)、回转方向(12 条)为本次新增,绿技能中带限制的共 157 条",
     "赛场回转方向取自解包 course_data.json 的 turn 字段:1=右回り(顺时针)/2=左回り(逆时针)/4=直線;与 JRA 官方口径一致(逆时针=东京/中京/新潟,其余顺时针),分布 74 顺时针 / 63 逆时针 / 1 无回转(新潟草1000m 直線,回转方向类技能不生效)",
-    "天气与季节不进物理公式(解包 RaceSolver/HpPolicy 与 614tools worker 均无对应项),仅决定 weather==N / season==N 类技能是否生效;场地状态只进体力消耗系数(草地 良1.0/稍重1.0/重1.02/不良1.02,泥地 良1.0/稍重1.0/重1.01/不良1.02),不改速度与加速度"
+    "天气与季节不进物理公式(解包 RaceSolver/HpPolicy 与 614tools worker 均无对应项),仅决定 weather==N / season==N 类技能是否生效;场地状态只进体力消耗系数(草地 良1.0/稍重1.0/重1.02/不良1.02,泥地 良1.0/稍重1.0/重1.01/不良1.02),不改速度与加速度",
+    "装配限制(触发代码级):running_style / distance_type / is_basis_distance / ground_type / ground_condition(含 !=、>=、<=)/ track_id(含范围成对合并)/ course_distance(精确与范围)/ rotation / weather / season / motivation / is_abroad / base_speed·base_stamina·base_power·base_guts·base_wiz,任一不满足 ⇒ 整场不生效;绿技能(213 条)中 164 条带限制",
+    "标准距离 is_basis_distance = 赛程全长为 400 米整数倍(1200/1600/2000/2400/3200...),与距离档(短/英里/中/长)是两条独立的轴:1600 属英里但是 400 倍数、2500 属长距离但非 400 倍数。存为独立布尔 restriction.basisDistance(6 条绿技能:标准距离◎○× / 非标准距离◎○×);此前误映射为 distanceTypes(标准→中/长),已修正",
+    "装配限制采用 DNF 子句:同一支(& 连接)= 与,同字段取交集;`@` 变体 = 或,输出 restriction.anyOf(任一满足即生效);condition_1 / condition_2 是两组独立效果块(拆成 -b1/-b2),不是或分支;单字段差异分支化简回扁平结构,仅 10 条异构技能保留 anyOf",
+    "仍未建模的 token(单马模型无法判断,按满足处理并记入 skill-notes.json):popularity / post_number / fan_count / grade(100=G1)/ is_dirtgrade(交流重赏)/ lane_type / furlong / time / visiblehorse / random_lot(_shared)/ succession_skill_count / is_move_lane / remain_distance_viewer_id / is_exist_*;is_tight_track(小回り)由文本侧落成 venues(札幌/函馆/福岛/小仓/川崎/船桥)"
   ]
 }

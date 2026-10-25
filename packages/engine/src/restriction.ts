@@ -19,6 +19,9 @@ export function clauseSatisfied(c: RestrictionClause, runner: RunnerConfig, cour
   if (c.distances !== undefined && !c.distances.includes(course.distance)) return false;
   if (c.distanceMin !== undefined && course.distance < c.distanceMin) return false;
   if (c.distanceMax !== undefined && course.distance > c.distanceMax) return false;
+  // is_basis_distance:标准距离 = 赛程全长为 400 米的整数倍(不是距离档)
+  if (c.basisDistance !== undefined && (course.distance % 400 === 0) !== c.basisDistance) return false;
+
   if (c.rotations !== undefined && (course.rotation === undefined || !c.rotations.includes(course.rotation))) return false;
   if (c.weathers !== undefined && !c.weathers.includes(runner.weather ?? DEFAULT_WEATHER)) return false;
   if (c.seasons !== undefined && !c.seasons.includes(runner.season ?? DEFAULT_SEASON)) return false;

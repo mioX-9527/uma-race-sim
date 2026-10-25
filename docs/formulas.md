@@ -75,19 +75,23 @@
 | 末脚延展 | 末脚延展 ×0.1 并入全开冲刺的额外速度增速速率(不再单独作加速度) | 614tools(Excel AA79=0.1,growthEffect 口径) |
 | 脚色充分 | 最终盘开始起 3 秒 accel += √((力量−1200)×130)×0.001 | 614tools(sim1!M104) |
 | **装配限制(✅ 2026-10-25 按触发代码严格执行)** | 触发代码里的限定全部解析为 `SkillRestriction`:
-脚质 `running_style` / 距离档 `distance_type`、**`is_basis_distance`(1=标准距离=中/长,0=非标准=短/英里)** /
+脚质 `running_style` / 距离档 `distance_type`(**1 短距离 ≤1400 / 2 英里 1500~1800 / 3 中距离 1900~2400 / 4 长距离 ≥2500**) /
+**`is_basis_distance`(标准距离:赛程全长为 400 米的整数倍;1=是 / 0=否。⚠ 与距离档是两条独立的轴:
+1600 属英里但为 400 倍数、2500 属长距离但非 400 倍数。不要映射成 distanceTypes)** /
 场地 `ground_type` / 赛场 `track_id`(含范围成对合并) / 精确距离与范围 `course_distance` /
 场地状态 `ground_condition`(含 `!=`、`>=`、`<=`,展开为候选集) / 回转方向 `rotation` /
 天气 `weather` / 季节 `season` / **干劲 `motivation`(1绝不调~5绝好调,支持 ==/>=/<=)** /
 **海外 `is_abroad`(隆尚·圣安妮塔公园·德尔马=海外)** /
 **面板属性 `base_speed/base_stamina/base_power/base_guts/base_wiz`(`>=`→下限含、`<`→上限不含;取面板值,不含绿与干劲)**。
-**语义分层**:同一支(`&` 连接)=「与」,同字段多次出现取交集;`@` 变体与 `condition_1/condition_2` = 「或」,
-数据侧输出为 `anyOf: [子句...]`(任一满足即生效),不再压成一层并集 —— 早期并集会把
+**语义分层**:同一支(`&` 连接)=「与」,同字段多次出现取交集;**`@` 分隔的变体 = 「或」**
+(数据侧输出 `anyOf: [子句...]`,任一满足即生效);`precondition_N`(前提)与 `condition_N`(发动条件)是「与」;
+`condition_1` / `condition_2` 是两组独立效果块(拆成 `-b1` / `-b2` 两条技能),不是同一技能的或分支。
+不再压成一层并集 —— 早期并集会把
 「A 支限短距离、B 支不限」错压成「限短距离」(2026-10-25 修)。只有真正异构的分支才保留 `anyOf`,
 「先行 or 差行」这类单字段分支仍化简为扁平结构。任一不满足 ⇒ 整场不生效,绿技能不计入起跑属性;
 UI 在技能列表与消融表标「不生效」。环境类缺省口径:场地状态 良(0)、天气 晴(1)、季节 春(1) | 触发代码(模块:技能数据库内容/内容2)+ 解包 turn 字段 |
-| **仍未建模的触发代码 token(⏳ 记录在案,单马模型无法判断)** | `popularity`(人气)、`post_number`(闸位)、`fan_count`、`grade`(比赛级别)、
-`is_dirtgrade`、`is_tight_track`(小回り)、`lane_type`、`furlong`、`time`、`visiblehorse`、`random_lot(_shared)`、
+| **仍未建模的触发代码 token(⏳ 记录在案,单马模型无法判断)** | `popularity`(人气)、`post_number`(闸位)、`fan_count`、`grade`(比赛级别,100=G1)、
+`is_dirtgrade`(交流重赏)、`lane_type`、`furlong`、`time`、`visiblehorse`、`random_lot(_shared)`、
 `succession_skill_count`、`is_exist_chara_id`、`is_move_lane`、`remain_distance_viewer_id` —— 一律**按满足处理并写进
 data/skill-notes.json**,不静默丢;名次/间距/被阻挡类(`order_rate`、`bashin_diff_*`、`blocked_*`、`compete_*` 等)
 按近似层在期望位置发动 | 见 docs/parity-log.md 2026-10-25 审计 |

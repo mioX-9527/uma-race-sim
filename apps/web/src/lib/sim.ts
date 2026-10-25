@@ -230,11 +230,8 @@ export const ROTATION_LABEL: Record<number, string> = { 1: '顺时针', 2: '逆�
 const STAT_CN: Record<string, string> = { speed: '速度', stamina: '耐力', power: '力量', guts: '根性', wisdom: '智力' };
 const MOTIVATION_ORDER: readonly Motivation[] = ['worst', 'bad', 'normal', 'good', 'best'];
 
-/** 距离档 → 简中;标准距离 = 中/长(与「标准距离◎」技能名一致),非标准 = 短/英里 */
+/** 距离档 → 简中(注意:「标准距离」不是距离档,而是 400m 倍数赛道,见 basisDistance) */
 function distanceTypeText(dts: readonly string[]): string {
-  const set = [...dts].sort().join(',');
-  if (set === 'long,mid') return '标准距离(中/长)';
-  if (set === 'mile,short') return '非标准距离(短/英里)';
   return dts.map(d => DISTTYPE_LABEL[d] ?? d).join('/');
 }
 
@@ -261,6 +258,7 @@ function describeClause(r: RestrictionClause): string {
   if (r.surfaces !== undefined) parts.push(r.surfaces.map(x => (x === 'turf' ? '草地' : '泥地')).join('/'));
   if (r.venues !== undefined) parts.push(`${r.venues.join('/')}赛场`);
   if (r.distances !== undefined) parts.push(r.distances.map(d => `${d}m`).join('/'));
+  if (r.basisDistance !== undefined) parts.push(r.basisDistance ? '标准距离(400m倍数)' : '非标准距离(非400m倍数)');
   if (r.grounds !== undefined) parts.push(r.grounds.map(g => GROUND_LABEL[g] ?? `${g}`).join('/'));
   if (r.rotations !== undefined) parts.push(`${r.rotations.map(v => ROTATION_LABEL[v] ?? `${v}`).join('/')}赛道`);
   if (r.weathers !== undefined) parts.push(`${r.weathers.map(w => WEATHER_LABEL[w] ?? `${w}`).join('/')}天`);

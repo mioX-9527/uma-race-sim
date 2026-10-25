@@ -32,7 +32,9 @@ function courseEnvNote(config: UiConfig): string {
   const course = findCourse(config.courseId);
   const rot = course.rotation === undefined ? '直線赛道(无回转,回转方向类技能不生效)' : `${ROTATION_LABEL[course.rotation]}赛道`;
   const dist = course.distanceType === undefined ? '' : ` · ${{ short: '短距离', mile: '英里', mid: '中距离', long: '长距离' }[course.distanceType]}`;
-  return `${rot}${dist} · 场地 ${GROUND_LABEL[config.groundCondition]} · 天气 ${WEATHER_LABEL[config.weather]} · 季节 ${SEASON_LABEL[config.season]}`;
+  // 标准距离 = 赛程全长为 400m 整数倍(游戏定义),与距离档无关
+  const basis = `${course.distance % 400 === 0 ? '标准距离' : '非标准距离'} ${course.distance}m`;
+  return `${rot}${dist} · ${basis} · 场地 ${GROUND_LABEL[config.groundCondition]} · 天气 ${WEATHER_LABEL[config.weather]} · 季节 ${SEASON_LABEL[config.season]}`;
 }
 
 export function ConfigPanel({ config, onChange }: Props): JSX.Element {

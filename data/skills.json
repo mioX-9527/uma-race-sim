@@ -6833,10 +6833,7 @@
    "toMeters": 801
   },
   "restriction": {
-   "distanceTypes": [
-    "mid",
-    "long"
-   ]
+   "basisDistance": true
   },
   "wisdomScaled": true,
   "source": "BWIKI 速查表 + 触发代码(模块:技能数据库内容)",
@@ -33997,13 +33994,10 @@
    "tactics": [
     "oikomi"
    ],
-   "distanceTypes": [
-    "mid",
-    "long"
-   ],
    "distances": [
     400
    ],
+   "basisDistance": true,
    "distanceMin": 1600,
    "distanceMax": 2500
   },
@@ -37939,7 +37933,8 @@
   "restriction": {
    "distanceTypes": [
     "mid"
-   ]
+   ],
+   "basisDistance": true
   },
   "wisdomScaled": true,
   "source": "BWIKI 速查表 + 触发代码(模块:技能数据库内容)",
@@ -38182,10 +38177,7 @@
    "toMeters": 401
   },
   "restriction": {
-   "distanceTypes": [
-    "short",
-    "mile"
-   ]
+   "basisDistance": false
   },
   "wisdomScaled": true,
   "source": "BWIKI 速查表 + 触发代码(模块:技能数据库内容)",
@@ -40841,10 +40833,7 @@
    "kind": "raceStart"
   },
   "restriction": {
-   "distanceTypes": [
-    "mid",
-    "long"
-   ]
+   "basisDistance": true
   },
   "wisdomScaled": false,
   "source": "BWIKI 速查表 + 触发代码(模块:技能数据库内容)",
@@ -40870,10 +40859,7 @@
    "kind": "raceStart"
   },
   "restriction": {
-   "distanceTypes": [
-    "mid",
-    "long"
-   ]
+   "basisDistance": true
   },
   "wisdomScaled": false,
   "source": "BWIKI 速查表 + 触发代码(模块:技能数据库内容)",
@@ -40899,10 +40885,7 @@
    "kind": "raceStart"
   },
   "restriction": {
-   "distanceTypes": [
-    "mid",
-    "long"
-   ]
+   "basisDistance": true
   },
   "wisdomScaled": false,
   "source": "BWIKI 速查表 + 触发代码(模块:技能数据库内容)",
@@ -40928,10 +40911,7 @@
    "kind": "raceStart"
   },
   "restriction": {
-   "distanceTypes": [
-    "short",
-    "mile"
-   ]
+   "basisDistance": false
   },
   "wisdomScaled": false,
   "source": "BWIKI 速查表 + 触发代码(模块:技能数据库内容)",
@@ -40957,10 +40937,7 @@
    "kind": "raceStart"
   },
   "restriction": {
-   "distanceTypes": [
-    "short",
-    "mile"
-   ]
+   "basisDistance": false
   },
   "wisdomScaled": false,
   "source": "BWIKI 速查表 + 触发代码(模块:技能数据库内容)",
@@ -40986,10 +40963,7 @@
    "kind": "raceStart"
   },
   "restriction": {
-   "distanceTypes": [
-    "short",
-    "mile"
-   ]
+   "basisDistance": false
   },
   "wisdomScaled": false,
   "source": "BWIKI 速查表 + 触发代码(模块:技能数据库内容)",
@@ -71648,10 +71622,7 @@
    "toMeters": 801
   },
   "restriction": {
-   "distanceTypes": [
-    "mid",
-    "long"
-   ]
+   "basisDistance": true
   },
   "wisdomScaled": true,
   "source": "BWIKI 继承技页面 + 触发代码(模块:技能数据库内容2)",
@@ -77119,10 +77090,7 @@
    "toMeters": 401
   },
   "restriction": {
-   "distanceTypes": [
-    "short",
-    "mile"
-   ]
+   "basisDistance": false
   },
   "wisdomScaled": true,
   "source": "BWIKI 继承技页面 + 触发代码(模块:技能数据库内容2)",

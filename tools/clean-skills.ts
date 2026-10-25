@@ -153,6 +153,8 @@ interface CodeRestriction {
   motivations: Set<string>;
   /** 海外赛场(触发代码 is_abroad) */
   abroad?: boolean;
+  /** 标准距离(触发代码 is_basis_distance:赛程全长为 400 米整数倍) */
+  basisDistance?: boolean;
   /** 面板属性下限(含,base_xxx>=N) */
   statsAtLeast: Record<string, number>;
   /** 面板属性上限(不含,base_xxx<N) */
@@ -242,7 +244,11 @@ function andRestriction(a: CodeRestriction, b: CodeRestriction): void {
   andSet(a.weathers, b.weathers);
   andSet(a.seasons, b.seasons);
   andSet(a.motivations, b.motivations);
-  if (b.abroad !== undefined) a.abroad = b.abroad;
+  if (b.abroad !== undefined) a.abroad = a.abroad === undefined ? b.abroad : a.abroad && b.abroad;
+  if (b.basisDistance !== undefined) {
+    // 「与」:两边要求不同(一个要标准、一个要非标准)⇒ 该子句不可能成立,记成 false 兜底
+    a.basisDistance = a.basisDistance === undefined ? b.basisDistance : a.basisDistance === b.basisDistance ? a.basisDistance : false;
+  }
   for (const [k, v] of Object.entries(b.statsAtLeast)) a.statsAtLeast[k] = Math.max(a.statsAtLeast[k] ?? -Infinity, v);
   for (const [k, v] of Object.entries(b.statsBelow)) a.statsBelow[k] = Math.min(a.statsBelow[k] ?? Infinity, v);
   if (b.distanceMin !== undefined) a.distanceMin = Math.max(a.distanceMin ?? -Infinity, b.distanceMin);
@@ -253,7 +259,7 @@ function andRestriction(a: CodeRestriction, b: CodeRestriction): void {
 function restrictionIsEmpty(r: CodeRestriction): boolean {
   return r.tactics.size + r.distanceTypes.size + r.surfaces.size + r.venues.size + r.grounds.size + r.distances.size +
     r.rotations.size + r.weathers.size + r.seasons.size + r.motivations.size === 0 &&
-    r.abroad === undefined && Object.keys(r.statsAtLeast).length === 0 && Object.keys(r.statsBelow).length === 0 &&
+    r.abroad === undefined && r.basisDistance === undefined && Object.keys(r.statsAtLeast).length === 0 && Object.keys(r.statsBelow).length === 0 &&
     r.distanceMin === undefined && r.distanceMax === undefined;
 }
 
@@ -461,12 +467,13 @@ function parseVariant(tokens: readonly Token[], notes: string[]): Omit<CodeParse
         putSet('distanceTypes', restriction.distanceTypes, Object.entries(CODE_DISTTYPE).filter(([k]) => k !== String(value)).map(([, v]) => v), touched);
         break;
       case name === 'is_basis_distance': {
-        // 標準距離(1)= 中距離/長距離;非標準(0)= 短距離/マイル。等价于对距离档的限定
-        const basis: readonly string[] = ['mid', 'long'];
-        const other: readonly string[] = ['short', 'mile'];
-        const vals = op === '==' ? (value === 1 ? basis : other) : op === '!=' ? (value === 1 ? other : basis) : null;
-        if (vals === null) notes.push(`is_basis_distance${op}${value} 未识别`);
-        else putSet('distanceTypes', restriction.distanceTypes, vals, touched);
+        // 標準距離:赛程全长为 400 米的整数倍(1200/1600/2000/2400/3200...)。
+        // 注意它和距离档(短/英里/中/长)是两条独立轴:2500 是长距离但非 400 倍数,
+        // 1600 是英里但是 400 倍数。**不要**映射成 distanceTypes。
+        const flag = value === 1;
+        if (op === '==') restriction.basisDistance = flag;
+        else if (op === '!=') restriction.basisDistance = !flag;
+        else notes.push(`is_basis_distance${op}${value} 未识别`);
         break;
       }
       case name === 'ground_type' && op === '==':
@@ -1073,6 +1080,7 @@ function cloneRestriction(c: CodeRestriction): CodeRestriction {
     rotations: new Set(c.rotations), weathers: new Set(c.weathers), seasons: new Set(c.seasons),
     motivations: new Set(c.motivations), statsAtLeast: { ...c.statsAtLeast }, statsBelow: { ...c.statsBelow },
     ...(c.abroad !== undefined ? { abroad: c.abroad } : {}),
+    ...(c.basisDistance !== undefined ? { basisDistance: c.basisDistance } : {}),
     ...(c.distanceMin !== undefined ? { distanceMin: c.distanceMin } : {}),
     ...(c.distanceMax !== undefined ? { distanceMax: c.distanceMax } : {}),
   };
@@ -1147,6 +1155,7 @@ function clauseObj(c: CodeRestriction): Record<string, unknown> {
   if (c.seasons.size > 0 && !isFullSet('seasons', [...c.seasons])) out.seasons = sortVals([...c.seasons], 'seasons');
   if (c.motivations.size > 0 && !isFullSet('motivations', [...c.motivations])) out.motivations = sortVals([...c.motivations], 'motivations');
   if (c.abroad !== undefined) out.abroad = c.abroad;
+  if (c.basisDistance !== undefined) out.basisDistance = c.basisDistance;
   if (Object.keys(c.statsAtLeast).length > 0) out.statsAtLeast = { ...c.statsAtLeast };
   if (Object.keys(c.statsBelow).length > 0) out.statsBelow = { ...c.statsBelow };
   if (c.distanceMin !== undefined) out.distanceMin = c.distanceMin;
