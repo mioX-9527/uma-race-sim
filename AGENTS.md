@@ -69,7 +69,7 @@ tools              抓取/清洗/构建后处理脚本(见下表)
 ```bash
 npm run dev         # 开发服务 http://localhost:5173(热更)
 npm run build       # 单文件构建:apps/web/dist/index.html + 根目录 打开模拟器.html
-npm test            # engine + analysis 全部 vitest(当前 124 例)
+npm test            # engine + analysis 全部 vitest(当前 126 例)
 npm run typecheck   # 四包 tsc(engine/analysis/schema/web;web 2026-10-25 纳入)
 node tools/validate-data.ts   # 数据 zod 校验
 node tools/clean-skills.ts    # 重新生成 skills.json(node 24 直跑 TS)
@@ -127,6 +127,12 @@ node tools/clean-skills.ts    # 重新生成 skills.json(node 24 直跑 TS)
   泥 良/稍重 1.0、重 1.01、不良 1.02),不改速度/加速度/体力上限 —— 所以「耐力判定」会变而完赛时间不变;
   **天气与季节没有任何物理项**(解包与 614tools 都没有),只决定 `weather==N` / `season==N` 类技能是否生效。
   三者都是 `SkillRestriction` 字段,不满足时技能整场不生效,UI 标注「不生效」。
+- **消融口径(2026-10-25 改)**:`ablate` 的逐技能收益是「**只去掉效果、保留发动**」(`SimOptions.inertSkills`),
+  不是从牌组删掉 —— 否则「需回复技能≥3」这类前提会让每个回复技能都背上大招的收益,同一份收益重复计 N 次。
+  「从牌组删掉会连带失去谁」用 `AblationRow.dependentIds`(UI「被依赖 N」角标),
+  只认 `usedSkillBaseIds` / `requiresFirstBlock`;`ownedSkillBaseIds` 是持有即满足,不算依赖。
+  **`inertSkills` 必须贯穿全部属性入口**(effstats / speed / stamina / simulate 的绿加成与门槛),
+  否则绿技能消融会得到 delta=0(踩过:speed.ts 的 effectiveStatsOf 漏传 inert)。
 - **发动前提(2026-10-25)**:`SkillConfig.prereq` 由 `packages/engine/src/prereq.ts` 的 `prereqSatisfied` 判定,
   计数来源是 `simulate` 里维护的 `fired` 发动史(id / 阶段 / 位置 / 是否回复):
   `all`=总数、`start`=序盘、`middle`=中盘、`laterHalf`=行进≥50%、`endAfter`=终盘起、`heal`=含回复类效果、

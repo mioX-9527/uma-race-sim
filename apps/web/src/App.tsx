@@ -157,7 +157,7 @@ export function App(): JSX.Element {
           </section>
 
           <section className="panel">
-            <h2>每技能马身收益(leave-one-out 消融)</h2>
+            <h2>每技能马身收益(单项效果消融:只去掉效果、保留发动)</h2>
             {report !== null ? (
               <AblationTable report={report} />
             ) : (

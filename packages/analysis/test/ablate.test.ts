@@ -1,6 +1,7 @@
 import { describe, expect, test } from 'vitest';
 import { ablate } from '../src/ablate';
 import { freshRunner, speedSkill, TOKYO_TURF_2400 as C } from '@uma-race-sim/engine/test/fixtures';
+import type { SkillConfig } from '@uma-race-sim/engine';
 
 describe('leave-one-out 消融', () => {
   const s1 = speedSkill('sp-a', 0.3, 10);
@@ -63,5 +64,50 @@ describe('装配限制不满足的技能(标注「不生效」)', () => {
     expect(row.applicable).toBe(true);
     expect(row.activated).toBe(true);
     expect(row.deltaSec).toBeGreaterThan(0);
+  });
+});
+
+describe('单项效果消融(只去掉效果、保留发动)', () => {
+  /** 中盘发动一次、回复量为给定值的回复技能 */
+  const healSkill = (id: string): SkillConfig => ({
+    id,
+    name: id,
+    rarity: 'normal',
+    precision: 'precise',
+    effects: [{ type: 'heal', value: 0.02 }],
+    durationSec: null,
+    condition: { kind: 'phase', phase: 1 },
+    wisdomScaled: false,
+  });
+
+  test('回复技能自身 0 收益,不再背负「大招因此不发动」的收益', () => {
+    const heals = [healSkill('h1'), healSkill('h2'), healSkill('h3')];
+    // 圣诞夜的奇迹飞驰:prereq 回复技能≥3,条件 50%~终点
+    const ult: SkillConfig = {
+      ...speedSkill('ult', 0.25, 5),
+      condition: { kind: 'distanceRate', fromPct: 50, toPct: 100 },
+      prereq: { counters: { heal: { min: 3 } } },
+    };
+    const rep = ablate(C, freshRunner([...heals, ult]));
+    const byId = new Map(rep.rows.map(r => [r.skillId, r]));
+    for (const h of heals) expect(Math.abs(byId.get(h.id)!.deltaSec)).toBeLessThan(1e-9);
+    expect(byId.get('ult')!.deltaSec).toBeGreaterThan(0);
+    // Σ 单项 ≈ 总收益(不再把同一份大招收益重复计 3 次)
+    expect(rep.sumDeltaSec).toBeCloseTo(byId.get('ult')!.deltaSec, 6);
+  });
+
+  test('前提链:-b2 只在 -b1 发动后才算收益,且 -b1 标注被依赖', () => {
+    // 注意:b1 的加成要够大才看得出完赛差异(终盘前期速度还在爬升,+0.1/2s 会在追上目标速度前就过期)
+    const b1 = speedSkill('x-b1', 0.3, 5, { condition: { kind: 'phase', phase: 2 } });
+    const b2 = speedSkill('x-b2', 0.2, 2, {
+      condition: { kind: 'phase', phase: 3 },
+      prereq: { requiresFirstBlock: true },
+    });
+    const rep = ablate(C, freshRunner([b1, b2]));
+    const byId = new Map(rep.rows.map(r => [r.skillId, r]));
+    expect(byId.get('x-b1')!.deltaSec).toBeGreaterThan(0);
+    expect(byId.get('x-b2')!.deltaSec).toBeGreaterThan(0);
+    expect(byId.get('x-b1')!.dependentIds).toEqual(['x-b2']);
+    expect(byId.get('x-b2')!.dependentIds).toBeUndefined();
   });
 });

@@ -1,5 +1,5 @@
 {
-  "version": "0.8.0-prereq",
+  "version": "0.8.1-inert-ablation",
   "generatedAt": "2026-10-25",
   "sources": [
     "BWIKI 技能速查表(api.php action=ask,1907 条原始;tools/scrape-once.ts)",
@@ -49,6 +49,7 @@
     "仍未建模的 token(单马模型无法判断,按满足处理并记入 skill-notes.json):popularity / post_number / fan_count / grade(100=G1)/ is_dirtgrade(交流重赏)/ lane_type / furlong / time / visiblehorse / random_lot(_shared)/ succession_skill_count / is_move_lane / remain_distance_viewer_id / is_exist_*;is_tight_track(小回り)由文本侧落成 venues(札幌/函馆/福岛/小仓/川崎/船桥)",
     "技能发动前提(prereq)建模:触发代码里依赖自身技能发动史的 token 不再当作近似丢掉 —— activate_count_all/start/middle/later_half/end_after/heal/param_skill、succession_skill_count、is_activate_any_skill、is_activate_heal_skill、is_used_skill_id(±with_detail_one)、is_exist_skill_id、is_activate_other_skill_detail(即 -b2 依赖 -b1),共 200 条技能带前提(129 条为 -b2 依赖 -b1)",
     "前提不满足 = 本帧不发动、后续帧继续判(不是整场禁用):计数器为 all/start/middle/laterHalf/endAfter/heal/green/heir,闭区间;只有前提无位置锚点的技能按前提统计范围重建可发动区间(start→序盘、middle→中盘、laterHalf→50%~终点、endAfter→终盘起),否则只会在起跑帧判一次而永不发动;带前提的常时被动不并入起跑属性(标不支持)",
-    "仍未建模的前提类 token(单马模型无法判断):activate_count_all_team(队伍)、is_activate_other_character_activate_advantage_skill、running_style_count_*(他马跑法统计);is_used_skill_id_with_detail_one 只建模「该技能已发动」,细节条件忽略并保留 approx"
+    "仍未建模的前提类 token(单马模型无法判断):activate_count_all_team(队伍)、is_activate_other_character_activate_advantage_skill、running_style_count_*(他马跑法统计);is_used_skill_id_with_detail_one 只建模「该技能已发动」,细节条件忽略并保留 approx",
+    "消融口径:逐技能收益 = 「只去掉效果、保留发动」(inertSkills,仍记入发动史供其他技能前提计数),不再从牌组删掉 —— 否则需「回复技能≥3」的技能会让每个回复技能都背上大招收益、重复计 N 次;「从牌组删掉会连带失去谁」用 AblationRow.dependentIds(UI「被依赖」角标)单独提示"
   ]
 }

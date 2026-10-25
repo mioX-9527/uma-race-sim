@@ -53,6 +53,14 @@ export function AblationTable({ report }: { report: AblationReport }): JSX.Eleme
                     {skill !== undefined && skill.prereq !== undefined && (
                       <span className="badge pre" title={`前提:${describePrereq(skill)}`}>前提</span>
                     )}
+                    {r.dependentIds !== undefined && (
+                      <span
+                        className="badge dep"
+                        title={`从牌组删掉它会连带失去:${r.dependentIds.map(id => SKILLS.find(x => x.id === id)?.name ?? id).join('、')}`}
+                      >
+                        被依赖 {r.dependentIds.length}
+                      </span>
+                    )}
                   </td>
                   <td className="left">
                     {skill !== undefined ? (
@@ -140,7 +148,7 @@ export function AblationTable({ report }: { report: AblationReport }): JSX.Eleme
             ) : (
               <>
                 <tr>
-                  <td colSpan={4}>Σ 单项收益(去重前)</td>
+                  <td colSpan={4}>Σ 单项收益</td>
                   <td>{signed(report.sumDeltaBody ?? 0, 2)} 马身({signed(report.sumDeltaSec, 3)}s)</td>
                 </tr>
                 <tr>
@@ -154,7 +162,9 @@ export function AblationTable({ report }: { report: AblationReport }): JSX.Eleme
       </table>
       </div>
       <p className="note">
-        收益 = 去掉该技能后完赛变慢的幅度(马身 = 米差/2.5)。Σ单项 ≠ 总收益属正常:技能间存在交互。
+        收益 = 只去掉该技能的效果(它照常发动、仍算进别的技能的前提)后,完赛变慢的幅度(马身 = 米差/2.5)。
+        所以回复/耐力类技能在体力不吃紧时显示 +0.00 是正常的;标「被依赖」的技能,从牌组里删掉才会连带失去依赖它的技能。
+        Σ单项 ≠ 总收益属正常:技能间存在交互。
         标「期望」的技能发动位置在满足区段内随机(如进弯道随机时刻),数字来自联合蒙特卡洛
         (含技能间随机耦合,确定性可复现),点击展开逐位置明细;名次类条件仍为规则取位近似。
       </p>

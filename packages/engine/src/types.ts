@@ -347,6 +347,12 @@ export interface SimOptions {
    * 仍受装配限制约束);后续发动照常按冷却规则衔接。未指定的技能按条件规则发动。
    */
   readonly positionOverrides?: ReadonlyMap<string, number>;
+  /**
+   * 消融「只去掉效果、保留发动」:这些技能照常判定条件/前提并记入发动史(供其他技能的
+   * prereq 计数),但不施加任何效果(不改速度/体力/属性)。用于把单项收益从「前置连带」里
+   * 剥出来 —— 否则 3 个回复技能各自都会背上「大招因此不发动」的收益,重复计账。
+   */
+  readonly inertSkills?: ReadonlySet<string>;
 }
 
 export interface SimResult {

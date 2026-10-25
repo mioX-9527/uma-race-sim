@@ -61,14 +61,15 @@ function solveSpurtTransition(
   course: Course,
   runner: RunnerConfig,
   ctx: SpurtCtx,
+  inert?: ReadonlySet<string>,
 ): number {
   const baseV = baseSpeedOf(course);
   const gutsMod = gutsDrainModifier(runner, course);
   const ground = runner.groundCondition ?? 0;
   const drainAt = (v: number): number =>
     staminaDrainPerSecond(v, baseV, course, { statusCoef: 1, ground, gutsModifier: gutsMod, phase: 2 });
-  const spurtV = lastSpurtSpeedOf(course, runner);
-  const target2 = phaseTargetSpeed(course, runner, 2);
+  const spurtV = lastSpurtSpeedOf(course, runner, inert);
+  const target2 = phaseTargetSpeed(course, runner, 2, inert);
   const late = course.phaseBounds.lateStart;
 
   // 体力足以全程末脚:从终盘分界开始
@@ -107,15 +108,17 @@ function solveSpurtTransition(
 export function simulate(course: Course, runner: RunnerConfig, opts: SimOptions = {}): SimResult {
   const ignoreExhaustion = opts.ignoreExhaustion === true;
   const positionOverrides = opts.positionOverrides;
+  /** 消融「只去掉效果、保留发动」的技能 id(仍计入 fired / activations) */
+  const inert = opts.inertSkills;
   const baseV = baseSpeedOf(course);
-  const maxHp = maxHpOf(course, runner);
-  const minSpeed = minSpeedOf(course, runner);
-  const gutsMod = gutsDrainModifier(runner, course);
-  const spurtV = lastSpurtSpeedOf(course, runner);
+  const maxHp = maxHpOf(course, runner, inert);
+  const minSpeed = minSpeedOf(course, runner, inert);
+  const gutsMod = gutsDrainModifier(runner, course, inert);
+  const spurtV = lastSpurtSpeedOf(course, runner, inert);
   const ground = runner.groundCondition ?? 0;
   const distScale = course.distance / 1000;
   const late = course.phaseBounds.lateStart;
-  const eff = effectiveStatsOf(runner, course);
+  const eff = effectiveStatsOf(runner, course, inert);
 
   // 序盘 PDM(取位放缓):仅非逃马,0~int(d/24);发动目标/即时速度技能时提前解除(614tools)
   const pdmApplies = runner.tactic !== 'nige';
@@ -129,15 +132,15 @@ export function simulate(course: Course, runner: RunnerConfig, opts: SimOptions 
   let ashiiroDone = false;
   const sfOn = (runner.assumeStaminaFight ?? true) && staminaFightDistCoef(course.distance) > 0;
   // 耐力对决参照值:面板×干劲 + 绿加成(绿不吃干劲,614tools worker Je 口径)
-  const sfGreen = passiveBonusOf(runner, course).stamina;
+  const sfGreen = passiveBonusOf(runner, course, inert).stamina;
   const sfRef = runner.stats.stamina * MOTIVATION_WISDOM_MULT[runner.motivation] + sfGreen;
   const sfBonus = sfOn && sfRef > 1200 ? Math.sqrt(sfRef - 1200) * 0.0085 * staminaFightDistCoef(course.distance) : 0;
 
   // 全开冲刺:速度 ≥2001(含绿加成,614tools B2 口径)且进入末脚后速度达冲刺目标(含坡度修正)时
   const fsOn =
     (runner.fullSpurtEnabled ?? true) &&
-    runner.stats.speed + passiveBonusOf(runner, course).speed >= FULL_SPURT_SPEED_GATE;
-  const fsRate = fsOn ? (FULL_SPURT_RATE * baseAccelOf(course, runner, 2, false)) / Math.pow(distScale, 1.5) : 0;
+    runner.stats.speed + passiveBonusOf(runner, course, inert).speed >= FULL_SPURT_SPEED_GATE;
+  const fsRate = fsOn ? (FULL_SPURT_RATE * baseAccelOf(course, runner, 2, false, inert)) / Math.pow(distScale, 1.5) : 0;
   let fsStarted = false;
   let fsExtra = 0;
 
@@ -183,6 +186,8 @@ export function simulate(course: Course, runner: RunnerConfig, opts: SimOptions 
 
   /** 发动效果入栈(共用路径:规则发动与位置采样强制发动) */
   const applyFire = (s: SkillConfig, frame: FrameState): void => {
+    // 消融「只去掉效果」:照常算发动(已记入 fired/activations),但不施加效果
+    if (inert?.has(s.id) === true) return;
     const mult = effectMultiplier(s, runner, frame.phase, course);
     const dur = s.durationSec !== null && s.durationSec > 0 ? s.durationSec * distScale : 0;
     if (dur > 0) buffs.push({ skill: s, untilSec: t + dur, mult });
@@ -209,7 +214,7 @@ export function simulate(course: Course, runner: RunnerConfig, opts: SimOptions 
     const p2 = strategyPhase(phase);
 
     if (phase >= 2 && spurtTransition === null) {
-      spurtTransition = solveSpurtTransition(course, runner, { pos: x, hp });
+      spurtTransition = solveSpurtTransition(course, runner, { pos: x, hp }, inert);
     }
     if (!spurtOn && spurtTransition !== null && x >= spurtTransition) spurtOn = true;
     if (pdmActive && x >= pdmEndM) pdmActive = false;
@@ -225,9 +230,9 @@ export function simulate(course: Course, runner: RunnerConfig, opts: SimOptions 
       target = spurtV;
     } else if (p2 === 0) {
       // 序盘 PDM(取位放缓):出闸后前 int(d/24) m 目标压低(614tools sim1!AG2)
-      target = phaseTargetSpeed(course, runner, 0) * (pdmActive ? PDM_SLOWDOWN_RATIO : 1);
+      target = phaseTargetSpeed(course, runner, 0, inert) * (pdmActive ? PDM_SLOWDOWN_RATIO : 1);
     } else {
-      target = phaseTargetSpeed(course, runner, phase);
+      target = phaseTargetSpeed(course, runner, phase, inert);
     }
     target += targetSpeedBonus(buffs, t);
     // 前提:耐力对决(终盘起概算加速)
@@ -248,7 +253,7 @@ export function simulate(course: Course, runner: RunnerConfig, opts: SimOptions 
       accel = PHASE_DECEL[p2];
     } else {
       accel =
-        baseAccelOf(course, runner, phase, slope !== null && slope.gradient > 0) +
+        baseAccelOf(course, runner, phase, slope !== null && slope.gradient > 0, inert) +
         accelerationBonus(buffs, t) +
         (ashiiroRemaining > 0 ? ashiiroBonus : 0);
     }
