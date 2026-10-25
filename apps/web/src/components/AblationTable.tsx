@@ -4,7 +4,7 @@ import { PRECISION_LABEL, SKILLS, describeCondition, describeEffects } from '../
 
 const signed = (v: number, digits: number): string => `${v >= 0 ? '+' : ''}${v.toFixed(digits)}`;
 
-/** 每技能马身收益(leave-one-out 消融);区段随机类技能附带位置采样(期望/区间/逐位置明细) */
+/** 每技能马身收益(leave-one-out 消融);区段随机类技能显示联合抽样期望,可展开逐位置明细 */
 export function AblationTable({ report }: { report: AblationReport }): JSX.Element {
   const rows = [...report.rows].sort((a, b) => (b.expectedBody ?? b.deltaBody) - (a.expectedBody ?? a.deltaBody));
   const order = report.rows; // 与赛道条编号一致
@@ -20,9 +20,6 @@ export function AblationTable({ report }: { report: AblationReport }): JSX.Eleme
             <th>技能</th>
             <th className="left">发动条件 / 效果</th>
             <th>发动位置</th>
-            <th>发动时刻</th>
-            <th>Δ时间</th>
-            <th>Δ距离</th>
             <th>马身收益</th>
           </tr>
         </thead>
@@ -58,24 +55,16 @@ export function AblationTable({ report }: { report: AblationReport }): JSX.Eleme
                         ? `${Math.round(r.activatedAtMeter)}m ×${r.activationCount}次`
                         : `${Math.round(r.activatedAtMeter)}m`}
                   </td>
-                  <td>{r.activatedAtSec === null ? '—' : `${r.activatedAtSec.toFixed(2)}s`}</td>
-                  <td className={r.deltaSec > 0 ? 'pos' : 'neg'}>{signed(r.deltaSec, 3)}</td>
-                  <td className={r.deltaMeter > 0 ? 'pos' : 'neg'}>{signed(r.deltaMeter, 1)}</td>
                   <td className={body > 0 ? 'pos' : 'neg'}>
                     {sampled ? (
-                      <>
-                        <button
-                          type="button"
-                          className="linkish"
-                          onClick={() => setExpanded(open ? null : r.skillId)}
-                          title="发动位置在满足区段内随机;点击展开逐位置收益明细"
-                        >
-                          {signed(body, 2)}(期望{open ? '▲' : '▼'})
-                        </button>
-                        <div className="meta">
-                          区间 {signed(r.bodyRange![0], 2)} ~ {signed(r.bodyRange![1], 2)}
-                        </div>
-                      </>
+                      <button
+                        type="button"
+                        className="linkish"
+                        onClick={() => setExpanded(open ? null : r.skillId)}
+                        title="发动位置在满足区段内随机;点击展开逐位置收益明细"
+                      >
+                        {signed(body, 2)}(期望{open ? '▲' : '▼'})
+                      </button>
                     ) : (
                       signed(r.deltaBody, 2)
                     )}
@@ -83,15 +72,15 @@ export function AblationTable({ report }: { report: AblationReport }): JSX.Eleme
                 </tr>
                 {sampled && open && (
                   <tr className="sample-row">
-                    <td colSpan={8}>
+                    <td colSpan={5}>
                       <div className="meta" style={{ padding: '2px 8px' }}>
-                        位置采样(满足区段全长均匀取 {r.positionSamples!.length} 点,强制发动后消融;其余技能保持规则发动):
+                        位置采样(满足区段全长均匀取 {r.positionSamples!.length} 点,强制发动后消融;其余技能按规则发动):
                         {r.positionSamples!.map(s => (
                           <span key={s.meter} style={{ marginLeft: 10, whiteSpace: 'nowrap' }}>
                             {s.meter}m → <b className={s.deltaBody > 0 ? 'pos' : 'neg'}>{signed(s.deltaBody, 2)}</b>
                           </span>
                         ))}
-                        。规则取位(进区段即发动)为 {signed(r.deltaBody, 2)} 马身,仅供对照。
+                        。波动区间 {signed(r.bodyRange![0], 2)} ~ {signed(r.bodyRange![1], 2)};规则取位(进区段即发动)为 {signed(r.deltaBody, 2)} 马身,仅供对照。
                       </div>
                     </td>
                   </tr>
@@ -100,46 +89,36 @@ export function AblationTable({ report }: { report: AblationReport }): JSX.Eleme
             );
           })}
           {rows.length === 0 && (
-            <tr><td colSpan={8} style={{ textAlign: 'center', color: 'var(--muted)' }}>左侧搜索并点选技能后显示收益</td></tr>
+            <tr><td colSpan={5} style={{ textAlign: 'center', color: 'var(--muted)' }}>左侧搜索并点选技能后显示收益</td></tr>
           )}
         </tbody>
         {rows.length > 0 && (
           <tfoot>
-            {report.mcDraws !== undefined && report.totalExpectedSec !== undefined && (
+            {report.mcDraws !== undefined && report.totalExpectedSec !== undefined ? (
               <>
                 <tr>
-                  <td colSpan={5}>Σ 单项收益(期望口径,联合抽样 {report.mcDraws} 组)</td>
-                  <td>{signed(report.sumExpectedSec, 3)}</td>
-                  <td>{signed(report.sumExpectedSec * 20, 0)}m(约)</td>
-                  <td>{signed((report.sumExpectedSec * 20) / 2.5, 2)}(约)</td>
+                  <td colSpan={4}>Σ 单项收益(期望,联合抽样 {report.mcDraws} 组)</td>
+                  <td>
+                    {signed((report.sumExpectedSec * 20) / 2.5, 2)} 马身({signed(report.sumExpectedSec, 3)}s)
+                  </td>
                 </tr>
                 <tr>
-                  <td colSpan={5}>实测总收益(期望 ±95%CI)</td>
+                  <td colSpan={4}>实测总收益(期望 ±95%CI)</td>
                   <td>
-                    {signed(report.totalExpectedSec, 3)}
-                    <span className="meta">(±{report.totalExpectedCI.toFixed(3)})</span>
+                    {signed((report.totalExpectedSec * 20) / 2.5, 2)} 马身({signed(report.totalExpectedSec, 3)}s
+                    <span className="meta"> ±{report.totalExpectedCI.toFixed(3)}</span>)
                   </td>
-                  <td colSpan={2}>{signed((report.totalExpectedSec * 20) / 2.5, 2)} 马身(约)</td>
-                </tr>
-                <tr className="meta">
-                  <td colSpan={5}>规则取位对照:Σ 单项 / 总收益</td>
-                  <td>{signed(report.sumDeltaSec, 3)} / {signed(report.totalDeltaSec, 3)}</td>
-                  <td colSpan={2}>{signed((report.totalDeltaSec * 20) / 2.5, 2)} 马身(约)</td>
                 </tr>
               </>
-            )}
-            {report.mcDraws === undefined && (
+            ) : (
               <>
                 <tr>
-                  <td colSpan={5}>Σ 单项收益(去重前)</td>
-                  <td>{signed(report.sumDeltaSec, 3)}</td>
-                  <td>{signed(report.sumDeltaSec * 20, 0)}m(约)</td>
-                  <td>{signed((report.sumDeltaSec * 20) / 2.5, 2)}(约)</td>
+                  <td colSpan={4}>Σ 单项收益(去重前)</td>
+                  <td>{signed((report.sumDeltaSec * 20) / 2.5, 2)} 马身({signed(report.sumDeltaSec, 3)}s)</td>
                 </tr>
                 <tr>
-                  <td colSpan={5}>实测总收益(无技能 − 全技能)</td>
-                  <td>{signed(report.totalDeltaSec, 3)}</td>
-                  <td colSpan={2}>{signed((report.totalDeltaSec * 20) / 2.5, 2)} 马身(约)</td>
+                  <td colSpan={4}>实测总收益(无技能 − 全技能)</td>
+                  <td>{signed((report.totalDeltaSec * 20) / 2.5, 2)} 马身({signed(report.totalDeltaSec, 3)}s)</td>
                 </tr>
               </>
             )}
@@ -148,11 +127,9 @@ export function AblationTable({ report }: { report: AblationReport }): JSX.Eleme
       </table>
       </div>
       <p className="note">
-        收益 = 去掉该技能后完赛变慢的幅度(马身 = 米差/2.5)。Σ单项 ≠ 总收益属正常:技能间存在交互
-        (回体技能改变后续发动位置、速度技能改变体力曲线)。未发动的技能不计收益。
-        标「期望」的技能发动位置在满足区段内随机(如进弯道随机时刻):行内数字与表尾两行期望口径
-        来自联合蒙特卡洛(所有随机位置技能的发动点联合抽样,含技能间随机耦合,确定性可复现);
-        展开明细为「固定其余技能规则发动」的逐位置对照。名次类条件(依赖名次/间距)仍为规则取位近似。
+        收益 = 去掉该技能后完赛变慢的幅度(马身 = 米差/2.5)。Σ单项 ≠ 总收益属正常:技能间存在交互。
+        标「期望」的技能发动位置在满足区段内随机(如进弯道随机时刻),数字来自联合蒙特卡洛
+        (含技能间随机耦合,确定性可复现),点击展开逐位置明细;名次类条件仍为规则取位近似。
       </p>
     </div>
   );
