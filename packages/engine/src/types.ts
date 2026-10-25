@@ -143,6 +143,70 @@ export type SkillCondition =
   | { readonly kind: 'elapsedSec'; readonly seconds: number; readonly base: ConditionBase }
   | { readonly kind: 'positionPct'; readonly pct: number };
 
+/** 一次技能发动记录(供 prereq 计数器与「需已发动某技能」判定) */
+export interface FiredSkill {
+  readonly skillId: string;
+  /** 发动时所处阶段 */
+  readonly phase: PhaseId;
+  /** 发动位置(米) */
+  readonly meter: number;
+  /** 是否为回复(耐力恢复)技能 */
+  readonly heal: boolean;
+}
+
+/** 前提判定上下文 */
+export interface PrereqContext {
+  readonly course: Course;
+  readonly runner: RunnerConfig;
+  /** 本技能基础 id(去掉 -b1/-b2 后缀),用于 requiresFirstBlock */
+  readonly baseId: string;
+  /** 已发动技能(同一帧内先于本技能发动的也计入) */
+  readonly fired: readonly FiredSkill[];
+}
+
+/** 技能发动计数器的种类(触发代码 activate_count_* / is_activate_* 的判定对象) */
+export type ActivationCounter =
+  /** activate_count_all:已发动技能总数 */
+  | 'all'
+  /** activate_count_start:序盘(phase 0)发动的技能数 */
+  | 'start'
+  /** activate_count_middle:中盘(phase 1)发动的技能数 */
+  | 'middle'
+  /** activate_count_later_half:比赛后半段(行进 ≥50%)发动的技能数 */
+  | 'laterHalf'
+  /** activate_count_end_after:终盘及之后(phase ≥2)发动的技能数 */
+  | 'endAfter'
+  /** activate_count_heal / is_activate_heal_skill:发动的回复技能数 */
+  | 'heal'
+  /** activate_count_param_skill:生效的绿技能(被动参数技能)数 */
+  | 'green'
+  /** succession_skill_count:继承技能数 */
+  | 'heir';
+
+/** 单个计数器约束(值域闭区间;== 时 min=max) */
+export interface CounterReq {
+  readonly min?: number;
+  readonly max?: number;
+}
+
+/**
+ * 技能发动前提(触发代码里依赖「自身技能发动史 / 持有技能」的条件)。
+ * 与 restriction 的区别:restriction 是赛道与比赛环境的静态适配(装配限制),
+ * 这里是在比赛过程中才能满足的前置状态 —— 不满足时该技能不发动,而不是整场判为不适用。
+ */
+export interface SkillPrereq {
+  /** 计数器约束,字段间为「与」 */
+  readonly counters?: Readonly<Partial<Record<ActivationCounter, CounterReq>>>;
+  /** 需要已发动过的技能(触发代码 is_used_skill_id==X;按基础 id 匹配,忽略 -b1/-b2) */
+  readonly usedSkillBaseIds?: readonly string[];
+  /** 需要已选入牌组的技能(触发代码 is_exist_skill_id==X) */
+  readonly ownedSkillBaseIds?: readonly string[];
+  /** 需要本技能第一段效果已发动(触发代码 is_activate_other_skill_detail==1,即 -b2 依赖 -b1) */
+  readonly requiresFirstBlock?: boolean;
+  /** 多分支:任一前提满足即可(@ 变体之间为「或」) */
+  readonly anyOf?: readonly SkillPrereq[];
+}
+
 export interface SkillConfig {
   readonly id: string;
   readonly name: string;
@@ -160,6 +224,11 @@ export interface SkillConfig {
   readonly condition: SkillCondition;
   /** 脚质/场地/赛场等装配型限制 */
   readonly restriction?: SkillRestriction;
+  /**
+   * 发动前提(已发动技能数/已发动回复技能数/需已发动的具体技能等)。
+   * 见 ActivationCounter;不满足则该次不发动(不是"不适用")。
+   */
+  readonly prereq?: SkillPrereq;
   /** 是否受智力增幅(固有/レア) */
   readonly wisdomScaled: boolean;
   /**

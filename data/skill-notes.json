@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-25T08:44:46.482Z",
+ "generatedAt": "2026-10-25T08:59:33.051Z",
  "items": [
   {
    "id": "100031-b1",
@@ -500,10 +500,24 @@
    ]
   },
   {
+   "id": "102101211",
+   "page": "尻尾の有頂天",
+   "reasons": [
+    "前提型技能无位置锚点,按前提范围发动:{\"kind\":\"phase\",\"phase\":1}"
+   ]
+  },
+  {
    "id": "103301211",
    "page": "己身焦がすほうき星",
    "reasons": [
     "前置条件:phase>=2&distance_diff_rate>=50"
+   ]
+  },
+  {
+   "id": "103401111",
+   "page": "火消の梯子登り",
+   "reasons": [
+    "前提型技能无位置锚点,按前提范围发动:{\"kind\":\"phase\",\"phase\":1}"
    ]
   },
   {
@@ -586,6 +600,20 @@
    ]
   },
   {
+   "id": "105502111-b1",
+   "page": "煌めき☆ドーリィステージ",
+   "reasons": [
+    "前提型技能无位置锚点,按前提范围发动:{\"kind\":\"distanceRate\",\"fromPct\":0,\"toPct\":100}"
+   ]
+  },
+  {
+   "id": "105502111-b2",
+   "page": "煌めき☆ドーリィステージ",
+   "reasons": [
+    "前提型技能无位置锚点,按前提范围发动:{\"kind\":\"distanceRate\",\"fromPct\":0,\"toPct\":100}"
+   ]
+  },
+  {
    "id": "105601211",
    "page": "七福即生",
    "reasons": [
@@ -657,6 +685,27 @@
    ]
   },
   {
+   "id": "108001111-b1",
+   "page": "情報強者",
+   "reasons": [
+    "前提型技能无位置锚点,按前提范围发动:{\"kind\":\"phase\",\"phase\":0}"
+   ]
+  },
+  {
+   "id": "108001111-b2",
+   "page": "情報強者",
+   "reasons": [
+    "前提型技能无位置锚点,按前提范围发动:{\"kind\":\"phase\",\"phase\":0}"
+   ]
+  },
+  {
+   "id": "108002111-b1",
+   "page": "勝ち筋ドミネーション",
+   "reasons": [
+    "前提型技能无位置锚点,按前提范围发动:{\"kind\":\"phase\",\"phase\":0}"
+   ]
+  },
+  {
    "id": "108202211-b1",
    "page": "春風、蒼穹を駆ける",
    "reasons": [
@@ -675,6 +724,20 @@
    "page": "霹靂閃電",
    "reasons": [
     "变体锚点不同(distanceRate / phase),取首个变体"
+   ]
+  },
+  {
+   "id": "109001211-b1",
+   "page": "『お姉ちゃん、だもの』",
+   "reasons": [
+    "前提型技能无位置锚点,按前提范围发动:{\"kind\":\"phase\",\"phase\":0}"
+   ]
+  },
+  {
+   "id": "109001211-b2",
+   "page": "『お姉ちゃん、だもの』",
+   "reasons": [
+    "前提型技能无位置锚点,按前提范围发动:{\"kind\":\"phase\",\"phase\":0}"
    ]
   },
   {
@@ -752,6 +815,20 @@
    ]
   },
   {
+   "id": "110202111",
+   "page": "ムジカ・シンティッランテ",
+   "reasons": [
+    "前提型技能无位置锚点,按前提范围发动:{\"kind\":\"distanceRate\",\"fromPct\":0,\"toPct\":100}"
+   ]
+  },
+  {
+   "id": "110211",
+   "page": "火神鳴",
+   "reasons": [
+    "前提型技能无位置锚点,按前提范围发动:{\"kind\":\"phase\",\"phase\":1}"
+   ]
+  },
+  {
    "id": "110251-b1",
    "page": "心からのおもてにゃし",
    "reasons": [
@@ -809,6 +886,27 @@
    "page": "逃げっ切りの1人旅",
    "reasons": [
     "前置条件:phase==1&bashin_diff_behind>=3&order==1"
+   ]
+  },
+  {
+   "id": "110501211",
+   "page": "星の海を駆けて",
+   "reasons": [
+    "前提型技能无位置锚点,按前提范围发动:{\"kind\":\"distanceRate\",\"fromPct\":0,\"toPct\":100}"
+   ]
+  },
+  {
+   "id": "110502111",
+   "page": "ルミナス・スペクトラム",
+   "reasons": [
+    "前提型技能无位置锚点,按前提范围发动:{\"kind\":\"distanceRate\",\"fromPct\":0,\"toPct\":100}"
+   ]
+  },
+  {
+   "id": "110502211",
+   "page": "“METI”レゾナンス",
+   "reasons": [
+    "前提型技能无位置锚点,按前提范围发动:{\"kind\":\"distanceRate\",\"fromPct\":0,\"toPct\":100}"
    ]
   },
   {
@@ -1069,6 +1167,20 @@
    ]
   },
   {
+   "id": "113601111-b1",
+   "page": "覚醒せし聖女",
+   "reasons": [
+    "is_used_skill_id_with_detail_one:仅建模「该技能已发动」,细节条件未建模"
+   ]
+  },
+  {
+   "id": "113601211-b1",
+   "page": "天与の恩寵",
+   "reasons": [
+    "is_used_skill_id_with_detail_one:仅建模「该技能已发动」,细节条件未建模"
+   ]
+  },
+  {
    "id": "114401111-b1",
    "page": "Impeccable",
    "reasons": [
@@ -1129,6 +1241,20 @@
    "page": "歌舞歓楽や、ああをかし",
    "reasons": [
     "前置条件:distance_rate>=50&order_rate<=50&overtake_target_time>=2"
+   ]
+  },
+  {
+   "id": "120051-b1",
+   "page": "Gloire à toi!",
+   "reasons": [
+    "前提型技能无位置锚点,按前提范围发动:{\"kind\":\"distanceRate\",\"fromPct\":50,\"toPct\":100}"
+   ]
+  },
+  {
+   "id": "120051-b2",
+   "page": "Gloire à toi!",
+   "reasons": [
+    "前提型技能无位置锚点,按前提范围发动:{\"kind\":\"distanceRate\",\"fromPct\":50,\"toPct\":100}"
    ]
   },
   {
@@ -1397,6 +1523,48 @@
    ]
   },
   {
+   "id": "201601",
+   "page": "地固め",
+   "reasons": [
+    "前提型技能无位置锚点,按前提范围发动:{\"kind\":\"phase\",\"phase\":0}"
+   ]
+  },
+  {
+   "id": "201602",
+   "page": "盤石の構え",
+   "reasons": [
+    "前提型技能无位置锚点,按前提范围发动:{\"kind\":\"phase\",\"phase\":0}"
+   ]
+  },
+  {
+   "id": "201611",
+   "page": "尻尾上がり",
+   "reasons": [
+    "前提型技能无位置锚点,按前提范围发动:{\"kind\":\"phase\",\"phase\":1}"
+   ]
+  },
+  {
+   "id": "201612",
+   "page": "尻尾の滝登り",
+   "reasons": [
+    "前提型技能无位置锚点,按前提范围发动:{\"kind\":\"phase\",\"phase\":1}"
+   ]
+  },
+  {
+   "id": "201621",
+   "page": "ふり絞り",
+   "reasons": [
+    "前提型技能无位置锚点,按前提范围发动:{\"kind\":\"phaseAfter\",\"phase\":2}"
+   ]
+  },
+  {
+   "id": "201632",
+   "page": "コネクト",
+   "reasons": [
+    "前提型技能无位置锚点,按前提范围发动:{\"kind\":\"distanceRate\",\"fromPct\":0,\"toPct\":100}"
+   ]
+  },
+  {
    "id": "202231",
    "page": "ナイター◎",
    "reasons": [
@@ -1527,6 +1695,20 @@
    ]
   },
   {
+   "id": "202601",
+   "page": "ルミネセンス",
+   "reasons": [
+    "前提型技能无位置锚点,按前提范围发动:{\"kind\":\"distanceRate\",\"fromPct\":0,\"toPct\":100}"
+   ]
+  },
+  {
+   "id": "202602",
+   "page": "イグニッション",
+   "reasons": [
+    "前提型技能无位置锚点,按前提范围发动:{\"kind\":\"distanceRate\",\"fromPct\":0,\"toPct\":100}"
+   ]
+  },
+  {
    "id": "203061-b1",
    "page": "無二",
    "reasons": [
@@ -1646,13 +1828,6 @@
    ]
   },
   {
-   "id": "204622-b1",
-   "page": "連綿",
-   "reasons": [
-    "succession_skill_count>=3(环境前提,视为满足)"
-   ]
-  },
-  {
    "id": "204691",
    "page": "剣抜弩張",
    "reasons": [
@@ -1678,6 +1853,13 @@
    "page": "遊び心",
    "reasons": [
     "前置条件:distance_type==3@distance_type==4"
+   ]
+  },
+  {
+   "id": "210131",
+   "page": "レースの真髄・賢",
+   "reasons": [
+    "前提型技能无位置锚点,按前提范围发动:{\"kind\":\"distanceRate\",\"fromPct\":50,\"toPct\":100}"
    ]
   },
   {
@@ -2042,6 +2224,13 @@
    ]
   },
   {
+   "id": "910211",
+   "page": "继承技/火神鳴",
+   "reasons": [
+    "前提型技能无位置锚点,按前提范围发动:{\"kind\":\"phase\",\"phase\":1}"
+   ]
+  },
+  {
    "id": "910251-b1",
    "page": "继承技/心からのおもてにゃし",
    "reasons": [
@@ -2225,6 +2414,13 @@
    "page": "继承技/歌舞歓楽や、ああをかし",
    "reasons": [
     "前置条件:distance_rate>=50&order_rate<=50&overtake_target_time>=2"
+   ]
+  },
+  {
+   "id": "920051",
+   "page": "继承技/Gloire à toi!",
+   "reasons": [
+    "前提型技能无位置锚点,按前提范围发动:{\"kind\":\"distanceRate\",\"fromPct\":50,\"toPct\":100}"
    ]
   },
   {

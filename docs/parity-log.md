@@ -12,6 +12,62 @@
 - 差异与结论:(公式差异/实现差异/可接受误差)
 ```
 
+## 2026-10-25 发动前提(技能发动次数)建模
+
+**问题(用户指出)**:「圣诞夜的奇迹飞驰！」要「触发耐力恢复技能次数≥3」才能发动,但模拟里直接发动。
+要求把这类**前置触发条件**全部核实一遍。
+
+**根因**:`activate_count_*` / `is_activate_*` / `is_used_skill_id` 等 token 被归类为「依赖他马的近似条件」
+(`APPROX_NAME_RE`),处理方式是**整条丢弃 + 标 approx**。当同一条代码里还有位置类 token(如 `distance_rate>=50`)时,
+位置照常解析、前提被静默丢掉 → 技能照常发动。
+
+**审计范围**:全库 198 个技能的触发代码含这类 token,逐条与 BWIKI 技能页「触发条件」中文对照:
+
+| token | 处数 | 真实含义(中文触发条件原文) | 处理 |
+|---|---|---|---|
+| `is_activate_other_skill_detail` | 159 | 「发动第一段技能」/「已发动第一段技能」 | `requiresFirstBlock`:`-b2` 需 `-b1` 已发动 |
+| `is_used_skill_id` | 18 | 「发动技能『冲动』」等具体技能 | `usedSkillBaseIds`(按基础 id,忽略 -b1/-b2) |
+| `activate_count_middle` | 11 | 「中盘发动技能次数≥2/3」「中盘发动技能次数为7」「技能发动数量≥3」 | `counters.middle` |
+| `activate_count_all` | 13 | 「触发技能数≥7」 | `counters.all` |
+| `activate_count_start` | 10 | 「序盘技能发动数量≥3」 | `counters.start` |
+| `activate_count_heal` | 9 | 「触发耐力恢复技能次数≥3」 | `counters.heal` |
+| `is_activate_any_skill` | 12 | 「发动任意技能」 | `counters.all ≥1` |
+| `activate_count_later_half` | 4 | 「比赛后半段发动技能数≥1」 | `counters.laterHalf` |
+| `is_activate_heal_skill` | 4 | 「发动耐力回复技能」 | `counters.heal ≥1` |
+| `activate_count_end_after` | 1 | 「终盘主动技能发动数量≥3」 | `counters.endAfter` |
+| `is_exist_skill_id` | 2 | 「场上持有『同理心』技能」 | `ownedSkillBaseIds`(牌组选了即满足) |
+| `activate_count_param_skill` | 1 | 「生效的绿技能数量≥7」 | `counters.green`(只数当前赛道生效的绿技能) |
+| `succession_skill_count` | 1 | 「继承技能数量≥3」 | `counters.heir`(牌组里 uniqueHeir 数量) |
+| `is_used_skill_id_with_detail_one` | 3 | 「技能X发动时提升了速度」 | 近似:`usedSkillBaseIds` + 标 approx(细节条件未建模) |
+| `activate_count_all_team` | 2 | 队伍合计发动数 | **无法判定**(单马模型),保持 approx |
+
+**实现**:
+- `types.ts` 新增 `SkillPrereq` / `FiredSkill`;`SkillConfig.prereq`。
+- 引擎 `simulate` 维护 `fired` 发动史(技能 id / 阶段 / 位置 / 是否回复),每帧在「区段命中 + 动态条件通过」之后、
+  真正发动之前判定 `prereqSatisfied`;不满足则**留到后续帧再判**(不是整场禁用)。消融的位置采样强制发动同样受前提约束。
+- 前提型技能若**没有位置锚点**(如「中盘发动技能数≥3」),数据侧按前提的统计范围重建可发动区间
+  (start→序盘、middle→中盘、laterHalf→50%~终点、endAfter→终盘起),否则只会在起跑帧判一次 → 永不发动。
+- 带前提的**常时被动**不并入起跑属性(加成要到比赛中段才成立),数据侧标「不支持」。
+- UI:技能列表/已选 chips/收益表显示「前提」角标,悬停给出中文前提(如「已发动回复技能 ≥3」);赛道摘要不受影响。
+
+**数据影响**:200 条技能带前提(其中 129 条是 `-b2` 依赖 `-b1`);精度分层
+精确 319→**409**、近似 2055→**1988**、不支持 267→**244**(多数是因为前提不再被当成「近似」而升级为精确)。
+
+**实测(CDP 无头,界面实际读数,东京草2400)**:
+
+| 场景 | 大招「圣诞夜的奇迹飞驰！」 |
+|---|---|
+| 只选大招(0 个回复技能) | 发动位置「—」,收益 +0.00(不发动) |
+| 再加 弯道恢复○ + 直线恢复(2 个) | 仍「—」、+0.00 |
+| 再加 圆弧艺术家(3 个) | 1200m 发动,收益 +1.77 马身 |
+
+另:收益表里三个回复技能行也显示 +1.77 —— 因为 leave-one-out 去掉任一回复后大招不再满足前提,
+边际收益里包含了「连带失去大招」的部分,属预期。
+
+**测试**:124 例全绿(新增 10 例:回复计数 2/3 个、all/middle 计数、requiresFirstBlock、usedSkillBaseIds、
+ownedSkillBaseIds、绿技能计数只算生效的、真实数据 110061 与 202832-b2)。
+校准双锚未漂移(116.366 / 116.724)。
+
 ## 2026-10-25 二次勘误:标准距离 = 400m 倍数(与距离档是两条独立的轴)
 
 **问题(用户纠正)**:上一轮把 `is_basis_distance` 当成「标准距离 = 中距离/长距离」,

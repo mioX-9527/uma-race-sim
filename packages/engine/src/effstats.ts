@@ -26,6 +26,7 @@ const STAT_LIST: readonly PassiveStat[] = ['speed', 'stamina', 'power', 'guts', 
  * ② 手动 greenBonus(用户从游戏面板抄前提值合计时直接填)。
  * 带装配限制(如 顺时针◎ 需顺时针赛道、东京赛场◎ 需东京)的绿技能按 course + 环境配置判定,
  * 不匹配不计入;course 缺省时,带限制的绿技能不计入(生产路径均传 course,无限制的绿技能不受影响)。
+ * 带发动前提(prereq)的被动同样不计入:其加成要到比赛中段才成立,起跑折算会凭空常驻。
  * 例外口径:耐力对决参照值中绿加成不吃干劲(simulate.ts sfRef)。
  */
 export function passiveBonusOf(runner: RunnerConfig, course?: Course): Stats {
@@ -33,6 +34,8 @@ export function passiveBonusOf(runner: RunnerConfig, course?: Course): Stats {
   for (const s of runner.skills) {
     if (s.effects.length === 0 || s.condition?.kind !== 'raceStart') continue;
     if (!s.effects.every(e => e.type === 'passive')) continue;
+    // 带发动前提的被动(如「序盘发动技能数≥3」)加成在比赛中段才成立,起跑折算无法表达 → 不计入
+    if (s.prereq !== undefined) continue;
     if (s.restriction !== undefined) {
       if (course === undefined) continue;
       if (!restrictionSatisfied(s.restriction, runner, course)) continue;

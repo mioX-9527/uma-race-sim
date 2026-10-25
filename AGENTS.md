@@ -31,6 +31,12 @@ tools              抓取/清洗/构建后处理脚本(见下表)
    继承技三语名称:`tools/fetch-heir-names.mjs` → `data/raw/heir-skill-names.json`。
 3. **清洗**:`node tools/clean-skills.ts` → `data/skills.json`(+ review/notes)。这是唯一生成 skills.json 的入口,
    三条路径:①触发代码(权威,先 precondition 后 condition,@ = 或变体);②继承技 pass(见下);③文本兜底(仅 2 条)。
+   触发代码里的**发动前提**解析为 `SkillPrereq`(与装配限制分开):`activate_count_all/start/middle/later_half/end_after/heal/
+   param_skill`、`succession_skill_count`、`is_activate_any_skill`、`is_activate_heal_skill`、`is_used_skill_id(±with_detail_one)`、
+   `is_exist_skill_id`、`is_activate_other_skill_detail`(=`-b2` 依赖 `-b1`)。
+   这些 token **不能**再落进 `APPROX_NAME_RE` 被静默丢掉 —— 那会让「需回复技能≥3」的技能直接发动(2026-10-25 修)。
+   只有前提、没有位置锚点的技能,数据侧按前提统计范围重建可发动区间(start→序盘、middle→中盘、laterHalf→50%~终点、
+   endAfter→终盘起、其余→全程);否则只会在起跑帧判一次,永不发动。
    触发代码里的**装配限制**统一解析为 `SkillRestriction`(脚质/距离档/**标准距离 is_basis_distance**/场地/赛场/
    精确距离与范围/**场地状态(含 !=、>=、<=)**/回转方向 rotation/天气 weather/季节 season/**干劲 motivation**/
    **海外 is_abroad**/**面板属性 base_speed 等**)——不满足则整场不生效(绿技能不计入起跑属性)。
@@ -63,7 +69,7 @@ tools              抓取/清洗/构建后处理脚本(见下表)
 ```bash
 npm run dev         # 开发服务 http://localhost:5173(热更)
 npm run build       # 单文件构建:apps/web/dist/index.html + 根目录 打开模拟器.html
-npm test            # engine + analysis 全部 vitest(当前 114 例)
+npm test            # engine + analysis 全部 vitest(当前 124 例)
 npm run typecheck   # 四包 tsc(engine/analysis/schema/web;web 2026-10-25 纳入)
 node tools/validate-data.ts   # 数据 zod 校验
 node tools/clean-skills.ts    # 重新生成 skills.json(node 24 直跑 TS)
@@ -121,6 +127,13 @@ node tools/clean-skills.ts    # 重新生成 skills.json(node 24 直跑 TS)
   泥 良/稍重 1.0、重 1.01、不良 1.02),不改速度/加速度/体力上限 —— 所以「耐力判定」会变而完赛时间不变;
   **天气与季节没有任何物理项**(解包与 614tools 都没有),只决定 `weather==N` / `season==N` 类技能是否生效。
   三者都是 `SkillRestriction` 字段,不满足时技能整场不生效,UI 标注「不生效」。
+- **发动前提(2026-10-25)**:`SkillConfig.prereq` 由 `packages/engine/src/prereq.ts` 的 `prereqSatisfied` 判定,
+  计数来源是 `simulate` 里维护的 `fired` 发动史(id / 阶段 / 位置 / 是否回复):
+  `all`=总数、`start`=序盘、`middle`=中盘、`laterHalf`=行进≥50%、`endAfter`=终盘起、`heal`=含回复类效果、
+  `green`=当前赛道生效的绿技能数、`heir`=牌组里 `uniqueHeir` 数量。
+  前提不满足是「本帧不发动、后续帧继续判」,不是「整场禁用」;消融的位置采样强制发动也要过前提。
+  带前提的**常时被动**不并入起跑属性(加成在比赛中段才成立),数据侧标不支持。
+  尚未建模:`activate_count_all_team`(队伍)、`is_activate_other_character_*`(他马)、`running_style_count_*`(他马跑法统计)。
 - **限制判定入口**:`packages/engine/src/restriction.ts` 的 `clauseSatisfied`(单子句,字段间为与)与
   `restrictionSatisfied`(有 `anyOf` 时任一子句满足即可)。`skillApplicable()` 供 UI/消融判断「不生效」。
   `base_*` 属性条件取**面板值**(`runner.stats`),不含绿技能与干劲。
@@ -156,6 +169,7 @@ node tools/clean-skills.ts    # 重新生成 skills.json(node 24 直跑 TS)
   天气/季节虽可选,但除技能条件外不参与任何计算(见 §6);场地状态参与体力消耗;
 - 仍未建模的触发代码 token(单马模型无法判断,按满足处理并记入 `data/skill-notes.json`):
   `popularity`/`post_number`/`fan_count`/`grade`(100=G1)/`is_dirtgrade`(交流重赏)/`lane_type`/`furlong`/`time`/
+  `activate_count_all_team`/`is_activate_other_character_activate_advantage_skill`/`running_style_count_*`/
   `visiblehorse`/`random_lot(_shared)`/`succession_skill_count`/`is_exist_chara_id`/`is_move_lane`/
   `remain_distance_viewer_id`。要新增建模时:clean-skills 加 token 分支 → types/schema 加字段 →
   restriction.ts 判定 → 文档表格同步(清单见 docs/formulas.md「仍未建模」行);

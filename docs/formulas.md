@@ -90,6 +90,14 @@
 「A 支限短距离、B 支不限」错压成「限短距离」(2026-10-25 修)。只有真正异构的分支才保留 `anyOf`,
 「先行 or 差行」这类单字段分支仍化简为扁平结构。任一不满足 ⇒ 整场不生效,绿技能不计入起跑属性;
 UI 在技能列表与消融表标「不生效」。环境类缺省口径:场地状态 良(0)、天气 晴(1)、季节 春(1) | 触发代码(模块:技能数据库内容/内容2)+ 解包 turn 字段 |
+| **技能发动前提(✅ 2026-10-25)** | 触发代码里依赖**自身技能发动史 / 持有技能**的条件,单列为 `prereq`(与 restriction 区分:restriction 是静态装配适配,prereq 是比赛中才成立的前置状态)。不满足 ⇒ 本次不发动,不是「不适用」。字段:
+`counters`(计数器闭区间)——`activate_count_all`(已发动技能数)、`activate_count_start`(序盘发动数)、`activate_count_middle`(中盘发动数)、`activate_count_later_half`(后半段 ≥50% 处发动数)、`activate_count_end_after`(终盘及以后发动数)、`activate_count_heal` + `is_activate_heal_skill`(回复技能数)、`activate_count_param_skill`(当前赛道生效的绿技能数)、`succession_skill_count`(继承技数量);
+`usedSkillBaseIds`(`is_used_skill_id` / `is_used_skill_id_with_detail_one`:需某技能已发动,按基础 id 匹配、忽略 `-b1/-b2`)、
+`ownedSkillBaseIds`(`is_exist_skill_id`:牌组里选了即满足)、
+`requiresFirstBlock`(`is_activate_other_skill_detail==1`:本技能第一段已发动,即 `-b2` 依赖 `-b1`)。
+语义:同支内为「与」,`@` 变体为「或」(输出 `prereq.anyOf`)。**只有前提、没有位置锚点**的技能按前提的统计范围给可发动区间
+(start→序盘、middle→中盘、laterHalf→50%~终点、endAfter→终盘起、其余→全程),否则只会在起跑帧判一次而永不发动。
+绿技能若带前提(加成要到比赛中段才成立)不并入起跑属性,数据侧标「不支持」 | 触发代码 + BWIKI 技能页「触发条件」中文对照(如「触发耐力恢复技能次数≥3」「序盘技能发动数量≥3」) |
 | **仍未建模的触发代码 token(⏳ 记录在案,单马模型无法判断)** | `popularity`(人气)、`post_number`(闸位)、`fan_count`、`grade`(比赛级别,100=G1)、
 `is_dirtgrade`(交流重赏)、`lane_type`、`furlong`、`time`、`visiblehorse`、`random_lot(_shared)`、
 `succession_skill_count`、`is_exist_chara_id`、`is_move_lane`、`remain_distance_viewer_id` —— 一律**按满足处理并写进

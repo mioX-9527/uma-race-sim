@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-25T08:44:46.475Z",
+ "generatedAt": "2026-10-25T08:59:33.047Z",
  "items": [
   {
    "id": "100191",
@@ -42,7 +42,8 @@
    "id": "100503111-b2",
    "page": "響け、万雷の喝采よ",
    "reasons": [
-    "无可解析发动位置(is_activate_other_skill_detail==1&run_at_full_speed_random==1&track_id==10005&base_stamina>=1000)"
+    "无可解析发动位置(is_activate_other_skill_detail==1&run_at_full_speed_random==1&track_id==10005&base_stamina>=1000)",
+    "前提型技能无位置锚点,按前提范围发动:{\"kind\":\"distanceRate\",\"fromPct\":0,\"toPct\":100}"
    ]
   },
   {
@@ -113,7 +114,8 @@
    "id": "101031-b2",
    "page": "絶対最強☆アピール宣言！",
    "reasons": [
-    "无可解析发动位置(is_activate_other_skill_detail==1&compete_fight_count>0)"
+    "无可解析发动位置(is_activate_other_skill_detail==1&compete_fight_count>0)",
+    "前提型技能无位置锚点,按前提范围发动:{\"kind\":\"distanceRate\",\"fromPct\":0,\"toPct\":100}"
    ]
   },
   {
@@ -121,7 +123,8 @@
    "page": "無二無三なる一条の路",
    "reasons": [
     "无可解析发动位置(furlong==3&order_rate<=50&is_used_skill_id==203061&is_used_skill_id==203071)",
-    "furlong==3(环境前提,视为满足)"
+    "furlong==3(环境前提,视为满足)",
+    "前提型技能无位置锚点,按前提范围发动:{\"kind\":\"distanceRate\",\"fromPct\":0,\"toPct\":100}"
    ]
   },
   {
@@ -136,14 +139,17 @@
    "id": "101291-b2",
    "page": "Peerless Heroine",
    "reasons": [
-    "无可解析发动位置(is_activate_other_skill_detail==1&run_at_full_speed_random==1&order<=3&distance_type==3)"
+    "无可解析发动位置(is_activate_other_skill_detail==1&run_at_full_speed_random==1&order<=3&distance_type==3)",
+    "前提型技能无位置锚点,按前提范围发动:{\"kind\":\"distanceRate\",\"fromPct\":0,\"toPct\":100}"
    ]
   },
   {
    "id": "101361-b2",
    "page": "無垢の祈り・ホーリーライト",
    "reasons": [
-    "无可解析发动位置(is_activate_other_skill_detail==1&run_at_full_speed_random==1&is_used_skill_id_with_detail_one==204452)"
+    "无可解析发动位置(is_activate_other_skill_detail==1&run_at_full_speed_random==1&is_used_skill_id_with_detail_one==204452)",
+    "is_used_skill_id_with_detail_one:仅建模「该技能已发动」,细节条件未建模",
+    "前提型技能无位置锚点,按前提范围发动:{\"kind\":\"distanceRate\",\"fromPct\":0,\"toPct\":100}"
    ]
   },
   {
@@ -158,14 +164,8 @@
    "id": "101703111-b2",
    "page": "大望は煌めきとなりて",
    "reasons": [
-    "无可解析发动位置(is_activate_other_skill_detail==1&ground_type==1&order_rate<=70&run_at_full_speed_random==1&track_id>=10001&track_id<=10010)"
-   ]
-  },
-  {
-   "id": "102101211",
-   "page": "尻尾の有頂天",
-   "reasons": [
-    "无可解析发动位置(activate_count_middle>=3)"
+    "无可解析发动位置(is_activate_other_skill_detail==1&ground_type==1&order_rate<=70&run_at_full_speed_random==1&track_id>=10001&track_id<=10010)",
+    "前提型技能无位置锚点,按前提范围发动:{\"kind\":\"distanceRate\",\"fromPct\":0,\"toPct\":100}"
    ]
   },
   {
@@ -181,13 +181,6 @@
    "reasons": [
     "未识别token:up_slope_random_later_half==1",
     "无可解析发动位置(up_slope_random_later_half==1&running_style==2)"
-   ]
-  },
-  {
-   "id": "103401111",
-   "page": "火消の梯子登り",
-   "reasons": [
-    "无可解析发动位置(activate_count_middle>=3)"
    ]
   },
   {
@@ -249,20 +242,6 @@
    ]
   },
   {
-   "id": "105502111-b1",
-   "page": "煌めき☆ドーリィステージ",
-   "reasons": [
-    "无可解析发动位置(activate_count_all>=13&course_distance>=2000&running_style==3&weather==1)"
-   ]
-  },
-  {
-   "id": "105502111-b2",
-   "page": "煌めき☆ドーリィステージ",
-   "reasons": [
-    "无可解析发动位置(activate_count_all>=13&course_distance>=2000&running_style==3)"
-   ]
-  },
-  {
    "id": "105701221",
    "page": "踊る脚色",
    "reasons": [
@@ -292,31 +271,11 @@
    ]
   },
   {
-   "id": "108001111-b1",
-   "page": "情報強者",
-   "reasons": [
-    "无可解析发动位置(distance_type==2&activate_count_start>=3@distance_type==3&activate_count_start>=3)"
-   ]
-  },
-  {
-   "id": "108001111-b2",
-   "page": "情報強者",
-   "reasons": [
-    "无可解析发动位置(distance_type==1&activate_count_start>=3@distance_type==4&activate_count_start>=3)"
-   ]
-  },
-  {
-   "id": "108002111-b1",
-   "page": "勝ち筋ドミネーション",
-   "reasons": [
-    "无可解析发动位置(activate_count_start>=3&distance_type==2@activate_count_start>=3&distance_type==3)"
-   ]
-  },
-  {
    "id": "108002211-b2",
    "page": "ここ、逃す手はないってね☆",
    "reasons": [
-    "无可解析发动位置(is_activate_other_skill_detail==1&is_other_character_activate_advantage_skill==27@is_activate_other_skill_detail==1&is_other_character_activate_advantage_skill==22)"
+    "无可解析发动位置(is_activate_other_skill_detail==1&is_other_character_activate_advantage_skill==27@is_activate_other_skill_detail==1&is_other_character_activate_advantage_skill==22)",
+    "前提型技能无位置锚点,按前提范围发动:{\"kind\":\"distanceRate\",\"fromPct\":0,\"toPct\":100}"
    ]
   },
   {
@@ -342,24 +301,11 @@
    ]
   },
   {
-   "id": "109001211-b1",
-   "page": "『お姉ちゃん、だもの』",
-   "reasons": [
-    "无可解析发动位置(distance_type==2&activate_count_start>=1)"
-   ]
-  },
-  {
-   "id": "109001211-b2",
-   "page": "『お姉ちゃん、だもの』",
-   "reasons": [
-    "无可解析发动位置(distance_type!=2&activate_count_start>=1)"
-   ]
-  },
-  {
    "id": "109201111-b2",
    "page": "わたしだって、勝ちたい！！",
    "reasons": [
-    "无可解析发动位置(distance_type==3&is_activate_other_skill_detail==1&compete_fight_count>0)"
+    "无可解析发动位置(distance_type==3&is_activate_other_skill_detail==1&compete_fight_count>0)",
+    "前提型技能无位置锚点,按前提范围发动:{\"kind\":\"distanceRate\",\"fromPct\":0,\"toPct\":100}"
    ]
   },
   {
@@ -370,46 +316,10 @@
    ]
   },
   {
-   "id": "110202111",
-   "page": "ムジカ・シンティッランテ",
-   "reasons": [
-    "无可解析发动位置(distance_type==3&activate_count_all>=13)"
-   ]
-  },
-  {
-   "id": "110211",
-   "page": "火神鳴",
-   "reasons": [
-    "无可解析发动位置(activate_count_middle>=2)"
-   ]
-  },
-  {
    "id": "110411",
    "page": "CHERRY☆スクランブル",
    "reasons": [
     "ability_time_usage=5"
-   ]
-  },
-  {
-   "id": "110501211",
-   "page": "星の海を駆けて",
-   "reasons": [
-    "无可解析发动位置(distance_type==3&activate_count_all>=13)"
-   ]
-  },
-  {
-   "id": "110502111",
-   "page": "ルミナス・スペクトラム",
-   "reasons": [
-    "无可解析发动位置(distance_type==3&activate_count_all>=13)"
-   ]
-  },
-  {
-   "id": "110502211",
-   "page": "“METI”レゾナンス",
-   "reasons": [
-    "未识别token:is_exist_skill_id==201631",
-    "无可解析发动位置(ground_type==1&distance_type==3&is_exist_skill_id==201631)"
    ]
   },
   {
@@ -444,7 +354,8 @@
    "id": "110701211",
    "page": "Smooth Sailing!",
    "reasons": [
-    "无可解析发动位置(activate_count_middle>=3&order==1)"
+    "无可解析发动位置(activate_count_middle>=3&order==1)",
+    "前提型技能无位置锚点,按前提范围发动:{\"kind\":\"phase\",\"phase\":1}"
    ]
   },
   {
@@ -482,14 +393,16 @@
    "id": "111801111-b2",
    "page": "雪魄氷姿",
    "reasons": [
-    "无可解析发动位置(is_activate_other_skill_detail==1&run_at_full_speed_random==1&order_rate>=20&order_rate<=50)"
+    "无可解析发动位置(is_activate_other_skill_detail==1&run_at_full_speed_random==1&order_rate>=20&order_rate<=50)",
+    "前提型技能无位置锚点,按前提范围发动:{\"kind\":\"distanceRate\",\"fromPct\":0,\"toPct\":100}"
    ]
   },
   {
    "id": "111801211-b2",
    "page": "無比なる六花",
    "reasons": [
-    "无可解析发动位置(is_activate_other_skill_detail==1&run_at_full_speed_random==1&order_rate>=20&order_rate<=50)"
+    "无可解析发动位置(is_activate_other_skill_detail==1&run_at_full_speed_random==1&order_rate>=20&order_rate<=50)",
+    "前提型技能无位置锚点,按前提范围发动:{\"kind\":\"distanceRate\",\"fromPct\":0,\"toPct\":100}"
    ]
   },
   {
@@ -531,20 +444,6 @@
    "reasons": [
     "未识别token:is_popularity_top_character_activate_advantage_skill==-1",
     "前置条件:distance_type==3@distance_type==4"
-   ]
-  },
-  {
-   "id": "120051-b1",
-   "page": "Gloire à toi!",
-   "reasons": [
-    "无可解析发动位置(activate_count_later_half>=1&distance_type==3&is_basis_distance==1)"
-   ]
-  },
-  {
-   "id": "120051-b2",
-   "page": "Gloire à toi!",
-   "reasons": [
-    "无可解析发动位置(activate_count_later_half>=1)"
    ]
   },
   {
@@ -660,41 +559,6 @@
    ]
   },
   {
-   "id": "201601",
-   "page": "地固め",
-   "reasons": [
-    "无可解析发动位置(activate_count_start>=3)"
-   ]
-  },
-  {
-   "id": "201602",
-   "page": "盤石の構え",
-   "reasons": [
-    "无可解析发动位置(activate_count_start>=3)"
-   ]
-  },
-  {
-   "id": "201611",
-   "page": "尻尾上がり",
-   "reasons": [
-    "无可解析发动位置(activate_count_middle>=3)"
-   ]
-  },
-  {
-   "id": "201612",
-   "page": "尻尾の滝登り",
-   "reasons": [
-    "无可解析发动位置(activate_count_middle>=3)"
-   ]
-  },
-  {
-   "id": "201621",
-   "page": "ふり絞り",
-   "reasons": [
-    "无可解析发动位置(activate_count_end_after>=3)"
-   ]
-  },
-  {
    "id": "201631",
    "page": "シンパシー",
    "reasons": [
@@ -702,32 +566,10 @@
    ]
   },
   {
-   "id": "201632",
-   "page": "コネクト",
-   "reasons": [
-    "未识别token:is_exist_skill_id==201631",
-    "无可解析发动位置(ground_type==1&is_exist_skill_id==201631)"
-   ]
-  },
-  {
    "id": "201641",
    "page": "一匹狼",
    "reasons": [
     "无可解析发动位置(same_skill_horse_count==1)"
-   ]
-  },
-  {
-   "id": "202601",
-   "page": "ルミネセンス",
-   "reasons": [
-    "无可解析发动位置(distance_type==3&activate_count_all>=13)"
-   ]
-  },
-  {
-   "id": "202602",
-   "page": "イグニッション",
-   "reasons": [
-    "无可解析发动位置(distance_type==3&activate_count_all>=13)"
    ]
   },
   {
@@ -789,13 +631,6 @@
    "page": "レースの真髄・根",
    "reasons": [
     "无可解析发动位置(compete_fight_count>0)"
-   ]
-  },
-  {
-   "id": "210131",
-   "page": "レースの真髄・賢",
-   "reasons": [
-    "无可解析发动位置(activate_count_later_half>=2)"
    ]
   },
   {
@@ -868,7 +703,8 @@
    "id": "901031-b2",
    "page": "继承技/絶対最強☆アピール宣言！",
    "reasons": [
-    "无可解析发动位置(is_activate_other_skill_detail==1&compete_fight_count>0)"
+    "无可解析发动位置(is_activate_other_skill_detail==1&compete_fight_count>0)",
+    "前提型技能无位置锚点,按前提范围发动:{\"kind\":\"distanceRate\",\"fromPct\":0,\"toPct\":100}"
    ]
   },
   {
@@ -885,13 +721,6 @@
    "reasons": [
     "无可解析发动位置(is_goodstart==1)",
     "前置条件:running_style==2@running_style==4"
-   ]
-  },
-  {
-   "id": "910211",
-   "page": "继承技/火神鳴",
-   "reasons": [
-    "无可解析发动位置(activate_count_middle>=2)"
    ]
   },
   {
@@ -927,13 +756,6 @@
    "page": "继承技/ごろりん！？パワードライブ",
    "reasons": [
     "ability_time_usage=7"
-   ]
-  },
-  {
-   "id": "920051",
-   "page": "继承技/Gloire à toi!",
-   "reasons": [
-    "无可解析发动位置(activate_count_later_half>=1)"
    ]
   },
   {

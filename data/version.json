@@ -1,5 +1,5 @@
 {
-  "version": "0.7.1-basis",
+  "version": "0.8.0-prereq",
   "generatedAt": "2026-10-25",
   "sources": [
     "BWIKI 技能速查表(api.php action=ask,1907 条原始;tools/scrape-once.ts)",
@@ -14,9 +14,9 @@
     "skills": 2641
   },
   "skillPrecision": {
-    "precise": 319,
-    "approx": 2055,
-    "unsupported": 267,
+    "precise": 409,
+    "approx": 1988,
+    "unsupported": 244,
     "excludedEvolution": 47,
     "codeParsed": 1857,
     "textFallback": 2,
@@ -46,6 +46,9 @@
     "装配限制(触发代码级):running_style / distance_type / is_basis_distance / ground_type / ground_condition(含 !=、>=、<=)/ track_id(含范围成对合并)/ course_distance(精确与范围)/ rotation / weather / season / motivation / is_abroad / base_speed·base_stamina·base_power·base_guts·base_wiz,任一不满足 ⇒ 整场不生效;绿技能(213 条)中 164 条带限制",
     "标准距离 is_basis_distance = 赛程全长为 400 米整数倍(1200/1600/2000/2400/3200...),与距离档(短/英里/中/长)是两条独立的轴:1600 属英里但是 400 倍数、2500 属长距离但非 400 倍数。存为独立布尔 restriction.basisDistance(6 条绿技能:标准距离◎○× / 非标准距离◎○×);此前误映射为 distanceTypes(标准→中/长),已修正",
     "装配限制采用 DNF 子句:同一支(& 连接)= 与,同字段取交集;`@` 变体 = 或,输出 restriction.anyOf(任一满足即生效);condition_1 / condition_2 是两组独立效果块(拆成 -b1/-b2),不是或分支;单字段差异分支化简回扁平结构,仅 10 条异构技能保留 anyOf",
-    "仍未建模的 token(单马模型无法判断,按满足处理并记入 skill-notes.json):popularity / post_number / fan_count / grade(100=G1)/ is_dirtgrade(交流重赏)/ lane_type / furlong / time / visiblehorse / random_lot(_shared)/ succession_skill_count / is_move_lane / remain_distance_viewer_id / is_exist_*;is_tight_track(小回り)由文本侧落成 venues(札幌/函馆/福岛/小仓/川崎/船桥)"
+    "仍未建模的 token(单马模型无法判断,按满足处理并记入 skill-notes.json):popularity / post_number / fan_count / grade(100=G1)/ is_dirtgrade(交流重赏)/ lane_type / furlong / time / visiblehorse / random_lot(_shared)/ succession_skill_count / is_move_lane / remain_distance_viewer_id / is_exist_*;is_tight_track(小回り)由文本侧落成 venues(札幌/函馆/福岛/小仓/川崎/船桥)",
+    "技能发动前提(prereq)建模:触发代码里依赖自身技能发动史的 token 不再当作近似丢掉 —— activate_count_all/start/middle/later_half/end_after/heal/param_skill、succession_skill_count、is_activate_any_skill、is_activate_heal_skill、is_used_skill_id(±with_detail_one)、is_exist_skill_id、is_activate_other_skill_detail(即 -b2 依赖 -b1),共 200 条技能带前提(129 条为 -b2 依赖 -b1)",
+    "前提不满足 = 本帧不发动、后续帧继续判(不是整场禁用):计数器为 all/start/middle/laterHalf/endAfter/heal/green/heir,闭区间;只有前提无位置锚点的技能按前提统计范围重建可发动区间(start→序盘、middle→中盘、laterHalf→50%~终点、endAfter→终盘起),否则只会在起跑帧判一次而永不发动;带前提的常时被动不并入起跑属性(标不支持)",
+    "仍未建模的前提类 token(单马模型无法判断):activate_count_all_team(队伍)、is_activate_other_character_activate_advantage_skill、running_style_count_*(他马跑法统计);is_used_skill_id_with_detail_one 只建模「该技能已发动」,细节条件忽略并保留 approx"
   ]
 }

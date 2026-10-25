@@ -92,6 +92,43 @@ const clauseSchema = z.object({
   rawText: z.string().optional(),
 });
 
+/** 发动前提的计数器约束(== 时 min=max;闭区间) */
+const counterReqSchema = z.object({
+  min: z.number().int().min(0).optional(),
+  max: z.number().int().min(0).optional(),
+});
+
+/** 发动前提的递归类型(anyOf 可嵌套,必须显式标注,否则 zod 推断会退化 any) */
+interface PrereqSchemaType {
+  readonly counters?: Readonly<Partial<Record<'all' | 'start' | 'middle' | 'laterHalf' | 'endAfter' | 'heal' | 'green' | 'heir', { readonly min?: number; readonly max?: number }>>>;
+  readonly usedSkillBaseIds?: readonly string[];
+  readonly ownedSkillBaseIds?: readonly string[];
+  readonly requiresFirstBlock?: boolean;
+  readonly anyOf?: readonly PrereqSchemaType[];
+}
+
+/** 发动前提:依赖自身技能发动史 / 持有技能(不满足则不发动,不是"不适用") */
+const prereqSchema: z.ZodType<PrereqSchemaType> = z.object({
+  counters: z.object({
+    all: counterReqSchema.optional(),
+    start: counterReqSchema.optional(),
+    middle: counterReqSchema.optional(),
+    laterHalf: counterReqSchema.optional(),
+    endAfter: counterReqSchema.optional(),
+    heal: counterReqSchema.optional(),
+    green: counterReqSchema.optional(),
+    heir: counterReqSchema.optional(),
+  }).optional(),
+  /** 需已发动的技能(按基础 id 匹配,忽略 -b1/-b2) */
+  usedSkillBaseIds: z.array(z.string()).optional(),
+  /** 需已选入牌组的技能(is_exist_skill_id) */
+  ownedSkillBaseIds: z.array(z.string()).optional(),
+  /** 需本技能第一段效果已发动(is_activate_other_skill_detail) */
+  requiresFirstBlock: z.boolean().optional(),
+  /** 多分支:任一满足即可(@ 变体之间为「或」) */
+  anyOf: z.array(z.lazy(() => prereqSchema)).min(1).optional(),
+});
+
 /** 技能装配限制:单子句用扁平字段,多分支用 anyOf(任一子句满足即生效) */
 const restrictionSchema = clauseSchema.extend({
   anyOf: z.array(clauseSchema).min(1).optional(),
@@ -146,6 +183,8 @@ export const skillSchema = z.object({
   cooldownSec: z.number().positive().nullable().optional(),
   condition: skillConditionSchema,
   restriction: restrictionSchema.optional(),
+  /** 发动前提(已发动技能数 / 回复技能数 / 需已发动的技能 / 本技能第一段) */
+  prereq: prereqSchema.optional(),
   /** 条件限制原始描述(装配时已过滤,数据层保留原始描述) */
   restrictionText: z.string().optional(),
   wisdomScaled: z.boolean(),

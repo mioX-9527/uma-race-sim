@@ -273,6 +273,58 @@ function describeClause(r: RestrictionClause): string {
   return parts.join(' · ');
 }
 
+const COUNTER_CN: Record<string, string> = {
+  all: '已发动技能',
+  start: '序盘发动技能',
+  middle: '中盘发动技能',
+  laterHalf: '后半段发动技能',
+  endAfter: '终盘发动技能',
+  heal: '已发动回复技能',
+  green: '生效绿技能',
+  heir: '继承技能',
+};
+
+/** 单条计数器约束 → 「已发动回复技能 ≥3」/「中盘发动技能 =7」 */
+function counterText(key: string, req: { readonly min?: number; readonly max?: number }): string {
+  const name = COUNTER_CN[key] ?? key;
+  const min = req.min;
+  const max = req.max;
+  if (min !== undefined && max !== undefined) return min === max ? `${name} =${min}` : `${name} ${min}~${max}`;
+  if (min !== undefined) return `${name} ≥${min}`;
+  if (max !== undefined) return `${name} ≤${max}`;
+  return '';
+}
+
+/** 技能 id → 名称(前提里引用别的技能时用) */
+function skillNameOf(id: string): string {
+  const hit = SKILLS.find(x => x.id === id || x.id.replace(/-b\d+$/, '') === id);
+  return hit?.name ?? id;
+}
+
+/** 单条前提子句 → 中文短描述(字段间为「与」) */
+function prereqClauseText(p: NonNullable<SkillConfig['prereq']>): string {
+  const parts: string[] = [];
+  for (const [k, req] of Object.entries(p.counters ?? {})) {
+    if (req === undefined) continue;
+    const t = counterText(k, req);
+    if (t !== '') parts.push(t);
+  }
+  if (p.usedSkillBaseIds !== undefined) parts.push(`已发动「${p.usedSkillBaseIds.map(skillNameOf).join('」「')}」`);
+  if (p.ownedSkillBaseIds !== undefined) parts.push(`持有「${p.ownedSkillBaseIds.map(skillNameOf).join('」「')}」`);
+  if (p.requiresFirstBlock === true) parts.push('需先发动第一段');
+  return parts.join(' · ');
+}
+
+/** 发动前提 → 中文短描述;多分支(anyOf)按「或」拼接 */
+export function describePrereq(s: SkillConfig): string {
+  const p = s.prereq;
+  if (p === undefined) return '';
+  if (p.anyOf !== undefined && p.anyOf.length > 0) {
+    return p.anyOf.map(c => `(${prereqClauseText(c)})`).join(' 或 ');
+  }
+  return prereqClauseText(p);
+}
+
 /** 装配型限制 → 中文短描述;多分支(anyOf)按「或」拼接 */
 export function describeRestriction(s: SkillConfig): string {
   const r = s.restriction;

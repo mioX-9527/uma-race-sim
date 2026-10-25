@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { skillApplicable } from '@uma-race-sim/engine';
 import type { Course, RunnerConfig } from '@uma-race-sim/engine';
-import { PRECISION_LABEL, SKILLS, describeCondition, describeEffects, describeRestriction, type SkillEntry } from '../lib/sim';
+import { PRECISION_LABEL, SKILLS, describeCondition, describeEffects, describePrereq, describeRestriction, type SkillEntry } from '../lib/sim';
 
 interface Props {
   selected: readonly string[];
@@ -64,6 +64,7 @@ export function SkillPicker({ selected, onChange, course, runner }: Props): JSX.
                   {s.cnReleased === true && <span className="badge cn">国服</span>}
                   <span className={`badge ${s.precision}`}>{PRECISION_LABEL[s.precision]}</span>
                   {!okOf(s) && <span className="badge off" title="当前赛道/环境不满足装配限制,选中也不生效">不生效</span>}
+                  {s.prereq !== undefined && <span className="badge pre" title={`前提:${describePrereq(s)}`}>前提</span>}
                 </span>
               </div>
               <div className="meta">
@@ -71,6 +72,10 @@ export function SkillPicker({ selected, onChange, course, runner }: Props): JSX.
                 {(() => {
                   const rst = describeRestriction(s);
                   return rst !== '' ? ` · 限:${rst}` : '';
+                })()}
+                {(() => {
+                  const pre = describePrereq(s);
+                  return pre !== '' ? ` · 前提:${pre}` : '';
                 })()}
                 {s.nameJa !== undefined && s.nameJa !== s.name ? ` · 原名:${s.nameJa}` : ''}
               </div>
@@ -91,6 +96,7 @@ export function SkillPicker({ selected, onChange, course, runner }: Props): JSX.
               {s.name}
               <span className={`badge ${s.precision}`}>{PRECISION_LABEL[s.precision]}</span>
               {!okOf(s) && <span className="badge off">不生效</span>}
+              {s.prereq !== undefined && <span className="badge pre" title={`前提:${describePrereq(s)}`}>前提</span>}
               ×
             </span>
           ))}

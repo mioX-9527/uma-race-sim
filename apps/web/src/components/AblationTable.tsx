@@ -1,6 +1,6 @@
 import { Fragment, useState } from 'react';
 import type { AblationReport } from '@uma-race-sim/analysis';
-import { PRECISION_LABEL, SKILLS, describeCondition, describeEffects, describeRestriction } from '../lib/sim';
+import { PRECISION_LABEL, SKILLS, describeCondition, describeEffects, describePrereq, describeRestriction } from '../lib/sim';
 
 const signed = (v: number, digits: number): string => `${v >= 0 ? '+' : ''}${v.toFixed(digits)}`;
 
@@ -49,6 +49,9 @@ export function AblationTable({ report }: { report: AblationReport }): JSX.Eleme
                       <span className="badge off" title={need === '' ? '当前赛道/环境不满足装配限制' : `需:${need}`}>
                         不生效
                       </span>
+                    )}
+                    {skill !== undefined && skill.prereq !== undefined && (
+                      <span className="badge pre" title={`前提:${describePrereq(skill)}`}>前提</span>
                     )}
                   </td>
                   <td className="left">

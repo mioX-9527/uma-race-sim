@@ -23,6 +23,7 @@ import {
 } from './conditions';
 import { effectiveStatsOf, passiveBonusOf } from './effstats';
 import { phaseAt } from './phase';
+import { baseIdOf, prereqSatisfied } from './prereq';
 import { baseAccelOf, baseSpeedOf, lastSpurtSpeedOf, minSpeedOf, phaseTargetSpeed } from './speed';
 import {
   accelerationBonus,
@@ -34,7 +35,7 @@ import {
   type Buff,
 } from './skills';
 import { gutsDrainModifier, maxHpOf, staminaDrainPerSecond } from './stamina';
-import type { Activation, Course, RunnerConfig, SimOptions, SimResult, SkillConfig, Slope } from './types';
+import type { Activation, Course, FiredSkill, RunnerConfig, SimOptions, SimResult, SkillConfig, Slope } from './types';
 
 const MAX_SECONDS = 600;
 
@@ -157,10 +158,28 @@ export function simulate(course: Course, runner: RunnerConfig, opts: SimOptions 
   const activations: Activation[] = [];
   /** 一次性技能的已发动标记(冷却缺失或 ≥ 一场最长冷却 500s) */
   const activated = new Set<string>();
+  /** 已发动技能史(供 prereq 计数器:已发动数量 / 回复数量 / 某技能是否发动过) */
+  const fired: FiredSkill[] = [];
   /** 带冷却技能的下次可发动时刻(秒,基准值已按 距离/1000 缩放) */
   const readyAt = new Map<string, number>();
   /** 位置采样:已按强制位置发动过的技能 */
   const overrideFired = new Set<string>();
+
+  /** 前提是否满足(已发动技能数 / 回复数 / 指定技能 / 本技能第一段) */
+  const prereqOk = (s: SkillConfig): boolean =>
+    s.prereq === undefined ||
+    prereqSatisfied(s.prereq, { course, runner, baseId: baseIdOf(s.id), fired });
+
+  /** 记录一次发动(供后续技能的前提判定) */
+  const noteFired = (s: SkillConfig, frame: FrameState): void => {
+    fired.push({
+      skillId: s.id,
+      phase: frame.phase,
+      meter: frame.x,
+      // 回复类技能计数:按效果类型判定(负值的「回复×」也属回复技能分类)
+      heal: s.effects.some(e => e.type === 'heal'),
+    });
+  };
 
   /** 发动效果入栈(共用路径:规则发动与位置采样强制发动) */
   const applyFire = (s: SkillConfig, frame: FrameState): void => {
@@ -278,10 +297,13 @@ export function simulate(course: Course, runner: RunnerConfig, opts: SimOptions 
       if (overrideM !== undefined && !overrideFired.has(s.id)) {
         if (x < overrideM) continue;
         if (s.restriction !== undefined && !restrictionSatisfied(s.restriction, runner, course)) continue;
+        // 强制位置也尊重发动前提:前提未满足时继续等待(否则消融会凭空发动)
+        if (!prereqOk(s)) continue;
         overrideFired.add(s.id);
         if (once) activated.add(s.id);
         else readyAt.set(s.id, t + s.cooldownSec * distScale);
         activations.push({ skillId: s.id, name: s.name, atSec: t, atMeter: x, precision: s.precision });
+        noteFired(s, frame);
         applyFire(s, frame);
         continue;
       }
@@ -289,9 +311,12 @@ export function simulate(course: Course, runner: RunnerConfig, opts: SimOptions 
       const hit = activationRegions(s.condition, course).some(r => inRegion(r, x));
       if (!hit) continue;
       if (!dynamicSatisfied(s.condition, frame)) continue;
+      // 发动前提(已发动技能数/回复数/需先发动的技能):不满足则本帧不发动,后续帧继续尝试
+      if (!prereqOk(s)) continue;
       if (once) activated.add(s.id);
       else readyAt.set(s.id, t + s.cooldownSec * distScale);
       activations.push({ skillId: s.id, name: s.name, atSec: t, atMeter: x, precision: s.precision });
+      noteFired(s, frame);
       applyFire(s, frame);
     }
 

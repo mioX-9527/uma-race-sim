@@ -42,6 +42,8 @@ interface OutSkill {
   cooldownSec?: number | null;
   condition: Record<string, unknown>;
   restriction?: Record<string, unknown>;
+  /** 发动前提(已发动技能数 / 回复技能数 / 需已发动的技能 / 本技能第一段) */
+  prereq?: Record<string, unknown>;
   restrictionText?: string;
   wisdomScaled: boolean;
   /** 触发代码含 *_random → 发动位置在满足区段内随机,消融按位置采样求期望 */
@@ -169,6 +171,8 @@ interface CodeParse {
   approx: boolean;
   /** 各 @ 变体的限制子句(变体之间是「或」;单元素 = 单子句) */
   clauses: CodeRestriction[];
+  /** 各 @ 变体的发动前提(变体之间是「或」) */
+  prereqs: CodePrereq[];
   notes: string[];
 }
 
@@ -197,7 +201,7 @@ const APPROX_NAME_RE =
 const ENV_TOKENS = new Set([
   'popularity', 'post_number',
   'fan_count', 'grade', 'is_dirtgrade', 'is_tight_track', 'lane_type',
-  'furlong', 'remain_distance_viewer_id', 'is_exist_chara_id', 'succession_skill_count',
+  'furlong', 'remain_distance_viewer_id', 'is_exist_chara_id',
   'visiblehorse', 'random_lot', 'random_lot_shared', 'is_move_lane', 'time',
 ]);
 
@@ -207,6 +211,127 @@ function emptyRestriction(): CodeRestriction {
     grounds: new Set(), distances: new Set(), rotations: new Set(), weathers: new Set(), seasons: new Set(),
     motivations: new Set(), statsAtLeast: {}, statsBelow: {},
   };
+}
+
+/** 计数器 token → 引擎计数器名(与 ActivationCounter 对齐) */
+const COUNTER_BY_TOKEN: Record<string, string> = {
+  activate_count_all: 'all',
+  activate_count_start: 'start',
+  activate_count_middle: 'middle',
+  activate_count_later_half: 'laterHalf',
+  activate_count_end_after: 'endAfter',
+  activate_count_heal: 'heal',
+  activate_count_param_skill: 'green',
+  succession_skill_count: 'heir',
+};
+
+/** 触发代码里的「发动前提」(依赖自身技能发动史 / 持有技能) */
+interface CodePrereq {
+  counters: Record<string, { min?: number; max?: number }>;
+  usedSkillBaseIds: string[];
+  ownedSkillBaseIds: string[];
+  requiresFirstBlock: boolean;
+}
+
+function emptyPrereq(): CodePrereq {
+  return { counters: {}, usedSkillBaseIds: [], ownedSkillBaseIds: [], requiresFirstBlock: false };
+}
+
+function prereqIsEmpty(p: CodePrereq): boolean {
+  return Object.keys(p.counters).length === 0 && p.usedSkillBaseIds.length === 0 &&
+    p.ownedSkillBaseIds.length === 0 && !p.requiresFirstBlock;
+}
+
+/** 写入计数器约束(同字段多次出现取「与」:min 取大、max 取小) */
+function putCounter(p: CodePrereq, key: string, op: string, value: number, notes: string[]): void {
+  const cur = p.counters[key] ?? {};
+  let min = cur.min;
+  let max = cur.max;
+  if (op === '>=') min = Math.max(min ?? -Infinity, value);
+  else if (op === '>') min = Math.max(min ?? -Infinity, value + 1);
+  else if (op === '<=') max = Math.min(max ?? Infinity, value);
+  else if (op === '<') max = Math.min(max ?? Infinity, value - 1);
+  else if (op === '==') { min = Math.max(min ?? -Infinity, value); max = Math.min(max ?? Infinity, value); }
+  else { notes.push(`${key}${op}${value} 未识别(前提)`); return; }
+  p.counters[key] = {
+    ...(min !== undefined && Number.isFinite(min) ? { min } : {}),
+    ...(max !== undefined && Number.isFinite(max) ? { max } : {}),
+  };
+}
+
+/** 前提「与」合并(两组前提需同时满足) */
+function mergePrereqAnd(a: CodePrereq, b: CodePrereq): void {
+  for (const [k, v] of Object.entries(b.counters)) {
+    const cur = a.counters[k] ?? {};
+    a.counters[k] = {
+      ...(v.min !== undefined || cur.min !== undefined ? { min: Math.max(v.min ?? -Infinity, cur.min ?? -Infinity) } : {}),
+      ...(v.max !== undefined || cur.max !== undefined ? { max: Math.min(v.max ?? Infinity, cur.max ?? Infinity) } : {}),
+    };
+  }
+  for (const id of b.usedSkillBaseIds) if (!a.usedSkillBaseIds.includes(id)) a.usedSkillBaseIds.push(id);
+  for (const id of b.ownedSkillBaseIds) if (!a.ownedSkillBaseIds.includes(id)) a.ownedSkillBaseIds.push(id);
+  if (b.requiresFirstBlock) a.requiresFirstBlock = true;
+}
+
+/**
+ * 只有前提、没有位置锚点的技能(如「中盘发动技能数≥3」):按前提的统计范围给出可发动区间。
+ * 例如 activate_count_middle 天然只能在中盘满足 → 中盘区间;later_half → 50%~终点。
+ */
+function conditionFromPrereq(p: CodePrereq): Record<string, unknown> {
+  const c = p.counters;
+  if (c.endAfter !== undefined) return { kind: 'phaseAfter', phase: 2 };
+  if (c.laterHalf !== undefined) return { kind: 'distanceRate', fromPct: 50, toPct: 100 };
+  if (c.middle !== undefined) return { kind: 'phase', phase: 1 };
+  if (c.start !== undefined) return { kind: 'phase', phase: 0 };
+  // all / heal / green / heir:随时可能满足,整场可发动
+  return { kind: 'distanceRate', fromPct: 0, toPct: 100 };
+}
+
+/** 前提 → 输出对象(空 = 无前提) */
+function prereqObj(p: CodePrereq): Record<string, unknown> {
+  const out: Record<string, unknown> = {};
+  if (Object.keys(p.counters).length > 0) out.counters = { ...p.counters };
+  if (p.usedSkillBaseIds.length > 0) out.usedSkillBaseIds = [...p.usedSkillBaseIds].sort();
+  if (p.ownedSkillBaseIds.length > 0) out.ownedSkillBaseIds = [...p.ownedSkillBaseIds].sort();
+  if (p.requiresFirstBlock) out.requiresFirstBlock = true;
+  return out;
+}
+
+/**
+ * 多组前提(@ 变体 / 前置条件)→ 输出对象。
+ * 变体之间是「或」:任一无前提 ⇒ 整体无前提;多组不同 ⇒ `{ anyOf: [...] }`(任一满足即成立)。
+ */
+function prereqObjOf(groups: readonly CodePrereq[]): Record<string, unknown> | undefined {
+  const objs: Record<string, unknown>[] = [];
+  for (const g of groups) {
+    if (prereqIsEmpty(g)) return undefined;
+    objs.push(prereqObj(g));
+  }
+  const uniq = [...new Map(objs.map(o => [JSON.stringify(o), o])).values()];
+  if (uniq.length === 0) return undefined;
+  if (uniq.length === 1) return uniq[0];
+  // 有任意一支不需要前提 → 等价于无前提
+  if (uniq.some(o => Object.keys(o).length === 0)) return undefined;
+  return { anyOf: uniq };
+}
+
+/** 前置条件与发动条件的前提「与」组合(两组都是 OR 时取交叉) */
+function crossPrereq(a: readonly CodePrereq[], b: readonly CodePrereq[]): CodePrereq[] {
+  const out: CodePrereq[] = [];
+  for (const x of a) {
+    for (const y of b) {
+      const m: CodePrereq = {
+        counters: { ...x.counters },
+        usedSkillBaseIds: [...x.usedSkillBaseIds],
+        ownedSkillBaseIds: [...x.ownedSkillBaseIds],
+        requiresFirstBlock: x.requiresFirstBlock,
+      };
+      mergePrereqAnd(m, y);
+      const key = JSON.stringify(prereqObj(m));
+      if (!out.some(o => JSON.stringify(prereqObj(o)) === key)) out.push(m);
+    }
+  }
+  return out.slice(0, 8);
 }
 
 /** 子句内字段是否「已被本变体赋值」(用于同字段多次出现取交集,即 AND 语义) */
@@ -268,8 +393,10 @@ function restrictionIsEmpty(r: CodeRestriction): boolean {
  * 锚点优先级(高→低):末脚起点 > 具体弯道 > 最终弯道/直线 > 任意弯道/直线 > 坡道 > 看台对面直线 >
  * 距离窗口(独立成锚) > 阶段 > 累计时间 > 常驻。阶段/距离窗口与区段锚联用时转为裁剪字段。
  */
-function parseVariant(tokens: readonly Token[], notes: string[]): Omit<CodeParse, 'clauses'> & { restriction: CodeRestriction } {
+function parseVariant(tokens: readonly Token[], notes: string[]): Omit<CodeParse, 'clauses' | 'prereqs'> & { restriction: CodeRestriction; prereq: CodePrereq } {
   const restriction = emptyRestriction();
+  /** 发动前提(已发动技能数等;不参与位置锚定) */
+  const prereq = emptyPrereq();
   /** 本变体内已被赋值的限制字段(同字段二次出现 → 取交集) */
   const touched: Touched = new Set();
   let approx = false;
@@ -561,6 +688,41 @@ function parseVariant(tokens: readonly Token[], notes: string[]): Omit<CodeParse
       case name === 'course_distance' && op === '<=':
         restriction.distanceMax = Math.min(restriction.distanceMax ?? Infinity, value);
         break;
+      // ---- 发动前提(依赖自身技能发动史 / 持有技能,不参与位置锚定) ----
+      case COUNTER_BY_TOKEN[name] !== undefined:
+        // activate_count_all/start/middle/later_half/end_after/heal/param_skill、succession_skill_count
+        putCounter(prereq, COUNTER_BY_TOKEN[name]!, op, value, notes);
+        break;
+      case name === 'is_activate_any_skill': {
+        // 「发动任意技能」:==1 → 至少 1 个
+        const flag = value === 1;
+        putCounter(prereq, 'all', op === '!=' ? (flag ? '<=' : '>=') : '>=', flag ? 1 : 0, notes);
+        break;
+      }
+      case name === 'is_activate_heal_skill': {
+        // 「发动耐力回复技能」
+        const flag = value === 1;
+        putCounter(prereq, 'heal', op === '!=' ? (flag ? '<=' : '>=') : '>=', flag ? 1 : 0, notes);
+        break;
+      }
+      case name === 'is_used_skill_id' || name === 'is_used_skill_id_with_detail_one':
+        // 「发动技能 X」(按基础 id 匹配,忽略 -b1/-b2)
+        if (op === '==') prereq.usedSkillBaseIds.push(String(value));
+        else notes.push(`${name}${op}${value} 未识别(前提)`);
+        if (name === 'is_used_skill_id_with_detail_one') {
+          approx = true;
+          notes.push('is_used_skill_id_with_detail_one:仅建模「该技能已发动」,细节条件未建模');
+        }
+        break;
+      case name === 'is_exist_skill_id':
+        // 「持有技能 X」(牌组里选了就算满足)
+        if (op === '==') prereq.ownedSkillBaseIds.push(String(value));
+        else notes.push(`${name}${op}${value} 未识别(前提)`);
+        break;
+      case name === 'is_activate_other_skill_detail':
+        // 「已发动第一段技能」:本技能的 -b2 依赖 -b1 已发动
+        if (op === '==' && value === 1) prereq.requiresFirstBlock = true;
+        break;
       // ---- 近似/环境 ----
       case APPROX_NAME_RE.test(name):
         approx = true;
@@ -644,7 +806,7 @@ function parseVariant(tokens: readonly Token[], notes: string[]): Omit<CodeParse
     condition = { kind: 'raceStart' };
   }
 
-  return { condition, approx, restriction, notes };
+  return { condition, approx, restriction, prereq, notes };
 }
 
 /** 完整条件字符串(可能含 @ 变体)→ 条件对象 + 并集限制 */
@@ -662,7 +824,7 @@ function parseCode(code: string): CodeParse {
     }
   }
   if (parsed.length > 1) approx = true;
-  return { condition: first.condition, approx, clauses: parsed.map(p => p.restriction), notes };
+  return { condition: first.condition, approx, clauses: parsed.map(p => p.restriction), prereqs: parsed.map(p => p.prereq), notes };
 }
 
 /** 触发代码效果槽(ability_type_s_e)→ 效果列表 */
@@ -734,6 +896,7 @@ function skillFromLuaBranch(
   // 触发代码含 *_random(corner/phase/straight/slope 随机)→ 发动位置在区段内随机
   const randomPosition = /_random/.test(`${codeRaw} ${pre}`);
   let clauses = cp.clauses;
+  let prereqs = cp.prereqs;
   if (pre !== '') {
     const pp = parseCode(pre);
     // 前置条件与发动条件为「与」:两边的每个变体交叉合并
@@ -746,6 +909,7 @@ function skillFromLuaBranch(
       }
     }
     clauses = crossed;
+    prereqs = crossPrereq(prereqs, pp.prereqs);
     if (pp.approx) cp.approx = true;
     info.push(`前置条件:${pre}`);
   }
@@ -767,6 +931,7 @@ function skillFromLuaBranch(
   }
 
   const restrictionObj = restrictionObjOf(clauses, meta.textRestrictionObj);
+  const prereqObjOut = prereqObjOf(prereqs);
 
   let precision: OutSkill['precision'];
   if (hasUnsupported || cp.condition === null || effects.length === 0) {
@@ -774,7 +939,12 @@ function skillFromLuaBranch(
     if (cp.condition === null) reasons.push(`无可解析发动位置(${lua[`condition_${slot}`] ?? ''})`);
   } else if (allPassive) {
     // 常时被动(绿技能):并入起跑属性,引擎 effstats passiveBonusOf 支持 → 精确
-    if (cp.condition.kind === 'raceStart') {
+    if (prereqObjOut !== undefined) {
+      // 依赖「已发动 N 个技能」的绿技能:加成本身要在比赛中段才成立,
+      // 起跑属性折算无法表达(且会凭空常驻),按不支持处理,不计入面板
+      precision = 'unsupported';
+      reasons.push('常时被动但依赖发动次数前提(起跑属性无法折算)');
+    } else if (cp.condition.kind === 'raceStart') {
       precision = 'precise';
     } else {
       precision = 'unsupported';
@@ -782,6 +952,14 @@ function skillFromLuaBranch(
     }
   } else {
     precision = cp.approx ? 'approx' : 'precise';
+  }
+
+  // 前提型技能若没有位置锚点(condition 落到 raceStart),按前提的统计范围重建可发动区间,
+  // 否则只会在起跑帧判定一次、永远不满足前提而永不发动。
+  let conditionOut = cp.condition ?? { kind: 'raceStart' };
+  if (prereqObjOut !== undefined && !allPassive && conditionOut.kind === 'raceStart') {
+    conditionOut = conditionFromPrereq(prereqs[0] ?? emptyPrereq());
+    info.push(`前提型技能无位置锚点,按前提范围发动:${JSON.stringify(conditionOut)}`);
   }
 
   const skill: OutSkill = {
@@ -795,8 +973,9 @@ function skillFromLuaBranch(
     effects,
     durationSec,
     ...(cooldownSec !== null ? { cooldownSec } : {}),
-    condition: cp.condition ?? { kind: 'raceStart' },
+    condition: conditionOut,
     restriction: restrictionObj,
+    ...(prereqObjOut !== undefined ? { prereq: prereqObjOut } : {}),
     restrictionText: meta.restrictionText,
     wisdomScaled: meta.wisdomScaled,
     ...(randomPosition ? { randomPosition: true } : {}),
