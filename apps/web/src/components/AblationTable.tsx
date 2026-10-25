@@ -30,6 +30,8 @@ export function AblationTable({ report }: { report: AblationReport }): JSX.Eleme
             const sampled = r.positionSamples !== undefined && r.positionSamples.length > 0;
             const open = expanded === r.skillId;
             const body = r.expectedBody ?? r.deltaBody;
+            const isPassiveRaceStart =
+              skill !== undefined && skill.effects.length > 0 && skill.effects.every(e => e.type === 'passive') && skill.condition.kind === 'raceStart';
             return (
               <Fragment key={r.skillId}>
                 <tr>
@@ -49,11 +51,13 @@ export function AblationTable({ report }: { report: AblationReport }): JSX.Eleme
                     )}
                   </td>
                   <td>
-                    {r.activatedAtMeter === null
-                      ? '—'
-                      : r.activationCount > 1
-                        ? `${Math.round(r.activatedAtMeter)}m ×${r.activationCount}次`
-                        : `${Math.round(r.activatedAtMeter)}m`}
+                    {isPassiveRaceStart
+                      ? '常时'
+                      : r.activatedAtMeter === null
+                        ? '—'
+                        : r.activationCount > 1
+                          ? `${Math.round(r.activatedAtMeter)}m ×${r.activationCount}次`
+                          : `${Math.round(r.activatedAtMeter)}m`}
                   </td>
                   <td className={body > 0 ? 'pos' : 'neg'}>
                     {sampled ? (

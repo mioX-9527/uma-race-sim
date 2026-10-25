@@ -154,7 +154,7 @@ export function ConfigPanel({ config, onChange }: Props): JSX.Element {
         <SkillPicker selected={config.skillIds} onChange={ids => set({ skillIds: ids })} />
         <p className="note">
           「近似」= 发动条件依赖名次/间距/随机时刻,单马期望模型按期望位置发动;
-          「不支持」(干扰/被动等)不参与模拟。绿技能(前提值)计入待 v0.2。
+          「不支持」(干扰/条件型被动等)不参与模拟。绿技能(常时被动)选中后并入起跑属性参与模拟。
           「继承」角标 = 继承固有(数值/持续时间与本体大招不同,增幅系数恒 1.0);
           「进化」角标 = 进化技能(本体技能进化后的强化版,与本体二选一)。
         </p>

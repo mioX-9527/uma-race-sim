@@ -626,10 +626,17 @@ function skillFromLuaBranch(
   const restrictionObj = mergeRestrictionObj(cp.restriction, meta.textRestrictionObj);
 
   let precision: OutSkill['precision'];
-  if (hasUnsupported || cp.condition === null || effects.length === 0 || allPassive) {
+  if (hasUnsupported || cp.condition === null || effects.length === 0) {
     precision = 'unsupported';
     if (cp.condition === null) reasons.push(`无可解析发动位置(${lua[`condition_${slot}`] ?? ''})`);
-    if (allPassive && effects.length > 0) reasons.push('纯被动(前提值,不参与比赛过程)');
+  } else if (allPassive) {
+    // 常时被动(绿技能):并入起跑属性,引擎 effstats passiveBonusOf 支持 → 精确
+    if (cp.condition.kind === 'raceStart') {
+      precision = 'precise';
+    } else {
+      precision = 'unsupported';
+      reasons.push('条件型被动(非常时)暂不支持');
+    }
   } else {
     precision = cp.approx ? 'approx' : 'precise';
   }
@@ -1099,10 +1106,14 @@ for (const [id, e] of rowsById) {
     reasons.push('Lua 未收录,文本解析');
 
     let precision: OutSkill['precision'];
-    if (hasUnsupported || cp.condition === null || effects.length === 0 || allPassive) {
+    if (hasUnsupported || cp.condition === null || effects.length === 0) {
       precision = 'unsupported';
       if (cp.condition === null) reasons.push('无可解析发动位置');
-      if (allPassive && effects.length > 0) reasons.push('纯被动(前提值,不参与比赛过程)');
+    } else if (allPassive && cp.condition?.kind === 'raceStart') {
+      precision = 'precise'; // 常时被动(绿技能):并入起跑属性
+    } else if (allPassive) {
+      precision = 'unsupported';
+      reasons.push('条件型被动(非常时)暂不支持');
     } else {
       precision = approx ? 'approx' : 'precise';
     }

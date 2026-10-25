@@ -117,12 +117,15 @@ node tools/clean-skills.ts    # 重新生成 skills.json(node 24 直跑 TS)
 
 ## 8. 已知边界与待办
 
-- 绿技能(前提值)未计入比赛过程(绿字段 greenBonus 结构已预留,UI 标注"待 v0.2");
+- 绿技能(常时被动)已支持:clean-skills 对 raceStart 条件的纯被动标 precise(条件型被动
+  仍 unsupported),引擎 `effstats.passiveBonusOf` 把已选绿技能与手动 greenBonus 并入起跑属性
+  (614tools ZP 口径:面板+绿逐项相加后统一过软上限与干劲;例外:耐力对决参照 sfRef 中绿不吃干劲);
+  消融表绿技能行 位置=「常时」,收益来自去掉它后的属性差;
 - 随机机制不建模:焦躁/追比/取位争夺/多马阻挡/下坡模式/智力 24 区间修正(614tools 也仅显示);
   近似层技能按"期望位置"发动,已在 UI 角标;
 - 47 条剧本型"进化"行无解包数据,维持排除(skill-data-lua2 里 25 条无名称的占位条目同样不入库);
-- 复核清单 `data/skill-review.json`(约 330 条,多为 unsupported/纯被动)与 `data/skill-notes.json`
+- 复核清单 `data/skill-review.json`(约 190 条)与 `data/skill-notes.json`
   (前置条件原文)供人工抽查;
-- 待办候选:绿技能计入、URL 分享参数、本体↔进化二选一联动去重、多马对比模式、部署 GitHub Pages。
+- 待办候选:URL 分享参数、本体↔进化二选一联动去重、多马对比模式、部署 GitHub Pages。
 - 测试断言依赖 data/skills.json 的具体条目(heir.test/evo.test 有锚点样例);重跑 clean-skills 后若
   这些测试红,先核数据是否真变,再改断言,并在 commit 里说明。

@@ -161,6 +161,9 @@ export function ablate(course: Course, runner: RunnerConfig): AblationReport {
       : 0;
 
   const rows: AblationRow[] = runner.skills.map(skill => {
+    // 常时被动(绿技能):无发动点,常时生效(引擎已并入起跑属性),视为已发动
+    const isPassiveRaceStart =
+      skill.effects.length > 0 && skill.effects.every(e => e.type === 'passive') && skill.condition?.kind === 'raceStart';
     const without = simulate(course, {
       ...runner,
       skills: runner.skills.filter(s => s.id !== skill.id),
@@ -196,7 +199,7 @@ export function ablate(course: Course, runner: RunnerConfig): AblationReport {
     return {
       skillId: skill.id,
       name: skill.name,
-      activated: acts.length > 0,
+      activated: isPassiveRaceStart ? true : acts.length > 0,
       activatedAtMeter: acts[0]?.atMeter ?? null,
       activatedAtSec: acts[0]?.atSec ?? null,
       activationCount: acts.length,

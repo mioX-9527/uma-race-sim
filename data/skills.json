@@ -945,7 +945,7 @@
   "name": "只属于我的世界(1)",
   "nameJa": "私だけの世界",
   "rarity": "evolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -979,7 +979,7 @@
   "name": "只属于我的世界(2)",
   "nameJa": "私だけの世界",
   "rarity": "evolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -9773,7 +9773,7 @@
   "nameTrad": "風霜高潔",
   "cnReleased": true,
   "rarity": "evolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -12912,7 +12912,7 @@
   "nameJa": "淀の祝福",
   "nameTrad": "淀的祝福",
   "rarity": "evolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -13231,7 +13231,7 @@
   "nameTrad": "拉普拉斯的惡魔",
   "cnReleased": true,
   "rarity": "evolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -13263,7 +13263,7 @@
   "nameTrad": "拉普拉斯的惡魔",
   "cnReleased": true,
   "rarity": "evolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -14459,7 +14459,7 @@
   "nameJa": "Ritter von Fuchu",
   "nameTrad": "Ritter von Fuchu",
   "rarity": "evolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -15711,7 +15711,7 @@
   "nameTrad": "惡作劇大師",
   "cnReleased": true,
   "rarity": "evolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -16786,7 +16786,7 @@
   "nameJa": "嵐纏いし英雄は往く",
   "nameTrad": "身纏暴風英雄邁步前行",
   "rarity": "evolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -17301,7 +17301,7 @@
   "nameTrad": "驍勇的賭徒",
   "cnReleased": true,
   "rarity": "evolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -17334,7 +17334,7 @@
   "nameTrad": "驍勇的賭徒",
   "cnReleased": true,
   "rarity": "evolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -17409,7 +17409,7 @@
   "name": "All-in!!(2)",
   "nameJa": "All-in!!",
   "rarity": "evolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -18660,7 +18660,7 @@
   "name": "现在是美丽秀时间♪(1)",
   "nameJa": "いざ、ショーベラスタイム♪",
   "rarity": "evolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -18764,7 +18764,7 @@
   "nameTrad": "七福即生",
   "cnReleased": true,
   "rarity": "evolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -19403,7 +19403,7 @@
   "nameTrad": "淀之女王",
   "cnReleased": true,
   "rarity": "evolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -19874,7 +19874,7 @@
   "nameTrad": "春風吹拂，櫻花飛舞",
   "cnReleased": true,
   "rarity": "evolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -20910,7 +20910,7 @@
   "nameTrad": "順時針的輪舞曲",
   "cnReleased": true,
   "rarity": "evolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -21436,7 +21436,7 @@
   "nameTrad": "今日九重宮中櫻花盛開",
   "cnReleased": true,
   "rarity": "evolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -21643,7 +21643,7 @@
   "nameJa": "悪路のほうが好みでね",
   "nameTrad": "我比較喜歡艱難的路呢",
   "rarity": "evolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -21682,7 +21682,7 @@
   "nameJa": "悪路のほうが好みでね",
   "nameTrad": "我比較喜歡艱難的路呢",
   "rarity": "evolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -21718,7 +21718,7 @@
   "name": "燃尽一切之星(1)",
   "nameJa": "すべてを焼き焦がす星",
   "rarity": "evolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -22626,7 +22626,7 @@
   "name": "初空迢迢花宴酣",
   "nameJa": "初空高く、花宴",
   "rarity": "evolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -22725,7 +22725,7 @@
   "nameTrad": "草地的主角",
   "cnReleased": true,
   "rarity": "evolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -24006,7 +24006,7 @@
   "nameTrad": "為我陶醉吧，世界",
   "cnReleased": true,
   "rarity": "evolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -26252,7 +26252,7 @@
   "nameTrad": "龍脈的波濤",
   "cnReleased": true,
   "rarity": "evolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -26281,7 +26281,7 @@
   "nameTrad": "龍脈的波濤",
   "cnReleased": true,
   "rarity": "evolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -26340,7 +26340,7 @@
   "nameJa": "走る縁起物",
   "nameTrad": "奔跑的幸運物",
   "rarity": "evolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -26373,7 +26373,7 @@
   "nameJa": "走る縁起物",
   "nameTrad": "奔跑的幸運物",
   "rarity": "evolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -26432,7 +26432,7 @@
   "name": "鸿运敲鼓(2)",
   "nameJa": "盛運のドラムロール",
   "rarity": "evolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -33566,7 +33566,7 @@
   "name": "这么可爱真是抱歉♡(2)",
   "nameJa": "愛されすぎてマジごめん♡",
   "rarity": "evolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -34441,7 +34441,7 @@
   "nameJa": "果てへの面舵",
   "nameTrad": "右滿舵邁向盡頭",
   "rarity": "evolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -39280,7 +39280,7 @@
   "nameTrad": "順時針◎",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -39303,7 +39303,7 @@
   "nameTrad": "順時針○",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -39326,7 +39326,7 @@
   "nameTrad": "順時針×",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -39349,7 +39349,7 @@
   "nameTrad": "順時針之鬼",
   "cnReleased": true,
   "rarity": "rareEvolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -39377,7 +39377,7 @@
   "nameTrad": "逆時針◎",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -39400,7 +39400,7 @@
   "nameTrad": "逆時針○",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -39423,7 +39423,7 @@
   "nameTrad": "逆時針×",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -39445,7 +39445,7 @@
   "nameJa": "左回りの鬼",
   "nameTrad": "逆時針之鬼",
   "rarity": "rareEvolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -39473,7 +39473,7 @@
   "nameTrad": "東京賽場◎",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -39501,7 +39501,7 @@
   "nameTrad": "東京賽場○",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -39529,7 +39529,7 @@
   "nameTrad": "東京賽場×",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -39556,7 +39556,7 @@
   "nameJa": "府中の申し子",
   "nameTrad": "府中奇才",
   "rarity": "rareEvolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -39594,7 +39594,7 @@
   "nameTrad": "中山賽場◎",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -39622,7 +39622,7 @@
   "nameTrad": "中山賽場○",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -39650,7 +39650,7 @@
   "nameTrad": "中山賽場×",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -39678,7 +39678,7 @@
   "nameTrad": "阪神賽場◎",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -39706,7 +39706,7 @@
   "nameTrad": "阪神賽場○",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -39734,7 +39734,7 @@
   "nameTrad": "阪神賽場×",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -39762,7 +39762,7 @@
   "nameTrad": "京都賽場◎",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -39790,7 +39790,7 @@
   "nameTrad": "京都賽場○",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -39818,7 +39818,7 @@
   "nameTrad": "京都賽場×",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -39846,7 +39846,7 @@
   "nameTrad": "淀之奇才",
   "cnReleased": true,
   "rarity": "rareEvolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -39884,7 +39884,7 @@
   "nameTrad": "中京賽場◎",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -39912,7 +39912,7 @@
   "nameTrad": "中京賽場○",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -39940,7 +39940,7 @@
   "nameTrad": "中京賽場×",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -39968,7 +39968,7 @@
   "nameTrad": "札幌賽場◎",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -39996,7 +39996,7 @@
   "nameTrad": "札幌賽場○",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -40024,7 +40024,7 @@
   "nameTrad": "札幌賽場×",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -40052,7 +40052,7 @@
   "nameTrad": "函館賽場◎",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -40080,7 +40080,7 @@
   "nameTrad": "函館賽場○",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -40108,7 +40108,7 @@
   "nameTrad": "函館賽場×",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -40136,7 +40136,7 @@
   "nameTrad": "福島賽場◎",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -40164,7 +40164,7 @@
   "nameTrad": "福島賽場○",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -40192,7 +40192,7 @@
   "nameTrad": "福島賽場×",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -40220,7 +40220,7 @@
   "nameTrad": "新潟賽場◎",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -40248,7 +40248,7 @@
   "nameTrad": "新潟賽場○",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -40276,7 +40276,7 @@
   "nameTrad": "新潟賽場×",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -40304,7 +40304,7 @@
   "nameTrad": "小倉賽場◎",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -40332,7 +40332,7 @@
   "nameTrad": "小倉賽場○",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -40360,7 +40360,7 @@
   "nameTrad": "小倉賽場×",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -40388,7 +40388,7 @@
   "nameTrad": "主要距離◎",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -40411,7 +40411,7 @@
   "nameTrad": "主要距離○",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -40434,7 +40434,7 @@
   "nameTrad": "主要距離×",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -40457,7 +40457,7 @@
   "nameTrad": "非主要距離◎",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -40480,7 +40480,7 @@
   "nameTrad": "非主要距離○",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -40503,7 +40503,7 @@
   "nameTrad": "非主要距離×",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -40526,7 +40526,7 @@
   "nameTrad": "良好場地◎",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -40554,7 +40554,7 @@
   "nameTrad": "良好場地○",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -40582,7 +40582,7 @@
   "nameTrad": "良好場地×",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -40610,7 +40610,7 @@
   "nameTrad": "良好場地之鬼",
   "cnReleased": true,
   "rarity": "rareEvolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -40643,7 +40643,7 @@
   "nameTrad": "路況差勁◎",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -40673,7 +40673,7 @@
   "nameTrad": "路況差勁○",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -40703,7 +40703,7 @@
   "nameTrad": "路況差勁×",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -40733,7 +40733,7 @@
   "nameTrad": "路況差勁之鬼",
   "cnReleased": true,
   "rarity": "rareEvolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -40768,7 +40768,7 @@
   "nameTrad": "春賽馬娘◎",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -40791,7 +40791,7 @@
   "nameTrad": "春賽馬娘○",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -40814,7 +40814,7 @@
   "nameTrad": "春賽馬娘×",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -40837,7 +40837,7 @@
   "nameTrad": "春初暖風",
   "cnReleased": true,
   "rarity": "rareEvolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -40865,7 +40865,7 @@
   "nameTrad": "夏賽馬娘◎",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -40888,7 +40888,7 @@
   "nameTrad": "夏賽馬娘○",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -40911,7 +40911,7 @@
   "nameTrad": "夏賽馬娘×",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -40934,7 +40934,7 @@
   "nameTrad": "青嵐",
   "cnReleased": true,
   "rarity": "rareEvolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -40962,7 +40962,7 @@
   "nameTrad": "秋賽馬娘◎",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -40985,7 +40985,7 @@
   "nameTrad": "秋賽馬娘○",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -41008,7 +41008,7 @@
   "nameTrad": "秋賽馬娘×",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -41031,7 +41031,7 @@
   "nameTrad": "秋初強風",
   "cnReleased": true,
   "rarity": "rareEvolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -41059,7 +41059,7 @@
   "nameTrad": "冬賽馬娘◎",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -41082,7 +41082,7 @@
   "nameTrad": "冬賽馬娘○",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -41105,7 +41105,7 @@
   "nameTrad": "冬賽馬娘×",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -41128,7 +41128,7 @@
   "nameTrad": "冷冽之風",
   "cnReleased": true,
   "rarity": "rareEvolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -41156,7 +41156,7 @@
   "nameTrad": "晴天◎",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -41179,7 +41179,7 @@
   "nameTrad": "晴天○",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -41202,7 +41202,7 @@
   "nameTrad": "陰天◎",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -41225,7 +41225,7 @@
   "nameTrad": "陰天○",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -41248,7 +41248,7 @@
   "nameTrad": "下雨天◎",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -41271,7 +41271,7 @@
   "nameTrad": "下雨天○",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -41294,7 +41294,7 @@
   "nameTrad": "下雨天×",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -41317,7 +41317,7 @@
   "nameTrad": "下雪天◎",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -41340,7 +41340,7 @@
   "nameTrad": "下雪天○",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -41363,7 +41363,7 @@
   "nameTrad": "擅長內側閘位◎",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -41386,7 +41386,7 @@
   "nameTrad": "擅長內側閘位○",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -41409,7 +41409,7 @@
   "nameTrad": "不擅長內側閘位",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -41432,7 +41432,7 @@
   "nameTrad": "擅長外側閘位◎",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -41455,7 +41455,7 @@
   "nameTrad": "擅長外側閘位○",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -41478,7 +41478,7 @@
   "nameTrad": "不擅長外側閘位",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -41662,7 +41662,7 @@
   "nameTrad": "伏兵◎",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -41685,7 +41685,7 @@
   "nameTrad": "伏兵○",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -41708,7 +41708,7 @@
   "nameTrad": "不擅長GⅠ",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -41731,7 +41731,7 @@
   "nameTrad": "膽小",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -44621,7 +44621,7 @@
   "nameTrad": "大井賽場◎",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -44649,7 +44649,7 @@
   "nameTrad": "大井賽場○",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -44677,7 +44677,7 @@
   "nameTrad": "大井賽場×",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -48817,7 +48817,7 @@
   "nameTrad": "超級幸運7",
   "cnReleased": true,
   "rarity": "rareEvolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -48850,7 +48850,7 @@
   "nameTrad": "幸運7",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -49543,7 +49543,7 @@
   "nameTrad": "立體美甲",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -50623,7 +50623,7 @@
   "nameTrad": "99 Problems",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -50719,7 +50719,7 @@
   "nameTrad": "川崎賽場◎",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -50747,7 +50747,7 @@
   "nameTrad": "川崎賽場○",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -50775,7 +50775,7 @@
   "nameTrad": "川崎賽場×",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -50803,7 +50803,7 @@
   "nameTrad": "船橋賽場◎",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -50831,7 +50831,7 @@
   "nameTrad": "船橋賽場○",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -50859,7 +50859,7 @@
   "nameTrad": "船橋賽場×",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -50887,7 +50887,7 @@
   "nameTrad": "盛岡賽場◎",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -50915,7 +50915,7 @@
   "nameTrad": "盛岡賽場○",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -50943,7 +50943,7 @@
   "nameTrad": "盛岡賽場×",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -50971,7 +50971,7 @@
   "nameTrad": "夜間賽◎",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -50994,7 +50994,7 @@
   "nameTrad": "夜間賽○",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -51017,7 +51017,7 @@
   "nameTrad": "夜間賽×",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -51040,7 +51040,7 @@
   "nameTrad": "急彎◎",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -51073,7 +51073,7 @@
   "nameTrad": "急彎○",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -51106,7 +51106,7 @@
   "nameTrad": "急彎×",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -51139,7 +51139,7 @@
   "nameTrad": "交流主要競賽◎",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -51162,7 +51162,7 @@
   "nameTrad": "交流主要競賽○",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -51185,7 +51185,7 @@
   "nameTrad": "交流主要競賽×",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -51207,7 +51207,7 @@
   "nameJa": "交流重賞の鬼",
   "nameTrad": "交流主要競賽之鬼",
   "rarity": "rareEvolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -51697,7 +51697,7 @@
   "nameTrad": "超群的邁步",
   "cnReleased": true,
   "rarity": "rareEvolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -51726,7 +51726,7 @@
   "nameTrad": "超群的邁步",
   "cnReleased": true,
   "rarity": "rareEvolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -51755,7 +51755,7 @@
   "nameTrad": "熟練邁步",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -51784,7 +51784,7 @@
   "nameTrad": "熟練邁步",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -51813,7 +51813,7 @@
   "nameTrad": "泥巴大師",
   "cnReleased": true,
   "rarity": "rareEvolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -51851,7 +51851,7 @@
   "nameTrad": "玩泥巴◎",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -51884,7 +51884,7 @@
   "nameTrad": "玩泥巴○",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -51917,7 +51917,7 @@
   "nameTrad": "玩泥巴×",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -52546,7 +52546,7 @@
   "nameTrad": "賭徒",
   "cnReleased": true,
   "rarity": "rareEvolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -52579,7 +52579,7 @@
   "nameTrad": "賭徒",
   "cnReleased": true,
   "rarity": "rareEvolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -52612,7 +52612,7 @@
   "nameTrad": "投機取巧",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -52645,7 +52645,7 @@
   "nameTrad": "投機取巧",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -53783,7 +53783,7 @@
   "nameTrad": "虎嘯風生",
   "cnReleased": true,
   "rarity": "rareEvolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -53818,7 +53818,7 @@
   "nameTrad": "自信家",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -54103,7 +54103,7 @@
   "nameTrad": "奇異點",
   "cnReleased": true,
   "rarity": "rareEvolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -54135,7 +54135,7 @@
   "nameTrad": "奇異點",
   "cnReleased": true,
   "rarity": "rareEvolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -54167,7 +54167,7 @@
   "nameTrad": "探求心",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -54199,7 +54199,7 @@
   "nameTrad": "探求心",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -54353,7 +54353,7 @@
   "nameTrad": "隆尚賽場◎",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -54381,7 +54381,7 @@
   "nameTrad": "隆尚賽場○",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -54409,7 +54409,7 @@
   "nameTrad": "隆尚賽場×",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -54437,7 +54437,7 @@
   "nameTrad": "隆尚奇才",
   "cnReleased": true,
   "rarity": "rareEvolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -57678,7 +57678,7 @@
   "nameJa": "無意識の枷",
   "nameTrad": "不自覺的枷鎖",
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -60698,7 +60698,7 @@
   "nameJa": "精神力",
   "nameTrad": "堅定意志",
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -60729,7 +60729,7 @@
   "nameJa": "精神力",
   "nameTrad": "堅定意志",
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -61443,7 +61443,7 @@
   "name": "麒麟儿",
   "nameJa": "麒麟児",
   "rarity": "rareEvolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -61476,7 +61476,7 @@
   "name": "天才",
   "nameJa": "天才肌",
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -62554,7 +62554,7 @@
   "name": "外柔内刚",
   "nameJa": "気丈夫",
   "rarity": "rareEvolved",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -62587,7 +62587,7 @@
   "name": "活力满满",
   "nameJa": "あふれる活力",
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -62895,7 +62895,7 @@
   "name": "战略家",
   "nameJa": "戦略家",
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -63014,7 +63014,7 @@
   "name": "圣塔安妮塔公园赛场◎",
   "nameJa": "サンタアニタパークレース場◎",
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -63040,7 +63040,7 @@
   "name": "圣塔安妮塔公园赛场○",
   "nameJa": "サンタアニタパークレース場○",
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -63066,7 +63066,7 @@
   "name": "圣塔安妮塔公园赛场×",
   "nameJa": "サンタアニタパークレース場×",
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -63092,7 +63092,7 @@
   "name": "德尔玛赛场◎",
   "nameJa": "デルマーレース場◎",
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -63118,7 +63118,7 @@
   "name": "德尔玛赛场○",
   "nameJa": "デルマーレース場○",
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -63144,7 +63144,7 @@
   "name": "德尔玛赛场×",
   "nameJa": "デルマーレース場×",
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -63170,7 +63170,7 @@
   "name": "隠れた閃光",
   "nameJa": "隠れた閃光",
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -63861,7 +63861,7 @@
   "name": "避其锋芒",
   "nameJa": "秘められた最強",
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -63911,7 +63911,7 @@
   "name": "潜藏的红",
   "nameJa": "潜む紅",
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -64636,7 +64636,7 @@
   "name": "比赛直觉(1)",
   "nameJa": "勝負勘",
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -64666,7 +64666,7 @@
   "name": "比赛直觉(2)",
   "nameJa": "勝負勘",
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -64821,7 +64821,7 @@
   "name": "我我我！！",
   "nameJa": "アタシアタシアタシ！！",
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -65299,7 +65299,7 @@
   "name": "玩心(1)",
   "nameJa": "遊び心",
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -65327,7 +65327,7 @@
   "name": "玩心(2)",
   "nameJa": "遊び心",
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -65967,7 +65967,7 @@
   "nameTrad": "競賽的精髓．心得",
   "cnReleased": true,
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -66742,7 +66742,7 @@
   "nameTrad": "止不住的渴望",
   "cnReleased": true,
   "rarity": "unique5",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -66770,7 +66770,7 @@
   "nameTrad": "始終如一",
   "cnReleased": true,
   "rarity": "unique5",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -66793,7 +66793,7 @@
   "nameTrad": "奔向理想的景色",
   "cnReleased": true,
   "rarity": "unique5",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -66816,7 +66816,7 @@
   "nameTrad": "擔憂擴散",
   "cnReleased": true,
   "rarity": "unique5",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -66977,7 +66977,7 @@
   "nameTrad": "抬頭挺胸打比賽馬娘",
   "cnReleased": true,
   "rarity": "unique5",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -67000,7 +67000,7 @@
   "nameTrad": "身為隊伍的一員",
   "cnReleased": true,
   "rarity": "unique5",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",
@@ -67070,7 +67070,7 @@
   "nameJa": "匣の抑圧",
   "nameTrad": "匣的壓抑",
   "rarity": "normal",
-  "precision": "unsupported",
+  "precision": "precise",
   "effects": [
    {
     "type": "passive",

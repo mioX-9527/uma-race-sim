@@ -1,5 +1,5 @@
 {
-  "version": "0.5.0-possample",
+  "version": "0.5.1-greenskill",
   "generatedAt": "2026-10-25",
   "sources": [
     "BWIKI 技能速查表(api.php action=ask,1907 条原始;tools/scrape-once.ts)",
@@ -10,7 +10,7 @@
     "uma-skill-tools data/course_data.json(游戏解包;tools/make-courses.ts 转换,含 straights frontType)"
   ],
   "counts": { "courses": 138, "skills": 2641 },
-  "skillPrecision": { "precise": 118, "approx": 2055, "unsupported": 468, "excludedEvolution": 47, "codeParsed": 1857, "textFallback": 2, "uniqueHeir": 383, "uniqueHeirCnReleased": 217, "evolved": 826 },
+  "skillPrecision": { "precise": 316, "approx": 2055, "unsupported": 270, "excludedEvolution": 47, "codeParsed": 1857, "textFallback": 2, "uniqueHeir": 383, "uniqueHeirCnReleased": 217, "evolved": 826, "passiveRaceStart": 198 },
   "notes": [
     "技能条件以触发代码优先解析(1224 条命中解包数据,2 条回退中文文本规则):distance_rate/remain_distance 数值窗口、corner 序号、is_finalcorner/_laterhalf、is_last_straight、is_lastspurt、straight_front_type==2(看台对面直线)、@ 分隔的\"或\"变体(限制取并集)",
     "效果取解包效果槽(最多 3 个/条件):21/27→速度、31→加速度、22→即时速度、9→耐力恢复(含负值=消耗体力)、1-5→被动前提值;target_type≠1 标记不支持",
@@ -21,6 +21,7 @@
     "继承固有(900xxx,383 条含双分支)单独成条:数值/持续时间/触发条件与本体不同(逐对核对 271/271,仅 2 个负面分支继承时数值不变),智力增幅系数恒 1.0;名称取 BWIKI 继承技页面,有简中页(217 条)= 国服已实装",
     "进化技能(1M+ 段,826 条含 193 双分支)纳入:速查表进化行 ID 与 解包数据直接对齐(633 条,触发代码级解析),与本体技能二选一(进化后数值/条件以进化版为准);智力增幅系数 1.0;47 条无解包数据的剧本技能维持排除",
     "区段随机技能位置采样(方案二):触发代码含 *_random 的技能标记 randomPosition(1118 条,其中近似 1005),消融时在满足区段全长均匀取 7 点强制发动后分别消融,马身收益报期望与区间,可展开逐位置明细;名次类近似技能不采样(发动依赖名次状态),维持规则取位;引擎新增 SimOptions.positionOverrides 支持强制发动位置",
+    "绿技能(常时被动)支持:raceStart 条件的纯被动(198 条)标 precise,引擎并入起跑属性(614tools ZP 口径:面板+绿逐项相加后统一过软上限与干劲;耐力对决参照 sfRef 中绿不吃干劲);条件型被动(非常时,15 条)仍 unsupported;消融表绿技能行 位置=常时、正常计收益",
     "赛道:阶段分界=距离的 1/6、2/3、5/6;基准速度=20−(距离−2000)/1000;坡度已换算为百分比;straights.frontType 1=看台前 2=看台对面;「直線」类条件以解包 straights 列表为准(28/138 赛道存在既非直线也非弯道的过渡区,如 有馬記念中山2500 起跑 0-100m)",
     "场地状态枚举修正为 0良/1稍重/2重/3不良(触发代码 ground_condition 1良~4不良 映射为代码−1)",
     "赛场映射:10001-10010=JRA 十场(东京 10006/中山 10005/京都 10008 已用坡度指纹验证);地方 10101-10105 与海外 10201-10203 按游戏内顺序映射,精度中等,待与 BWIKI 抽查确认",
