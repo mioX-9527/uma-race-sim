@@ -6,18 +6,33 @@ interface Props {
   course: Course;
   activations: readonly Activation[];
   exhaustedAtMeter: number | null;
-  /** 与曲线图绘图区对齐(同一边距映射距离);缺省用自带边距 */
+  /** 两图联动悬停:App 持有的全局悬停距离(null = 无);onHover 上报本图鼠标位置 */
+  hoverMeter: number | null;
+  onHover: (m: number | null) => void;
+  /** 曲线图上报的 bbox——仅作几何重测量的触发器(图表挂载/重建时变),定位以实测为准 */
   align?: { left: number; width: number };
+  /** 悬停位置的数据快照(速度/体力),由 App 注入;用于赛道条 tooltip */
+  describePoint?: (m: number) => string;
 }
 
 const H = 96;
 
-/** 赛道条:弯道/坡度/阶段分界/技能发动点/体力归零点 */
-export function TrackBar({ course, activations, exhaustedAtMeter, align }: Props): JSX.Element {
+/** 赛道条:弯道/坡度/阶段分界/技能发动点/体力归零点。
+ *  画布用 margin/width 精确锚定到曲线图绘图区(.u-under)的实时 DOM 几何——
+ *  浏览器缩放/窗口变化下两图逐像素对齐;悬停经 App 中转实现两图联动。 */
+export function TrackBar({ course, activations, exhaustedAtMeter, hoverMeter, onHover, align, describePoint }: Props): JSX.Element {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
   const tipRef = useRef<HTMLDivElement>(null);
+  const hoverCb = useRef(onHover);
+  hoverCb.current = onHover;
+  const pointCb = useRef(describePoint);
+  pointCb.current = describePoint;
+  /** 绘制 effect 注册的 tooltip 渲染器(依赖最新 course/activations 闭包) */
+  const tipFn = useRef<((m: number) => void) | null>(null);
   const [width, setWidth] = useState(900);
+  /** 曲线图绘图区相对本容器几何(left/width,CSS px);null = 图表未挂载 */
+  const [plot, setPlot] = useState<{ left: number; width: number } | null>(null);
 
   useEffect(() => {
     const el = wrapRef.current;
@@ -28,37 +43,55 @@ export function TrackBar({ course, activations, exhaustedAtMeter, align }: Props
     return () => ro.disconnect();
   }, []);
 
+  // 追踪曲线图绘图区几何:图表挂载/重建(align 变化)或宽度变化后重新发现并挂 ResizeObserver。
+  // align 的值不用于定位,仅作触发器;定位一律以实时测量为准。
+  useEffect(() => {
+    const wrap = wrapRef.current;
+    if (!wrap) return;
+    const plotEl = wrap.parentElement?.parentElement?.querySelector<HTMLDivElement>('.chart-wrap .u-under') ?? null;
+    if (plotEl === null) {
+      setPlot(null);
+      return;
+    }
+    const update = (): void => {
+      const pr = plotEl.getBoundingClientRect();
+      const wr = wrap.getBoundingClientRect();
+      if (pr.width <= 50) return;
+      const left = pr.left - wr.left;
+      setPlot(prev =>
+        prev !== null && Math.abs(prev.left - left) < 0.5 && Math.abs(prev.width - pr.width) < 0.5
+          ? prev
+          : { left, width: pr.width },
+      );
+    };
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(plotEl);
+    return () => ro.disconnect();
+  }, [width, activations, course, exhaustedAtMeter, align]);
+
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    const wrap = wrapRef.current;
+    if (!canvas || !wrap) return;
     const dpr = window.devicePixelRatio || 1;
-    canvas.width = width * dpr;
+    // 画布精确覆盖曲线图绘图区:margin-left 定位,宽度一致 → 缩放下逐像素对齐
+    const trackW = plot?.width ?? width - 14 - 14;
+    const padL = plot?.left ?? 14;
+    canvas.width = Math.round(trackW * dpr);
     canvas.height = H * dpr;
-    canvas.style.width = `${width}px`;
+    canvas.style.marginLeft = `${padL}px`;
+    canvas.style.width = `${trackW}px`;
     canvas.style.height = `${H}px`;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
     ctx.scale(dpr, dpr);
 
     const D = course.distance;
-    // 与曲线图绘图区共用同一水平映射:直接测量 uPlot 绘图区 DOM(u-under),
-    // 保证两图按距离逐像素对齐(align 仅作图表未挂载时的回退与重绘触发)。
-    let padL = align?.left ?? 14;
-    let trackW = align?.width ?? width - 14 - 14;
-    const plotEl = wrapRef.current?.parentElement?.parentElement
-      ?.querySelector<HTMLDivElement>('.chart-wrap .u-under');
-    if (plotEl !== null && plotEl !== undefined) {
-      const pr = plotEl.getBoundingClientRect();
-      const cr = canvas.getBoundingClientRect();
-      if (pr.width > 50) {
-        padL = pr.left - cr.left;
-        trackW = pr.width;
-      }
-    }
-    const px = (m: number): number => padL + (m / D) * trackW;
-    const meterAt = (x: number): number => ((x - padL) / trackW) * D;
+    const px = (m: number): number => (m / D) * trackW;
+    const meterAt = (mx: number): number => (mx / trackW) * D;
 
-    ctx.clearRect(0, 0, width, H);
+    ctx.clearRect(0, 0, trackW, H);
     ctx.font = '10px system-ui';
 
     // 主轨道
@@ -182,12 +215,22 @@ export function TrackBar({ course, activations, exhaustedAtMeter, align }: Props
       ctx.fillText(`${i + 1}`, x - 2, 20.5);
     });
 
-    // 悬停
+    // 两图联动悬停线(来自任一图的悬停位置)
+    if (hoverMeter !== null) {
+      const x = px(Math.max(0, Math.min(D, hoverMeter)));
+      ctx.strokeStyle = '#94a3b8';
+      ctx.lineWidth = 1;
+      ctx.setLineDash([2, 3]);
+      ctx.beginPath();
+      ctx.moveTo(x, 8);
+      ctx.lineTo(x, 80);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
+
+    // 悬停提示:任意来源的悬停距离(本图鼠标 / 曲线图联动)都在赛道条上显示同一份数据
     const straights = realStraights(course);
-    const onMove = (ev: MouseEvent): void => {
-      const rect = canvas.getBoundingClientRect();
-      const mx = ev.clientX - rect.left;
-      const m = Math.max(0, Math.min(D, meterAt(mx)));
+    const showTip = (m: number): void => {
       const corner = course.corners.find(c => m >= c.start && m <= c.end);
       const slope = course.slopes.find(s => m >= s.start && m <= s.end);
       const onStraight = !corner && straights.some(s => m >= s[0] && m <= s[1]);
@@ -197,17 +240,28 @@ export function TrackBar({ course, activations, exhaustedAtMeter, align }: Props
       else if (onStraight) parts.push('直线');
       else parts.push('过渡区(非直线非弯道)');
       if (slope !== undefined) parts.push(`${slope.gradient > 0 ? '上' : '下'}坡 ${slope.gradient}%`);
+      const point = pointCb.current?.(m);
+      if (point !== undefined) parts.push(point);
       const act = activations.find(a => Math.abs(a.atMeter - m) < D / 200);
       if (act !== undefined) parts.push(`技能发动: ${act.name}`);
       const tip = tipRef.current;
       if (tip !== null) {
         tip.style.display = 'block';
-        tip.style.left = `${Math.min(mx + 12, width - 170)}px`;
+        tip.style.left = `${Math.min(px(m) + padL + 12, width - 170)}px`;
         tip.style.top = '6px';
         tip.textContent = parts.join(' · ');
       }
     };
+    tipFn.current = showTip;
+    const onMove = (ev: MouseEvent): void => {
+      const rect = canvas.getBoundingClientRect();
+      const mx = ev.clientX - rect.left;
+      const m = Math.max(0, Math.min(D, meterAt(mx)));
+      hoverCb.current(m);
+      showTip(m);
+    };
     const onLeave = (): void => {
+      hoverCb.current(null);
       if (tipRef.current !== null) tipRef.current.style.display = 'none';
     };
     canvas.addEventListener('mousemove', onMove);
@@ -216,7 +270,16 @@ export function TrackBar({ course, activations, exhaustedAtMeter, align }: Props
       canvas.removeEventListener('mousemove', onMove);
       canvas.removeEventListener('mouseleave', onLeave);
     };
-  }, [width, course, activations, exhaustedAtMeter, align]);
+  }, [width, plot, course, activations, exhaustedAtMeter, hoverMeter]);
+
+  // 两图联动:曲线图悬停 → 赛道条同样显示该距离的提示(本图鼠标悬停已在 onMove 内处理)
+  useEffect(() => {
+    if (hoverMeter === null) {
+      if (tipRef.current !== null) tipRef.current.style.display = 'none';
+      return;
+    }
+    tipFn.current?.(hoverMeter);
+  }, [hoverMeter]);
 
   return (
     <div className="track-wrap" ref={wrapRef}>

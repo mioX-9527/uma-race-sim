@@ -59,8 +59,15 @@ node tools/clean-skills.ts    # 重新生成 skills.json(node 24 直跑 TS)
   `<script type="module">` **降级为经典 `<script>` 并挪到 `</body>` 前**。
   原因:①部分浏览器 file:// 不执行 module 脚本;②经典脚本立即执行,留在 head 会因 #root 未渲染白屏。
   产物已确认无 import.meta/动态 import,降级安全——**改构建配置前想清楚,别把这两步去掉**。
+  ⚠️ 插入位置必须用 `lastIndexOf('</body>')`——压缩 bundle 内部可能含 `"</body>"` 字面量,
+  `replace` 首个匹配会把脚本插进代码中间导致 SyntaxError(已踩坑)。
 - `apps/web/index.html` 是 dev 专用壳,双击空白是正常的;对外入口是 dist/index.html 与根目录
   `打开模拟器.html`、`启动模拟器.bat`(ASCII 内容 + %~dp0 相对路径,勿改成中文路径)。
+- **赛道条与曲线图的对齐/联动机制**(改 TrackBar/Chart 前必读):赛道条画布用 margin/width
+  实时锚定 `.chart-wrap .u-under` 的 DOM 几何(缩放/改窗口下逐像素对齐);Chart 的 onPlotArea 上报
+  仅作"重新测量"触发器——图表挂载/重建时赛道条自身感知不到,**没有这个触发器首屏就错位**。
+  两图悬停联动经 App 的 hoverMeter 状态中转:任一图悬停 → 另一图显示同距离数据
+  (Chart 用 u.setCursor 吸附最近数据点并弹 tooltip,TrackBar 画虚线 + tooltip)。
 
 ## 5. 本机环境坑(Windows + cmd,踩过的都在这)
 

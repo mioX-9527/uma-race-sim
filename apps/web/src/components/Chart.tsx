@@ -6,12 +6,15 @@ interface Props {
   x: Float64Array;
   v: Float64Array;
   hpPct: Float64Array;
-  /** 绘图区水平范围上报(用于赛道条按距离对齐) */
+  /** 两图联动悬停:App 持有的全局悬停距离(null = 无);onHover 上报本图光标位置 */
+  hoverMeter: number | null;
+  onHover: (m: number | null) => void;
+  /** 每次重建后上报绘图区 bbox——仅作赛道条重新测量的触发器,定位以赛道条实测为准 */
   onPlotArea?: (area: { left: number; width: number }) => void;
 }
 
-/** 悬浮提示:显示当前位置的速度与体力具体数值 */
-function makeTooltipPlugin(getEl: () => HTMLDivElement): uPlot.Plugin {
+/** 悬浮提示:显示当前位置的速度与体力具体数值;光标位置上报给 App(联动赛道条) */
+function makeTooltipPlugin(getEl: () => HTMLDivElement, hoverCb: () => (m: number | null) => void): uPlot.Plugin {
   return {
     hooks: {
       init(u) {
@@ -22,6 +25,7 @@ function makeTooltipPlugin(getEl: () => HTMLDivElement): uPlot.Plugin {
         const cursor = u.cursor as unknown as { idx: number | null; left: number; top: number };
         if (cursor.idx == null) {
           el.style.display = 'none';
+          hoverCb()(null);
           return;
         }
         const idx = cursor.idx;
@@ -32,18 +36,22 @@ function makeTooltipPlugin(getEl: () => HTMLDivElement): uPlot.Plugin {
         el.style.left = `${Math.min(cursor.left + 14, u.width - 190)}px`;
         el.style.top = `${Math.max(cursor.top - 36, 4)}px`;
         el.textContent = `${Math.round(x)}m · 速度 ${v.toFixed(2)} m/s · 体力 ${pct.toFixed(1)}%`;
+        hoverCb()(x);
       },
     },
   };
 }
 
-/** 速度 + 剩余体力 双轴曲线(横轴=距离),悬浮显示具体数值 */
-export function Chart({ x, v, hpPct, onPlotArea }: Props): JSX.Element {
+/** 速度 + 剩余体力 双轴曲线(横轴=距离),悬浮显示具体数值;悬停与赛道条双向联动 */
+export function Chart({ x, v, hpPct, hoverMeter, onHover, onPlotArea }: Props): JSX.Element {
   const elRef = useRef<HTMLDivElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
   const tipRef = useRef<HTMLDivElement>(null);
-  const areaCbRef = useRef(onPlotArea);
-  areaCbRef.current = onPlotArea;
+  const uRef = useRef<uPlot | null>(null);
+  const hoverCb = useRef(onHover);
+  hoverCb.current = onHover;
+  const areaCb = useRef(onPlotArea);
+  areaCb.current = onPlotArea;
   const [width, setWidth] = useState(900);
 
   useEffect(() => {
@@ -62,9 +70,9 @@ export function Chart({ x, v, hpPct, onPlotArea }: Props): JSX.Element {
     const opts: uPlot.Options = {
       width,
       height: 280,
-      title: '速度 / 剩余体力 — 距离(悬浮查看数值)',
+      title: '速度 / 剩余体力 — 距离(悬浮查看数值,两图联动)',
       cursor: { drag: { x: false, y: false } },
-      plugins: [makeTooltipPlugin(() => tip)],
+      plugins: [makeTooltipPlugin(() => tip, () => hoverCb.current)],
       series: [
         { label: '距离 m' },
         {
@@ -102,12 +110,22 @@ export function Chart({ x, v, hpPct, onPlotArea }: Props): JSX.Element {
     };
     const data = [Array.from(x), Array.from(v), Array.from(hpPct)] as unknown as uPlot.AlignedData;
     const u = new uPlot(opts, data, el);
-    areaCbRef.current?.({ left: u.bbox.left, width: u.bbox.width });
+    uRef.current = u;
+    areaCb.current?.({ left: u.bbox.left, width: u.bbox.width });
     return () => {
+      uRef.current = null;
       u.destroy();
       if (tip.parentElement === el) el.removeChild(tip);
     };
   }, [width, x, v, hpPct]);
+
+  // 两图联动:赛道条悬停 → 曲线图光标移到对应距离(setCursor 吸附最近数据点并触发 tooltip)
+  useEffect(() => {
+    const u = uRef.current;
+    if (!u || hoverMeter === null) return;
+    const left = u.valToPos(hoverMeter, 'x');
+    u.setCursor({ left, top: u.bbox.height / 2 });
+  }, [hoverMeter]);
 
   return (
     <div className="chart-wrap" ref={wrapRef}>

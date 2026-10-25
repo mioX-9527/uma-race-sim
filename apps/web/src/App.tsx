@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { BODY_LENGTH_METERS, simulate } from '@uma-race-sim/engine';
 import type { SimResult } from '@uma-race-sim/engine';
 import { ablate } from '@uma-race-sim/analysis';
@@ -10,6 +10,9 @@ import { DEFAULT_CONFIG, buildRunner, findCourse, fmtSec, type UiConfig } from '
 
 export function App(): JSX.Element {
   const [config, setConfig] = useState<UiConfig>(DEFAULT_CONFIG);
+  /** 两图联动悬停:赛道条与曲线图共享的全局悬停距离(null = 无悬停) */
+  const [hoverMeter, setHoverMeter] = useState<number | null>(null);
+  /** 曲线图绘图区 bbox 上报(仅作赛道条几何重测量的触发器) */
   const [plotArea, setPlotArea] = useState<{ left: number; width: number } | undefined>(undefined);
 
   const course = useMemo(() => findCourse(config.courseId), [config.courseId]);
@@ -18,6 +21,25 @@ export function App(): JSX.Element {
   const report = useMemo(
     () => (config.skillIds.length > 0 ? ablate(course, runner) : null),
     [course, runner, config.skillIds.length],
+  );
+
+  /** 赛道条 tooltip 的数据快照:悬停距离 → 最近帧的速度/体力(result.x 单调,二分) */
+  const describePoint = useCallback(
+    (m: number): string => {
+      const xs = result.x;
+      let lo = 0;
+      let hi = xs.length - 1;
+      while (lo < hi) {
+        const mid = (lo + hi) >> 1;
+        if ((xs[mid] ?? 0) < m) lo = mid + 1;
+        else hi = mid;
+      }
+      const i = Math.min(lo, xs.length - 1);
+      const v = result.v[i] ?? 0;
+      const hp = result.hp[i] ?? 0;
+      return `速度 ${v.toFixed(2)} m/s · 体力 ${((hp / result.maxHp) * 100).toFixed(1)}%`;
+    },
+    [result],
   );
 
   const hpPct = useMemo(() => {
@@ -118,11 +140,19 @@ export function App(): JSX.Element {
         <div style={{ display: 'grid', gap: 12 }}>
           <section className="panel">
             <h2>赛道条(弯道 / 坡度 / 阶段 / 技能发动位置,与下图按距离对齐)</h2>
-            <TrackBar course={course} activations={result.activations} exhaustedAtMeter={result.exhaustedAtMeter} align={plotArea} />
+            <TrackBar
+              course={course}
+              activations={result.activations}
+              exhaustedAtMeter={result.exhaustedAtMeter}
+              hoverMeter={hoverMeter}
+              onHover={setHoverMeter}
+              align={plotArea}
+              describePoint={describePoint}
+            />
           </section>
 
           <section className="panel">
-            <Chart x={result.x} v={result.v} hpPct={hpPct} onPlotArea={setPlotArea} />
+            <Chart x={result.x} v={result.v} hpPct={hpPct} hoverMeter={hoverMeter} onHover={setHoverMeter} onPlotArea={setPlotArea} />
           </section>
 
           <section className="panel">
