@@ -57,14 +57,19 @@ export function AblationTable({ report }: { report: AblationReport }): JSX.Eleme
                   </td>
                   <td className={body > 0 ? 'pos' : 'neg'}>
                     {sampled ? (
-                      <button
-                        type="button"
-                        className="linkish"
-                        onClick={() => setExpanded(open ? null : r.skillId)}
-                        title="发动位置在满足区段内随机;点击展开逐位置收益明细"
-                      >
-                        {signed(body, 2)}(期望{open ? '▲' : '▼'})
-                      </button>
+                      <>
+                        <button
+                          type="button"
+                          className="linkish"
+                          onClick={() => setExpanded(open ? null : r.skillId)}
+                          title="发动位置在满足区段内随机;点击展开逐位置收益明细"
+                        >
+                          {signed(body, 2)}(期望{open ? '▲' : '▼'})
+                        </button>
+                        <div className="meta">
+                          区间 {signed(r.bodyRange![0], 2)} ~ {signed(r.bodyRange![1], 2)}
+                        </div>
+                      </>
                     ) : (
                       signed(r.deltaBody, 2)
                     )}
@@ -80,7 +85,7 @@ export function AblationTable({ report }: { report: AblationReport }): JSX.Eleme
                             {s.meter}m → <b className={s.deltaBody > 0 ? 'pos' : 'neg'}>{signed(s.deltaBody, 2)}</b>
                           </span>
                         ))}
-                        。波动区间 {signed(r.bodyRange![0], 2)} ~ {signed(r.bodyRange![1], 2)};规则取位(进区段即发动)为 {signed(r.deltaBody, 2)} 马身,仅供对照。
+                        。规则取位(进区段即发动)为 {signed(r.deltaBody, 2)} 马身,仅供对照。
                       </div>
                     </td>
                   </tr>
