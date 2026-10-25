@@ -1,5 +1,5 @@
 {
-  "version": "0.6.0-env",
+  "version": "0.7.0-strict",
   "generatedAt": "2026-10-25",
   "sources": [
     "BWIKI 技能速查表(api.php action=ask,1907 条原始;tools/scrape-once.ts)",

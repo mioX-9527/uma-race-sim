@@ -31,9 +31,15 @@ tools              抓取/清洗/构建后处理脚本(见下表)
    继承技三语名称:`tools/fetch-heir-names.mjs` → `data/raw/heir-skill-names.json`。
 3. **清洗**:`node tools/clean-skills.ts` → `data/skills.json`(+ review/notes)。这是唯一生成 skills.json 的入口,
    三条路径:①触发代码(权威,先 precondition 后 condition,@ = 或变体);②继承技 pass(见下);③文本兜底(仅 2 条)。
-   触发代码里的**装配限制**统一解析为 `SkillRestriction`:脚质/距离档/场地/赛场/精确距离/距离范围/
-   **场地状态(含 !=、>=、<=)** / **回转方向 rotation** / **天气 weather** / **季节 season**——
-   不满足则整场不生效(绿技能不计入起跑属性)。环境类缺省口径:场地状态 良(0)、天气 晴(1)、季节 春(1)。
+   触发代码里的**装配限制**统一解析为 `SkillRestriction`(脚质/距离档/**标准距离 is_basis_distance**/场地/赛场/
+   精确距离与范围/**场地状态(含 !=、>=、<=)**/回转方向 rotation/天气 weather/季节 season/**干劲 motivation**/
+   **海外 is_abroad**/**面板属性 base_speed 等**)——不满足则整场不生效(绿技能不计入起跑属性)。
+   环境类缺省口径:场地状态 良(0)、天气 晴(1)、季节 春(1)。
+   **语义分层(改 clean-skills 必读)**:同一支(`&`)= 与,同字段多次出现取**交集**(`putSet`);
+   `@` 变体与 `condition_1/condition_2` = 或,每支单独成子句,输出 `restriction.anyOf`(任一满足即生效)。
+   只有真正异构的分支才留 `anyOf`;单字段差异会被 `simplifyClauseObjs` 化简回扁平结构
+   ((A∧X)∨(A∧Y) ≡ A∧(X∨Y)),被支配的子句由 `dropDominated` 剔除。
+   **不要退回「一层并集」**:那会把「A 支限短距离、B 支不限」压成「限短距离」,全库约 400 条技能会错。
 4. **赛道**:uma-skill-tools 的 course_data.json → `tools/make-courses.ts` → `data/courses.json`(弯道/直线/坡度/门槛属性/**回转方向**)。
    **回转方向直接读解包 `turn`:1=右回り(顺时针)、2=左回り(逆时针)、4=直線(不写 rotation 字段 ⇒ 回转类技能不生效)**;
    别再手写赛场映射表(2026-10-25 曾因此把阪神/札幌/函馆/福岛/小仓 44 条赛道标反,见 parity-log)。
@@ -52,7 +58,7 @@ tools              抓取/清洗/构建后处理脚本(见下表)
 ```bash
 npm run dev         # 开发服务 http://localhost:5173(热更)
 npm run build       # 单文件构建:apps/web/dist/index.html + 根目录 打开模拟器.html
-npm test            # engine + analysis 全部 vitest(当前 106 例)
+npm test            # engine + analysis 全部 vitest(当前 114 例)
 npm run typecheck   # 四包 tsc(engine/analysis/schema/web;web 2026-10-25 纳入)
 node tools/validate-data.ts   # 数据 zod 校验
 node tools/clean-skills.ts    # 重新生成 skills.json(node 24 直跑 TS)
@@ -110,6 +116,9 @@ node tools/clean-skills.ts    # 重新生成 skills.json(node 24 直跑 TS)
   泥 良/稍重 1.0、重 1.01、不良 1.02),不改速度/加速度/体力上限 —— 所以「耐力判定」会变而完赛时间不变;
   **天气与季节没有任何物理项**(解包与 614tools 都没有),只决定 `weather==N` / `season==N` 类技能是否生效。
   三者都是 `SkillRestriction` 字段,不满足时技能整场不生效,UI 标注「不生效」。
+- **限制判定入口**:`packages/engine/src/restriction.ts` 的 `clauseSatisfied`(单子句,字段间为与)与
+  `restrictionSatisfied`(有 `anyOf` 时任一子句满足即可)。`skillApplicable()` 供 UI/消融判断「不生效」。
+  `base_*` 属性条件取**面板值**(`runner.stats`),不含绿技能与干劲。
 - 继承固有与本体数值不同(负面分支不变、增益段削减);进化与本体二选一。
 - 精度分层:precise / approx(依赖名次/随机,按期望位置发动)/ unsupported(不参与模拟,灰显)。
 - 校准双锚:courseFix=1.2 ↔ 历史互拍 116.328±0.1;auto(东京无门槛)↔ 游戏实录 116.987±0.5。
@@ -140,6 +149,11 @@ node tools/clean-skills.ts    # 重新生成 skills.json(node 24 直跑 TS)
   —— 传 undefined 会把带限制的绿技能当成不生效(2026-10-25 踩过,代价是全库 157 条绿技能归零);
 - 随机机制不建模:焦躁/追比/取位争夺/多马阻挡/下坡模式/智力 24 区间修正(614tools 也仅显示);
   天气/季节虽可选,但除技能条件外不参与任何计算(见 §6);场地状态参与体力消耗;
+- 仍未建模的触发代码 token(单马模型无法判断,按满足处理并记入 `data/skill-notes.json`):
+  `popularity`/`post_number`/`fan_count`/`grade`/`is_dirtgrade`/`is_tight_track`/`lane_type`/`furlong`/`time`/
+  `visiblehorse`/`random_lot(_shared)`/`succession_skill_count`/`is_exist_chara_id`/`is_move_lane`/
+  `remain_distance_viewer_id`。要新增建模时:clean-skills 加 token 分支 → types/schema 加字段 →
+  restriction.ts 判定 → 文档表格同步(清单见 docs/formulas.md「仍未建模」行);
   近似层技能按"期望位置"发动,已在 UI 角标;
 - 47 条剧本型"进化"行无解包数据,维持排除(skill-data-lua2 里 25 条无名称的占位条目同样不入库);
 - 复核清单 `data/skill-review.json`(约 190 条)与 `data/skill-notes.json`

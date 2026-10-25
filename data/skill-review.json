@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-25T08:08:38.781Z",
+ "generatedAt": "2026-10-25T08:30:16.142Z",
  "items": [
   {
    "id": "100191",
@@ -13,8 +13,7 @@
    "page": "天賦の身ごなし",
    "reasons": [
     "未识别token:course_distance<2400",
-    "未识别token:course_distance>2500",
-    "base_stamina<1000(环境前提,视为满足)"
+    "未识别token:course_distance>2500"
    ]
   },
   {
@@ -43,8 +42,7 @@
    "id": "100503111-b2",
    "page": "響け、万雷の喝采よ",
    "reasons": [
-    "无可解析发动位置(is_activate_other_skill_detail==1&run_at_full_speed_random==1&track_id==10005&base_stamina>=1000)",
-    "base_stamina>=1000(环境前提,视为满足)"
+    "无可解析发动位置(is_activate_other_skill_detail==1&run_at_full_speed_random==1&track_id==10005&base_stamina>=1000)"
    ]
   },
   {
@@ -276,8 +274,7 @@
    "id": "106402211-b2",
    "page": "メリ☆クリ↑パーリー",
    "reasons": [
-    "未识别token:track_id!=10005",
-    "motivation<=4(环境前提,视为满足)"
+    "未识别token:track_id!=10005"
    ]
   },
   {
@@ -291,8 +288,7 @@
    "id": "106703211-b2",
    "page": "ダンス・デ・レぺ",
    "reasons": [
-    "未识别token:track_id!=10201",
-    "motivation<=4(环境前提,视为满足)"
+    "未识别token:track_id!=10201"
    ]
   },
   {
@@ -501,8 +497,7 @@
    "page": "海を越える神回！",
    "reasons": [
     "未识别token:phase_latter_half_straight_random==1",
-    "无可解析发动位置(phase_latter_half_straight_random==1&running_style==2&distance_type==3&order_rate<=50&is_abroad==1)",
-    "is_abroad==1(环境前提,视为满足)"
+    "无可解析发动位置(phase_latter_half_straight_random==1&running_style==2&distance_type==3&order_rate<=50&is_abroad==1)"
    ]
   },
   {
@@ -527,7 +522,6 @@
    "page": "想い束ね、前へ",
    "reasons": [
     "未识别token:is_popularity_top_character_activate_advantage_skill==-1",
-    "base_wiz>=1200(环境前提,视为满足)",
     "前置条件:distance_type==3@distance_type==4"
    ]
   },
@@ -543,8 +537,7 @@
    "id": "120051-b1",
    "page": "Gloire à toi!",
    "reasons": [
-    "无可解析发动位置(activate_count_later_half>=1&distance_type==3&is_basis_distance==1)",
-    "is_basis_distance==1(环境前提,视为满足)"
+    "无可解析发动位置(activate_count_later_half>=1&distance_type==3&is_basis_distance==1)"
    ]
   },
   {

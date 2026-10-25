@@ -79,6 +79,8 @@ const out = Object.entries(raw).map(([courseId, c]) => {
     baseSpeed: Math.round((20 - (d - 2000) / 1000) * 1000) / 1000,
     courseSetStatus: (c.courseSetStatus ?? []).map(s => STATS[s] ?? 'speed'),
     rotation: rotationOf(c.turn),
+    // 海外赛场:10201~ = 隆尚/圣安妮塔公园/德尔马(触发代码 is_abroad)
+    ...(c.raceTrackId >= 10200 ? { overseas: true } : {}),
   };
 });
 

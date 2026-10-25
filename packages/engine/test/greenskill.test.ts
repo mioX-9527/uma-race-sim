@@ -5,7 +5,7 @@ import { effectiveStatsOf, passiveBonusOf } from '../src/effstats';
 import { simulate } from '../src/simulate';
 import { skillApplicable } from '../src/restriction';
 import type { Course, SkillConfig } from '../src/types';
-import { makeRunner } from './fixtures';
+import { BASE_STATS, makeRunner } from './fixtures';
 
 const coursesUrl = new URL('../../../data/courses.json', import.meta.url);
 const courses = JSON.parse(readFileSync(fileURLToPath(coursesUrl), 'utf8')) as Course[];
@@ -122,5 +122,49 @@ describe('装配限制生效:回转方向 / 季节', () => {
     const withS = simulate(nak, runner);
     const withoutS = simulate(nak, { ...runner, skills: [] });
     expect(withS.finishTimeSec).toBeCloseTo(withoutS.finishTimeSec, 10);
+  });
+});
+
+describe('触发代码严格执行(数据驱动:标准距离 / 面板属性 / 海外)', () => {
+  const byType = (t: string): Course => {
+    const c = courses.find(x => x.distanceType === t && x.surface === 'turf');
+    if (!c) throw new Error('赛道未找到:' + t);
+    return c;
+  };
+
+  test('标准距离◎ 只在中/长距离计入起跑属性', () => {
+    const s = byId('200131'); // 耐力 +60
+    const runner = makeRunner({ skills: [s] });
+    for (const t of ['mid', 'long']) expect(passiveBonusOf(runner, byType(t)).stamina).toBe(60);
+    for (const t of ['short', 'mile']) expect(passiveBonusOf(runner, byType(t)).stamina).toBe(0);
+    expect(skillApplicable(s, byType('short'), runner)).toBe(false);
+  });
+
+  test('非标准距离◎ 只在短/英里计入', () => {
+    const s = byId('200141'); // 耐力 +60
+    const runner = makeRunner({ skills: [s] });
+    for (const t of ['short', 'mile']) expect(passiveBonusOf(runner, byType(t)).stamina).toBe(60);
+    for (const t of ['mid', 'long']) expect(passiveBonusOf(runner, byType(t)).stamina).toBe(0);
+  });
+
+  test('拉普拉斯妖(1)/(2) 按面板 速度/智力 分流(先行·中距离)', () => {
+    const b1 = byId('103202111-b1'); // speed≥1200 & wiz≥1200 → 速度+100
+    const b2 = byId('103202111-b2'); // speed≥1200 & wiz<1200  → 速度+80
+    const mid = byType('mid');
+    const hi = makeRunner({ tactic: 'senko', stats: { ...BASE_STATS, speed: 1300, wisdom: 1300 }, skills: [b1, b2] });
+    const lo = makeRunner({ tactic: 'senko', stats: { ...BASE_STATS, speed: 1300, wisdom: 1000 }, skills: [b1, b2] });
+    expect(passiveBonusOf(hi, mid).speed).toBe(100);
+    expect(passiveBonusOf(lo, mid).speed).toBe(80);
+    // 短距离两条都不满足
+    expect(passiveBonusOf(hi, byType('short')).speed).toBe(0);
+  });
+
+  test('海外赛场(is_abroad)按赛道所在地判定', () => {
+    const s = byId('111321-b1'); // 仅在海外赛场发动
+    const abroad = courses.find(c => c.overseas === true)!;
+    const domestic = courses.find(c => c.overseas !== true)!;
+    const runner = makeRunner();
+    expect(skillApplicable(s, abroad, runner)).toBe(true);
+    expect(skillApplicable(s, domestic, runner)).toBe(false);
   });
 });

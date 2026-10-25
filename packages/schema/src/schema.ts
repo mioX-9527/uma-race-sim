@@ -42,6 +42,8 @@ export const courseSchema = z.object({
   courseSetStatus: z.array(passiveStat).optional(),
   /** 赛场回转方向:1=顺时针(中山/京都/阪神/札幌/函馆/福岛/小仓/大井/隆尚),2=逆时针;直線赛道无此字段 */
   rotation: z.union([z.literal(1), z.literal(2)]).optional(),
+  /** 海外赛场(is_abroad:隆尚/圣安妮塔公园/德尔马) */
+  overseas: z.boolean().optional(),
 });
 
 const conditionBase = z.enum(['start', 'midStart', 'lateStart', 'finalStart']);
@@ -54,7 +56,16 @@ const regionExtras = {
   spurt: z.boolean().optional(),
 };
 
-const restrictionSchema = z.object({
+const statMap = z.object({
+  speed: z.number().optional(),
+  stamina: z.number().optional(),
+  power: z.number().optional(),
+  guts: z.number().optional(),
+  wisdom: z.number().optional(),
+});
+
+/** 单条限制子句(字段间为「与」) */
+const clauseSchema = z.object({
   tactics: z.array(z.enum(['nige', 'senko', 'sashi', 'oikomi'])).optional(),
   distanceTypes: z.array(z.enum(['short', 'mile', 'mid', 'long'])).optional(),
   surfaces: z.array(z.enum(['turf', 'dirt'])).optional(),
@@ -69,7 +80,19 @@ const restrictionSchema = z.object({
   weathers: z.array(z.union([z.literal(1), z.literal(2), z.literal(3), z.literal(4)])).optional(),
   /** 季节(触发代码 season==N:1春/2夏/3秋/4冬/5樱花) */
   seasons: z.array(z.union([z.literal(1), z.literal(2), z.literal(3), z.literal(4), z.literal(5)])).optional(),
+  /** 干劲(触发代码 motivation) */
+  motivations: z.array(z.enum(['best', 'good', 'normal', 'bad', 'worst'])).optional(),
+  /** 海外赛场(触发代码 is_abroad) */
+  abroad: z.boolean().optional(),
+  /** 面板属性下限(含)/上限(不含),触发代码 base_* */
+  statsAtLeast: statMap.optional(),
+  statsBelow: statMap.optional(),
   rawText: z.string().optional(),
+});
+
+/** 技能装配限制:单子句用扁平字段,多分支用 anyOf(任一子句满足即生效) */
+const restrictionSchema = clauseSchema.extend({
+  anyOf: z.array(clauseSchema).min(1).optional(),
 });
 
 export const skillConditionSchema = z.discriminatedUnion('kind', [

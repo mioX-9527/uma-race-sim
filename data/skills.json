@@ -1683,6 +1683,9 @@
    "tactics": [
     "senko"
    ],
+   "statsAtLeast": {
+    "stamina": 1000
+   },
    "distanceMin": 2400,
    "distanceMax": 2500
   },
@@ -1716,6 +1719,9 @@
    "tactics": [
     "senko"
    ],
+   "statsBelow": {
+    "stamina": 1000
+   },
    "distanceMin": 2400,
    "distanceMax": 2500
   },
@@ -2941,7 +2947,10 @@
    ],
    "venues": [
     "中山"
-   ]
+   ],
+   "statsAtLeast": {
+    "stamina": 1000
+   }
   },
   "restrictionText": "先行",
   "wisdomScaled": true,
@@ -3218,9 +3227,7 @@
   "restriction": {
    "distanceTypes": [
     "mid",
-    "long",
-    "short",
-    "mile"
+    "long"
    ]
   },
   "wisdomScaled": true,
@@ -3250,8 +3257,6 @@
   },
   "restriction": {
    "distanceTypes": [
-    "mid",
-    "long",
     "short",
     "mile"
    ]
@@ -3816,9 +3821,7 @@
   "restriction": {
    "distanceTypes": [
     "short",
-    "mile",
-    "mid",
-    "long"
+    "mile"
    ]
   },
   "wisdomScaled": true,
@@ -3848,8 +3851,6 @@
   },
   "restriction": {
    "distanceTypes": [
-    "short",
-    "mile",
     "mid",
     "long"
    ]
@@ -4645,9 +4646,9 @@
   },
   "restriction": {
    "venues": [
-    "大井",
     "川崎",
-    "船桥"
+    "船桥",
+    "大井"
    ]
   },
   "wisdomScaled": true,
@@ -4675,9 +4676,9 @@
   },
   "restriction": {
    "venues": [
-    "大井",
     "川崎",
-    "船桥"
+    "船桥",
+    "大井"
    ]
   },
   "wisdomScaled": true,
@@ -4710,16 +4711,16 @@
     "dirt"
    ],
    "venues": [
-    "东京",
-    "中山",
-    "京都",
     "阪神",
-    "札幌",
-    "函馆",
-    "新潟",
+    "东京",
     "福岛",
+    "函馆",
+    "京都",
+    "小仓",
+    "新潟",
+    "札幌",
     "中京",
-    "小仓"
+    "中山"
    ]
   },
   "wisdomScaled": true,
@@ -4748,16 +4749,16 @@
     "dirt"
    ],
    "venues": [
-    "东京",
-    "中山",
-    "京都",
     "阪神",
-    "札幌",
-    "函馆",
-    "新潟",
+    "东京",
     "福岛",
+    "函馆",
+    "京都",
+    "小仓",
+    "新潟",
+    "札幌",
     "中京",
-    "小仓"
+    "中山"
    ]
   },
   "wisdomScaled": true,
@@ -5754,9 +5755,7 @@
   "restriction": {
    "distanceTypes": [
     "short",
-    "mile",
-    "mid",
-    "long"
+    "mile"
    ]
   },
   "wisdomScaled": true,
@@ -5786,8 +5785,6 @@
   },
   "restriction": {
    "distanceTypes": [
-    "short",
-    "mile",
     "mid",
     "long"
    ]
@@ -6835,6 +6832,12 @@
    "fromMeters": 799,
    "toMeters": 801
   },
+  "restriction": {
+   "distanceTypes": [
+    "mid",
+    "long"
+   ]
+  },
   "wisdomScaled": true,
   "source": "BWIKI 速查表 + 触发代码(模块:技能数据库内容)",
   "fetchedAt": "2026-10-24"
@@ -7372,7 +7375,14 @@
    "distanceTypes": [
     "mid",
     "long"
-   ]
+   ],
+   "statsAtLeast": {
+    "speed": 1000,
+    "stamina": 1000,
+    "power": 1000,
+    "guts": 1000,
+    "wisdom": 1000
+   }
   },
   "restrictionText": "追马",
   "wisdomScaled": true,
@@ -7599,8 +7609,8 @@
     "long"
    ],
    "venues": [
-    "中山",
-    "阪神"
+    "阪神",
+    "中山"
    ]
   },
   "wisdomScaled": true,
@@ -7625,13 +7635,39 @@
    "kind": "straightFastest"
   },
   "restriction": {
-   "distanceTypes": [
-    "mid",
-    "long"
-   ],
-   "venues": [
-    "中山",
-    "阪神"
+   "anyOf": [
+    {
+     "distanceTypes": [
+      "mid"
+     ],
+     "venues": [
+      "中山"
+     ]
+    },
+    {
+     "distanceTypes": [
+      "long"
+     ],
+     "venues": [
+      "中山"
+     ]
+    },
+    {
+     "distanceTypes": [
+      "mid"
+     ],
+     "venues": [
+      "阪神"
+     ]
+    },
+    {
+     "distanceTypes": [
+      "long"
+     ],
+     "venues": [
+      "阪神"
+     ]
+    }
    ]
   },
   "wisdomScaled": true,
@@ -9289,8 +9325,8 @@
   },
   "restriction": {
    "tactics": [
-    "oikomi",
-    "senko"
+    "senko",
+    "oikomi"
    ]
   },
   "restrictionText": "追马",
@@ -9318,8 +9354,8 @@
   },
   "restriction": {
    "tactics": [
-    "oikomi",
-    "senko"
+    "senko",
+    "oikomi"
    ]
   },
   "restrictionText": "追马",
@@ -9349,8 +9385,8 @@
   },
   "restriction": {
    "tactics": [
-    "sashi",
-    "senko"
+    "senko",
+    "sashi"
    ],
    "distanceTypes": [
     "mid"
@@ -9379,8 +9415,8 @@
   },
   "restriction": {
    "tactics": [
-    "sashi",
-    "senko"
+    "senko",
+    "sashi"
    ],
    "distanceTypes": [
     "mid"
@@ -9835,16 +9871,16 @@
     "turf"
    ],
    "venues": [
-    "东京",
-    "中山",
-    "京都",
     "阪神",
-    "札幌",
-    "函馆",
-    "新潟",
+    "东京",
     "福岛",
+    "函馆",
+    "京都",
+    "小仓",
+    "新潟",
+    "札幌",
     "中京",
-    "小仓"
+    "中山"
    ]
   },
   "restrictionText": "中距离",
@@ -9878,16 +9914,16 @@
     "turf"
    ],
    "venues": [
-    "东京",
-    "中山",
-    "京都",
     "阪神",
-    "札幌",
-    "函馆",
-    "新潟",
+    "东京",
     "福岛",
+    "函馆",
+    "京都",
+    "小仓",
+    "新潟",
+    "札幌",
     "中京",
-    "小仓"
+    "中山"
    ]
   },
   "restrictionText": "中距离",
@@ -9915,23 +9951,23 @@
   },
   "restriction": {
    "tactics": [
-    "sashi",
-    "senko"
+    "senko",
+    "sashi"
    ],
    "surfaces": [
     "turf"
    ],
    "venues": [
-    "东京",
-    "中山",
-    "京都",
     "阪神",
-    "札幌",
-    "函馆",
-    "新潟",
+    "东京",
     "福岛",
+    "函馆",
+    "京都",
+    "小仓",
+    "新潟",
+    "札幌",
     "中京",
-    "小仓"
+    "中山"
    ],
    "distanceMin": 2000
   },
@@ -9960,23 +9996,23 @@
   },
   "restriction": {
    "tactics": [
-    "sashi",
-    "senko"
+    "senko",
+    "sashi"
    ],
    "surfaces": [
     "turf"
    ],
    "venues": [
-    "东京",
-    "中山",
-    "京都",
     "阪神",
-    "札幌",
-    "函馆",
-    "新潟",
+    "东京",
     "福岛",
+    "函馆",
+    "京都",
+    "小仓",
+    "新潟",
+    "札幌",
     "中京",
-    "小仓"
+    "中山"
    ],
    "distanceMin": 2000
   },
@@ -10375,8 +10411,7 @@
     "mid"
    ],
    "surfaces": [
-    "turf",
-    "dirt"
+    "turf"
    ]
   },
   "restrictionText": "中距离",
@@ -10409,7 +10444,6 @@
     "mid"
    ],
    "surfaces": [
-    "turf",
     "dirt"
    ]
   },
@@ -10793,7 +10827,10 @@
    ],
    "surfaces": [
     "turf"
-   ]
+   ],
+   "statsAtLeast": {
+    "wisdom": 1000
+   }
   },
   "restrictionText": "逃马",
   "wisdomScaled": true,
@@ -12124,7 +12161,10 @@
   "restriction": {
    "tactics": [
     "nige"
-   ]
+   ],
+   "statsAtLeast": {
+    "wisdom": 1200
+   }
   },
   "restrictionText": "逃马",
   "wisdomScaled": true,
@@ -13260,7 +13300,11 @@
    ],
    "distanceTypes": [
     "mid"
-   ]
+   ],
+   "statsAtLeast": {
+    "speed": 1200,
+    "wisdom": 1200
+   }
   },
   "restrictionText": "先行",
   "wisdomScaled": true,
@@ -13292,7 +13336,13 @@
    ],
    "distanceTypes": [
     "mid"
-   ]
+   ],
+   "statsAtLeast": {
+    "speed": 1200
+   },
+   "statsBelow": {
+    "wisdom": 1200
+   }
   },
   "restrictionText": "先行",
   "wisdomScaled": true,
@@ -15220,7 +15270,10 @@
   "restriction": {
    "tactics": [
     "sashi"
-   ]
+   ],
+   "statsAtLeast": {
+    "power": 1200
+   }
   },
   "restrictionText": "差行",
   "wisdomScaled": true,
@@ -15249,7 +15302,10 @@
   "restriction": {
    "tactics": [
     "sashi"
-   ]
+   ],
+   "statsAtLeast": {
+    "power": 1200
+   }
   },
   "restrictionText": "差行",
   "wisdomScaled": true,
@@ -15787,8 +15843,8 @@
     "dirt"
    ],
    "grounds": [
-    0,
-    2
+    2,
+    3
    ]
   },
   "restrictionText": "泥地",
@@ -15826,7 +15882,7 @@
    ],
    "grounds": [
     0,
-    2
+    1
    ]
   },
   "restrictionText": "泥地",
@@ -17025,9 +17081,9 @@
     "sashi"
    ],
    "distanceTypes": [
-    "mid",
     "short",
     "mile",
+    "mid",
     "long"
    ],
    "venues": [
@@ -17196,7 +17252,6 @@
     "sashi"
    ],
    "distanceTypes": [
-    "long",
     "short",
     "mile",
     "mid"
@@ -18704,7 +18759,10 @@
    ],
    "grounds": [
     0
-   ]
+   ],
+   "statsAtLeast": {
+    "wisdom": 1200
+   }
   },
   "restrictionText": "中距离",
   "wisdomScaled": true,
@@ -18739,11 +18797,13 @@
     "long"
    ],
    "grounds": [
-    0,
     1,
     2,
     3
-   ]
+   ],
+   "statsAtLeast": {
+    "wisdom": 1200
+   }
   },
   "restrictionText": "中距离",
   "wisdomScaled": true,
@@ -20343,7 +20403,11 @@
    "distanceTypes": [
     "mile",
     "mid"
-   ]
+   ],
+   "statsAtLeast": {
+    "speed": 1000,
+    "power": 1000
+   }
   },
   "restrictionText": "英里",
   "wisdomScaled": true,
@@ -20586,6 +20650,9 @@
    ],
    "venues": [
     "中山"
+   ],
+   "motivations": [
+    "best"
    ]
   },
   "restrictionText": "大逃",
@@ -20626,6 +20693,12 @@
    ],
    "venues": [
     "中山"
+   ],
+   "motivations": [
+    "worst",
+    "bad",
+    "normal",
+    "good"
    ]
   },
   "restrictionText": "大逃",
@@ -21094,6 +21167,9 @@
    ],
    "venues": [
     "隆尚"
+   ],
+   "motivations": [
+    "best"
    ]
   },
   "restrictionText": "中距离",
@@ -21126,6 +21202,12 @@
    ],
    "venues": [
     "隆尚"
+   ],
+   "motivations": [
+    "worst",
+    "bad",
+    "normal",
+    "good"
    ]
   },
   "restrictionText": "中距离",
@@ -21705,7 +21787,6 @@
     "turf"
    ],
    "grounds": [
-    0,
     1,
     2,
     3
@@ -21744,8 +21825,7 @@
     "turf"
    ],
    "grounds": [
-    0,
-    2
+    0
    ]
   },
   "restrictionText": "草地",
@@ -21884,8 +21964,7 @@
     "mid"
    ],
    "grounds": [
-    0,
-    2
+    0
    ]
   },
   "restrictionText": "中距离",
@@ -22445,7 +22524,10 @@
   "restriction": {
    "tactics": [
     "sashi"
-   ]
+   ],
+   "statsAtLeast": {
+    "stamina": 1200
+   }
   },
   "restrictionText": "差行",
   "wisdomScaled": true,
@@ -22475,7 +22557,10 @@
   "restriction": {
    "tactics": [
     "sashi"
-   ]
+   ],
+   "statsBelow": {
+    "stamina": 1200
+   }
   },
   "restrictionText": "差行",
   "wisdomScaled": true,
@@ -22505,7 +22590,10 @@
   "restriction": {
    "distanceTypes": [
     "long"
-   ]
+   ],
+   "statsAtLeast": {
+    "stamina": 1200
+   }
   },
   "restrictionText": "长距离",
   "wisdomScaled": true,
@@ -22687,7 +22775,10 @@
    "distanceTypes": [
     "mid",
     "long"
-   ]
+   ],
+   "statsAtLeast": {
+    "stamina": 1200
+   }
   },
   "restrictionText": "中距离",
   "wisdomScaled": true,
@@ -23323,9 +23414,7 @@
   "restriction": {
    "distanceTypes": [
     "mile",
-    "mid",
-    "short",
-    "long"
+    "mid"
    ]
   },
   "restrictionText": "英里",
@@ -23352,8 +23441,6 @@
   },
   "restriction": {
    "distanceTypes": [
-    "mile",
-    "mid",
     "short",
     "long"
    ]
@@ -23553,7 +23640,8 @@
   "restriction": {
    "surfaces": [
     "dirt"
-   ]
+   ],
+   "distanceMax": 1800
   },
   "restrictionText": "泥地",
   "wisdomScaled": true,
@@ -23612,6 +23700,11 @@
   "condition": {
    "kind": "phase",
    "phase": 1
+  },
+  "restriction": {
+   "statsAtLeast": {
+    "wisdom": 1200
+   }
   },
   "wisdomScaled": true,
   "source": "BWIKI 速查表 + 触发代码(模块:技能数据库内容2)",
@@ -24072,7 +24165,11 @@
    "distanceTypes": [
     "mile",
     "mid"
-   ]
+   ],
+   "statsAtLeast": {
+    "speed": 1000,
+    "power": 1000
+   }
   },
   "restrictionText": "英里",
   "wisdomScaled": true,
@@ -24771,7 +24868,8 @@
   "restriction": {
    "distanceTypes": [
     "mid"
-   ]
+   ],
+   "distanceMax": 2400
   },
   "restrictionText": "中距离",
   "wisdomScaled": true,
@@ -24838,7 +24936,10 @@
    ],
    "distanceTypes": [
     "mid"
-   ]
+   ],
+   "statsAtLeast": {
+    "wisdom": 1200
+   }
   },
   "restrictionText": "差行",
   "wisdomScaled": true,
@@ -25157,7 +25258,6 @@
   },
   "restriction": {
    "distanceTypes": [
-    "mile",
     "short",
     "mid",
     "long"
@@ -25291,7 +25391,10 @@
    ],
    "venues": [
     "京都"
-   ]
+   ],
+   "statsAtLeast": {
+    "wisdom": 1200
+   }
   },
   "restrictionText": "差行",
   "wisdomScaled": true,
@@ -25416,7 +25519,6 @@
   },
   "restriction": {
    "distanceTypes": [
-    "mile",
     "mid"
    ]
   },
@@ -25446,8 +25548,7 @@
   },
   "restriction": {
    "distanceTypes": [
-    "mile",
-    "mid"
+    "mile"
    ]
   },
   "restrictionText": "英里",
@@ -25515,7 +25616,6 @@
     "senko"
    ],
    "distanceTypes": [
-    "short",
     "mile",
     "mid",
     "long"
@@ -25745,7 +25845,10 @@
    ],
    "distanceTypes": [
     "mid"
-   ]
+   ],
+   "statsAtLeast": {
+    "power": 1200
+   }
   },
   "restrictionText": "差行",
   "wisdomScaled": true,
@@ -26312,7 +26415,10 @@
   "restriction": {
    "surfaces": [
     "dirt"
-   ]
+   ],
+   "statsAtLeast": {
+    "power": 1200
+   }
   },
   "restrictionText": "泥地",
   "wisdomScaled": true,
@@ -26341,7 +26447,13 @@
   "restriction": {
    "surfaces": [
     "dirt"
-   ]
+   ],
+   "statsAtLeast": {
+    "power": 1000
+   },
+   "statsBelow": {
+    "power": 1200
+   }
   },
   "restrictionText": "泥地",
   "wisdomScaled": true,
@@ -26465,6 +26577,9 @@
   "restriction": {
    "surfaces": [
     "dirt"
+   ],
+   "motivations": [
+    "best"
    ]
   },
   "restrictionText": "泥地",
@@ -26497,6 +26612,12 @@
   "restriction": {
    "surfaces": [
     "dirt"
+   ],
+   "motivations": [
+    "worst",
+    "bad",
+    "normal",
+    "good"
    ]
   },
   "restrictionText": "泥地",
@@ -26744,7 +26865,8 @@
    ],
    "surfaces": [
     "dirt"
-   ]
+   ],
+   "distanceMin": 1800
   },
   "restrictionText": "先行",
   "wisdomScaled": true,
@@ -26895,7 +27017,10 @@
    ],
    "surfaces": [
     "dirt"
-   ]
+   ],
+   "statsAtLeast": {
+    "guts": 1200
+   }
   },
   "restrictionText": "先行",
   "wisdomScaled": true,
@@ -28160,7 +28285,6 @@
   },
   "restriction": {
    "distanceTypes": [
-    "mid",
     "short",
     "mile",
     "long"
@@ -29116,6 +29240,12 @@
     100
    ]
   },
+  "restriction": {
+   "motivations": [
+    "good",
+    "best"
+   ]
+  },
   "wisdomScaled": true,
   "source": "BWIKI 速查表 + 触发代码(模块:技能数据库内容)",
   "fetchedAt": "2026-10-24"
@@ -29234,15 +29364,26 @@
    ]
   },
   "restriction": {
-   "distanceTypes": [
-    "mid"
-   ],
-   "venues": [
-    "东京",
-    "中山"
-   ],
-   "distances": [
-    2500
+   "anyOf": [
+    {
+     "distanceTypes": [
+      "mid"
+     ],
+     "venues": [
+      "中山"
+     ],
+     "distances": [
+      2500
+     ]
+    },
+    {
+     "distanceTypes": [
+      "mid"
+     ],
+     "venues": [
+      "东京"
+     ]
+    }
    ]
   },
   "wisdomScaled": true,
@@ -29302,6 +29443,11 @@
    "kind": "distanceRate",
    "fromPct": 40,
    "toPct": 50
+  },
+  "restriction": {
+   "motivations": [
+    "best"
+   ]
   },
   "wisdomScaled": true,
   "source": "BWIKI 速查表 + 触发代码(模块:技能数据库内容)",
@@ -29697,6 +29843,11 @@
   "durationSec": 5,
   "condition": {
    "kind": "finalStraight"
+  },
+  "restriction": {
+   "motivations": [
+    "best"
+   ]
   },
   "wisdomScaled": true,
   "source": "BWIKI 速查表 + 触发代码(模块:技能数据库内容)",
@@ -30470,7 +30621,10 @@
   "restriction": {
    "distanceTypes": [
     "mid"
-   ]
+   ],
+   "statsAtLeast": {
+    "power": 1200
+   }
   },
   "wisdomScaled": true,
   "source": "BWIKI 速查表 + 触发代码(模块:技能数据库内容)",
@@ -30788,6 +30942,11 @@
   "condition": {
    "kind": "phaseAfter",
    "phase": 2
+  },
+  "restriction": {
+   "statsAtLeast": {
+    "stamina": 1200
+   }
   },
   "wisdomScaled": true,
   "source": "BWIKI 速查表 + 触发代码(模块:技能数据库内容)",
@@ -31134,8 +31293,8 @@
   },
   "restriction": {
    "tactics": [
-    "oikomi",
-    "sashi"
+    "sashi",
+    "oikomi"
    ],
    "distanceTypes": [
     "mid"
@@ -31166,8 +31325,8 @@
   },
   "restriction": {
    "tactics": [
-    "oikomi",
-    "sashi"
+    "sashi",
+    "oikomi"
    ],
    "distanceTypes": [
     "mid"
@@ -31202,8 +31361,8 @@
   },
   "restriction": {
    "tactics": [
-    "oikomi",
-    "sashi"
+    "sashi",
+    "oikomi"
    ],
    "distanceTypes": [
     "mid"
@@ -31233,8 +31392,8 @@
   },
   "restriction": {
    "tactics": [
-    "oikomi",
-    "sashi"
+    "sashi",
+    "oikomi"
    ],
    "distanceTypes": [
     "mid"
@@ -31549,7 +31708,10 @@
   "restriction": {
    "distanceTypes": [
     "short"
-   ]
+   ],
+   "statsAtLeast": {
+    "wisdom": 1200
+   }
   },
   "wisdomScaled": true,
   "source": "BWIKI 速查表 + 触发代码(模块:技能数据库内容)",
@@ -32776,18 +32938,40 @@
    ]
   },
   "restriction": {
-   "surfaces": [
-    "turf"
-   ],
-   "venues": [
-    "阪神",
-    "京都",
-    "东京"
-   ],
-   "distances": [
-    1600,
-    2000,
-    2400
+   "anyOf": [
+    {
+     "surfaces": [
+      "turf"
+     ],
+     "venues": [
+      "阪神"
+     ],
+     "distances": [
+      1600
+     ]
+    },
+    {
+     "surfaces": [
+      "turf"
+     ],
+     "venues": [
+      "京都"
+     ],
+     "distances": [
+      2000
+     ]
+    },
+    {
+     "surfaces": [
+      "turf"
+     ],
+     "venues": [
+      "东京"
+     ],
+     "distances": [
+      2400
+     ]
+    }
    ]
   },
   "wisdomScaled": true,
@@ -32816,18 +33000,40 @@
    ]
   },
   "restriction": {
-   "surfaces": [
-    "turf"
-   ],
-   "venues": [
-    "阪神",
-    "京都",
-    "东京"
-   ],
-   "distances": [
-    1600,
-    2000,
-    2400
+   "anyOf": [
+    {
+     "surfaces": [
+      "turf"
+     ],
+     "venues": [
+      "阪神"
+     ],
+     "distances": [
+      1600
+     ]
+    },
+    {
+     "surfaces": [
+      "turf"
+     ],
+     "venues": [
+      "京都"
+     ],
+     "distances": [
+      2000
+     ]
+    },
+    {
+     "surfaces": [
+      "turf"
+     ],
+     "venues": [
+      "东京"
+     ],
+     "distances": [
+      2400
+     ]
+    }
    ]
   },
   "wisdomScaled": true,
@@ -32919,7 +33125,10 @@
   "restriction": {
    "distanceTypes": [
     "mid"
-   ]
+   ],
+   "statsAtLeast": {
+    "wisdom": 1200
+   }
   },
   "restrictionText": "中距离",
   "wisdomScaled": true,
@@ -33042,6 +33251,9 @@
   "restriction": {
    "distanceTypes": [
     "mid"
+   ],
+   "motivations": [
+    "best"
    ]
   },
   "wisdomScaled": true,
@@ -33599,7 +33811,13 @@
    ],
    "distanceTypes": [
     "mid"
-   ]
+   ],
+   "motivations": [
+    "best"
+   ],
+   "statsAtLeast": {
+    "speed": 1200
+   }
   },
   "restrictionText": "先行",
   "wisdomScaled": true,
@@ -33629,7 +33847,16 @@
    ],
    "distanceTypes": [
     "mid"
-   ]
+   ],
+   "motivations": [
+    "worst",
+    "bad",
+    "normal",
+    "good"
+   ],
+   "statsAtLeast": {
+    "speed": 1200
+   }
   },
   "restrictionText": "先行",
   "wisdomScaled": true,
@@ -33658,6 +33885,9 @@
   "restriction": {
    "distanceTypes": [
     "mid"
+   ],
+   "motivations": [
+    "best"
    ]
   },
   "restrictionText": "中距离",
@@ -33716,6 +33946,9 @@
     66.66666666666667
    ]
   },
+  "restriction": {
+   "abroad": true
+  },
   "wisdomScaled": true,
   "source": "BWIKI 速查表 + 触发代码(模块:技能数据库内容)",
   "fetchedAt": "2026-10-24"
@@ -33763,6 +33996,10 @@
   "restriction": {
    "tactics": [
     "oikomi"
+   ],
+   "distanceTypes": [
+    "mid",
+    "long"
    ],
    "distances": [
     400
@@ -34064,6 +34301,9 @@
    "tactics": [
     "senko"
    ],
+   "statsAtLeast": {
+    "power": 1200
+   },
    "distanceMin": 2400,
    "distanceMax": 2500
   },
@@ -34539,7 +34779,10 @@
    ],
    "venues": [
     "中山"
-   ]
+   ],
+   "statsAtLeast": {
+    "wisdom": 1200
+   }
   },
   "restrictionText": "追马",
   "wisdomScaled": true,
@@ -34602,7 +34845,10 @@
    ],
    "distanceTypes": [
     "long"
-   ]
+   ],
+   "statsAtLeast": {
+    "wisdom": 1200
+   }
   },
   "restrictionText": "追马",
   "wisdomScaled": true,
@@ -35283,7 +35529,8 @@
   "restriction": {
    "distanceTypes": [
     "long"
-   ]
+   ],
+   "distanceMin": 3200
   },
   "restrictionText": "长距离",
   "wisdomScaled": true,
@@ -35346,7 +35593,8 @@
    ],
    "distanceTypes": [
     "long"
-   ]
+   ],
+   "distanceMin": 3200
   },
   "restrictionText": "先行",
   "wisdomScaled": true,
@@ -35373,7 +35621,10 @@
   "restriction": {
    "tactics": [
     "senko"
-   ]
+   ],
+   "statsAtLeast": {
+    "stamina": 1000
+   }
   },
   "restrictionText": "先行",
   "wisdomScaled": true,
@@ -35435,7 +35686,10 @@
    "distanceTypes": [
     "mid",
     "long"
-   ]
+   ],
+   "statsAtLeast": {
+    "guts": 1000
+   }
   },
   "restrictionText": "中距离",
   "wisdomScaled": true,
@@ -35494,7 +35748,10 @@
   "restriction": {
    "tactics": [
     "senko"
-   ]
+   ],
+   "statsAtLeast": {
+    "speed": 1200
+   }
   },
   "restrictionText": "先行",
   "wisdomScaled": true,
@@ -35616,7 +35873,10 @@
    ],
    "distanceTypes": [
     "mile"
-   ]
+   ],
+   "statsAtLeast": {
+    "guts": 1200
+   }
   },
   "restrictionText": "先行",
   "wisdomScaled": true,
@@ -35729,16 +35989,51 @@
    ]
   },
   "restriction": {
-   "tactics": [
-    "senko",
-    "sashi"
-   ],
-   "distanceTypes": [
-    "mile",
-    "mid"
-   ],
-   "surfaces": [
-    "turf"
+   "anyOf": [
+    {
+     "tactics": [
+      "senko"
+     ],
+     "distanceTypes": [
+      "mile"
+     ],
+     "surfaces": [
+      "turf"
+     ]
+    },
+    {
+     "tactics": [
+      "senko"
+     ],
+     "distanceTypes": [
+      "mid"
+     ],
+     "surfaces": [
+      "turf"
+     ]
+    },
+    {
+     "tactics": [
+      "sashi"
+     ],
+     "distanceTypes": [
+      "mile"
+     ],
+     "surfaces": [
+      "turf"
+     ]
+    },
+    {
+     "tactics": [
+      "sashi"
+     ],
+     "distanceTypes": [
+      "mid"
+     ],
+     "surfaces": [
+      "turf"
+     ]
+    }
    ]
   },
   "restrictionText": "先行",
@@ -35808,7 +36103,6 @@
   },
   "restriction": {
    "distanceTypes": [
-    "short",
     "mile"
    ]
   },
@@ -35839,8 +36133,7 @@
   },
   "restriction": {
    "distanceTypes": [
-    "short",
-    "mile"
+    "short"
    ]
   },
   "restrictionText": "短距离",
@@ -35911,7 +36204,6 @@
   },
   "restriction": {
    "distanceTypes": [
-    "mile",
     "short",
     "mid",
     "long"
@@ -35983,7 +36275,10 @@
    ],
    "distanceTypes": [
     "mid"
-   ]
+   ],
+   "statsAtLeast": {
+    "wisdom": 1200
+   }
   },
   "restrictionText": "差行",
   "wisdomScaled": true,
@@ -36047,7 +36342,8 @@
    ],
    "surfaces": [
     "turf"
-   ]
+   ],
+   "abroad": true
   },
   "restrictionText": "中距离",
   "wisdomScaled": true,
@@ -36073,12 +36369,25 @@
    "part": "firstHalf"
   },
   "restriction": {
-   "distanceTypes": [
-    "mid"
-   ],
-   "surfaces": [
-    "turf",
-    "dirt"
+   "anyOf": [
+    {
+     "distanceTypes": [
+      "mid"
+     ],
+     "surfaces": [
+      "turf"
+     ],
+     "abroad": false
+    },
+    {
+     "distanceTypes": [
+      "mid"
+     ],
+     "surfaces": [
+      "dirt"
+     ],
+     "abroad": true
+    }
    ]
   },
   "restrictionText": "中距离",
@@ -36113,7 +36422,8 @@
    ],
    "distanceTypes": [
     "mid"
-   ]
+   ],
+   "abroad": true
   },
   "restrictionText": "先行",
   "wisdomScaled": true,
@@ -36295,7 +36605,10 @@
    "distanceTypes": [
     "mid",
     "long"
-   ]
+   ],
+   "statsAtLeast": {
+    "wisdom": 1200
+   }
   },
   "restrictionText": "中距离",
   "wisdomScaled": true,
@@ -36357,6 +36670,9 @@
   "restriction": {
    "tactics": [
     "sashi"
+   ],
+   "motivations": [
+    "best"
    ]
   },
   "restrictionText": "差行",
@@ -37009,8 +37325,7 @@
   },
   "restriction": {
    "distanceTypes": [
-    "mid",
-    "long"
+    "mid"
    ]
   },
   "restrictionText": "中距离",
@@ -37037,7 +37352,6 @@
   },
   "restriction": {
    "distanceTypes": [
-    "mid",
     "long"
    ]
   },
@@ -37190,7 +37504,8 @@
   "restriction": {
    "surfaces": [
     "turf"
-   ]
+   ],
+   "distanceMax": 2500
   },
   "wisdomScaled": true,
   "randomPosition": true,
@@ -37221,8 +37536,8 @@
   },
   "restriction": {
    "tactics": [
-    "oikomi",
-    "senko"
+    "senko",
+    "oikomi"
    ],
    "distanceTypes": [
     "mid"
@@ -37255,8 +37570,8 @@
   },
   "restriction": {
    "tactics": [
-    "oikomi",
-    "senko"
+    "senko",
+    "oikomi"
    ],
    "distanceTypes": [
     "mid"
@@ -37291,13 +37606,39 @@
    "kind": "downhillFastest"
   },
   "restriction": {
-   "tactics": [
-    "sashi",
-    "senko"
-   ],
-   "distanceTypes": [
-    "mile",
-    "mid"
+   "anyOf": [
+    {
+     "tactics": [
+      "senko"
+     ],
+     "distanceTypes": [
+      "mile"
+     ]
+    },
+    {
+     "tactics": [
+      "sashi"
+     ],
+     "distanceTypes": [
+      "mile"
+     ]
+    },
+    {
+     "tactics": [
+      "senko"
+     ],
+     "distanceTypes": [
+      "mid"
+     ]
+    },
+    {
+     "tactics": [
+      "sashi"
+     ],
+     "distanceTypes": [
+      "mid"
+     ]
+    }
    ]
   },
   "restrictionText": "差马",
@@ -37324,8 +37665,8 @@
   },
   "restriction": {
    "tactics": [
-    "sashi",
-    "senko"
+    "senko",
+    "sashi"
    ],
    "distanceTypes": [
     "mile",
@@ -37388,7 +37729,11 @@
    "distanceTypes": [
     "mile",
     "mid"
-   ]
+   ],
+   "statsAtLeast": {
+    "power": 1000,
+    "guts": 1000
+   }
   },
   "restrictionText": "英里",
   "wisdomScaled": true,
@@ -37836,6 +38181,12 @@
    "fromMeters": 399,
    "toMeters": 401
   },
+  "restriction": {
+   "distanceTypes": [
+    "short",
+    "mile"
+   ]
+  },
   "wisdomScaled": true,
   "source": "BWIKI 速查表 + 触发代码(模块:技能数据库内容)",
   "fetchedAt": "2026-10-24"
@@ -37915,23 +38266,23 @@
   },
   "restriction": {
    "tactics": [
-    "sashi",
-    "senko"
+    "senko",
+    "sashi"
    ],
    "surfaces": [
     "turf"
    ],
    "venues": [
-    "东京",
-    "中山",
-    "京都",
     "阪神",
-    "札幌",
-    "函馆",
-    "新潟",
+    "东京",
     "福岛",
+    "函馆",
+    "京都",
+    "小仓",
+    "新潟",
+    "札幌",
     "中京",
-    "小仓"
+    "中山"
    ]
   },
   "restrictionText": "差马",
@@ -37967,23 +38318,23 @@
   },
   "restriction": {
    "tactics": [
-    "sashi",
-    "senko"
+    "senko",
+    "sashi"
    ],
    "surfaces": [
     "turf"
    ],
    "venues": [
-    "东京",
-    "中山",
-    "京都",
     "阪神",
-    "札幌",
-    "函馆",
-    "新潟",
+    "东京",
     "福岛",
+    "函馆",
+    "京都",
+    "小仓",
+    "新潟",
+    "札幌",
     "中京",
-    "小仓"
+    "中山"
    ]
   },
   "restrictionText": "差马",
@@ -39071,7 +39422,6 @@
   },
   "restriction": {
    "distanceTypes": [
-    "mid",
     "short",
     "mile",
     "long"
@@ -40490,6 +40840,12 @@
   "condition": {
    "kind": "raceStart"
   },
+  "restriction": {
+   "distanceTypes": [
+    "mid",
+    "long"
+   ]
+  },
   "wisdomScaled": false,
   "source": "BWIKI 速查表 + 触发代码(模块:技能数据库内容)",
   "fetchedAt": "2026-10-24"
@@ -40512,6 +40868,12 @@
   "durationSec": null,
   "condition": {
    "kind": "raceStart"
+  },
+  "restriction": {
+   "distanceTypes": [
+    "mid",
+    "long"
+   ]
   },
   "wisdomScaled": false,
   "source": "BWIKI 速查表 + 触发代码(模块:技能数据库内容)",
@@ -40536,6 +40898,12 @@
   "condition": {
    "kind": "raceStart"
   },
+  "restriction": {
+   "distanceTypes": [
+    "mid",
+    "long"
+   ]
+  },
   "wisdomScaled": false,
   "source": "BWIKI 速查表 + 触发代码(模块:技能数据库内容)",
   "fetchedAt": "2026-10-24"
@@ -40558,6 +40926,12 @@
   "durationSec": null,
   "condition": {
    "kind": "raceStart"
+  },
+  "restriction": {
+   "distanceTypes": [
+    "short",
+    "mile"
+   ]
   },
   "wisdomScaled": false,
   "source": "BWIKI 速查表 + 触发代码(模块:技能数据库内容)",
@@ -40582,6 +40956,12 @@
   "condition": {
    "kind": "raceStart"
   },
+  "restriction": {
+   "distanceTypes": [
+    "short",
+    "mile"
+   ]
+  },
   "wisdomScaled": false,
   "source": "BWIKI 速查表 + 触发代码(模块:技能数据库内容)",
   "fetchedAt": "2026-10-24"
@@ -40604,6 +40984,12 @@
   "durationSec": null,
   "condition": {
    "kind": "raceStart"
+  },
+  "restriction": {
+   "distanceTypes": [
+    "short",
+    "mile"
+   ]
   },
   "wisdomScaled": false,
   "source": "BWIKI 速查表 + 触发代码(模块:技能数据库内容)",
@@ -51273,12 +51659,12 @@
   },
   "restriction": {
    "venues": [
-    "札幌",
-    "函馆",
-    "福岛",
-    "小仓",
     "川崎",
-    "船桥"
+    "船桥",
+    "福岛",
+    "函馆",
+    "小仓",
+    "札幌"
    ]
   },
   "wisdomScaled": false,
@@ -51306,12 +51692,12 @@
   },
   "restriction": {
    "venues": [
-    "札幌",
-    "函馆",
-    "福岛",
-    "小仓",
     "川崎",
-    "船桥"
+    "船桥",
+    "福岛",
+    "函馆",
+    "小仓",
+    "札幌"
    ]
   },
   "wisdomScaled": false,
@@ -51339,12 +51725,12 @@
   },
   "restriction": {
    "venues": [
-    "札幌",
-    "函馆",
-    "福岛",
-    "小仓",
     "川崎",
-    "船桥"
+    "船桥",
+    "福岛",
+    "函馆",
+    "小仓",
+    "札幌"
    ]
   },
   "wisdomScaled": false,
@@ -51931,7 +52317,10 @@
   "restriction": {
    "surfaces": [
     "dirt"
-   ]
+   ],
+   "statsAtLeast": {
+    "power": 1200
+   }
   },
   "restrictionText": "泥地",
   "wisdomScaled": true,
@@ -51960,7 +52349,13 @@
   "restriction": {
    "surfaces": [
     "dirt"
-   ]
+   ],
+   "statsAtLeast": {
+    "power": 1000
+   },
+   "statsBelow": {
+    "power": 1200
+   }
   },
   "restrictionText": "泥地",
   "wisdomScaled": true,
@@ -51989,7 +52384,10 @@
   "restriction": {
    "surfaces": [
     "dirt"
-   ]
+   ],
+   "statsAtLeast": {
+    "power": 1200
+   }
   },
   "restrictionText": "泥地",
   "wisdomScaled": false,
@@ -52018,7 +52416,13 @@
   "restriction": {
    "surfaces": [
     "dirt"
-   ]
+   ],
+   "statsAtLeast": {
+    "power": 1000
+   },
+   "statsBelow": {
+    "power": 1200
+   }
   },
   "restrictionText": "泥地",
   "wisdomScaled": false,
@@ -54023,7 +54427,11 @@
    "distanceTypes": [
     "mile",
     "mid"
-   ]
+   ],
+   "statsAtLeast": {
+    "speed": 1000,
+    "power": 1000
+   }
   },
   "restrictionText": "英里",
   "wisdomScaled": true,
@@ -54058,7 +54466,11 @@
    "distanceTypes": [
     "mile",
     "mid"
-   ]
+   ],
+   "statsAtLeast": {
+    "speed": 1000,
+    "power": 1000
+   }
   },
   "restrictionText": "英里",
   "wisdomScaled": false,
@@ -54340,7 +54752,11 @@
    ],
    "distanceTypes": [
     "mid"
-   ]
+   ],
+   "statsAtLeast": {
+    "speed": 1200,
+    "wisdom": 1200
+   }
   },
   "restrictionText": "先行",
   "wisdomScaled": true,
@@ -54372,7 +54788,13 @@
    ],
    "distanceTypes": [
     "mid"
-   ]
+   ],
+   "statsAtLeast": {
+    "speed": 1200
+   },
+   "statsBelow": {
+    "wisdom": 1200
+   }
   },
   "restrictionText": "先行",
   "wisdomScaled": true,
@@ -54404,7 +54826,11 @@
    ],
    "distanceTypes": [
     "mid"
-   ]
+   ],
+   "statsAtLeast": {
+    "speed": 1200,
+    "wisdom": 1200
+   }
   },
   "restrictionText": "先行",
   "wisdomScaled": false,
@@ -54436,7 +54862,13 @@
    ],
    "distanceTypes": [
     "mid"
-   ]
+   ],
+   "statsAtLeast": {
+    "speed": 1200
+   },
+   "statsBelow": {
+    "wisdom": 1200
+   }
   },
   "restrictionText": "先行",
   "wisdomScaled": false,
@@ -57546,6 +57978,10 @@
    ],
    "distanceTypes": [
     "long"
+   ],
+   "motivations": [
+    "good",
+    "best"
    ]
   },
   "restrictionText": "逃马",
@@ -60935,7 +61371,11 @@
    ],
    "distanceTypes": [
     "mid"
-   ]
+   ],
+   "statsAtLeast": {
+    "speed": 1200,
+    "power": 1200
+   }
   },
   "restrictionText": "差行",
   "wisdomScaled": false,
@@ -60966,7 +61406,13 @@
    ],
    "distanceTypes": [
     "mid"
-   ]
+   ],
+   "statsAtLeast": {
+    "speed": 1200
+   },
+   "statsBelow": {
+    "power": 1200
+   }
   },
   "restrictionText": "差行",
   "wisdomScaled": false,
@@ -61683,7 +62129,10 @@
    "distanceTypes": [
     "mid",
     "long"
-   ]
+   ],
+   "statsAtLeast": {
+    "wisdom": 1200
+   }
   },
   "restrictionText": "中距离",
   "wisdomScaled": true,
@@ -61711,7 +62160,10 @@
    "distanceTypes": [
     "mid",
     "long"
-   ]
+   ],
+   "statsAtLeast": {
+    "wisdom": 1200
+   }
   },
   "restrictionText": "中距离",
   "wisdomScaled": false,
@@ -62794,7 +63246,10 @@
    "distanceTypes": [
     "mid",
     "long"
-   ]
+   ],
+   "statsAtLeast": {
+    "stamina": 1200
+   }
   },
   "restrictionText": "中距离",
   "wisdomScaled": true,
@@ -62822,7 +63277,10 @@
    "distanceTypes": [
     "mid",
     "long"
-   ]
+   ],
+   "statsAtLeast": {
+    "stamina": 1200
+   }
   },
   "restrictionText": "中距离",
   "wisdomScaled": false,
@@ -63135,7 +63593,11 @@
    "distanceTypes": [
     "mid",
     "long"
-   ]
+   ],
+   "statsAtLeast": {
+    "speed": 1000,
+    "power": 1000
+   }
   },
   "restrictionText": "中距离",
   "wisdomScaled": false,
@@ -64873,7 +65335,11 @@
    ],
    "distanceTypes": [
     "mid"
-   ]
+   ],
+   "statsAtLeast": {
+    "speed": 1200,
+    "wisdom": 1200
+   }
   },
   "restrictionText": "逃马",
   "wisdomScaled": false,
@@ -64903,7 +65369,13 @@
    ],
    "distanceTypes": [
     "mid"
-   ]
+   ],
+   "statsAtLeast": {
+    "speed": 1200
+   },
+   "statsBelow": {
+    "wisdom": 1200
+   }
   },
   "restrictionText": "逃马",
   "wisdomScaled": false,
@@ -65534,7 +66006,11 @@
    "distanceTypes": [
     "mid",
     "long"
-   ]
+   ],
+   "statsAtLeast": {
+    "speed": 1200,
+    "wisdom": 1200
+   }
   },
   "restrictionText": "中距离",
   "wisdomScaled": false,
@@ -65562,7 +66038,13 @@
    "distanceTypes": [
     "mid",
     "long"
-   ]
+   ],
+   "statsAtLeast": {
+    "speed": 1200
+   },
+   "statsBelow": {
+    "wisdom": 1200
+   }
   },
   "restrictionText": "中距离",
   "wisdomScaled": false,
@@ -66208,6 +66690,12 @@
   "condition": {
    "kind": "raceStart"
   },
+  "restriction": {
+   "motivations": [
+    "good",
+    "best"
+   ]
+  },
   "wisdomScaled": false,
   "source": "BWIKI 速查表 + 触发代码(模块:技能数据库内容)",
   "fetchedAt": "2026-10-24"
@@ -66488,7 +66976,10 @@
    "distanceTypes": [
     "mile",
     "mid"
-   ]
+   ],
+   "statsAtLeast": {
+    "guts": 1200
+   }
   },
   "wisdomScaled": false,
   "randomPosition": true,
@@ -66519,7 +67010,10 @@
    "distanceTypes": [
     "mile",
     "mid"
-   ]
+   ],
+   "statsBelow": {
+    "guts": 1200
+   }
   },
   "wisdomScaled": false,
   "randomPosition": true,
@@ -66610,7 +67104,10 @@
    "distanceTypes": [
     "short",
     "mile"
-   ]
+   ],
+   "statsAtLeast": {
+    "power": 1200
+   }
   },
   "restrictionText": "短距离",
   "wisdomScaled": false,
@@ -69827,9 +70324,9 @@
   },
   "restriction": {
    "venues": [
-    "大井",
     "川崎",
-    "船桥"
+    "船桥",
+    "大井"
    ]
   },
   "wisdomScaled": true,
@@ -71150,6 +71647,12 @@
    "fromMeters": 799,
    "toMeters": 801
   },
+  "restriction": {
+   "distanceTypes": [
+    "mid",
+    "long"
+   ]
+  },
   "wisdomScaled": true,
   "source": "BWIKI 继承技页面 + 触发代码(模块:技能数据库内容2)",
   "fetchedAt": "2026-10-24"
@@ -71570,13 +72073,39 @@
    "kind": "straightFastest"
   },
   "restriction": {
-   "distanceTypes": [
-    "mid",
-    "long"
-   ],
-   "venues": [
-    "中山",
-    "阪神"
+   "anyOf": [
+    {
+     "distanceTypes": [
+      "mid"
+     ],
+     "venues": [
+      "中山"
+     ]
+    },
+    {
+     "distanceTypes": [
+      "long"
+     ],
+     "venues": [
+      "中山"
+     ]
+    },
+    {
+     "distanceTypes": [
+      "mid"
+     ],
+     "venues": [
+      "阪神"
+     ]
+    },
+    {
+     "distanceTypes": [
+      "long"
+     ],
+     "venues": [
+      "阪神"
+     ]
+    }
    ]
   },
   "wisdomScaled": true,
@@ -73957,15 +74486,23 @@
    ]
   },
   "restriction": {
-   "distanceTypes": [
-    "mid"
-   ],
-   "venues": [
-    "中山",
-    "东京"
-   ],
-   "distances": [
-    2500
+   "anyOf": [
+    {
+     "venues": [
+      "中山"
+     ],
+     "distances": [
+      2500
+     ]
+    },
+    {
+     "distanceTypes": [
+      "mid"
+     ],
+     "venues": [
+      "东京"
+     ]
+    }
    ]
   },
   "wisdomScaled": true,
@@ -74017,6 +74554,11 @@
    "kind": "distanceRate",
    "fromPct": 40,
    "toPct": 50
+  },
+  "restriction": {
+   "motivations": [
+    "best"
+   ]
   },
   "wisdomScaled": true,
   "source": "BWIKI 继承技页面 + 触发代码(模块:技能数据库内容2)",
@@ -74277,6 +74819,11 @@
   "durationSec": 3,
   "condition": {
    "kind": "finalStraight"
+  },
+  "restriction": {
+   "motivations": [
+    "best"
+   ]
   },
   "wisdomScaled": true,
   "source": "BWIKI 继承技页面 + 触发代码(模块:技能数据库内容2)",
@@ -74755,7 +75302,10 @@
   "restriction": {
    "distanceTypes": [
     "mid"
-   ]
+   ],
+   "statsAtLeast": {
+    "power": 1200
+   }
   },
   "wisdomScaled": true,
   "source": "BWIKI 继承技页面 + 触发代码(模块:技能数据库内容2)",
@@ -74889,6 +75439,11 @@
   "condition": {
    "kind": "phaseAfter",
    "phase": 2
+  },
+  "restriction": {
+   "statsAtLeast": {
+    "stamina": 1200
+   }
   },
   "wisdomScaled": true,
   "source": "BWIKI 继承技页面 + 触发代码(模块:技能数据库内容2)",
@@ -75315,7 +75870,10 @@
   "restriction": {
    "distanceTypes": [
     "short"
-   ]
+   ],
+   "statsAtLeast": {
+    "wisdom": 1200
+   }
   },
   "wisdomScaled": true,
   "source": "BWIKI 继承技页面 + 触发代码(模块:技能数据库内容2)",
@@ -75910,18 +76468,40 @@
    ]
   },
   "restriction": {
-   "surfaces": [
-    "turf"
-   ],
-   "venues": [
-    "阪神",
-    "京都",
-    "东京"
-   ],
-   "distances": [
-    1600,
-    2000,
-    2400
+   "anyOf": [
+    {
+     "surfaces": [
+      "turf"
+     ],
+     "venues": [
+      "阪神"
+     ],
+     "distances": [
+      1600
+     ]
+    },
+    {
+     "surfaces": [
+      "turf"
+     ],
+     "venues": [
+      "京都"
+     ],
+     "distances": [
+      2000
+     ]
+    },
+    {
+     "surfaces": [
+      "turf"
+     ],
+     "venues": [
+      "东京"
+     ],
+     "distances": [
+      2400
+     ]
+    }
    ]
   },
   "wisdomScaled": true,
@@ -76537,6 +77117,12 @@
    "kind": "distanceLeft",
    "fromMeters": 399,
    "toMeters": 401
+  },
+  "restriction": {
+   "distanceTypes": [
+    "short",
+    "mile"
+   ]
   },
   "wisdomScaled": true,
   "source": "BWIKI 继承技页面 + 触发代码(模块:技能数据库内容2)",

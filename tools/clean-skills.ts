@@ -149,6 +149,14 @@ interface CodeRestriction {
   weathers: Set<number>;
   /** 季节(触发代码 season==N:1春/2夏/3秋/4冬/5樱花) */
   seasons: Set<number>;
+  /** 干劲(触发代码 motivation:1绝不调~5绝好调) */
+  motivations: Set<string>;
+  /** 海外赛场(触发代码 is_abroad) */
+  abroad?: boolean;
+  /** 面板属性下限(含,base_xxx>=N) */
+  statsAtLeast: Record<string, number>;
+  /** 面板属性上限(不含,base_xxx<N) */
+  statsBelow: Record<string, number>;
   distanceMin?: number;
   distanceMax?: number;
 }
@@ -157,7 +165,8 @@ interface CodeParse {
   /** 条件对象(null=无可发动区段) */
   condition: Record<string, unknown> | null;
   approx: boolean;
-  restriction: CodeRestriction;
+  /** 各 @ 变体的限制子句(变体之间是「或」;单元素 = 单子句) */
+  clauses: CodeRestriction[];
   notes: string[];
 }
 
@@ -184,32 +193,68 @@ const APPROX_NAME_RE =
   /^order|bashin_diff|distance_diff|near_|infront_near|behind_near|is_behind_in|is_overtake|overtake_target|blocked_|is_surrounded|compete_|temptation|is_temptation|change_order|is_activate_other|is_activate_any|is_activate_heal|activate_count|is_used_skill|hp_per|run_at_full_speed_random|running_style_count|running_style_equal|is_other_character|same_skill_horse|is_badstart|is_goodstart/;
 /** 环境前提 token:单马模拟视为满足,记录到备注 */
 const ENV_TOKENS = new Set([
-  'base_speed', 'base_stamina', 'base_power', 'base_guts', 'base_wiz',
-  'motivation', 'popularity', 'post_number',
-  'fan_count', 'grade', 'is_abroad', 'is_dirtgrade', 'is_tight_track', 'lane_type',
+  'popularity', 'post_number',
+  'fan_count', 'grade', 'is_dirtgrade', 'is_tight_track', 'lane_type',
   'furlong', 'remain_distance_viewer_id', 'is_exist_chara_id', 'succession_skill_count',
-  'is_basis_distance', 'visiblehorse', 'random_lot', 'random_lot_shared', 'is_move_lane', 'time',
+  'visiblehorse', 'random_lot', 'random_lot_shared', 'is_move_lane', 'time',
 ]);
 
 function emptyRestriction(): CodeRestriction {
   return {
     tactics: new Set(), distanceTypes: new Set(), surfaces: new Set(), venues: new Set(),
     grounds: new Set(), distances: new Set(), rotations: new Set(), weathers: new Set(), seasons: new Set(),
+    motivations: new Set(), statsAtLeast: {}, statsBelow: {},
   };
 }
 
-function mergeRestriction(a: CodeRestriction, b: CodeRestriction): void {
-  for (const v of b.tactics) a.tactics.add(v);
-  for (const v of b.distanceTypes) a.distanceTypes.add(v);
-  for (const v of b.surfaces) a.surfaces.add(v);
-  for (const v of b.venues) a.venues.add(v);
-  for (const v of b.grounds) a.grounds.add(v);
-  for (const v of b.distances) a.distances.add(v);
-  for (const v of b.rotations) a.rotations.add(v);
-  for (const v of b.weathers) a.weathers.add(v);
-  for (const v of b.seasons) a.seasons.add(v);
-  if (b.distanceMin !== undefined) a.distanceMin = a.distanceMin === undefined ? b.distanceMin : Math.min(a.distanceMin, b.distanceMin);
-  if (b.distanceMax !== undefined) a.distanceMax = a.distanceMax === undefined ? b.distanceMax : Math.max(a.distanceMax, b.distanceMax);
+/** 子句内字段是否「已被本变体赋值」(用于同字段多次出现取交集,即 AND 语义) */
+type Touched = Set<string>;
+
+/**
+ * 写入单值集合:本变体内首次出现 → 赋值;再次出现 → 取交集。
+ * 触发代码同一支里 `ground_condition>=2&ground_condition<=3` 这类写法是「与」,
+ * 直接累加会错成并集(全部场地状态)。
+ */
+function putSet<T>(field: string, set: Set<T>, values: readonly T[], touched: Touched): void {
+  if (!touched.has(field)) {
+    set.clear();
+    for (const v of values) set.add(v);
+    touched.add(field);
+  } else {
+    for (const v of [...set]) if (!values.includes(v)) set.delete(v);
+  }
+}
+
+/** 子句「与」合并(把 b 的限制并进 a;同字段取交集/更严的一端) */
+function andRestriction(a: CodeRestriction, b: CodeRestriction): void {
+  const andSet = <T>(x: Set<T>, y: Set<T>): void => {
+    if (y.size === 0) return;
+    if (x.size === 0) { for (const v of y) x.add(v); return; }
+    for (const v of [...x]) if (!y.has(v)) x.delete(v);
+  };
+  andSet(a.tactics, b.tactics);
+  andSet(a.distanceTypes, b.distanceTypes);
+  andSet(a.surfaces, b.surfaces);
+  andSet(a.venues, b.venues);
+  andSet(a.grounds, b.grounds);
+  andSet(a.distances, b.distances);
+  andSet(a.rotations, b.rotations);
+  andSet(a.weathers, b.weathers);
+  andSet(a.seasons, b.seasons);
+  andSet(a.motivations, b.motivations);
+  if (b.abroad !== undefined) a.abroad = b.abroad;
+  for (const [k, v] of Object.entries(b.statsAtLeast)) a.statsAtLeast[k] = Math.max(a.statsAtLeast[k] ?? -Infinity, v);
+  for (const [k, v] of Object.entries(b.statsBelow)) a.statsBelow[k] = Math.min(a.statsBelow[k] ?? Infinity, v);
+  if (b.distanceMin !== undefined) a.distanceMin = Math.max(a.distanceMin ?? -Infinity, b.distanceMin);
+  if (b.distanceMax !== undefined) a.distanceMax = Math.min(a.distanceMax ?? Infinity, b.distanceMax);
+}
+
+/** 子句是否「无任何限制」(恒真) */
+function restrictionIsEmpty(r: CodeRestriction): boolean {
+  return r.tactics.size + r.distanceTypes.size + r.surfaces.size + r.venues.size + r.grounds.size + r.distances.size +
+    r.rotations.size + r.weathers.size + r.seasons.size + r.motivations.size === 0 &&
+    r.abroad === undefined && Object.keys(r.statsAtLeast).length === 0 && Object.keys(r.statsBelow).length === 0 &&
+    r.distanceMin === undefined && r.distanceMax === undefined;
 }
 
 /**
@@ -217,8 +262,10 @@ function mergeRestriction(a: CodeRestriction, b: CodeRestriction): void {
  * 锚点优先级(高→低):末脚起点 > 具体弯道 > 最终弯道/直线 > 任意弯道/直线 > 坡道 > 看台对面直线 >
  * 距离窗口(独立成锚) > 阶段 > 累计时间 > 常驻。阶段/距离窗口与区段锚联用时转为裁剪字段。
  */
-function parseVariant(tokens: readonly Token[], notes: string[]): Omit<CodeParse, 'restriction'> & { restriction: CodeRestriction } {
+function parseVariant(tokens: readonly Token[], notes: string[]): Omit<CodeParse, 'clauses'> & { restriction: CodeRestriction } {
   const restriction = emptyRestriction();
+  /** 本变体内已被赋值的限制字段(同字段二次出现 → 取交集) */
+  const touched: Touched = new Set();
   let approx = false;
 
   // 距离窗口(可与区段锚联用)
@@ -397,58 +444,99 @@ function parseVariant(tokens: readonly Token[], notes: string[]): Omit<CodeParse
       case name === 'accumulatetime' && (op === '>=' || op === '>'):
         setAnchor(80, { kind: 'elapsedSec', seconds: value, base: 'start' });
         break;
-      // ---- 装配限制 ----
+      // ---- 装配限制(同一变体内为「与」:同字段多次出现取交集) ----
       case name === 'running_style' && op === '==': {
         const t = CODE_TACTIC[String(value)];
-        if (t !== undefined) restriction.tactics.add(t);
+        if (t !== undefined) putSet('tactics', restriction.tactics, [t], touched);
         else notes.push(`running_style=${value} 未知`);
         break;
       }
       case name === 'distance_type' && op === '==': {
         const d = CODE_DISTTYPE[String(value)];
-        if (d !== undefined) restriction.distanceTypes.add(d);
+        if (d !== undefined) putSet('distanceTypes', restriction.distanceTypes, [d], touched);
         break;
       }
       case name === 'distance_type' && op === '!=':
         // distance_type!=N:排除某一档
-        for (const [k, v] of Object.entries(CODE_DISTTYPE)) if (k !== String(value)) restriction.distanceTypes.add(v);
+        putSet('distanceTypes', restriction.distanceTypes, Object.entries(CODE_DISTTYPE).filter(([k]) => k !== String(value)).map(([, v]) => v), touched);
         break;
+      case name === 'is_basis_distance': {
+        // 標準距離(1)= 中距離/長距離;非標準(0)= 短距離/マイル。等价于对距离档的限定
+        const basis: readonly string[] = ['mid', 'long'];
+        const other: readonly string[] = ['short', 'mile'];
+        const vals = op === '==' ? (value === 1 ? basis : other) : op === '!=' ? (value === 1 ? other : basis) : null;
+        if (vals === null) notes.push(`is_basis_distance${op}${value} 未识别`);
+        else putSet('distanceTypes', restriction.distanceTypes, vals, touched);
+        break;
+      }
       case name === 'ground_type' && op === '==':
-        restriction.surfaces.add(value === 1 ? 'turf' : 'dirt');
+        putSet('surfaces', restriction.surfaces, [value === 1 ? 'turf' : 'dirt'], touched);
         break;
       case name === 'ground_condition': {
-        // 触发代码 1良/2稍重/3重/4不良 → 枚举 0/1/2/3;!= / >= / <= 展开为集合(变体内交集,变体间并集)
+        // 触发代码 1良/2稍重/3重/4不良 → 枚举 0/1/2/3;!= / >= / <= 展开为候选集
         const all: readonly number[] = [0, 1, 2, 3];
-        if (op === '==') restriction.grounds.add(value - 1);
-        else if (op === '!=') for (const g of all) if (g !== value - 1) restriction.grounds.add(g);
-        else if (op === '>=') for (const g of all) if (g >= value - 1) restriction.grounds.add(g);
-        else if (op === '<=') for (const g of all) if (g <= value - 1) restriction.grounds.add(g);
-        else notes.push(`ground_condition${op}${value} 未识别`);
+        const g = value - 1;
+        let vals: readonly number[] | null = null;
+        if (op === '==') vals = [g];
+        else if (op === '!=') vals = all.filter(x => x !== g);
+        else if (op === '>=') vals = all.filter(x => x >= g);
+        else if (op === '<=') vals = all.filter(x => x <= g);
+        if (vals === null) notes.push(`ground_condition${op}${value} 未识别`);
+        else putSet('grounds', restriction.grounds, vals, touched);
         break;
       }
       case name === 'rotation' && op === '==':
         // 赛场回转方向:1=顺时针(中山/京都/阪神/札幌/函馆/福岛/小仓/大井/隆尚),2=逆时针
-        restriction.rotations.add(value);
+        putSet('rotations', restriction.rotations, [value], touched);
         break;
       case name === 'weather': {
         // 天气:1晴/2阴/3雨/4雪
         const all: readonly number[] = [1, 2, 3, 4];
-        if (op === '==') restriction.weathers.add(value);
-        else if (op === '!=') for (const w of all) if (w !== value) restriction.weathers.add(w);
-        else notes.push(`weather${op}${value} 未识别`);
+        const vals = op === '==' ? [value] : op === '!=' ? all.filter(w => w !== value) : null;
+        if (vals === null) notes.push(`weather${op}${value} 未识别`);
+        else putSet('weathers', restriction.weathers, vals, touched);
         break;
       }
       case name === 'season': {
         // 季节:1春/2夏/3秋/4冬/5樱花
         const all: readonly number[] = [1, 2, 3, 4, 5];
-        if (op === '==') restriction.seasons.add(value);
-        else if (op === '!=') for (const s of all) if (s !== value) restriction.seasons.add(s);
-        else notes.push(`season${op}${value} 未识别`);
+        const vals = op === '==' ? [value] : op === '!=' ? all.filter(x => x !== value) : null;
+        if (vals === null) notes.push(`season${op}${value} 未识别`);
+        else putSet('seasons', restriction.seasons, vals, touched);
+        break;
+      }
+      case (name === 'motivation') && ['==', '>=', '>', '<=', '<'].includes(op): {
+        // 干劲:1绝不调 2不调 3普通 4好调 5绝好调
+        const table: Record<number, string> = { 1: 'worst', 2: 'bad', 3: 'normal', 4: 'good', 5: 'best' };
+        const idx = [1, 2, 3, 4, 5];
+        let vals: readonly string[] | null = null;
+        if (op === '==') vals = table[value] !== undefined ? [table[value]!] : null;
+        else if (op === '>=') vals = idx.filter(i => i >= value).map(i => table[i]!);
+        else if (op === '>') vals = idx.filter(i => i > value).map(i => table[i]!);
+        else if (op === '<=') vals = idx.filter(i => i <= value).map(i => table[i]!);
+        else vals = idx.filter(i => i < value).map(i => table[i]!);
+        if (vals === null || vals.length === 0) notes.push(`motivation${op}${value} 未识别`);
+        else putSet('motivations', restriction.motivations, vals, touched);
+        break;
+      }
+      case name === 'is_abroad' && (op === '==' || op === '!='): {
+        // 海外赛场:隆尚/圣安妮塔公园/德尔马
+        const flag = value === 1;
+        restriction.abroad = op === '==' ? flag : !flag;
+        break;
+      }
+      case name === 'base_speed' || name === 'base_stamina' || name === 'base_power' || name === 'base_guts' || name === 'base_wiz': {
+        // 面板属性条件(base_* = 面板值,不含绿技能与干劲)
+        const stat = name.slice(5) === 'wiz' ? 'wisdom' : name.slice(5);
+        if (op === '>=' || op === '>') restriction.statsAtLeast[stat] = Math.max(restriction.statsAtLeast[stat] ?? -Infinity, value);
+        else if (op === '<' || op === '<=') restriction.statsBelow[stat] = Math.min(restriction.statsBelow[stat] ?? Infinity, value);
+        else if (op === '==') { restriction.statsAtLeast[stat] = value; restriction.statsBelow[stat] = value + 1; }
+        else notes.push(`${name}${op}${value} 未识别`);
         break;
       }
       case name === 'track_id' && op === '==': {
         const v = TRACK_VENUES[value];
-        if (v !== undefined) restriction.venues.add(v);
+        if (v !== undefined) putSet('venues', restriction.venues, [v], touched);
         else notes.push(`track_id=${value} 未知赛场`);
         break;
       }
@@ -458,13 +546,13 @@ function parseVariant(tokens: readonly Token[], notes: string[]): Omit<CodeParse
         else trackMax = Math.min(trackMax ?? Infinity, value);
         break;
       case name === 'course_distance' && op === '==':
-        restriction.distances.add(value);
+        putSet('distances', restriction.distances, [value], touched);
         break;
       case name === 'course_distance' && op === '>=':
-        restriction.distanceMin = value;
+        restriction.distanceMin = Math.max(restriction.distanceMin ?? -Infinity, value);
         break;
       case name === 'course_distance' && op === '<=':
-        restriction.distanceMax = value;
+        restriction.distanceMax = Math.min(restriction.distanceMax ?? Infinity, value);
         break;
       // ---- 近似/环境 ----
       case APPROX_NAME_RE.test(name):
@@ -487,10 +575,12 @@ function parseVariant(tokens: readonly Token[], notes: string[]): Omit<CodeParse
     const lo = trackMin ?? -Infinity;
     const hi = trackMax ?? Infinity;
     let found = false;
+    const inRange: string[] = [];
     for (const [k, v] of Object.entries(TRACK_VENUES)) {
       const n = Number.parseInt(k, 10);
-      if (n >= lo && n <= hi) { restriction.venues.add(v); found = true; }
+      if (n >= lo && n <= hi) { inRange.push(v); found = true; }
     }
+    if (found) putSet('venues', restriction.venues, inRange, touched);
     if (!found) notes.push(`track_id 范围 ${lo}~${hi} 无已知赛场`);
   }
   let condition: Record<string, unknown> | null = null;
@@ -554,21 +644,18 @@ function parseVariant(tokens: readonly Token[], notes: string[]): Omit<CodeParse
 function parseCode(code: string): CodeParse {
   const notes: string[] = [];
   const variants = code.split('@').map(v => v.trim()).filter(Boolean);
-  const first = parseVariant(tokenize(variants[0] ?? ''), notes);
-  const restriction = first.restriction;
-  let approx = first.approx;
+  const parsed = (variants.length > 0 ? variants : ['']).map(v => parseVariant(tokenize(v), notes));
+  const first = parsed[0]!;
+  let approx = parsed.some(p => p.approx);
   const firstKind = first.condition?.kind;
-  for (const v of variants.slice(1)) {
-    const pv = parseVariant(tokenize(v), notes);
-    mergeRestriction(restriction, pv.restriction);
-    approx = approx || pv.approx;
+  for (const pv of parsed.slice(1)) {
     if (pv.condition?.kind !== firstKind) {
       approx = true;
       notes.push(`变体锚点不同(${String(firstKind)} / ${String(pv.condition?.kind)}),取首个变体`);
     }
   }
-  if (variants.length > 1) approx = true;
-  return { condition: first.condition, approx, restriction, notes };
+  if (parsed.length > 1) approx = true;
+  return { condition: first.condition, approx, clauses: parsed.map(p => p.restriction), notes };
 }
 
 /** 触发代码效果槽(ability_type_s_e)→ 效果列表 */
@@ -639,9 +726,19 @@ function skillFromLuaBranch(
   const pre = lua[`precondition_${slot}`] ?? '';
   // 触发代码含 *_random(corner/phase/straight/slope 随机)→ 发动位置在区段内随机
   const randomPosition = /_random/.test(`${codeRaw} ${pre}`);
+  let clauses = cp.clauses;
   if (pre !== '') {
     const pp = parseCode(pre);
-    mergeRestriction(cp.restriction, pp.restriction);
+    // 前置条件与发动条件为「与」:两边的每个变体交叉合并
+    const crossed: CodeRestriction[] = [];
+    for (const a of clauses) {
+      for (const b of pp.clauses) {
+        const m = cloneRestriction(a);
+        andRestriction(m, b);
+        crossed.push(m);
+      }
+    }
+    clauses = crossed;
     if (pp.approx) cp.approx = true;
     info.push(`前置条件:${pre}`);
   }
@@ -662,7 +759,7 @@ function skillFromLuaBranch(
     reasons.push(`ability_time_usage=${lua[`ability_time_usage_${slot}`]}`);
   }
 
-  const restrictionObj = mergeRestrictionObj(cp.restriction, meta.textRestrictionObj);
+  const restrictionObj = restrictionObjOf(clauses, meta.textRestrictionObj);
 
   let precision: OutSkill['precision'];
   if (hasUnsupported || cp.condition === null || effects.length === 0) {
@@ -968,46 +1065,153 @@ function buildRestriction(rawTexts: readonly string[]): Record<string, unknown> 
   return out;
 }
 
-/** 代码限制 + 文本限制合并(并集) */
-function mergeRestrictionObj(code: CodeRestriction, textObj: Record<string, unknown> | undefined): Record<string, unknown> | undefined {
-  if (textObj === undefined) {
-    if (code.tactics.size + code.distanceTypes.size + code.surfaces.size + code.venues.size + code.grounds.size + code.distances.size + code.rotations.size + code.weathers.size + code.seasons.size === 0 && code.distanceMin === undefined && code.distanceMax === undefined) return undefined;
-    const out: Record<string, unknown> = {};
-    if (code.tactics.size > 0) out.tactics = [...code.tactics];
-    if (code.distanceTypes.size > 0) out.distanceTypes = [...code.distanceTypes];
-    if (code.surfaces.size > 0) out.surfaces = [...code.surfaces];
-    if (code.venues.size > 0) out.venues = [...code.venues];
-    if (code.grounds.size > 0) out.grounds = [...code.grounds].sort();
-    if (code.distances.size > 0) out.distances = [...code.distances].sort();
-    if (code.rotations.size > 0) out.rotations = [...code.rotations].sort();
-    if (code.weathers.size > 0) out.weathers = [...code.weathers].sort();
-    if (code.seasons.size > 0) out.seasons = [...code.seasons].sort();
-    if (code.distanceMin !== undefined) out.distanceMin = code.distanceMin;
-    if (code.distanceMax !== undefined) out.distanceMax = code.distanceMax;
-    return out;
-  }
-  // 文本限制存在 → 把代码限制并进去
-  const merged = emptyRestriction();
-  for (const t of (textObj.tactics as string[] | undefined) ?? []) merged.tactics.add(t);
-  for (const t of (textObj.distanceTypes as string[] | undefined) ?? []) merged.distanceTypes.add(t);
-  for (const t of (textObj.surfaces as string[] | undefined) ?? []) merged.surfaces.add(t);
-  for (const t of (textObj.venues as string[] | undefined) ?? []) merged.venues.add(t);
-  for (const t of (textObj.grounds as number[] | undefined) ?? []) merged.grounds.add(t);
-  for (const t of (textObj.distances as number[] | undefined) ?? []) merged.distances.add(t);
-  mergeRestriction(merged, code);
+/** 深拷贝一条子句(后续与前置条件/文本限制合并时不污染原对象) */
+function cloneRestriction(c: CodeRestriction): CodeRestriction {
+  return {
+    tactics: new Set(c.tactics), distanceTypes: new Set(c.distanceTypes), surfaces: new Set(c.surfaces),
+    venues: new Set(c.venues), grounds: new Set(c.grounds), distances: new Set(c.distances),
+    rotations: new Set(c.rotations), weathers: new Set(c.weathers), seasons: new Set(c.seasons),
+    motivations: new Set(c.motivations), statsAtLeast: { ...c.statsAtLeast }, statsBelow: { ...c.statsBelow },
+    ...(c.abroad !== undefined ? { abroad: c.abroad } : {}),
+    ...(c.distanceMin !== undefined ? { distanceMin: c.distanceMin } : {}),
+    ...(c.distanceMax !== undefined ? { distanceMax: c.distanceMax } : {}),
+  };
+}
+
+/**
+ * 把文本侧限制补进子句:**只填空缺字段**(触发代码为准,文本只补代码没写的)。
+ * 早期实现是并集,会把「代码限先行、文本写先行/差行」放大成两者皆可 —— 与触发代码冲突,已改。
+ */
+function fillTextInto(c: CodeRestriction, textObj: Record<string, unknown>): void {
+  const fill = <T>(set: Set<T>, values: readonly T[] | undefined): void => {
+    if (set.size > 0) return;
+    for (const v of values ?? []) set.add(v);
+  };
+  fill(c.tactics, textObj.tactics as string[] | undefined);
+  fill(c.distanceTypes, textObj.distanceTypes as string[] | undefined);
+  fill(c.surfaces, textObj.surfaces as string[] | undefined);
+  fill(c.venues, textObj.venues as string[] | undefined);
+  fill(c.grounds, textObj.grounds as number[] | undefined);
+  fill(c.distances, textObj.distances as number[] | undefined);
+  if (c.distanceMin === undefined) c.distanceMin = textObj.distanceMin as number | undefined;
+  if (c.distanceMax === undefined) c.distanceMax = textObj.distanceMax as number | undefined;
+}
+
+/** 排序用字典序(按游戏内枚举顺序,便于与历史数据/测试断言保持一致) */
+const VALUE_ORDER: Record<string, readonly string[]> = {
+  tactics: ['nige', 'senko', 'sashi', 'oikomi'],
+  distanceTypes: ['short', 'mile', 'mid', 'long'],
+  surfaces: ['turf', 'dirt'],
+  motivations: ['worst', 'bad', 'normal', 'good', 'best'],
+};
+
+/** 字段值排序:数字按大小,枚举按游戏顺序,其余按字典序 */
+function sortVals<T>(vals: readonly T[], field?: string): T[] {
+  const order = field !== undefined ? VALUE_ORDER[field] : undefined;
+  return [...vals].sort((a, b) => {
+    if (typeof a === 'number' && typeof b === 'number') return a - b;
+    if (order !== undefined) {
+      const ia = order.indexOf(String(a));
+      const ib = order.indexOf(String(b));
+      if (ia >= 0 && ib >= 0) return ia - ib;
+    }
+    return String(a).localeCompare(String(b));
+  });
+}
+
+/** 枚举字段的「全集」:写满等于没限制,直接省略(化简后常见,如 motivation==5@motivation<=4) */
+const FULL_SETS: Record<string, readonly unknown[]> = {
+  distanceTypes: ['short', 'mile', 'mid', 'long'],
+  surfaces: ['turf', 'dirt'],
+  grounds: [0, 1, 2, 3],
+  weathers: [1, 2, 3, 4],
+  seasons: [1, 2, 3, 4, 5],
+  motivations: ['worst', 'bad', 'normal', 'good', 'best'],
+};
+function isFullSet(field: string, values: readonly unknown[]): boolean {
+  const full = FULL_SETS[field];
+  return full !== undefined && values.length >= full.length && full.every(v => values.includes(v));
+}
+
+/** 单条子句 → 输出对象(字段顺序固定,便于去重) */
+function clauseObj(c: CodeRestriction): Record<string, unknown> {
   const out: Record<string, unknown> = {};
-  if (merged.tactics.size > 0) out.tactics = [...merged.tactics];
-  if (merged.distanceTypes.size > 0) out.distanceTypes = [...merged.distanceTypes];
-  if (merged.surfaces.size > 0) out.surfaces = [...merged.surfaces];
-  if (merged.venues.size > 0) out.venues = [...merged.venues];
-  if (merged.grounds.size > 0) out.grounds = [...merged.grounds].sort();
-  if (merged.distances.size > 0) out.distances = [...merged.distances].sort();
-  if (merged.rotations.size > 0) out.rotations = [...merged.rotations].sort();
-  if (merged.weathers.size > 0) out.weathers = [...merged.weathers].sort();
-  if (merged.seasons.size > 0) out.seasons = [...merged.seasons].sort();
-  if (merged.distanceMin !== undefined) out.distanceMin = merged.distanceMin;
-  if (merged.distanceMax !== undefined) out.distanceMax = merged.distanceMax;
-  return Object.keys(out).length > 0 ? out : undefined;
+  if (c.tactics.size > 0) out.tactics = sortVals([...c.tactics], 'tactics');
+  if (c.distanceTypes.size > 0 && !isFullSet('distanceTypes', [...c.distanceTypes])) out.distanceTypes = sortVals([...c.distanceTypes], 'distanceTypes');
+  if (c.surfaces.size > 0 && !isFullSet('surfaces', [...c.surfaces])) out.surfaces = sortVals([...c.surfaces], 'surfaces');
+  if (c.venues.size > 0) out.venues = sortVals([...c.venues], 'venues');
+  if (c.grounds.size > 0 && !isFullSet('grounds', [...c.grounds])) out.grounds = sortVals([...c.grounds], 'grounds');
+  if (c.distances.size > 0) out.distances = sortVals([...c.distances], 'distances');
+  if (c.rotations.size > 0) out.rotations = sortVals([...c.rotations], 'rotations');
+  if (c.weathers.size > 0 && !isFullSet('weathers', [...c.weathers])) out.weathers = sortVals([...c.weathers], 'weathers');
+  if (c.seasons.size > 0 && !isFullSet('seasons', [...c.seasons])) out.seasons = sortVals([...c.seasons], 'seasons');
+  if (c.motivations.size > 0 && !isFullSet('motivations', [...c.motivations])) out.motivations = sortVals([...c.motivations], 'motivations');
+  if (c.abroad !== undefined) out.abroad = c.abroad;
+  if (Object.keys(c.statsAtLeast).length > 0) out.statsAtLeast = { ...c.statsAtLeast };
+  if (Object.keys(c.statsBelow).length > 0) out.statsBelow = { ...c.statsBelow };
+  if (c.distanceMin !== undefined) out.distanceMin = c.distanceMin;
+  if (c.distanceMax !== undefined) out.distanceMax = c.distanceMax;
+  return out;
+}
+
+/**
+ * 多子句 → restriction 对象。
+ * 触发代码的分支之间是「或」:任一支无限制 ⇒ 整体恒真(不写 restriction);
+ * 单支 ⇒ 扁平字段(与历史数据格式一致);多支 ⇒ `{ anyOf: [...] }`。
+ */
+function restrictionObjOf(clauses: readonly CodeRestriction[], textObj: Record<string, unknown> | undefined): Record<string, unknown> | undefined {
+  const objs: Record<string, unknown>[] = [];
+  for (const c0 of clauses) {
+    const c = cloneRestriction(c0);
+    if (textObj !== undefined) fillTextInto(c, textObj);
+    if (restrictionIsEmpty(c)) return undefined;
+    objs.push(clauseObj(c));
+  }
+  const uniq = dropDominated(simplifyClauseObjs([...new Map(objs.map(o => [JSON.stringify(o), o])).values()]));
+  if (uniq.length === 0) return undefined;
+  return uniq.length === 1 ? uniq[0] : { anyOf: uniq };
+}
+
+/**
+ * 去掉被支配的子句:甲字段是乙字段的子集(值相同)⇒ 甲更宽松,OR 后乙无意义。
+ * 例:{干劲:好调} 与 {} 并存 ⇒ 后者恒真,前者失效,只留 {}。
+ */
+function dropDominated(objs: Record<string, unknown>[]): Record<string, unknown>[] {
+  if (objs.length < 2) return objs;
+  const subsumes = (loose: Record<string, unknown>, strict: Record<string, unknown>): boolean => {
+    const lk = Object.keys(loose);
+    if (lk.length >= Object.keys(strict).length) return false;
+    return lk.every(k => JSON.stringify(loose[k]) === JSON.stringify(strict[k]));
+  };
+  return objs.filter(o => !objs.some(other => other !== o && subsumes(o, other)));
+}
+
+/**
+ * 子句化简:(A∧X)∨(A∧Y) ≡ A∧(X∨Y)。
+ * 若所有子句除某个字段外完全一致,就把该字段并成一条 —— 这样「先行 or 差行」这类
+ * 单字段分支仍是扁平结构(与历史数据一致),只有真正异构的分支才落到 anyOf。
+ */
+function simplifyClauseObjs(objs: Record<string, unknown>[]): Record<string, unknown>[] {
+  const ARRAY_FIELDS = [
+    'tactics', 'distanceTypes', 'surfaces', 'venues', 'grounds', 'distances',
+    'rotations', 'weathers', 'seasons', 'motivations',
+  ];
+  let cur = objs;
+  let changed = true;
+  while (changed && cur.length > 1) {
+    changed = false;
+    for (const f of ARRAY_FIELDS) {
+      if (!cur.every(o => Array.isArray(o[f]))) continue;
+      const sigs = new Set(cur.map(o => JSON.stringify({ ...o, [f]: null })));
+      if (sigs.size !== 1) continue;
+      const merged = sortVals([...new Set(cur.flatMap(o => o[f] as unknown[]))], f);
+      const base = { ...cur[0]!, [f]: merged };
+      cur = [base];
+      changed = true;
+      break;
+    }
+  }
+  return cur;
 }
 
 // =====================================================================

@@ -50,6 +50,8 @@ export interface Course {
   readonly baseSpeed?: number;
   /** 赛道补正门槛属性(course_set_status),用于赛道补正公式 */
   readonly courseSetStatus?: readonly PassiveStat[];
+  /** 海外赛场(触发代码 is_abroad:隆尚/圣安妮塔公园/德尔马) */
+  readonly overseas?: boolean;
   /**
    * 赛场回转方向:1=顺时针(中山/京都/阪神/札幌/函馆/福岛/小仓/大井/隆尚),
    * 2=逆时针(东京/中京/新潟/川崎/船桥/盛冈/圣安妮塔公园/德尔马);
@@ -176,8 +178,11 @@ export type Weather = 1 | 2 | 3 | 4;
 /** 季节:1=春 2=夏 3=秋 4=冬 5=樱花(触发代码 season==N;仅作技能条件,不进物理公式) */
 export type Season = 1 | 2 | 3 | 4 | 5;
 
-/** 技能的脚质/场地/赛场等装配型限制(不满足则整场不发动) */
-export interface SkillRestriction {
+/**
+ * 单条限制子句(全部字段为「与」关系:都满足才成立)。
+ * 触发代码里同一支(& 连接)的多条限定都落在这里。
+ */
+export interface RestrictionClause {
   /** 脚质(大逃并入逃马) */
   readonly tactics?: readonly Tactic[];
   readonly distanceTypes?: readonly ('short' | 'mile' | 'mid' | 'long')[];
@@ -195,8 +200,27 @@ export interface SkillRestriction {
   readonly weathers?: readonly Weather[];
   /** 季节(触发代码 season==N:1春/2夏/3秋/4冬/5樱花) */
   readonly seasons?: readonly Season[];
+  /** 干劲(触发代码 motivation==N/>=N/<=N:1绝不调~5绝好调) */
+  readonly motivations?: readonly Motivation[];
+  /** 是否为海外赛场(触发代码 is_abroad==0/1) */
+  readonly abroad?: boolean;
+  /** 面板属性下限(含,触发代码 base_speed>=N 等;取面板值,不含绿技能与干劲) */
+  readonly statsAtLeast?: Readonly<Partial<Record<PassiveStat, number>>>;
+  /** 面板属性上限(不含,触发代码 base_wiz<N 等) */
+  readonly statsBelow?: Readonly<Partial<Record<PassiveStat, number>>>;
   /** 原始限制文本(展示用) */
   readonly rawText?: string;
+}
+
+/**
+ * 技能的脚质/场地/赛场等装配型限制(不满足则整场不发动;绿技能则不计入起跑属性)。
+ * 单子句时直接用本层字段;触发代码存在多分支(@ 变体或 condition_1/condition_2)时
+ * 用 `anyOf` 表示「任一支满足即生效」——分支之间是 OR,不能压成一层并集,
+ * 否则「A 分支限短距离、B 分支不限」会被错压成「限短距离」。
+ */
+export interface SkillRestriction extends RestrictionClause {
+  /** 多分支子句:任一满足即生效;缺省 = 使用本层扁平字段 */
+  readonly anyOf?: readonly RestrictionClause[];
 }
 
 export interface RunnerConfig {

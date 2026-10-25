@@ -74,7 +74,23 @@
 | **进化技能(✅ 2026-10-25)** | 本体技能进化后的强化版(1M+ 段,模块:技能数据库内容2),与本体**二选一**:进化后数值/持续时间/触发条件以进化版为准(如 饥肠辘辘大将:中盘随机位置 耐力恢复0.055+目标速度0.15 3s)。633 条速查表进化行 ID 与解包数据直接对齐(193 条双分支拆 -b1/-b2),触发代码级解析;智力增幅等级系数 1.0(rarity evolved);47 条无解包数据的剧本技能维持排除 | 速查表 进化 行 × 内容2 逐条核对 |
 | 末脚延展 | 末脚延展 ×0.1 并入全开冲刺的额外速度增速速率(不再单独作加速度) | 614tools(Excel AA79=0.1,growthEffect 口径) |
 | 脚色充分 | 最终盘开始起 3 秒 accel += √((力量−1200)×130)×0.001 | 614tools(sim1!M104) |
-| **装配限制(✅ 2026-10-25 扩展)** | 触发代码级条件解析为 `SkillRestriction`:脚质 `running_style` / 距离档 `distance_type` / 场地 `ground_type` / 赛场 `track_id` / 精确距离与范围 `course_distance` / 场地状态 `ground_condition`(含 `!=`、`>=`、`<=`,展开为集合) / **回转方向 `rotation`** / **天气 `weather`** / **季节 `season`**。任一不满足 ⇒ 整场不生效(绿技能不计入起跑属性,普通技能不发动);UI 在技能列表与消融表标注「不生效」。环境类缺省口径:场地状态 良(0)、天气 晴(1)、季节 春(1);无 `rotation` 的直線赛道 ⇒ 回转方向类技能不匹配 | 触发代码(模块:技能数据库内容/内容2)+ 解包 turn 字段 |
+| **装配限制(✅ 2026-10-25 按触发代码严格执行)** | 触发代码里的限定全部解析为 `SkillRestriction`:
+脚质 `running_style` / 距离档 `distance_type`、**`is_basis_distance`(1=标准距离=中/长,0=非标准=短/英里)** /
+场地 `ground_type` / 赛场 `track_id`(含范围成对合并) / 精确距离与范围 `course_distance` /
+场地状态 `ground_condition`(含 `!=`、`>=`、`<=`,展开为候选集) / 回转方向 `rotation` /
+天气 `weather` / 季节 `season` / **干劲 `motivation`(1绝不调~5绝好调,支持 ==/>=/<=)** /
+**海外 `is_abroad`(隆尚·圣安妮塔公园·德尔马=海外)** /
+**面板属性 `base_speed/base_stamina/base_power/base_guts/base_wiz`(`>=`→下限含、`<`→上限不含;取面板值,不含绿与干劲)**。
+**语义分层**:同一支(`&` 连接)=「与」,同字段多次出现取交集;`@` 变体与 `condition_1/condition_2` = 「或」,
+数据侧输出为 `anyOf: [子句...]`(任一满足即生效),不再压成一层并集 —— 早期并集会把
+「A 支限短距离、B 支不限」错压成「限短距离」(2026-10-25 修)。只有真正异构的分支才保留 `anyOf`,
+「先行 or 差行」这类单字段分支仍化简为扁平结构。任一不满足 ⇒ 整场不生效,绿技能不计入起跑属性;
+UI 在技能列表与消融表标「不生效」。环境类缺省口径:场地状态 良(0)、天气 晴(1)、季节 春(1) | 触发代码(模块:技能数据库内容/内容2)+ 解包 turn 字段 |
+| **仍未建模的触发代码 token(⏳ 记录在案,单马模型无法判断)** | `popularity`(人气)、`post_number`(闸位)、`fan_count`、`grade`(比赛级别)、
+`is_dirtgrade`、`is_tight_track`(小回り)、`lane_type`、`furlong`、`time`、`visiblehorse`、`random_lot(_shared)`、
+`succession_skill_count`、`is_exist_chara_id`、`is_move_lane`、`remain_distance_viewer_id` —— 一律**按满足处理并写进
+data/skill-notes.json**,不静默丢;名次/间距/被阻挡类(`order_rate`、`bashin_diff_*`、`blocked_*`、`compete_*` 等)
+按近似层在期望位置发动 | 见 docs/parity-log.md 2026-10-25 审计 |
 | **明确排除(与 614tools 一致)** | 智力区间修正(sectionModifier,24 区间随机)、下坡加速模式(期望占用 ~75%)、焦躁(掛かり)、追比/取位争夺、位置保持:仅显示不计算;本工具同样不参与计算 | 614tools worker(「仅显示数值,不参与计算」) |
 
 ### 触发代码(✅ 2026-10-24 起,条件解析的权威来源)

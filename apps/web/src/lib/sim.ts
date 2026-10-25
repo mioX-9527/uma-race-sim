@@ -1,5 +1,5 @@
 import type {
-  Aptitude, Course, GroundCondition, Motivation, RunnerConfig, Season, SkillConfig, Stats, Tactic, Weather,
+  Aptitude, Course, GroundCondition, Motivation, RestrictionClause, RunnerConfig, Season, SkillConfig, Stats, Tactic, Weather,
 } from '@uma-race-sim/engine';
 import coursesJson from '../../../../data/courses.json';
 import skillsJson from '../../../../data/skills.json';
@@ -227,13 +227,37 @@ export const SEASON_LABEL: Record<Season, string> = { 1: '春', 2: '夏', 3: '�
 /** 赛场回转方向:1=顺时针 2=逆时针(与技能名「顺时针◎」「逆时针◎」用词一致) */
 export const ROTATION_LABEL: Record<number, string> = { 1: '顺时针', 2: '逆时针' };
 
-/** 装配型限制 → 中文短描述 */
-export function describeRestriction(s: SkillConfig): string {
-  const r = s.restriction;
-  if (r === undefined) return '';
+const STAT_CN: Record<string, string> = { speed: '速度', stamina: '耐力', power: '力量', guts: '根性', wisdom: '智力' };
+const MOTIVATION_ORDER: readonly Motivation[] = ['worst', 'bad', 'normal', 'good', 'best'];
+
+/** 距离档 → 简中;标准距离 = 中/长(与「标准距离◎」技能名一致),非标准 = 短/英里 */
+function distanceTypeText(dts: readonly string[]): string {
+  const set = [...dts].sort().join(',');
+  if (set === 'long,mid') return '标准距离(中/长)';
+  if (set === 'mile,short') return '非标准距离(短/英里)';
+  return dts.map(d => DISTTYPE_LABEL[d] ?? d).join('/');
+}
+
+/** 干劲集合 → 「好调以上」这类区间描述 */
+function motivationText(ms: readonly Motivation[]): string {
+  const idx = ms.map(m => MOTIVATION_ORDER.indexOf(m)).filter(i => i >= 0).sort((a, b) => a - b);
+  if (idx.length === 0) return '';
+  if (idx.length === MOTIVATION_ORDER.length) return '';
+  const lo = idx[0]!;
+  const hi = idx[idx.length - 1]!;
+  const contiguous = hi - lo + 1 === idx.length;
+  const full = MOTIVATION_LABEL[MOTIVATION_ORDER[lo]!];
+  if (!contiguous) return `干劲 ${ms.map(m => MOTIVATION_LABEL[m]).join('/')}`;
+  if (lo === 0) return `干劲 ${MOTIVATION_LABEL[MOTIVATION_ORDER[hi]!]}以下`;
+  if (hi === MOTIVATION_ORDER.length - 1) return `干劲 ${full}以上`;
+  return `干劲 ${full}~${MOTIVATION_LABEL[MOTIVATION_ORDER[hi]!]}`;
+}
+
+/** 单条限制子句 → 中文短描述(字段间为「与」) */
+function describeClause(r: RestrictionClause): string {
   const parts: string[] = [];
   if (r.tactics !== undefined) parts.push(r.tactics.map(t => TACTIC_LABEL[t]).join('/'));
-  if (r.distanceTypes !== undefined) parts.push(r.distanceTypes.map(d => DISTTYPE_LABEL[d] ?? d).join('/'));
+  if (r.distanceTypes !== undefined) parts.push(distanceTypeText(r.distanceTypes));
   if (r.surfaces !== undefined) parts.push(r.surfaces.map(x => (x === 'turf' ? '草地' : '泥地')).join('/'));
   if (r.venues !== undefined) parts.push(`${r.venues.join('/')}赛场`);
   if (r.distances !== undefined) parts.push(r.distances.map(d => `${d}m`).join('/'));
@@ -241,5 +265,22 @@ export function describeRestriction(s: SkillConfig): string {
   if (r.rotations !== undefined) parts.push(`${r.rotations.map(v => ROTATION_LABEL[v] ?? `${v}`).join('/')}赛道`);
   if (r.weathers !== undefined) parts.push(`${r.weathers.map(w => WEATHER_LABEL[w] ?? `${w}`).join('/')}天`);
   if (r.seasons !== undefined) parts.push(`季节 ${r.seasons.map(s => SEASON_LABEL[s] ?? `${s}`).join('/')}`);
+  if (r.motivations !== undefined) {
+    const t = motivationText(r.motivations);
+    if (t !== '') parts.push(t);
+  }
+  if (r.abroad !== undefined) parts.push(r.abroad ? '海外赛场' : '国内赛场');
+  for (const [k, v] of Object.entries(r.statsAtLeast ?? {})) parts.push(`${STAT_CN[k] ?? k}≥${v}`);
+  for (const [k, v] of Object.entries(r.statsBelow ?? {})) parts.push(`${STAT_CN[k] ?? k}<${v}`);
   return parts.join(' · ');
+}
+
+/** 装配型限制 → 中文短描述;多分支(anyOf)按「或」拼接 */
+export function describeRestriction(s: SkillConfig): string {
+  const r = s.restriction;
+  if (r === undefined) return '';
+  if (r.anyOf !== undefined && r.anyOf.length > 0) {
+    return r.anyOf.map(c => `(${describeClause(c)})`).join(' 或 ');
+  }
+  return describeClause(r);
 }

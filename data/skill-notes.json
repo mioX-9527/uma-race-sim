@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-25T08:08:38.787Z",
+ "generatedAt": "2026-10-25T08:30:16.145Z",
  "items": [
   {
    "id": "100031-b1",
@@ -85,13 +85,6 @@
    "reasons": [
     "is_move_lane==1(环境前提,视为满足)",
     "is_move_lane==2(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "100303111-b1",
-   "page": "天賦の身ごなし",
-   "reasons": [
-    "base_stamina>=1000(环境前提,视为满足)"
    ]
   },
   {
@@ -339,21 +332,9 @@
    ]
   },
   {
-   "id": "101101-b1",
-   "page": "Guiding Sea",
-   "reasons": [
-    "is_basis_distance==1(环境前提,视为满足)"
-   ]
-  },
-  {
    "id": "101151-b1",
    "page": "我が覇道、阻むものなし",
    "reasons": [
-    "base_speed>=1000(环境前提,视为满足)",
-    "base_stamina>=1000(环境前提,视为满足)",
-    "base_power>=1000(环境前提,视为满足)",
-    "base_guts>=1000(环境前提,视为满足)",
-    "base_wiz>=1000(环境前提,视为满足)",
     "前置条件:distance_type==3@distance_type==4"
    ]
   },
@@ -519,36 +500,6 @@
    ]
   },
   {
-   "id": "102003211-b1",
-   "page": "夏風フロントランナー",
-   "reasons": [
-    "base_wiz>=1000(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "102602121",
-   "page": "甘さ控えめエスケープ",
-   "reasons": [
-    "base_wiz>=1200(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "103202111-b1",
-   "page": "ラプラスの悪魔",
-   "reasons": [
-    "base_speed>=1200(环境前提,视为满足)",
-    "base_wiz>=1200(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "103202111-b2",
-   "page": "ラプラスの悪魔",
-   "reasons": [
-    "base_speed>=1200(环境前提,视为满足)",
-    "base_wiz<1200(环境前提,视为满足)"
-   ]
-  },
-  {
    "id": "103301211",
    "page": "己身焦がすほうき星",
    "reasons": [
@@ -574,20 +525,6 @@
    "page": "刑苦",
    "reasons": [
     "lane_type==0(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "104003211-b1",
-   "page": "黄金の炎陽",
-   "reasons": [
-    "base_power>=1200(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "104003211-b2",
-   "page": "黄金の炎陽",
-   "reasons": [
-    "base_power>=1200(环境前提,视为满足)"
    ]
   },
   {
@@ -649,22 +586,6 @@
    ]
   },
   {
-   "id": "105502211-b1",
-   "page": "いざ、ショーベラスタイム♪",
-   "reasons": [
-    "base_wiz>=1200(环境前提,视为满足)",
-    "base_wiz>=1200(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "105502211-b2",
-   "page": "いざ、ショーベラスタイム♪",
-   "reasons": [
-    "base_wiz>=1200(环境前提,视为满足)",
-    "base_wiz>=1200(环境前提,视为满足)"
-   ]
-  },
-  {
    "id": "105601211",
    "page": "七福即生",
    "reasons": [
@@ -683,30 +604,6 @@
    "page": "奪目の宙乗り",
    "reasons": [
     "前置条件:distance_rate>=50&change_order_onetime<0"
-   ]
-  },
-  {
-   "id": "106302111",
-   "page": "梅仰ぎ、漕ぐ計路",
-   "reasons": [
-    "base_speed>=1000(环境前提,视为满足)",
-    "base_power>=1000(环境前提,视为满足)",
-    "base_speed>=1000(环境前提,视为满足)",
-    "base_power>=1000(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "106402211-b1",
-   "page": "メリ☆クリ↑パーリー",
-   "reasons": [
-    "motivation==5(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "106703211-b1",
-   "page": "ダンス・デ・レぺ",
-   "reasons": [
-    "motivation==5(环境前提,视为满足)"
    ]
   },
   {
@@ -739,27 +636,6 @@
    ]
   },
   {
-   "id": "107402111-b1",
-   "page": "聖夜の天路",
-   "reasons": [
-    "base_stamina>=1200(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "107402111-b2",
-   "page": "聖夜の天路",
-   "reasons": [
-    "base_stamina<1200(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "107402211-b1",
-   "page": "雪華の追い上げ",
-   "reasons": [
-    "base_stamina>=1200(环境前提,视为满足)"
-   ]
-  },
-  {
    "id": "107403111",
    "page": "浜辺の追いかけっこ",
    "reasons": [
@@ -770,7 +646,6 @@
    "id": "107602111",
    "page": "初空高く、花宴",
    "reasons": [
-    "base_stamina>=1200(环境前提,视为满足)",
     "前置条件:distance_type==3@distance_type==4"
    ]
   },
@@ -779,13 +654,6 @@
    "page": "勇船直往",
    "reasons": [
     "前置条件:compete_fight_count>0"
-   ]
-  },
-  {
-   "id": "108201111-b1",
-   "page": "ココロ、キラめくままに！",
-   "reasons": [
-    "base_wiz>=1200(环境前提,视为满足)"
    ]
   },
   {
@@ -803,16 +671,6 @@
    ]
   },
   {
-   "id": "108401211",
-   "page": "酔い痴れよ、世界",
-   "reasons": [
-    "base_speed>=1000(环境前提,视为满足)",
-    "base_power>=1000(环境前提,视为满足)",
-    "base_speed>=1000(环境前提,视为满足)",
-    "base_power>=1000(环境前提,视为满足)"
-   ]
-  },
-  {
    "id": "108502111",
    "page": "霹靂閃電",
    "reasons": [
@@ -820,46 +678,10 @@
    ]
   },
   {
-   "id": "108802211-b1",
-   "page": "波上のラストトリック",
-   "reasons": [
-    "base_wiz>=1200(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "109102211-b1",
-   "page": "いざ征かん！マリンロード",
-   "reasons": [
-    "base_wiz>=1200(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "109401111-b1",
-   "page": "猛襲の牙",
-   "reasons": [
-    "base_power>=1200(环境前提,视为满足)"
-   ]
-  },
-  {
    "id": "109402211-b1",
    "page": "“最強”の焔",
    "reasons": [
     "前置条件:distance_type==3&running_style==3&phase==1&blocked_side_continuetime>=2"
-   ]
-  },
-  {
-   "id": "109801211-b1",
-   "page": "龍脈の波濤",
-   "reasons": [
-    "base_power>=1200(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "109801211-b2",
-   "page": "龍脈の波濤",
-   "reasons": [
-    "base_power>=1000(环境前提,视为满足)",
-    "base_power<1200(环境前提,视为满足)"
    ]
   },
   {
@@ -874,28 +696,6 @@
    "page": "走る縁起物",
    "reasons": [
     "is_dirtgrade!=1(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "109802221-b1",
-   "page": "盛運のドラムロール",
-   "reasons": [
-    "motivation==5(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "109802221-b2",
-   "page": "盛運のドラムロール",
-   "reasons": [
-    "motivation<=4(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "110002211-b1",
-   "page": "風まかせ、お湯まかせ",
-   "reasons": [
-    "base_guts>=1200(环境前提,视为满足)",
-    "base_guts>=1200(环境前提,视为满足)"
    ]
   },
   {
@@ -1012,24 +812,9 @@
    ]
   },
   {
-   "id": "110441-b2",
-   "page": "とっておきmaterialize",
-   "reasons": [
-    "motivation>=4(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "110481-b1",
-   "page": "GALmem.ふぉーえば♪",
-   "reasons": [
-    "motivation==5(环境前提,视为满足)"
-   ]
-  },
-  {
    "id": "110551-b1",
    "page": "喝采☆ワンダードール！",
    "reasons": [
-    "motivation==5(环境前提,视为满足)",
     "前置条件:phase>=2&is_finalcorner==1&corner!=0&near_count>=1&order_rate>=30&order_rate<=70"
    ]
   },
@@ -1071,13 +856,6 @@
    ]
   },
   {
-   "id": "110701-b1",
-   "page": "駆るは光、狩るは星々",
-   "reasons": [
-    "base_power>=1200(环境前提,视为满足)"
-   ]
-  },
-  {
    "id": "110721-b1",
    "page": "剛勇果断、烈火之刀",
    "reasons": [
@@ -1090,13 +868,6 @@
    "page": "剛勇果断、烈火之刀",
    "reasons": [
     "前置条件:distance_rate>=40&distance_rate<=50&blocked_side_continuetime>=2"
-   ]
-  },
-  {
-   "id": "110741-b2",
-   "page": "Illuminate you",
-   "reasons": [
-    "base_stamina>=1200(环境前提,视为满足)"
    ]
   },
   {
@@ -1163,13 +934,6 @@
    ]
   },
   {
-   "id": "110871-b1",
-   "page": "ふわもこアワー",
-   "reasons": [
-    "base_wiz>=1200(环境前提,视为满足)"
-   ]
-  },
-  {
    "id": "110931-b1",
    "page": "きせき・おもい・かなで",
    "reasons": [
@@ -1213,20 +977,6 @@
    ]
   },
   {
-   "id": "111101111-b1",
-   "page": "母の面影を追って",
-   "reasons": [
-    "base_wiz>=1200(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "111131-b1",
-   "page": "渚のヴィーナスタイム♡",
-   "reasons": [
-    "motivation==5(环境前提,视为满足)"
-   ]
-  },
-  {
    "id": "111161-b1",
    "page": "不凋なるCattleya",
    "reasons": [
@@ -1255,54 +1005,10 @@
    ]
   },
   {
-   "id": "111302111-b1",
-   "page": "愛されすぎてマジごめん♡",
-   "reasons": [
-    "base_speed>=1200(环境前提,视为满足)",
-    "motivation==5(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "111302111-b2",
-   "page": "愛されすぎてマジごめん♡",
-   "reasons": [
-    "base_speed>=1200(环境前提,视为满足)",
-    "motivation<=4(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "111302211-b1",
-   "page": "秘める気のない才気",
-   "reasons": [
-    "motivation==5(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "111321-b1",
-   "page": "Watch Us Flourish",
-   "reasons": [
-    "is_abroad==1(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "111401111-b1",
-   "page": "ふたりの約束、とどく時",
-   "reasons": [
-    "is_basis_distance==1(环境前提,视为满足)"
-   ]
-  },
-  {
    "id": "111401211",
    "page": "誠心たる光燿",
    "reasons": [
     "变体锚点不同(phase / finalCorner),取首个变体"
-   ]
-  },
-  {
-   "id": "111601221-b1",
-   "page": "淑女の独擅場",
-   "reasons": [
-    "base_power>=1200(环境前提,视为满足)"
    ]
   },
   {
@@ -1320,20 +1026,6 @@
    ]
   },
   {
-   "id": "111901211-b1",
-   "page": "夢見心地",
-   "reasons": [
-    "base_wiz>=1200(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "111902111-b1",
-   "page": "雪暗れに微笑む",
-   "reasons": [
-    "base_wiz>=1200(环境前提,视为满足)"
-   ]
-  },
-  {
    "id": "112402111-b1",
    "page": "風上に立て",
    "reasons": [
@@ -1341,17 +1033,9 @@
    ]
   },
   {
-   "id": "112702111-b1",
-   "page": "王道刑事、強面派",
-   "reasons": [
-    "base_stamina>=1000(环境前提,视为满足)"
-   ]
-  },
-  {
    "id": "112702211-b1",
    "page": "トドメのかつ丼！",
    "reasons": [
-    "base_guts>=1000(环境前提,视为满足)",
     "前置条件:distance_type==3@distance_type==4"
    ]
   },
@@ -1360,20 +1044,6 @@
    "page": "トドメのかつ丼！",
    "reasons": [
     "前置条件:distance_type==3@distance_type==4"
-   ]
-  },
-  {
-   "id": "112901111-b1",
-   "page": "The Next Phase",
-   "reasons": [
-    "base_speed>=1200(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "112901221-b1",
-   "page": "革新された未来",
-   "reasons": [
-    "base_guts>=1200(环境前提,视为满足)"
    ]
   },
   {
@@ -1389,35 +1059,6 @@
    "page": "霞薙ぐ花形",
    "reasons": [
     "前置条件:running_style==2@running_style==3"
-   ]
-  },
-  {
-   "id": "113201211-b1",
-   "page": "応援コメントよろしく！",
-   "reasons": [
-    "base_wiz>=1200(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "113202111-b1",
-   "page": "ロッツオブラヴ♡",
-   "reasons": [
-    "is_abroad==1(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "113202111-b2",
-   "page": "ロッツオブラヴ♡",
-   "reasons": [
-    "is_abroad==0(环境前提,视为满足)",
-    "is_abroad==1(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "113501111-b1",
-   "page": "見果てぬ旅路",
-   "reasons": [
-    "motivation==5(环境前提,视为满足)"
    ]
   },
   {
@@ -1470,14 +1111,6 @@
    ]
   },
   {
-   "id": "114901211-b2",
-   "page": "寄らば斬る！",
-   "reasons": [
-    "base_power>=1000(环境前提,视为满足)",
-    "base_guts>=1000(环境前提,视为满足)"
-   ]
-  },
-  {
    "id": "120011-b1",
    "page": "威風堂々、夢錦！",
    "reasons": [
@@ -1509,7 +1142,6 @@
    "id": "120111-b1",
    "page": "演舞・撫子大薙刀",
    "reasons": [
-    "is_basis_distance==0(环境前提,视为满足)",
     "前置条件:distance_rate>=50&order_rate<=70&order_rate>=30&overtake_target_time>=1@distance_rate>=50&order_rate<=70&order_rate>=30&is_overtake==1"
    ]
   },
@@ -1582,8 +1214,8 @@
    "page": "ヤバ技☆ジャグルビート",
    "reasons": [
     "slope==0(非坡道)按全场近似",
-    "变体锚点不同(raceStart / uphillFastest),取首个变体",
     "slope==0(非坡道)按全场近似",
+    "变体锚点不同(raceStart / uphillFastest),取首个变体",
     "变体锚点不同(raceStart / uphillFastest),取首个变体",
     "前置条件:phase>=1&slope==2&order_rate>=30&order_rate<=70"
    ]
@@ -1600,48 +1232,6 @@
    "page": "夕凪のリトリート・メモリー",
    "reasons": [
     "前置条件:distance_type==3&phase==1&change_order_onetime>0@distance_type==4&phase==1&change_order_onetime>0"
-   ]
-  },
-  {
-   "id": "200131",
-   "page": "根幹距離◎",
-   "reasons": [
-    "is_basis_distance==1(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "200132",
-   "page": "根幹距離○",
-   "reasons": [
-    "is_basis_distance==1(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "200133",
-   "page": "根幹距離×",
-   "reasons": [
-    "is_basis_distance==1(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "200141",
-   "page": "非根幹距離◎",
-   "reasons": [
-    "is_basis_distance==0(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "200142",
-   "page": "非根幹距離○",
-   "reasons": [
-    "is_basis_distance==0(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "200143",
-   "page": "非根幹距離×",
-   "reasons": [
-    "is_basis_distance==0(环境前提,视为满足)"
    ]
   },
   {
@@ -1877,36 +1467,6 @@
    ]
   },
   {
-   "id": "202331-b1",
-   "page": "抜群の踏み込み",
-   "reasons": [
-    "base_power>=1200(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "202331-b2",
-   "page": "抜群の踏み込み",
-   "reasons": [
-    "base_power>=1000(环境前提,视为满足)",
-    "base_power<1200(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "202332-b1",
-   "page": "踏み込み上手",
-   "reasons": [
-    "base_power>=1200(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "202332-b2",
-   "page": "踏み込み上手",
-   "reasons": [
-    "base_power>=1000(环境前提,视为满足)",
-    "base_power<1200(环境前提,视为满足)"
-   ]
-  },
-  {
    "id": "202441-b1",
    "page": "勝負師",
    "reasons": [
@@ -1967,58 +1527,6 @@
    ]
   },
   {
-   "id": "202651",
-   "page": "雲蒸竜変",
-   "reasons": [
-    "base_speed>=1000(环境前提,视为满足)",
-    "base_power>=1000(环境前提,视为满足)",
-    "base_speed>=1000(环境前提,视为满足)",
-    "base_power>=1000(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "202652",
-   "page": "自信家",
-   "reasons": [
-    "base_speed>=1000(环境前提,视为满足)",
-    "base_power>=1000(环境前提,视为满足)",
-    "base_speed>=1000(环境前提,视为满足)",
-    "base_power>=1000(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "202701-b1",
-   "page": "シンギュラリティ",
-   "reasons": [
-    "base_speed>=1200(环境前提,视为满足)",
-    "base_wiz>=1200(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "202701-b2",
-   "page": "シンギュラリティ",
-   "reasons": [
-    "base_speed>=1200(环境前提,视为满足)",
-    "base_wiz<1200(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "202702-b1",
-   "page": "探求心",
-   "reasons": [
-    "base_speed>=1200(环境前提,视为满足)",
-    "base_wiz>=1200(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "202702-b2",
-   "page": "探求心",
-   "reasons": [
-    "base_speed>=1200(环境前提,视为满足)",
-    "base_wiz<1200(环境前提,视为满足)"
-   ]
-  },
-  {
    "id": "203061-b1",
    "page": "無二",
    "reasons": [
@@ -2047,13 +1555,6 @@
    ]
   },
   {
-   "id": "203212-b1",
-   "page": "気の向くままに",
-   "reasons": [
-    "motivation>=4(环境前提,视为满足)"
-   ]
-  },
-  {
    "id": "203471",
    "page": "猛烈激走",
    "reasons": [
@@ -2068,22 +1569,6 @@
    ]
   },
   {
-   "id": "203812-b1",
-   "page": "精神力",
-   "reasons": [
-    "base_speed>=1200(环境前提,视为满足)",
-    "base_power>=1200(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "203812-b2",
-   "page": "精神力",
-   "reasons": [
-    "base_speed>=1200(环境前提,视为满足)",
-    "base_power<1200(环境前提,视为满足)"
-   ]
-  },
-  {
    "id": "203822-b1",
    "page": "内なる獣",
    "reasons": [
@@ -2091,26 +1576,9 @@
    ]
   },
   {
-   "id": "203951",
-   "page": "麒麟児",
-   "reasons": [
-    "base_wiz>=1200(环境前提,视为满足)",
-    "base_wiz>=1200(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "203952",
-   "page": "天才肌",
-   "reasons": [
-    "base_wiz>=1200(环境前提,视为满足)",
-    "base_wiz>=1200(环境前提,视为满足)"
-   ]
-  },
-  {
    "id": "204141",
    "page": "気丈夫",
    "reasons": [
-    "base_stamina>=1200(环境前提,视为满足)",
     "前置条件:distance_type==3@distance_type==4"
    ]
   },
@@ -2118,7 +1586,6 @@
    "id": "204142",
    "page": "あふれる活力",
    "reasons": [
-    "base_stamina>=1200(环境前提,视为满足)",
     "前置条件:distance_type==3@distance_type==4"
    ]
   },
@@ -2134,16 +1601,6 @@
    "page": "押しの一手",
    "reasons": [
     "前置条件:running_style==1@running_style==2"
-   ]
-  },
-  {
-   "id": "204202",
-   "page": "戦略家",
-   "reasons": [
-    "base_speed>=1000(环境前提,视为满足)",
-    "base_power>=1000(环境前提,视为满足)",
-    "base_speed>=1000(环境前提,视为满足)",
-    "base_power>=1000(环境前提,视为满足)"
    ]
   },
   {
@@ -2189,22 +1646,6 @@
    ]
   },
   {
-   "id": "204562-b1",
-   "page": "勝負勘",
-   "reasons": [
-    "base_speed>=1200(环境前提,视为满足)",
-    "base_wiz>=1200(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "204562-b2",
-   "page": "勝負勘",
-   "reasons": [
-    "base_speed>=1200(环境前提,视为满足)",
-    "base_wiz<1200(环境前提,视为满足)"
-   ]
-  },
-  {
    "id": "204622-b1",
    "page": "連綿",
    "reasons": [
@@ -2229,8 +1670,6 @@
    "id": "204792-b1",
    "page": "遊び心",
    "reasons": [
-    "base_speed>=1200(环境前提,视为满足)",
-    "base_wiz>=1200(环境前提,视为满足)",
     "前置条件:distance_type==3@distance_type==4"
    ]
   },
@@ -2238,40 +1677,7 @@
    "id": "204792-b2",
    "page": "遊び心",
    "reasons": [
-    "base_speed>=1200(环境前提,视为满足)",
-    "base_wiz<1200(环境前提,视为满足)",
     "前置条件:distance_type==3@distance_type==4"
-   ]
-  },
-  {
-   "id": "210141",
-   "page": "レースの真髄・心",
-   "reasons": [
-    "motivation>=4(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "210311-b1",
-   "page": "アスリート魂",
-   "reasons": [
-    "base_guts>=1200(环境前提,视为满足)",
-    "base_guts>=1200(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "210311-b2",
-   "page": "アスリート魂",
-   "reasons": [
-    "base_guts<1200(环境前提,视为满足)",
-    "base_guts<1200(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "210331-b1",
-   "page": "食の極意",
-   "reasons": [
-    "base_power>=1200(环境前提,视为满足)",
-    "base_power>=1200(环境前提,视为满足)"
    ]
   },
   {
@@ -2520,13 +1926,6 @@
    ]
   },
   {
-   "id": "901101-b1",
-   "page": "继承技/Guiding Sea",
-   "reasons": [
-    "is_basis_distance==1(环境前提,视为满足)"
-   ]
-  },
-  {
    "id": "901171-b1",
    "page": "继承技/鋭気のアレグロ",
    "reasons": [
@@ -2680,17 +2079,9 @@
    ]
   },
   {
-   "id": "910481-b1",
-   "page": "继承技/GALmem.ふぉーえば♪",
-   "reasons": [
-    "motivation==5(环境前提,视为满足)"
-   ]
-  },
-  {
    "id": "910551-b1",
    "page": "继承技/喝采☆ワンダードール！",
    "reasons": [
-    "motivation==5(环境前提,视为满足)",
     "前置条件:phase>=2&is_finalcorner==1&corner!=0&near_count>=1&order_rate>=30&order_rate<=70"
    ]
   },
@@ -2732,24 +2123,10 @@
    ]
   },
   {
-   "id": "910701-b1",
-   "page": "继承技/駆るは光、狩るは星々",
-   "reasons": [
-    "base_power>=1200(环境前提,视为满足)"
-   ]
-  },
-  {
    "id": "910721",
    "page": "继承技/剛勇果断、烈火之刀",
    "reasons": [
     "前置条件:distance_rate>=40&distance_rate<=50&blocked_side_continuetime>=2"
-   ]
-  },
-  {
-   "id": "910741-b2",
-   "page": "继承技/Illuminate you",
-   "reasons": [
-    "base_stamina>=1200(环境前提,视为满足)"
    ]
   },
   {
@@ -2771,13 +2148,6 @@
    "page": "继承技/Immortal Work",
    "reasons": [
     "前置条件:distance_rate>=50&distance_rate<=51&order_rate>=40&order_rate<=80"
-   ]
-  },
-  {
-   "id": "910871-b1",
-   "page": "继承技/ふわもこアワー",
-   "reasons": [
-    "base_wiz>=1200(环境前提,视为满足)"
    ]
   },
   {
@@ -2861,7 +2231,6 @@
    "id": "920111-b1",
    "page": "继承技/演舞・撫子大薙刀",
    "reasons": [
-    "is_basis_distance==0(环境前提,视为满足)",
     "前置条件:distance_rate>=50&order_rate<=70&order_rate>=30&overtake_target_time>=1@distance_rate>=50&order_rate<=70&order_rate>=30&is_overtake==1"
    ]
   },
@@ -2920,8 +2289,8 @@
    "page": "继承技/ヤバ技☆ジャグルビート",
    "reasons": [
     "slope==0(非坡道)按全场近似",
-    "变体锚点不同(raceStart / uphillFastest),取首个变体",
     "slope==0(非坡道)按全场近似",
+    "变体锚点不同(raceStart / uphillFastest),取首个变体",
     "变体锚点不同(raceStart / uphillFastest),取首个变体",
     "前置条件:phase>=1&slope==2&order_rate>=30&order_rate<=70"
    ]

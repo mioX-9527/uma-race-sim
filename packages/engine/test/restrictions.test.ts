@@ -100,3 +100,41 @@ describe('场地状态进体力消耗(不改速度)', () => {
     expect(minHp(3)).toBeCloseTo(minHp(2), 6);
   });
 });
+
+describe('限制子句语义(anyOf / 面板属性 / 干劲 / 海外)', () => {
+  test('anyOf:任一子句满足即生效(触发代码 OR 分支不压成并集)', () => {
+    const either = { ...midSkill, restriction: { anyOf: [{ tactics: ['nige' as const] }, { distanceTypes: ['mid' as const] }] } };
+    // 先行不满足第一条,但中距离满足第二条 → 发动
+    expect(simulate(C, makeRunner({ tactic: 'senko', skills: [either] })).activations).toHaveLength(1);
+    const neither = { ...midSkill, restriction: { anyOf: [{ tactics: ['nige' as const] }, { distanceTypes: ['short' as const] }] } };
+    expect(simulate(C, makeRunner({ tactic: 'senko', skills: [neither] })).activations).toHaveLength(0);
+    // 逃马满足第一支
+    expect(simulate(C, makeRunner({ tactic: 'nige', skills: [neither] })).activations).toHaveLength(1);
+  });
+
+  test('面板属性条件:base_speed>=1200 / base_wiz<1200(取面板,不含绿与干劲)', () => {
+    const hiWis = { ...midSkill, restriction: { statsAtLeast: { speed: 1200, wisdom: 1200 } } };
+    const loWis = { ...midSkill, restriction: { statsAtLeast: { speed: 1200 }, statsBelow: { wisdom: 1200 } } };
+    const high = makeRunner({ stats: { ...BASE_STATS, speed: 1300, wisdom: 1300 } });
+    const low = makeRunner({ stats: { ...BASE_STATS, speed: 1300, wisdom: 1000 } });
+    expect(simulate(C, { ...high, skills: [hiWis] }).activations).toHaveLength(1);
+    expect(simulate(C, { ...low, skills: [hiWis] }).activations).toHaveLength(0);
+    expect(simulate(C, { ...low, skills: [loWis] }).activations).toHaveLength(1);
+    expect(simulate(C, { ...high, skills: [loWis] }).activations).toHaveLength(0);
+  });
+
+  test('干劲条件:motivation==5 / <=4', () => {
+    const bestOnly = { ...midSkill, restriction: { motivations: ['best' as const] } };
+    const notBest = { ...midSkill, restriction: { motivations: ['worst', 'bad', 'normal', 'good'] as const } };
+    expect(simulate(C, makeRunner({ motivation: 'best', skills: [bestOnly] })).activations).toHaveLength(1);
+    expect(simulate(C, makeRunner({ motivation: 'good', skills: [bestOnly] })).activations).toHaveLength(0);
+    expect(simulate(C, makeRunner({ motivation: 'good', skills: [notBest] })).activations).toHaveLength(1);
+    expect(simulate(C, makeRunner({ motivation: 'best', skills: [notBest] })).activations).toHaveLength(0);
+  });
+
+  test('海外赛场条件(is_abroad)', () => {
+    const abroadOnly = { ...midSkill, restriction: { abroad: true } };
+    expect(simulate(C, makeRunner({ skills: [abroadOnly] })).activations).toHaveLength(0);
+    expect(simulate({ ...C, overseas: true }, makeRunner({ skills: [abroadOnly] })).activations).toHaveLength(1);
+  });
+});
