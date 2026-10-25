@@ -22,6 +22,15 @@ const VENUES: Record<number, string> = {
 const DISTANCE_TYPES: Record<number, 'short' | 'mile' | 'mid' | 'long'> = { 1: 'short', 2: 'mile', 3: 'mid', 4: 'long' };
 const STATS: Record<number, string> = { 1: 'speed', 2: 'stamina', 3: 'power', 4: 'guts', 5: 'wisdom' };
 
+/**
+ * 赛场回转方向(顺时针/逆时针,rotation 类技能的装配判定)。
+ * 直接用解包 course_data.json 的 turn 字段:1=右回り(顺时针)、2=左回り(逆时针)、4=直線(无回转)。
+ * 与 JRA 官方口径一致:逆时针(左回り)=东京/中京/新潟,其余顺时针;
+ * 地方/海外按同字段(大井/隆尚 顺时针,川崎/船桥/盛冈/圣安妮塔公园/德尔马 逆时针)。
+ * 直線赛道(新潟草1000m, turn=4)→ 不写 rotation 字段 ⇒ 回转方向类技能一律不生效。
+ */
+const rotationOf = (turn: number): 1 | 2 | undefined => (turn === 1 ? 1 : turn === 2 ? 2 : undefined);
+
 interface RawCourse {
   raceTrackId: number;
   distance: number;
@@ -69,6 +78,7 @@ const out = Object.entries(raw).map(([courseId, c]) => {
     },
     baseSpeed: Math.round((20 - (d - 2000) / 1000) * 1000) / 1000,
     courseSetStatus: (c.courseSetStatus ?? []).map(s => STATS[s] ?? 'speed'),
+    rotation: rotationOf(c.turn),
   };
 });
 

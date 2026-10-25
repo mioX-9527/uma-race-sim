@@ -107,8 +107,8 @@ export function App(): JSX.Element {
         {report !== null && (
           <span className="item">
             全技能总收益 <b className={report.totalDeltaSec >= 0 ? 'pos' : 'neg'}>
-              {report.totalDeltaSec >= 0 ? '+' : ''}
-              {((report.totalDeltaSec * 20) / 2.5).toFixed(2)}
+              {report.totalDeltaBody >= 0 ? '+' : ''}
+              {report.totalDeltaBody.toFixed(2)}
             </b> 马身(约)
           </span>
         )}

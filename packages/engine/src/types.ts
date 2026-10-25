@@ -50,6 +50,13 @@ export interface Course {
   readonly baseSpeed?: number;
   /** 赛道补正门槛属性(course_set_status),用于赛道补正公式 */
   readonly courseSetStatus?: readonly PassiveStat[];
+  /**
+   * 赛场回转方向:1=顺时针(中山/京都/阪神/札幌/函馆/福岛/小仓/大井/隆尚),
+   * 2=逆时针(东京/中京/新潟/川崎/船桥/盛冈/圣安妮塔公园/德尔马);
+   * 直線赛道(新潟草1000m)无回转,缺省 → 回转方向类技能一律不生效。
+   * 来源:game course_data.json 的 turn 字段(1=右/2=左/4=直線),与 JRA 官方口径一致。
+   */
+  readonly rotation?: 1 | 2;
 }
 
 export interface Stats {
@@ -163,6 +170,12 @@ export interface SkillConfig {
 /** 场地状态:0=良 1=稍重 2=重 3=不良(触发代码 ground_condition 1良~4不良,映射为代码−1) */
 export type GroundCondition = 0 | 1 | 2 | 3;
 
+/** 天气:1=晴 2=阴 3=雨 4=雪(触发代码 weather==N;仅作技能条件,不进物理公式) */
+export type Weather = 1 | 2 | 3 | 4;
+
+/** 季节:1=春 2=夏 3=秋 4=冬 5=樱花(触发代码 season==N;仅作技能条件,不进物理公式) */
+export type Season = 1 | 2 | 3 | 4 | 5;
+
 /** 技能的脚质/场地/赛场等装配型限制(不满足则整场不发动) */
 export interface SkillRestriction {
   /** 脚质(大逃并入逃马) */
@@ -176,6 +189,12 @@ export interface SkillRestriction {
   /** 比赛距离范围(米,触发代码 course_distance>=/<=) */
   readonly distanceMin?: number;
   readonly distanceMax?: number;
+  /** 赛场回转方向(触发代码 rotation==N:1=顺时针,2=逆时针;直線赛道不匹配) */
+  readonly rotations?: readonly number[];
+  /** 天气(触发代码 weather==N:1晴/2阴/3雨/4雪) */
+  readonly weathers?: readonly Weather[];
+  /** 季节(触发代码 season==N:1春/2夏/3秋/4冬/5樱花) */
+  readonly seasons?: readonly Season[];
   /** 原始限制文本(展示用) */
   readonly rawText?: string;
 }
@@ -189,6 +208,10 @@ export interface RunnerConfig {
   readonly surfaceAptitude: Aptitude;
   readonly motivation: Motivation;
   readonly groundCondition?: GroundCondition;
+  /** 天气(技能条件;缺省 1=晴) */
+  readonly weather?: Weather;
+  /** 季节(技能条件;缺省 1=春) */
+  readonly season?: Season;
   /**
    * 赛道补正:'auto'(缺省)= 按赛道门槛属性(courseSetStatus)与五维计算:
    * 1 + 平均((1+floor(min(属性,901)/300.01))×0.05)(uma-skill-tools CourseHelpers.courseSpeedModifier;

@@ -1,4 +1,5 @@
 import { MOTIVATION_WISDOM_MULT, STAT_SOFT_CAP } from './constants';
+import { restrictionSatisfied } from './restriction';
 import type { Course, PassiveStat, RunnerConfig, Stats } from './types';
 
 /**
@@ -23,13 +24,19 @@ const STAT_LIST: readonly PassiveStat[] = ['speed', 'stamina', 'power', 'guts', 
  * 起跑即生效的属性加成合计:
  * ① 已选技能中的常时被动(绿技能,condition=raceStart,全部效果为 passive);
  * ② 手动 greenBonus(用户从游戏面板抄前提值合计时直接填)。
+ * 带装配限制(如 顺时针◎ 需顺时针赛道、东京赛场◎ 需东京)的绿技能按 course + 环境配置判定,
+ * 不匹配不计入;course 缺省时,带限制的绿技能不计入(生产路径均传 course,无限制的绿技能不受影响)。
  * 例外口径:耐力对决参照值中绿加成不吃干劲(simulate.ts sfRef)。
  */
-export function passiveBonusOf(runner: RunnerConfig): Stats {
+export function passiveBonusOf(runner: RunnerConfig, course?: Course): Stats {
   const out: Record<PassiveStat, number> = { speed: 0, stamina: 0, power: 0, guts: 0, wisdom: 0 };
   for (const s of runner.skills) {
     if (s.effects.length === 0 || s.condition?.kind !== 'raceStart') continue;
     if (!s.effects.every(e => e.type === 'passive')) continue;
+    if (s.restriction !== undefined) {
+      if (course === undefined) continue;
+      if (!restrictionSatisfied(s.restriction, runner, course)) continue;
+    }
     for (const e of s.effects) {
       if (e.type === 'passive') out[e.stat] += e.value ?? 0;
     }
@@ -50,7 +57,7 @@ export function courseFixOf(course: Course | undefined, runner: RunnerConfig): n
   if (typeof manual === 'number') return manual;
   const refs = course?.courseSetStatus ?? [];
   if (refs.length === 0) return 1;
-  const bonus = passiveBonusOf(runner);
+  const bonus = passiveBonusOf(runner, course);
   const stat = (kind: PassiveStat): number => (runner.stats[kind] + bonus[kind]) * MOTIVATION_WISDOM_MULT[runner.motivation];
   const sum = refs.reduce(
     (acc, kind) => acc + (1 + Math.floor(Math.min(stat(kind), 901) / 300.01)) * 0.05,
@@ -61,7 +68,7 @@ export function courseFixOf(course: Course | undefined, runner: RunnerConfig): n
 
 export function effectiveStatsOf(runner: RunnerConfig, course?: Course): EffectiveStats {
   const m = MOTIVATION_WISDOM_MULT[runner.motivation];
-  const bonus = passiveBonusOf(runner);
+  const bonus = passiveBonusOf(runner, course);
   const fix = courseFixOf(course, runner);
   return {
     speed: softCap(runner.stats.speed + bonus.speed) * m * fix,

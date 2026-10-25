@@ -1,6 +1,6 @@
 import { Fragment, useState } from 'react';
 import type { AblationReport } from '@uma-race-sim/analysis';
-import { PRECISION_LABEL, SKILLS, describeCondition, describeEffects } from '../lib/sim';
+import { PRECISION_LABEL, SKILLS, describeCondition, describeEffects, describeRestriction } from '../lib/sim';
 
 const signed = (v: number, digits: number): string => `${v >= 0 ? '+' : ''}${v.toFixed(digits)}`;
 
@@ -9,6 +9,11 @@ export function AblationTable({ report }: { report: AblationReport }): JSX.Eleme
   const rows = [...report.rows].sort((a, b) => (b.expectedBody ?? b.deltaBody) - (a.expectedBody ?? a.deltaBody));
   const order = report.rows; // 与赛道条编号一致
   const [expanded, setExpanded] = useState<string | null>(null);
+  // 合计行的期望口径字段在无随机位置技能时缺省,这里统一兜底 0(该分支本身不会渲染)
+  const sumExpBody = report.sumExpectedBody ?? 0;
+  const sumExpSec = report.sumExpectedSec ?? 0;
+  const totalExpSec = report.totalExpectedSec ?? 0;
+  const totalExpCI = report.totalExpectedCI ?? 0;
 
   return (
     <div>
@@ -32,13 +37,19 @@ export function AblationTable({ report }: { report: AblationReport }): JSX.Eleme
             const body = r.expectedBody ?? r.deltaBody;
             const isPassiveRaceStart =
               skill !== undefined && skill.effects.length > 0 && skill.effects.every(e => e.type === 'passive') && skill.condition.kind === 'raceStart';
+            const need = skill !== undefined ? describeRestriction(skill) : '';
             return (
               <Fragment key={r.skillId}>
-                <tr>
+                <tr className={r.applicable ? undefined : 'row-off'}>
                   <td>{idx}</td>
                   <td>
                     {r.name}
                     {skill !== undefined && <span className={`badge ${skill.precision}`}>{PRECISION_LABEL[skill.precision]}</span>}
+                    {!r.applicable && (
+                      <span className="badge off" title={need === '' ? '当前赛道/环境不满足装配限制' : `需:${need}`}>
+                        不生效
+                      </span>
+                    )}
                   </td>
                   <td className="left">
                     {skill !== undefined ? (
@@ -51,16 +62,20 @@ export function AblationTable({ report }: { report: AblationReport }): JSX.Eleme
                     )}
                   </td>
                   <td>
-                    {isPassiveRaceStart
-                      ? '常时'
-                      : r.activatedAtMeter === null
-                        ? '—'
-                        : r.activationCount > 1
-                          ? `${Math.round(r.activatedAtMeter)}m ×${r.activationCount}次`
-                          : `${Math.round(r.activatedAtMeter)}m`}
+                    {!r.applicable
+                      ? <span title={need === '' ? '' : `需:${need}`}>不生效</span>
+                      : isPassiveRaceStart
+                        ? '常时'
+                        : r.activatedAtMeter === null
+                          ? '—'
+                          : r.activationCount > 1
+                            ? `${Math.round(r.activatedAtMeter)}m ×${r.activationCount}次`
+                            : `${Math.round(r.activatedAtMeter)}m`}
                   </td>
-                  <td className={body > 0 ? 'pos' : 'neg'}>
-                    {sampled ? (
+                  <td className={!r.applicable ? '' : body > 0 ? 'pos' : 'neg'}>
+                    {!r.applicable ? (
+                      <span className="meta">—</span>
+                    ) : sampled ? (
                       <>
                         <button
                           type="button"
@@ -108,14 +123,14 @@ export function AblationTable({ report }: { report: AblationReport }): JSX.Eleme
                 <tr>
                   <td colSpan={4}>Σ 单项收益(期望,联合抽样 {report.mcDraws} 组)</td>
                   <td>
-                    {signed(report.sumExpectedBody, 2)} 马身({signed(report.sumExpectedSec, 3)}s)
+                    {signed(sumExpBody, 2)} 马身({signed(sumExpSec, 3)}s)
                   </td>
                 </tr>
                 <tr>
                   <td colSpan={4}>实测总收益(期望 ±95%CI)</td>
                   <td>
-                    {signed(report.totalExpectedBody, 2)} 马身({signed(report.totalExpectedSec, 3)}s
-                    <span className="meta"> ±{report.totalExpectedCI.toFixed(3)}</span>)
+                    {signed(report.totalExpectedBody, 2)} 马身({signed(totalExpSec, 3)}s
+                    <span className="meta"> ±{totalExpCI.toFixed(3)}</span>)
                   </td>
                 </tr>
               </>
@@ -123,11 +138,11 @@ export function AblationTable({ report }: { report: AblationReport }): JSX.Eleme
               <>
                 <tr>
                   <td colSpan={4}>Σ 单项收益(去重前)</td>
-                  <td>{signed(report.sumDeltaBody ?? report.sumDeltaSec * 8, 2)} 马身({signed(report.sumDeltaSec, 3)}s)</td>
+                  <td>{signed(report.sumDeltaBody ?? 0, 2)} 马身({signed(report.sumDeltaSec, 3)}s)</td>
                 </tr>
                 <tr>
                   <td colSpan={4}>实测总收益(无技能 − 全技能)</td>
-                  <td>{signed(report.totalDeltaBody ?? report.totalDeltaSec * 8, 2)} 马身({signed(report.totalDeltaSec, 3)}s)</td>
+                  <td>{signed(report.totalDeltaBody, 2)} 马身({signed(report.totalDeltaSec, 3)}s)</td>
                 </tr>
               </>
             )}

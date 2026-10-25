@@ -143,6 +143,12 @@ interface CodeRestriction {
   venues: Set<string>;
   grounds: Set<number>;
   distances: Set<number>;
+  /** 赛场回转方向(触发代码 rotation==N:1=顺时针,2=逆时针) */
+  rotations: Set<number>;
+  /** 天气(触发代码 weather==N:1晴/2阴/3雨/4雪) */
+  weathers: Set<number>;
+  /** 季节(触发代码 season==N:1春/2夏/3秋/4冬/5樱花) */
+  seasons: Set<number>;
   distanceMin?: number;
   distanceMax?: number;
 }
@@ -179,14 +185,17 @@ const APPROX_NAME_RE =
 /** 环境前提 token:单马模拟视为满足,记录到备注 */
 const ENV_TOKENS = new Set([
   'base_speed', 'base_stamina', 'base_power', 'base_guts', 'base_wiz',
-  'weather', 'season', 'rotation', 'motivation', 'popularity', 'post_number',
+  'motivation', 'popularity', 'post_number',
   'fan_count', 'grade', 'is_abroad', 'is_dirtgrade', 'is_tight_track', 'lane_type',
   'furlong', 'remain_distance_viewer_id', 'is_exist_chara_id', 'succession_skill_count',
   'is_basis_distance', 'visiblehorse', 'random_lot', 'random_lot_shared', 'is_move_lane', 'time',
 ]);
 
 function emptyRestriction(): CodeRestriction {
-  return { tactics: new Set(), distanceTypes: new Set(), surfaces: new Set(), venues: new Set(), grounds: new Set(), distances: new Set() };
+  return {
+    tactics: new Set(), distanceTypes: new Set(), surfaces: new Set(), venues: new Set(),
+    grounds: new Set(), distances: new Set(), rotations: new Set(), weathers: new Set(), seasons: new Set(),
+  };
 }
 
 function mergeRestriction(a: CodeRestriction, b: CodeRestriction): void {
@@ -196,6 +205,9 @@ function mergeRestriction(a: CodeRestriction, b: CodeRestriction): void {
   for (const v of b.venues) a.venues.add(v);
   for (const v of b.grounds) a.grounds.add(v);
   for (const v of b.distances) a.distances.add(v);
+  for (const v of b.rotations) a.rotations.add(v);
+  for (const v of b.weathers) a.weathers.add(v);
+  for (const v of b.seasons) a.seasons.add(v);
   if (b.distanceMin !== undefined) a.distanceMin = a.distanceMin === undefined ? b.distanceMin : Math.min(a.distanceMin, b.distanceMin);
   if (b.distanceMax !== undefined) a.distanceMax = a.distanceMax === undefined ? b.distanceMax : Math.max(a.distanceMax, b.distanceMax);
 }
@@ -404,9 +416,36 @@ function parseVariant(tokens: readonly Token[], notes: string[]): Omit<CodeParse
       case name === 'ground_type' && op === '==':
         restriction.surfaces.add(value === 1 ? 'turf' : 'dirt');
         break;
-      case name === 'ground_condition' && op === '==':
-        restriction.grounds.add(value - 1);
+      case name === 'ground_condition': {
+        // 触发代码 1良/2稍重/3重/4不良 → 枚举 0/1/2/3;!= / >= / <= 展开为集合(变体内交集,变体间并集)
+        const all: readonly number[] = [0, 1, 2, 3];
+        if (op === '==') restriction.grounds.add(value - 1);
+        else if (op === '!=') for (const g of all) if (g !== value - 1) restriction.grounds.add(g);
+        else if (op === '>=') for (const g of all) if (g >= value - 1) restriction.grounds.add(g);
+        else if (op === '<=') for (const g of all) if (g <= value - 1) restriction.grounds.add(g);
+        else notes.push(`ground_condition${op}${value} 未识别`);
         break;
+      }
+      case name === 'rotation' && op === '==':
+        // 赛场回转方向:1=顺时针(中山/京都/阪神/札幌/函馆/福岛/小仓/大井/隆尚),2=逆时针
+        restriction.rotations.add(value);
+        break;
+      case name === 'weather': {
+        // 天气:1晴/2阴/3雨/4雪
+        const all: readonly number[] = [1, 2, 3, 4];
+        if (op === '==') restriction.weathers.add(value);
+        else if (op === '!=') for (const w of all) if (w !== value) restriction.weathers.add(w);
+        else notes.push(`weather${op}${value} 未识别`);
+        break;
+      }
+      case name === 'season': {
+        // 季节:1春/2夏/3秋/4冬/5樱花
+        const all: readonly number[] = [1, 2, 3, 4, 5];
+        if (op === '==') restriction.seasons.add(value);
+        else if (op === '!=') for (const s of all) if (s !== value) restriction.seasons.add(s);
+        else notes.push(`season${op}${value} 未识别`);
+        break;
+      }
       case name === 'track_id' && op === '==': {
         const v = TRACK_VENUES[value];
         if (v !== undefined) restriction.venues.add(v);
@@ -932,7 +971,7 @@ function buildRestriction(rawTexts: readonly string[]): Record<string, unknown> 
 /** 代码限制 + 文本限制合并(并集) */
 function mergeRestrictionObj(code: CodeRestriction, textObj: Record<string, unknown> | undefined): Record<string, unknown> | undefined {
   if (textObj === undefined) {
-    if (code.tactics.size + code.distanceTypes.size + code.surfaces.size + code.venues.size + code.grounds.size + code.distances.size === 0 && code.distanceMin === undefined && code.distanceMax === undefined) return undefined;
+    if (code.tactics.size + code.distanceTypes.size + code.surfaces.size + code.venues.size + code.grounds.size + code.distances.size + code.rotations.size + code.weathers.size + code.seasons.size === 0 && code.distanceMin === undefined && code.distanceMax === undefined) return undefined;
     const out: Record<string, unknown> = {};
     if (code.tactics.size > 0) out.tactics = [...code.tactics];
     if (code.distanceTypes.size > 0) out.distanceTypes = [...code.distanceTypes];
@@ -940,6 +979,9 @@ function mergeRestrictionObj(code: CodeRestriction, textObj: Record<string, unkn
     if (code.venues.size > 0) out.venues = [...code.venues];
     if (code.grounds.size > 0) out.grounds = [...code.grounds].sort();
     if (code.distances.size > 0) out.distances = [...code.distances].sort();
+    if (code.rotations.size > 0) out.rotations = [...code.rotations].sort();
+    if (code.weathers.size > 0) out.weathers = [...code.weathers].sort();
+    if (code.seasons.size > 0) out.seasons = [...code.seasons].sort();
     if (code.distanceMin !== undefined) out.distanceMin = code.distanceMin;
     if (code.distanceMax !== undefined) out.distanceMax = code.distanceMax;
     return out;
@@ -960,6 +1002,9 @@ function mergeRestrictionObj(code: CodeRestriction, textObj: Record<string, unkn
   if (merged.venues.size > 0) out.venues = [...merged.venues];
   if (merged.grounds.size > 0) out.grounds = [...merged.grounds].sort();
   if (merged.distances.size > 0) out.distances = [...merged.distances].sort();
+  if (merged.rotations.size > 0) out.rotations = [...merged.rotations].sort();
+  if (merged.weathers.size > 0) out.weathers = [...merged.weathers].sort();
+  if (merged.seasons.size > 0) out.seasons = [...merged.seasons].sort();
   if (merged.distanceMin !== undefined) out.distanceMin = merged.distanceMin;
   if (merged.distanceMax !== undefined) out.distanceMax = merged.distanceMax;
   return Object.keys(out).length > 0 ? out : undefined;

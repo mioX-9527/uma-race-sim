@@ -1,6 +1,7 @@
 import { describe, expect, test } from 'vitest';
 import { simulate } from '../src/simulate';
-import { freshRunner, makeRunner, speedSkill, TOKYO_TURF_2400 as C } from './fixtures';
+import { passiveBonusOf } from '../src/effstats';
+import { BASE_STATS, freshRunner, makeRunner, speedSkill, TOKYO_TURF_2400 as C } from './fixtures';
 
 /** 中盘发动的通用测试技能(便于观察限制是否拦截) */
 const midSkill = speedSkill('r-test', 0.5, 10, { condition: { kind: 'phase', phase: 1 } as never });
@@ -41,5 +42,61 @@ describe('装配型限制(脚质/场地/距离档)判定', () => {
     expect(simulate({ ...C, distance: 2000, distanceType: 'mile' as const }, freshRunner([min2400])).activations).toHaveLength(0);
     const max2200 = { ...midSkill, restriction: { distanceMax: 2200 } };
     expect(simulate(C, freshRunner([max2200])).activations).toHaveLength(0);
+  });
+});
+
+describe('环境条件限制(场地状态 / 天气 / 季节)', () => {
+  /** 常时绿技能(速度 +60),用于观察装配限制是否拦截 */
+  const greenSpeed = (restriction: Record<string, unknown>) =>
+    speedSkill('g-env', 0, 0, {
+      effects: [{ type: 'passive', stat: 'speed', value: 60 }],
+      durationSec: null,
+      condition: { kind: 'raceStart' },
+      restriction,
+    }) as never;
+
+  test('场地状态:良场地◎ 只在良场生效', () => {
+    const s = greenSpeed({ grounds: [0] });
+    const atGood = passiveBonusOf(freshRunner([s], {}, { groundCondition: 0 }), C).speed;
+    const atHeavy = passiveBonusOf(freshRunner([s], {}, { groundCondition: 3 }), C).speed;
+    expect(atGood).toBe(60);
+    expect(atHeavy).toBe(0);
+  });
+
+  test('天气:雨天◎ 只在雨天生效,缺省(晴)不生效', () => {
+    const s = greenSpeed({ weathers: [3] });
+    expect(passiveBonusOf(freshRunner([s]), C).speed).toBe(0);
+    expect(passiveBonusOf(freshRunner([s], {}, { weather: 3 }), C).speed).toBe(60);
+  });
+
+  test('季节:秋季技能按季节判定', () => {
+    const s = greenSpeed({ seasons: [3] });
+    expect(passiveBonusOf(freshRunner([s], {}, { season: 1 }), C).speed).toBe(0);
+    expect(passiveBonusOf(freshRunner([s], {}, { season: 3 }), C).speed).toBe(60);
+    // 春/樱花双季技能
+    const spring = greenSpeed({ seasons: [1, 5] });
+    expect(passiveBonusOf(freshRunner([spring], {}, { season: 5 }), C).speed).toBe(60);
+  });
+
+  test('普通技能的限制不满足时整场不发动', () => {
+    const onlyAutumn = { ...midSkill, restriction: { seasons: [3] as const } };
+    expect(simulate(C, freshRunner([onlyAutumn], {}, { season: 1 })).activations).toHaveLength(0);
+    expect(simulate(C, freshRunner([onlyAutumn], {}, { season: 3 })).activations).toHaveLength(1);
+  });
+});
+
+describe('场地状态进体力消耗(不改速度)', () => {
+  test('草地:良=稍重(1.0)、重与不良(1.02)更快耗体力', () => {
+    const runner = makeRunner({ stats: { ...BASE_STATS, stamina: 900 } });
+    const minHp = (groundCondition: 0 | 1 | 2 | 3): number => {
+      const probe = simulate(C, { ...runner, groundCondition }, { ignoreExhaustion: true });
+      let m = Infinity;
+      for (let i = 0; i < probe.hp.length; i++) m = Math.min(m, probe.hp[i]!);
+      return probe.maxHp - m; // 全程消耗
+    };
+    const good = minHp(0);
+    expect(minHp(1)).toBeCloseTo(good, 6);
+    expect(minHp(2)).toBeGreaterThan(good);
+    expect(minHp(3)).toBeCloseTo(minHp(2), 6);
   });
 });

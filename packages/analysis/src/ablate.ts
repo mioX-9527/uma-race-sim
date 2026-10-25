@@ -1,4 +1,4 @@
-import { BODY_LENGTH_METERS, sampleableSpans, simulate } from '@uma-race-sim/engine';
+import { BODY_LENGTH_METERS, sampleableSpans, simulate, skillApplicable } from '@uma-race-sim/engine';
 import type { Course, Region, RunnerConfig } from '@uma-race-sim/engine';
 
 /** 区段随机类技能的期望位置采样数(在满足区段全长上均匀取点;用于逐位置明细) */
@@ -42,6 +42,11 @@ export interface AblationRow {
   readonly expectedBody?: number;
   /** 各抽样组下该技能边际收益的 [min, max](环境波动区间) */
   readonly bodyRange?: readonly [number, number];
+  /**
+   * 当前赛道/环境配置下装配限制是否满足(false = 整场不生效,如 逆时针◎ 在顺时针赛道)。
+   * UI 对 false 的行标注「不生效」:收益恒 0,不代表技能本身无用。
+   */
+  readonly applicable: boolean;
 }
 
 export interface AblationReport {
@@ -51,6 +56,8 @@ export interface AblationReport {
   readonly totalDeltaSec: number;
   /** 单项收益之和;与 totalDeltaSec 的差 = 技能间交互(回体改变后续发动位置等),UI 需同时展示 */
   readonly sumDeltaSec: number;
+  /** 全技能总收益的马身口径(= totalDeltaSec × 末脚目标速度 / 2.5,与逐行同一换算) */
+  readonly totalDeltaBody: number;
   readonly rows: readonly AblationRow[];
   /** 联合蒙特卡洛组数;undefined = 未启用(无随机位置技能) */
   readonly mcDraws?: number;
@@ -161,9 +168,11 @@ export function ablate(course: Course, runner: RunnerConfig): AblationReport {
       : 0;
 
   const rows: AblationRow[] = runner.skills.map(skill => {
+    // 装配限制是否满足(不满足 = 整场不生效:绿技能不计入属性,普通技能不发动)
+    const applicable = skillApplicable(skill, course, runner);
     // 常时被动(绿技能):无发动点,常时生效(引擎已并入起跑属性),视为已发动
     const isPassiveRaceStart =
-      skill.effects.length > 0 && skill.effects.every(e => e.type === 'passive') && skill.condition?.kind === 'raceStart';
+      applicable && skill.effects.length > 0 && skill.effects.every(e => e.type === 'passive') && skill.condition?.kind === 'raceStart';
     const without = simulate(course, {
       ...runner,
       skills: runner.skills.filter(s => s.id !== skill.id),
@@ -206,6 +215,7 @@ export function ablate(course: Course, runner: RunnerConfig): AblationReport {
       deltaSec,
       deltaMeter,
       deltaBody: deltaMeter / BODY_LENGTH_METERS,
+      applicable,
       ...(positionSamples !== undefined ? { positionSamples } : {}),
       ...(expectedBody !== undefined ? { expectedBody, bodyRange } : {}),
     };
@@ -226,7 +236,8 @@ export function ablate(course: Course, runner: RunnerConfig): AblationReport {
     totalDeltaSec,
     sumDeltaSec,
     rows,
-    /** 各合计的马身口径(与逐行同一换算):Σ规则 / Σ期望 / 总期望 */
+    /** 各合计的马身口径(与逐行同一换算):总收益 / Σ规则 / Σ期望 / 总期望 */
+    totalDeltaBody: toBody(totalDeltaSec),
     sumDeltaBody: toBody(sumDeltaSec),
     ...(mcDraws !== undefined
       ? {

@@ -1,4 +1,6 @@
-import type { Course, Motivation, RunnerConfig, SkillConfig, SkillRestriction, Stats, Tactic, Aptitude } from '@uma-race-sim/engine';
+import type {
+  Aptitude, Course, GroundCondition, Motivation, RunnerConfig, Season, SkillConfig, Stats, Tactic, Weather,
+} from '@uma-race-sim/engine';
 import coursesJson from '../../../../data/courses.json';
 import skillsJson from '../../../../data/skills.json';
 
@@ -127,6 +129,12 @@ export interface UiConfig {
   readonly distanceAptitude: Aptitude;
   readonly surfaceAptitude: Aptitude;
   readonly motivation: Motivation;
+  /** 场地状态(影响体力消耗:稍重/重/不良按场地系数放大) */
+  readonly groundCondition: GroundCondition;
+  /** 天气(仅作技能条件:晴/阴/雨/雪) */
+  readonly weather: Weather;
+  /** 季节(仅作技能条件:春/夏/秋/冬/樱花) */
+  readonly season: Season;
   /**
    * 赛道补正:'auto'(缺省)= 按赛道门槛属性(courseSetStatus)与五维自动计算
    * (uma-skill-tools 公式,见 engine courseFixOf);数字 = 手动覆盖。
@@ -144,6 +152,9 @@ export const DEFAULT_CONFIG: UiConfig = {
   distanceAptitude: 'S',
   surfaceAptitude: 'A',
   motivation: 'best',
+  groundCondition: 0,
+  weather: 1,
+  season: 1,
   courseId: 'c10606',
   skillIds: [],
 };
@@ -185,6 +196,9 @@ export function buildRunner(cfg: UiConfig): RunnerConfig {
     distanceAptitude: cfg.distanceAptitude,
     surfaceAptitude: cfg.surfaceAptitude,
     motivation: cfg.motivation,
+    groundCondition: cfg.groundCondition,
+    weather: cfg.weather,
+    season: cfg.season,
     courseFix: cfg.courseFix ?? 'auto',
     skills: [...skills, ...planToSkills(cfg.healPlan, 'heal'), ...planToSkills(cfg.healPlan, 'debuff')],
   };
@@ -206,7 +220,12 @@ export function fmtSec(v: number): string {
 }
 
 const DISTTYPE_LABEL: Record<string, string> = { short: '短距离', mile: '英里', mid: '中距离', long: '长距离' };
-const GROUND_LABEL: Record<number, string> = { 0: '良场', 1: '好场', 2: '稍重', 3: '不良' };
+/** 场地状态(触发代码 ground_condition 1良/2稍重/3重/4不良 → 枚举 0~3) */
+export const GROUND_LABEL: Record<GroundCondition, string> = { 0: '良场', 1: '稍重', 2: '重', 3: '不良' };
+export const WEATHER_LABEL: Record<Weather, string> = { 1: '晴', 2: '阴', 3: '雨', 4: '雪' };
+export const SEASON_LABEL: Record<Season, string> = { 1: '春', 2: '夏', 3: '秋', 4: '冬', 5: '樱花' };
+/** 赛场回转方向:1=顺时针 2=逆时针(与技能名「顺时针◎」「逆时针◎」用词一致) */
+export const ROTATION_LABEL: Record<number, string> = { 1: '顺时针', 2: '逆时针' };
 
 /** 装配型限制 → 中文短描述 */
 export function describeRestriction(s: SkillConfig): string {
@@ -219,5 +238,8 @@ export function describeRestriction(s: SkillConfig): string {
   if (r.venues !== undefined) parts.push(`${r.venues.join('/')}赛场`);
   if (r.distances !== undefined) parts.push(r.distances.map(d => `${d}m`).join('/'));
   if (r.grounds !== undefined) parts.push(r.grounds.map(g => GROUND_LABEL[g] ?? `${g}`).join('/'));
+  if (r.rotations !== undefined) parts.push(`${r.rotations.map(v => ROTATION_LABEL[v] ?? `${v}`).join('/')}赛道`);
+  if (r.weathers !== undefined) parts.push(`${r.weathers.map(w => WEATHER_LABEL[w] ?? `${w}`).join('/')}天`);
+  if (r.seasons !== undefined) parts.push(`季节 ${r.seasons.map(s => SEASON_LABEL[s] ?? `${s}`).join('/')}`);
   return parts.join(' · ');
 }

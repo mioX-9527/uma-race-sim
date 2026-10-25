@@ -10,7 +10,7 @@
     "apps/*"
   ],
   "scripts": {
-    "typecheck": "npm run typecheck -w @uma-race-sim/engine && npm run typecheck -w @uma-race-sim/analysis && npm run typecheck -w @uma-race-sim/schema",
+    "typecheck": "npm run typecheck -w @uma-race-sim/engine && npm run typecheck -w @uma-race-sim/analysis && npm run typecheck -w @uma-race-sim/schema && npm run typecheck -w @uma-race-sim/web",
     "test": "npm run test -w @uma-race-sim/engine && npm run test -w @uma-race-sim/analysis",
     "dev": "npm run dev -w @uma-race-sim/web",
     "build": "npm run build -w @uma-race-sim/web"

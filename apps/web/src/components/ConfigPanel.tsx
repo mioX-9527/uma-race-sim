@@ -1,7 +1,10 @@
 import { Fragment } from 'react';
 import { courseFixOf } from '@uma-race-sim/engine';
-import type { Aptitude, Motivation, Stats, Tactic } from '@uma-race-sim/engine';
-import { APTITUDES, COURSES, DEBUFF_TIERS, MOTIVATION_LABEL, TACTIC_LABEL, buildRunner, findCourse, type HealPlanItem, type UiConfig } from '../lib/sim';
+import type { Aptitude, GroundCondition, Motivation, Season, Stats, Tactic, Weather } from '@uma-race-sim/engine';
+import {
+  APTITUDES, COURSES, DEBUFF_TIERS, GROUND_LABEL, HEAL_TIERS, MOTIVATION_LABEL, ROTATION_LABEL, SEASON_LABEL, TACTIC_LABEL,
+  WEATHER_LABEL, buildRunner, findCourse, type HealPlanItem, type UiConfig,
+} from '../lib/sim';
 import { SkillPicker } from './SkillPicker';
 
 interface Props {
@@ -22,6 +25,14 @@ function courseFixNote(config: UiConfig): string {
   const fix = courseFixOf(course, buildRunner(config));
   const mode = config.courseFix === undefined || config.courseFix === 'auto' ? '自动补正' : '手动补正';
   return `${course.name} — ${gate},${mode} ×${fix.toFixed(2)}(自动档:≥901→×1.2、601~900→×1.15、301~600→×1.10、≤300→×1.05)`;
+}
+
+/** 赛道环境摘要:回转方向 + 距离档(直線赛道无回转) */
+function courseEnvNote(config: UiConfig): string {
+  const course = findCourse(config.courseId);
+  const rot = course.rotation === undefined ? '直線赛道(无回转,回转方向类技能不生效)' : `${ROTATION_LABEL[course.rotation]}赛道`;
+  const dist = course.distanceType === undefined ? '' : ` · ${{ short: '短距离', mile: '英里', mid: '中距离', long: '长距离' }[course.distanceType]}`;
+  return `${rot}${dist} · 场地 ${GROUND_LABEL[config.groundCondition]} · 天气 ${WEATHER_LABEL[config.weather]} · 季节 ${SEASON_LABEL[config.season]}`;
 }
 
 export function ConfigPanel({ config, onChange }: Props): JSX.Element {
@@ -133,6 +144,39 @@ export function ConfigPanel({ config, onChange }: Props): JSX.Element {
             </optgroup>
           ))}
         </select>
+        <p className="note">{courseEnvNote(config)}</p>
+      </section>
+
+      <section>
+        <h2>比赛环境</h2>
+        <div className="field-grid">
+          <label htmlFor="cfg-ground" title="场地状态只影响体力消耗系数(草地 良1.0/稍重1.0/重1.02/不良1.02;泥地 良1.0/稍重1.0/重1.01/不良1.02),不改速度与加速度">
+            场地状态
+          </label>
+          <select
+            id="cfg-ground"
+            value={config.groundCondition}
+            onChange={e => set({ groundCondition: Number(e.target.value) as GroundCondition })}
+          >
+            {([0, 1, 2, 3] as const).map(g => <option key={g} value={g}>{GROUND_LABEL[g]}</option>)}
+          </select>
+          <label htmlFor="cfg-weather" title="天气只作为技能条件(晴天◎/雨天◎ 等),不进入速度、加速度、体力公式">
+            天气
+          </label>
+          <select id="cfg-weather" value={config.weather} onChange={e => set({ weather: Number(e.target.value) as Weather })}>
+            {([1, 2, 3, 4] as const).map(w => <option key={w} value={w}>{WEATHER_LABEL[w]}</option>)}
+          </select>
+          <label htmlFor="cfg-season" title="季节只作为技能条件(春/夏/秋/冬 优俊少女等),不进入速度、加速度、体力公式">
+            季节
+          </label>
+          <select id="cfg-season" value={config.season} onChange={e => set({ season: Number(e.target.value) as Season })}>
+            {([1, 2, 3, 4, 5] as const).map(x => <option key={x} value={x}>{SEASON_LABEL[x]}</option>)}
+          </select>
+        </div>
+        <p className="note">
+          场地状态进体力消耗(耐力需求会变,速度/加速度不变);天气与季节只决定「晴天◎」「秋季优俊少女◎」这类技能是否生效,
+          对物理公式无影响(解包模型与 614tools 均无对应项)。
+        </p>
       </section>
 
       <section>
@@ -151,10 +195,17 @@ export function ConfigPanel({ config, onChange }: Props): JSX.Element {
 
       <section>
         <h2>技能</h2>
-        <SkillPicker selected={config.skillIds} onChange={ids => set({ skillIds: ids })} />
+        <SkillPicker
+          selected={config.skillIds}
+          onChange={ids => set({ skillIds: ids })}
+          course={findCourse(config.courseId)}
+          runner={buildRunner(config)}
+        />
         <p className="note">
           「近似」= 发动条件依赖名次/间距/随机时刻,单马期望模型按期望位置发动;
-          「不支持」(干扰/条件型被动等)不参与模拟。绿技能(常时被动)选中后并入起跑属性参与模拟。
+          「不支持」(干扰/条件型被动等)不参与模拟。绿技能(常时被动)选中后并入起跑属性参与模拟;
+          带装配限制的技能(赛场/回转方向/场地状态/天气/季节/脚质/距离档)在当前赛道与环境下不满足时,
+          表中标注「不生效」且不计收益。
           「继承」角标 = 继承固有(数值/持续时间与本体大招不同,增幅系数恒 1.0);
           「进化」角标 = 进化技能(本体技能进化后的强化版,与本体二选一)。
         </p>

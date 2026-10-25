@@ -47,9 +47,13 @@ export function makeRunner(partial: Partial<RunnerConfig> = {}): RunnerConfig {
   };
 }
 
-/** 耐力充足的跑者(不触发挥体力耗尽,便于隔离测机制) */
-export function freshRunner(skills: readonly SkillConfig[] = [], stats: Partial<Stats> = {}): RunnerConfig {
-  return makeRunner({ stats: { ...BASE_STATS, stamina: 5000, ...stats }, skills });
+/** 耐力充足的跑者(不触发挥体力耗尽,便于隔离测机制);partial 用于叠加环境配置(场地/天气/季节) */
+export function freshRunner(
+  skills: readonly SkillConfig[] = [],
+  stats: Partial<Stats> = {},
+  partial: Partial<RunnerConfig> = {},
+): RunnerConfig {
+  return makeRunner({ stats: { ...BASE_STATS, stamina: 5000, ...stats }, skills, ...partial });
 }
 
 /** 终盘发动的目标速度技能 */

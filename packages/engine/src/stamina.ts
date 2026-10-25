@@ -8,8 +8,8 @@ export function maxHpOf(course: Course, runner: RunnerConfig): number {
 }
 
 /** 终盘起的根性消耗系数 = 1 + 200/√(600×有效根性) */
-export function gutsDrainModifier(runner: RunnerConfig): number {
-  return 1 + 200 / Math.sqrt(600 * effectiveStatsOf(runner).guts);
+export function gutsDrainModifier(runner: RunnerConfig, course?: Course): number {
+  return 1 + 200 / Math.sqrt(600 * effectiveStatsOf(runner, course).guts);
 }
 
 export interface DrainOpts {

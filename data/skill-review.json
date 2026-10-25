@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-25T07:33:32.440Z",
+ "generatedAt": "2026-10-25T08:08:38.781Z",
  "items": [
   {
    "id": "100191",
@@ -221,22 +221,6 @@
    ]
   },
   {
-   "id": "104301221-b1",
-   "page": "泥んこ魔王様",
-   "reasons": [
-    "未识别token:ground_condition>=3",
-    "无可解析发动位置(ground_type==2&ground_condition>=3)"
-   ]
-  },
-  {
-   "id": "104301221-b2",
-   "page": "泥んこ魔王様",
-   "reasons": [
-    "未识别token:ground_condition<=2",
-    "无可解析发动位置(ground_type==2&ground_condition<=2)"
-   ]
-  },
-  {
    "id": "104402111-b2",
    "page": "シルフィード・マギア",
    "reasons": [
@@ -270,8 +254,7 @@
    "id": "105502111-b1",
    "page": "煌めき☆ドーリィステージ",
    "reasons": [
-    "无可解析发动位置(activate_count_all>=13&course_distance>=2000&running_style==3&weather==1)",
-    "weather==1(环境前提,视为满足)"
+    "无可解析发动位置(activate_count_all>=13&course_distance>=2000&running_style==3&weather==1)"
    ]
   },
   {
@@ -279,17 +262,6 @@
    "page": "煌めき☆ドーリィステージ",
    "reasons": [
     "无可解析发动位置(activate_count_all>=13&course_distance>=2000&running_style==3)"
-   ]
-  },
-  {
-   "id": "105502211-b2",
-   "page": "いざ、ショーベラスタイム♪",
-   "reasons": [
-    "未识别token:ground_condition!=1",
-    "未识别token:ground_condition!=1",
-    "无可解析发动位置(base_wiz>=1200&distance_type==3&ground_condition!=1@base_wiz>=1200&distance_type==4&ground_condition!=1)",
-    "base_wiz>=1200(环境前提,视为满足)",
-    "base_wiz>=1200(环境前提,视为满足)"
    ]
   },
   {
@@ -321,14 +293,6 @@
    "reasons": [
     "未识别token:track_id!=10201",
     "motivation<=4(环境前提,视为满足)"
-   ]
-  },
-  {
-   "id": "107701111-b2",
-   "page": "ターフの主人公",
-   "reasons": [
-    "未识别token:ground_condition!=1",
-    "无可解析发动位置(ground_condition!=1&ground_type==1)"
    ]
   },
   {

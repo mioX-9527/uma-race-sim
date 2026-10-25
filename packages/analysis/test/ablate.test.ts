@@ -34,3 +34,34 @@ describe('leave-one-out 消融', () => {
     expect(r.totalDeltaSec).toBe(0);
   });
 });
+
+describe('装配限制不满足的技能(标注「不生效」)', () => {
+  test('限制不满足:applicable=false,收益恒 0,activated=false', () => {
+    const green = speedSkill('green-off', 0.5, 0, {
+      effects: [{ type: 'passive', stat: 'speed', value: 60 }],
+      durationSec: null,
+      condition: { kind: 'raceStart' },
+      restriction: { rotations: [2] }, // 逆时针,而 C(Tokyo 结构示例)无 rotation → 不匹配
+    });
+    const rep = ablate(C, freshRunner([green]));
+    const row = rep.rows[0]!;
+    expect(row.applicable).toBe(false);
+    expect(row.activated).toBe(false);
+    expect(row.deltaSec).toBeCloseTo(0, 10);
+    expect(row.deltaBody).toBeCloseTo(0, 10);
+  });
+
+  test('限制满足时同一技能正常计入(对照)', () => {
+    const green = speedSkill('green-on', 0.5, 0, {
+      effects: [{ type: 'passive', stat: 'speed', value: 60 }],
+      durationSec: null,
+      condition: { kind: 'raceStart' },
+      restriction: { rotations: [1] },
+    });
+    const rep = ablate({ ...C, rotation: 1 as const }, freshRunner([green]));
+    const row = rep.rows[0]!;
+    expect(row.applicable).toBe(true);
+    expect(row.activated).toBe(true);
+    expect(row.deltaSec).toBeGreaterThan(0);
+  });
+});

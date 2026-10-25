@@ -31,7 +31,12 @@ tools              抓取/清洗/构建后处理脚本(见下表)
    继承技三语名称:`tools/fetch-heir-names.mjs` → `data/raw/heir-skill-names.json`。
 3. **清洗**:`node tools/clean-skills.ts` → `data/skills.json`(+ review/notes)。这是唯一生成 skills.json 的入口,
    三条路径:①触发代码(权威,先 precondition 后 condition,@ = 或变体);②继承技 pass(见下);③文本兜底(仅 2 条)。
-4. **赛道**:uma-skill-tools 的 course_data.json → `tools/make-courses.ts` → `data/courses.json`(弯道/直线/坡度/门槛属性)。
+   触发代码里的**装配限制**统一解析为 `SkillRestriction`:脚质/距离档/场地/赛场/精确距离/距离范围/
+   **场地状态(含 !=、>=、<=)** / **回转方向 rotation** / **天气 weather** / **季节 season**——
+   不满足则整场不生效(绿技能不计入起跑属性)。环境类缺省口径:场地状态 良(0)、天气 晴(1)、季节 春(1)。
+4. **赛道**:uma-skill-tools 的 course_data.json → `tools/make-courses.ts` → `data/courses.json`(弯道/直线/坡度/门槛属性/**回转方向**)。
+   **回转方向直接读解包 `turn`:1=右回り(顺时针)、2=左回り(逆时针)、4=直線(不写 rotation 字段 ⇒ 回转类技能不生效)**;
+   别再手写赛场映射表(2026-10-25 曾因此把阪神/札幌/函馆/福岛/小仓 44 条赛道标反,见 parity-log)。
 5. **校验**:`node tools/validate-data.ts` 必须通过,再跑 `npx vitest run`。
 
 ### 技能 ID 约定(字符串)
@@ -47,8 +52,8 @@ tools              抓取/清洗/构建后处理脚本(见下表)
 ```bash
 npm run dev         # 开发服务 http://localhost:5173(热更)
 npm run build       # 单文件构建:apps/web/dist/index.html + 根目录 打开模拟器.html
-npm test            # engine + analysis 全部 vitest(当前 82 例)
-npm run typecheck   # 三包 tsc
+npm test            # engine + analysis 全部 vitest(当前 106 例)
+npm run typecheck   # 四包 tsc(engine/analysis/schema/web;web 2026-10-25 纳入)
 node tools/validate-data.ts   # 数据 zod 校验
 node tools/clean-skills.ts    # 重新生成 skills.json(node 24 直跑 TS)
 ```
@@ -101,6 +106,10 @@ node tools/clean-skills.ts    # 重新生成 skills.json(node 24 直跑 TS)
   数字 = 手动覆盖。补正只乘速度,不乘力量/根性/耐力。
 - 冷却实际 = 基准 × 距离/1000;<400s 可重复发动,500s = 一次性。
 - 「直線」类条件以解包 straights 列表为准(28/138 赛道有非直非弯的过渡区,琥珀色斜纹)。
+- **环境三件套(2026-10-25 核实)**:场地状态**只进体力消耗系数**(草 良/稍重 1.0、重/不良 1.02;
+  泥 良/稍重 1.0、重 1.01、不良 1.02),不改速度/加速度/体力上限 —— 所以「耐力判定」会变而完赛时间不变;
+  **天气与季节没有任何物理项**(解包与 614tools 都没有),只决定 `weather==N` / `season==N` 类技能是否生效。
+  三者都是 `SkillRestriction` 字段,不满足时技能整场不生效,UI 标注「不生效」。
 - 继承固有与本体数值不同(负面分支不变、增益段削减);进化与本体二选一。
 - 精度分层:precise / approx(依赖名次/随机,按期望位置发动)/ unsupported(不参与模拟,灰显)。
 - 校准双锚:courseFix=1.2 ↔ 历史互拍 116.328±0.1;auto(东京无门槛)↔ 游戏实录 116.987±0.5。
@@ -108,7 +117,9 @@ node tools/clean-skills.ts    # 重新生成 skills.json(node 24 直跑 TS)
 
 ## 7. 改动后必做清单
 
-1. `npm run typecheck` + `npx vitest run` 全绿(不许跳过/删测试);
+1. `npm run typecheck`(含 web)+ `npx vitest run` 全绿(不许跳过/删测试);
+   本机若遇 vitest `EPERM ...\Temp\...\ssr\...`,把 TEMP/TMP 指到项目内再跑:
+   `TEMP=%CD%\.tmp TMP=%CD%\.tmp npx vitest run`(沙箱不放行系统临时目录时);
 2. 涉及数据:`node tools/validate-data.ts`;
 3. 涉及公式/机制:更新 `docs/formulas.md` + `docs/parity-log.md` 追加条目(对拍方法:614tools 实测或游戏实录);
 4. 涉及数据规模:同步 `data/version.json`(version/counts/skillPrecision/notes)与 README「状态」行;
@@ -117,11 +128,18 @@ node tools/clean-skills.ts    # 重新生成 skills.json(node 24 直跑 TS)
 
 ## 8. 已知边界与待办
 
+### 既有边界
+
 - 绿技能(常时被动)已支持:clean-skills 对 raceStart 条件的纯被动标 precise(条件型被动
-  仍 unsupported),引擎 `effstats.passiveBonusOf` 把已选绿技能与手动 greenBonus 并入起跑属性
+  仍 unsupported),引擎 `effstats.passiveBonusOf(runner, course)` 把已选绿技能与手动 greenBonus 并入起跑属性
   (614tools ZP 口径:面板+绿逐项相加后统一过软上限与干劲;例外:耐力对决参照 sfRef 中绿不吃干劲);
-  消融表绿技能行 位置=「常时」,收益来自去掉它后的属性差;
+  **带装配限制的绿技能按 course + 环境配置判定**(157/213 条,如「东京赛场◎」「良场地◎」「顺时针◎」「秋季优俊少女◎」),
+  不匹配则不计入;消融表绿技能行 位置=「常时」,收益来自去掉它后的属性差;
+  **不满足限制的技能在技能列表/消融表标「不生效」**(AblationRow.applicable=false,收益恒 0)。
+  调用链务必传 course:`effectiveStatsOf` / `courseFixOf` / `passiveBonusOf` / `gutsDrainModifier`
+  —— 传 undefined 会把带限制的绿技能当成不生效(2026-10-25 踩过,代价是全库 157 条绿技能归零);
 - 随机机制不建模:焦躁/追比/取位争夺/多马阻挡/下坡模式/智力 24 区间修正(614tools 也仅显示);
+  天气/季节虽可选,但除技能条件外不参与任何计算(见 §6);场地状态参与体力消耗;
   近似层技能按"期望位置"发动,已在 UI 角标;
 - 47 条剧本型"进化"行无解包数据,维持排除(skill-data-lua2 里 25 条无名称的占位条目同样不入库);
 - 复核清单 `data/skill-review.json`(约 190 条)与 `data/skill-notes.json`

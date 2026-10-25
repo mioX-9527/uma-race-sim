@@ -40,6 +40,8 @@ export const courseSchema = z.object({
   phaseBounds: z.object({ midStart: nonneg, lateStart: nonneg, finalStart: nonneg }),
   baseSpeed: z.number().positive().optional(),
   courseSetStatus: z.array(passiveStat).optional(),
+  /** 赛场回转方向:1=顺时针(中山/京都/阪神/札幌/函馆/福岛/小仓/大井/隆尚),2=逆时针;直線赛道无此字段 */
+  rotation: z.union([z.literal(1), z.literal(2)]).optional(),
 });
 
 const conditionBase = z.enum(['start', 'midStart', 'lateStart', 'finalStart']);
@@ -61,6 +63,12 @@ const restrictionSchema = z.object({
   distances: z.array(z.number().int().positive()).optional(),
   distanceMin: z.number().int().positive().optional(),
   distanceMax: z.number().int().positive().optional(),
+  /** 赛场回转方向(触发代码 rotation==N:1=顺时针,2=逆时针) */
+  rotations: z.array(z.union([z.literal(1), z.literal(2)])).optional(),
+  /** 天气(触发代码 weather==N:1晴/2阴/3雨/4雪) */
+  weathers: z.array(z.union([z.literal(1), z.literal(2), z.literal(3), z.literal(4)])).optional(),
+  /** 季节(触发代码 season==N:1春/2夏/3秋/4冬/5樱花) */
+  seasons: z.array(z.union([z.literal(1), z.literal(2), z.literal(3), z.literal(4), z.literal(5)])).optional(),
   rawText: z.string().optional(),
 });
 

@@ -1,16 +1,23 @@
 import { useMemo, useState } from 'react';
+import { skillApplicable } from '@uma-race-sim/engine';
+import type { Course, RunnerConfig } from '@uma-race-sim/engine';
 import { PRECISION_LABEL, SKILLS, describeCondition, describeEffects, describeRestriction, type SkillEntry } from '../lib/sim';
 
 interface Props {
   selected: readonly string[];
   onChange: (ids: readonly string[]) => void;
+  /** 当前赛道与环境(用于标注装配限制不满足的技能「不生效」) */
+  course: Course;
+  runner: RunnerConfig;
 }
 
 const MAX_SKILLS = 30;
 
 /** 技能搜索点选:简中/繁中/日文三语匹配,显示发动条件与效果数值 */
-export function SkillPicker({ selected, onChange }: Props): JSX.Element {
+export function SkillPicker({ selected, onChange, course, runner }: Props): JSX.Element {
   const [query, setQuery] = useState('');
+  /** 该技能在当前赛道/环境下是否满足装配限制 */
+  const okOf = (s: SkillEntry): boolean => skillApplicable(s, course, runner);
 
   const matches = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -46,7 +53,7 @@ export function SkillPicker({ selected, onChange }: Props): JSX.Element {
           {matches.map(s => (
             <div
               key={s.id}
-              className={`skill-item${selected.includes(s.id) ? ' selected' : ''}${s.precision === 'unsupported' ? ' dim' : ''}`}
+              className={`skill-item${selected.includes(s.id) ? ' selected' : ''}${s.precision === 'unsupported' || !okOf(s) ? ' dim' : ''}`}
               onClick={() => toggle(s.id)}
             >
               <div className="row1">
@@ -56,6 +63,7 @@ export function SkillPicker({ selected, onChange }: Props): JSX.Element {
                   {s.rarity === 'evolved' && <span className="badge cn" title="进化技能:本体技能进化后的强化版,数值与发动条件以进化后为准">进化</span>}
                   {s.cnReleased === true && <span className="badge cn">国服</span>}
                   <span className={`badge ${s.precision}`}>{PRECISION_LABEL[s.precision]}</span>
+                  {!okOf(s) && <span className="badge off" title="当前赛道/环境不满足装配限制,选中也不生效">不生效</span>}
                 </span>
               </div>
               <div className="meta">
@@ -82,6 +90,7 @@ export function SkillPicker({ selected, onChange }: Props): JSX.Element {
               <span className="idx">{i + 1}</span>
               {s.name}
               <span className={`badge ${s.precision}`}>{PRECISION_LABEL[s.precision]}</span>
+              {!okOf(s) && <span className="badge off">不生效</span>}
               ×
             </span>
           ))}

@@ -62,7 +62,7 @@ function solveSpurtTransition(
   ctx: SpurtCtx,
 ): number {
   const baseV = baseSpeedOf(course);
-  const gutsMod = gutsDrainModifier(runner);
+  const gutsMod = gutsDrainModifier(runner, course);
   const ground = runner.groundCondition ?? 0;
   const drainAt = (v: number): number =>
     staminaDrainPerSecond(v, baseV, course, { statusCoef: 1, ground, gutsModifier: gutsMod, phase: 2 });
@@ -109,7 +109,7 @@ export function simulate(course: Course, runner: RunnerConfig, opts: SimOptions 
   const baseV = baseSpeedOf(course);
   const maxHp = maxHpOf(course, runner);
   const minSpeed = minSpeedOf(course, runner);
-  const gutsMod = gutsDrainModifier(runner);
+  const gutsMod = gutsDrainModifier(runner, course);
   const spurtV = lastSpurtSpeedOf(course, runner);
   const ground = runner.groundCondition ?? 0;
   const distScale = course.distance / 1000;
@@ -128,14 +128,14 @@ export function simulate(course: Course, runner: RunnerConfig, opts: SimOptions 
   let ashiiroDone = false;
   const sfOn = (runner.assumeStaminaFight ?? true) && staminaFightDistCoef(course.distance) > 0;
   // 耐力对决参照值:面板×干劲 + 绿加成(绿不吃干劲,614tools worker Je 口径)
-  const sfGreen = passiveBonusOf(runner).stamina;
+  const sfGreen = passiveBonusOf(runner, course).stamina;
   const sfRef = runner.stats.stamina * MOTIVATION_WISDOM_MULT[runner.motivation] + sfGreen;
   const sfBonus = sfOn && sfRef > 1200 ? Math.sqrt(sfRef - 1200) * 0.0085 * staminaFightDistCoef(course.distance) : 0;
 
   // 全开冲刺:速度 ≥2001(含绿加成,614tools B2 口径)且进入末脚后速度达冲刺目标(含坡度修正)时
   const fsOn =
     (runner.fullSpurtEnabled ?? true) &&
-    runner.stats.speed + passiveBonusOf(runner).speed >= FULL_SPURT_SPEED_GATE;
+    runner.stats.speed + passiveBonusOf(runner, course).speed >= FULL_SPURT_SPEED_GATE;
   const fsRate = fsOn ? (FULL_SPURT_RATE * baseAccelOf(course, runner, 2, false)) / Math.pow(distScale, 1.5) : 0;
   let fsStarted = false;
   let fsExtra = 0;
@@ -164,7 +164,7 @@ export function simulate(course: Course, runner: RunnerConfig, opts: SimOptions 
 
   /** 发动效果入栈(共用路径:规则发动与位置采样强制发动) */
   const applyFire = (s: SkillConfig, frame: FrameState): void => {
-    const mult = effectMultiplier(s, runner, frame.phase);
+    const mult = effectMultiplier(s, runner, frame.phase, course);
     const dur = s.durationSec !== null && s.durationSec > 0 ? s.durationSec * distScale : 0;
     if (dur > 0) buffs.push({ skill: s, untilSec: t + dur, mult });
     const st = applyInstant(s, { v, hp, maxHp }, mult);
