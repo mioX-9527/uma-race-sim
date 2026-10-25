@@ -45,8 +45,18 @@ docs               最终方案 / formulas(公式与来源) / parity-log(对拍�
 ## 数据与公式
 
 - 技能数据:游戏解包数据一次性抓取生成(含本体/继承固有,触发代码级条件解析);后续新技能手动更新(zod 校验把关)
-- 赛道数据:开源解包数据集
+- 赛道数据:[alpha123/uma-skill-tools](https://github.com/alpha123/uma-skill-tools) 的游戏解包数据集(course_data.json,138 条赛道/17 赛场)
 - 公式来源与校准状态:见 `docs/formulas.md`
+
+## 来源与致谢
+
+- **游戏本体**:《赛马娘 Pretty Derby》(Cygames;国服《闪耀!优俊少女》由哔哩哔哩代理)——本工具全部技能/赛道数值的最终来源
+- **技能数据(2641 条)**:[BWIKI 赛马娘国服 WIKI](https://wiki.biligame.com/umamusume/)——[技能速查表](https://wiki.biligame.com/umamusume/%E6%8A%80%E8%83%BD%E9%80%9F%E6%9F%A5%E8%A1%A8)、游戏解包技能数据库模块(触发代码/效果/冷却)、继承技页面与国服译名(`tools/scrape-once` 一次性抓取,完整清单见 `data/version.json`)
+- **赛道数据(138 条/17 赛场)**:[alpha123/uma-skill-tools](https://github.com/alpha123/uma-skill-tools) 的 `course_data.json`(游戏解包,经 `tools/make-courses.ts` 转换;赛道补正公式参考其 CourseHelpers)
+- **同类模拟器(思路与对照基准)**:[614tools 技能模拟器](https://614tools.top/skill/)(公式与校准基准)、[Uma Race Emulator](http://race.wf-calc.net/)、[Google 表格 ウマ娘スキルシミュレーター](https://docs.google.com/spreadsheets/d/1wDlcXyHTML0wDzcJX7HNQTLrBXrLJeAD4z5bQ0jSrHI/edit)、[mee1080/umasim](https://github.com/mee1080/umasim)(AGPL-3.0,**只读参考**,未引入其代码)
+- **机制研究**:umamusumeschool(体力公式)、[note「理論で学ぶウマ娘」](https://note.com/legatus235/n/n8c1b4c304448)、umamusu_reveng 等
+
+逐条公式的出处与校准状态见 [`docs/formulas.md`](./docs/formulas.md)。感谢以上项目与社区资料的作者们。
 
 ## 免责声明
 
@@ -54,4 +64,21 @@ docs               最终方案 / formulas(公式与来源) / parity-log(对拍�
 
 ## 许可证
 
-[GPL-3.0](./LICENSE)
+- 本项目**代码**(packages / apps / tools 及构建脚本)以 [GPL-3.0-or-later](./LICENSE) 发布;
+- `data/` 目录中的**游戏解包数据与 WIKI 抓取数据**不在此许可范围内:版权归 Cygames 及相应数据来源方所有,此处仅以学习研究为目的随仓库分发;如权利方提出要求,将立即移除;
+- 对 AGPL-3.0 的 umasim 仅作只读参考、未引入其代码,故本项目维持 GPL-3.0。
+
+## 引用
+
+如果本项目对你的研究或创作有帮助,欢迎引用;仓库首页 "Cite this repository" 按钮给出同样内容(见 [CITATION.cff](./CITATION.cff)):
+
+```bibtex
+@software{mioX9527_uma_race_sim_2026,
+  author  = {mioX-9527},
+  title   = {uma-race-sim: 赛马娘(国服)赛道模拟器},
+  year    = {2026},
+  version = {v0.1.0},
+  url     = {https://github.com/mioX-9527/uma-race-sim},
+  license = {GPL-3.0-or-later}
+}
+```

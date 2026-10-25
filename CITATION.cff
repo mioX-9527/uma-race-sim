@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "如果您在研究或创作中使用了本项目,请按以下格式引用。"
+type: software
+title: "uma-race-sim: 赛马娘(国服)赛道模拟器"
+abstract: "开源的赛马娘(国服)网页版赛道模拟工具:技能发动位置、速度与体力曲线、每技能马身收益消融分析。"
+authors:
+  - alias: mioX-9527
+    website: "https://github.com/mioX-9527"
+version: 0.1.0
+date-released: "2026-10-25"
+license: GPL-3.0-or-later
+repository-code: "https://github.com/mioX-9527/uma-race-sim"
+keywords:
+  - umamusume
+  - race-simulator
