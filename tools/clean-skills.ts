@@ -44,6 +44,8 @@ interface OutSkill {
   restriction?: Record<string, unknown>;
   restrictionText?: string;
   wisdomScaled: boolean;
+  /** 触发代码含 *_random → 发动位置在满足区段内随机,消融按位置采样求期望 */
+  randomPosition?: boolean;
   source: string;
   fetchedAt: string;
 }
@@ -581,7 +583,6 @@ interface LuaSkillMeta {
   readonly textRestrictionObj?: Record<string, unknown>;
   readonly restrictionText?: string;
 }
-
 /** 解包数据单分支 → OutSkill(本体与继承技共用;review/info 由调用方落盘) */
 function skillFromLuaBranch(
   lua: Record<string, string>,
@@ -590,12 +591,15 @@ function skillFromLuaBranch(
 ): { skill: OutSkill; reasons: string[]; info: string[] } {
   const reasons: string[] = [];
   const info: string[] = [];
-  const cp = parseCode(lua[`condition_${slot}`] ?? '');
+  const codeRaw = lua[`condition_${slot}`] ?? '';
+  const cp = parseCode(codeRaw);
   for (const n of cp.notes) {
     (n.startsWith('未识别token') || n.includes('未知赛场') || n.includes('无已知赛场') ? reasons : info).push(n);
   }
   // 前置条件:限制并入,近似/未知 token 标记
   const pre = lua[`precondition_${slot}`] ?? '';
+  // 触发代码含 *_random(corner/phase/straight/slope 随机)→ 发动位置在区段内随机
+  const randomPosition = /_random/.test(`${codeRaw} ${pre}`);
   if (pre !== '') {
     const pp = parseCode(pre);
     mergeRestriction(cp.restriction, pp.restriction);
@@ -645,6 +649,7 @@ function skillFromLuaBranch(
     restriction: restrictionObj,
     restrictionText: meta.restrictionText,
     wisdomScaled: meta.wisdomScaled,
+    ...(randomPosition ? { randomPosition: true } : {}),
     source: meta.source,
     fetchedAt: raw.fetchedAt.slice(0, 10),
   };

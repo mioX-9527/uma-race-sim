@@ -116,6 +116,8 @@ export const skillSchema = z.object({
   /** 条件限制原始描述(装配时已过滤,数据层保留原始描述) */
   restrictionText: z.string().optional(),
   wisdomScaled: z.boolean(),
+  /** 触发代码含 *_random → 发动位置在满足区段内随机,消融按位置采样求期望 */
+  randomPosition: z.boolean().optional(),
   /** 数据来源与抓取日期,供追溯 */
   source: z.string().optional(),
   fetchedAt: z.string().optional(),

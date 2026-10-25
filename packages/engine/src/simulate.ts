@@ -34,7 +34,7 @@ import {
   type Buff,
 } from './skills';
 import { gutsDrainModifier, maxHpOf, staminaDrainPerSecond } from './stamina';
-import type { Activation, Course, RunnerConfig, SimOptions, SimResult, Slope } from './types';
+import type { Activation, Course, RunnerConfig, SimOptions, SimResult, SkillConfig, Slope } from './types';
 
 const MAX_SECONDS = 600;
 
@@ -105,6 +105,7 @@ function solveSpurtTransition(
  */
 export function simulate(course: Course, runner: RunnerConfig, opts: SimOptions = {}): SimResult {
   const ignoreExhaustion = opts.ignoreExhaustion === true;
+  const positionOverrides = opts.positionOverrides;
   const baseV = baseSpeedOf(course);
   const maxHp = maxHpOf(course, runner);
   const minSpeed = minSpeedOf(course, runner);
@@ -156,6 +157,22 @@ export function simulate(course: Course, runner: RunnerConfig, opts: SimOptions 
   const activated = new Set<string>();
   /** 带冷却技能的下次可发动时刻(秒,基准值已按 距离/1000 缩放) */
   const readyAt = new Map<string, number>();
+  /** 位置采样:已按强制位置发动过的技能 */
+  const overrideFired = new Set<string>();
+
+  /** 发动效果入栈(共用路径:规则发动与位置采样强制发动) */
+  const applyFire = (s: SkillConfig, frame: FrameState): void => {
+    const mult = effectMultiplier(s, runner, frame.phase);
+    const dur = s.durationSec !== null && s.durationSec > 0 ? s.durationSec * distScale : 0;
+    if (dur > 0) buffs.push({ skill: s, untilSec: t + dur, mult });
+    const st = applyInstant(s, { v, hp, maxHp }, mult);
+    v = st.v;
+    hp = st.hp;
+    // 目标/即时速度技能提前解除序盘 PDM(614tools sim1!BX)
+    if (s.effects.some(e => (e.type === 'targetSpeed' || e.type === 'currentSpeed') && e.value !== 0)) pdmActive = false;
+    // 回复改变体力预算:末脚尚未开始时重算起点
+    if (s.effects.some(e => e.type === 'heal') && !spurtOn) spurtTransition = null;
+  };
 
   const record = (): void => {
     tArr.push(t);
@@ -252,6 +269,18 @@ export function simulate(course: Course, runner: RunnerConfig, opts: SimOptions 
       if (s.precision === 'unsupported') continue;
       const once = s.cooldownSec === null || s.cooldownSec === undefined;
       if (once ? activated.has(s.id) : (readyAt.get(s.id) ?? 0) > t) continue;
+      // 位置采样(消融):强制首次发动位置——未到指定位置前压制规则发动,到达即发动(跳过区段/动态判定)
+      const overrideM = positionOverrides?.get(s.id);
+      if (overrideM !== undefined && !overrideFired.has(s.id)) {
+        if (x < overrideM) continue;
+        if (s.restriction !== undefined && !restrictionSatisfied(s.restriction, runner, course)) continue;
+        overrideFired.add(s.id);
+        if (once) activated.add(s.id);
+        else readyAt.set(s.id, t + s.cooldownSec * distScale);
+        activations.push({ skillId: s.id, name: s.name, atSec: t, atMeter: x, precision: s.precision });
+        applyFire(s, frame);
+        continue;
+      }
       if (s.restriction !== undefined && !restrictionSatisfied(s.restriction, runner, course)) continue;
       const hit = activationRegions(s.condition, course).some(r => inRegion(r, x));
       if (!hit) continue;
@@ -259,16 +288,7 @@ export function simulate(course: Course, runner: RunnerConfig, opts: SimOptions 
       if (once) activated.add(s.id);
       else readyAt.set(s.id, t + s.cooldownSec * distScale);
       activations.push({ skillId: s.id, name: s.name, atSec: t, atMeter: x, precision: s.precision });
-      const mult = effectMultiplier(s, runner, frame.phase);
-      const dur = s.durationSec !== null && s.durationSec > 0 ? s.durationSec * distScale : 0;
-      if (dur > 0) buffs.push({ skill: s, untilSec: t + dur, mult });
-      const st = applyInstant(s, { v, hp, maxHp }, mult);
-      v = st.v;
-      hp = st.hp;
-      // 目标/即时速度技能提前解除序盘 PDM(614tools sim1!BX)
-      if (s.effects.some(e => (e.type === 'targetSpeed' || e.type === 'currentSpeed') && e.value !== 0)) pdmActive = false;
-      // 回复改变体力预算:末脚尚未开始时重算起点
-      if (s.effects.some(e => e.type === 'heal') && !spurtOn) spurtTransition = null;
+      applyFire(s, frame);
     }
 
     if (ashiiroRemaining > 0) ashiiroRemaining = Math.max(0, ashiiroRemaining - dt);

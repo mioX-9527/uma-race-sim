@@ -153,6 +153,11 @@ export interface SkillConfig {
   readonly restriction?: SkillRestriction;
   /** 是否受智力增幅(固有/レア) */
   readonly wisdomScaled: boolean;
+  /**
+   * 触发代码含 *_random(进弯道/阶段/直线后随机位置发动)→ 发动位置在满足区段内随机,
+   * 消融时按位置采样求期望(见 analysis ablate);false/缺省 = 条件满足即发动,无需采样。
+   */
+  readonly randomPosition?: boolean;
 }
 
 /** 场地状态:0=良 1=稍重 2=重 3=不良(触发代码 ground_condition 1良~4不良,映射为代码−1) */
@@ -214,6 +219,11 @@ export interface SimOptions {
    * 即 614tools 耐力计算器的温存回避线口径)。exhaustedAtMeter 仍记录首次归零位置。
    */
   readonly ignoreExhaustion?: boolean;
+  /**
+   * 消融位置采样用:强制技能首次发动位置(米)。跑到该位置即发动(跳过条件/动态判定,
+   * 仍受装配限制约束);后续发动照常按冷却规则衔接。未指定的技能按条件规则发动。
+   */
+  readonly positionOverrides?: ReadonlyMap<string, number>;
 }
 
 export interface SimResult {

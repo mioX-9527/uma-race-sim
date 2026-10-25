@@ -259,6 +259,20 @@ export function inRegion(r: Region, x: number): boolean {
   return r[0] === r[1] ? x >= r[0] : x >= r[0] && x <= r[1];
 }
 
+/**
+ * 区段随机类技能(randomPosition)的可采样区间:activationRegions 结果中长度 > 0 的段。
+ * 点条件(raceStart 等)与动态条件(lastSpurt/带 spurt 标记,起点随体力预算变化)不可枚举 → null,
+ * 消融时这些技能不采样、维持规则发动。
+ */
+export function sampleableSpans(cond: SkillCondition, course: Course): readonly Region[] | null {
+  if (cond.kind === 'lastSpurt' || cond.kind === 'raceStart' || cond.kind === 'elapsedSec' || cond.kind === 'positionPct' || cond.kind === 'distanceRun') {
+    return null;
+  }
+  if ('spurt' in cond && cond.spurt === true) return null;
+  const spans = activationRegions(cond, course).filter(r => r[1] > r[0]);
+  return spans.length > 0 ? spans : null;
+}
+
 /** 区间命中后的动态谓词;返回 true 表示本帧可发动 */
 export function dynamicSatisfied(cond: SkillCondition, s: FrameState): boolean {
   switch (cond.kind) {

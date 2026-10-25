@@ -161,3 +161,7 @@ table.ablation .neg { color: var(--warn); }
 .legend .k { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 4px; vertical-align: -1px; }
 
 .disclaimer { color: var(--muted); font-size: 11px; margin-top: 20px; border-top: 1px solid var(--border); padding-top: 8px; }
+
+/* 消融表内联展开按钮 */
+.linkish { background: none; border: none; padding: 0; font: inherit; color: var(--accent, #2563eb); cursor: pointer; text-decoration: underline; }
+.sample-row > td { background: rgba(127, 179, 227, 0.06); }
