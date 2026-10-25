@@ -144,6 +144,7 @@ export function App(): JSX.Element {
               course={course}
               activations={result.activations}
               exhaustedAtMeter={result.exhaustedAtMeter}
+              skillOrder={runner.skills.map(s => s.id)}
               hoverMeter={hoverMeter}
               onHover={setHoverMeter}
               align={plotArea}

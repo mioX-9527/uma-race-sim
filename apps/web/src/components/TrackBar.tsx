@@ -6,6 +6,8 @@ interface Props {
   course: Course;
   activations: readonly Activation[];
   exhaustedAtMeter: number | null;
+  /** 技能编号基准(= 消融表的行序,即 runner.skills 顺序):标记序号按技能而非按发动次数 */
+  skillOrder: readonly string[];
   /** 两图联动悬停:App 持有的全局悬停距离(null = 无);onHover 上报本图鼠标位置 */
   hoverMeter: number | null;
   onHover: (m: number | null) => void;
@@ -20,7 +22,7 @@ const H = 96;
 /** 赛道条:弯道/坡度/阶段分界/技能发动点/体力归零点。
  *  画布用 margin/width 精确锚定到曲线图绘图区(.u-under)的实时 DOM 几何——
  *  浏览器缩放/窗口变化下两图逐像素对齐;悬停经 App 中转实现两图联动。 */
-export function TrackBar({ course, activations, exhaustedAtMeter, hoverMeter, onHover, align, describePoint }: Props): JSX.Element {
+export function TrackBar({ course, activations, exhaustedAtMeter, skillOrder, hoverMeter, onHover, align, describePoint }: Props): JSX.Element {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
   const tipRef = useRef<HTMLDivElement>(null);
@@ -199,20 +201,37 @@ export function TrackBar({ course, activations, exhaustedAtMeter, hoverMeter, on
       ctx.fillText('体力归零', px(exhaustedAtMeter) - 18, 88);
     }
 
-    // 技能发动点
+    // 技能发动点:序号 = 技能编号(与消融表一致);同技能再次发动用空心圆区分
+    const fired = new Map<string, number>();
     activations.forEach((a, i) => {
       const x = px(a.atMeter);
+      const occurrence = fired.get(a.skillId) ?? 0;
+      fired.set(a.skillId, occurrence + 1);
+      const tableIdx = skillOrder.indexOf(a.skillId);
+      const label = tableIdx >= 0 ? String(tableIdx + 1) : String(i + 1);
       ctx.strokeStyle = a.precision === 'approx' ? '#d97706' : '#2563eb';
       ctx.beginPath();
       ctx.moveTo(x, 20);
       ctx.lineTo(x, 52);
       ctx.stroke();
-      ctx.fillStyle = a.precision === 'approx' ? '#d97706' : '#2563eb';
+      if (occurrence === 0) {
+        ctx.fillStyle = a.precision === 'approx' ? '#d97706' : '#2563eb';
+      } else {
+        // 同技能第 2+ 次发动:空心圆(同色描边),序号不变
+        ctx.fillStyle = '#ffffff';
+      }
       ctx.beginPath();
       ctx.arc(x, 17, 7, 0, Math.PI * 2);
       ctx.fill();
-      ctx.fillStyle = '#ffffff';
-      ctx.fillText(`${i + 1}`, x - 2, 20.5);
+      if (occurrence > 0) {
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(x, 17, 6, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.lineWidth = 1;
+      }
+      ctx.fillStyle = a.precision === 'approx' ? (occurrence > 0 ? '#d97706' : '#ffffff') : occurrence > 0 ? '#2563eb' : '#ffffff';
+      ctx.fillText(label, x - 2, 20.5);
     });
 
     // 两图联动悬停线(来自任一图的悬停位置)
@@ -293,6 +312,9 @@ export function TrackBar({ course, activations, exhaustedAtMeter, hoverMeter, on
         <span><i className="k" style={{ background: '#3d8bfd66' }} />下坡</span>
         <span><i className="k" style={{ background: '#2563eb' }} />技能发动</span>
         <span><i className="k" style={{ background: '#d97706' }} />近似层发动</span>
+        <span title="同一技能(如带冷却的弧线大师)再次发动:序号不变,标记为空心">
+          <i className="k" style={{ background: '#ffffff', border: '2px solid #2563eb' }} />再次发动(空心)
+        </span>
         <span><i className="k" style={{ background: '#dc2626' }} />体力归零</span>
       </div>
     </div>
