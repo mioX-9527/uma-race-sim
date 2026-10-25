@@ -105,17 +105,44 @@ export function AblationTable({ report }: { report: AblationReport }): JSX.Eleme
         </tbody>
         {rows.length > 0 && (
           <tfoot>
-            <tr>
-              <td colSpan={5}>Σ 单项收益(去重前)</td>
-              <td>{signed(report.sumDeltaSec, 3)}</td>
-              <td>{signed(report.sumDeltaSec * 20, 0)}m(约)</td>
-              <td>{signed((report.sumDeltaSec * 20) / 2.5, 2)}(约)</td>
-            </tr>
-            <tr>
-              <td colSpan={5}>实测总收益(无技能 − 全技能)</td>
-              <td>{signed(report.totalDeltaSec, 3)}</td>
-              <td colSpan={2}>{signed((report.totalDeltaSec * 20) / 2.5, 2)} 马身(约)</td>
-            </tr>
+            {report.mcDraws !== undefined && report.totalExpectedSec !== undefined && (
+              <>
+                <tr>
+                  <td colSpan={5}>Σ 单项收益(期望口径,联合抽样 {report.mcDraws} 组)</td>
+                  <td>{signed(report.sumExpectedSec, 3)}</td>
+                  <td>{signed(report.sumExpectedSec * 20, 0)}m(约)</td>
+                  <td>{signed((report.sumExpectedSec * 20) / 2.5, 2)}(约)</td>
+                </tr>
+                <tr>
+                  <td colSpan={5}>实测总收益(期望 ±95%CI)</td>
+                  <td>
+                    {signed(report.totalExpectedSec, 3)}
+                    <span className="meta">(±{report.totalExpectedCI.toFixed(3)})</span>
+                  </td>
+                  <td colSpan={2}>{signed((report.totalExpectedSec * 20) / 2.5, 2)} 马身(约)</td>
+                </tr>
+                <tr className="meta">
+                  <td colSpan={5}>规则取位对照:Σ 单项 / 总收益</td>
+                  <td>{signed(report.sumDeltaSec, 3)} / {signed(report.totalDeltaSec, 3)}</td>
+                  <td colSpan={2}>{signed((report.totalDeltaSec * 20) / 2.5, 2)} 马身(约)</td>
+                </tr>
+              </>
+            )}
+            {report.mcDraws === undefined && (
+              <>
+                <tr>
+                  <td colSpan={5}>Σ 单项收益(去重前)</td>
+                  <td>{signed(report.sumDeltaSec, 3)}</td>
+                  <td>{signed(report.sumDeltaSec * 20, 0)}m(约)</td>
+                  <td>{signed((report.sumDeltaSec * 20) / 2.5, 2)}(约)</td>
+                </tr>
+                <tr>
+                  <td colSpan={5}>实测总收益(无技能 − 全技能)</td>
+                  <td>{signed(report.totalDeltaSec, 3)}</td>
+                  <td colSpan={2}>{signed((report.totalDeltaSec * 20) / 2.5, 2)} 马身(约)</td>
+                </tr>
+              </>
+            )}
           </tfoot>
         )}
       </table>
@@ -123,8 +150,9 @@ export function AblationTable({ report }: { report: AblationReport }): JSX.Eleme
       <p className="note">
         收益 = 去掉该技能后完赛变慢的幅度(马身 = 米差/2.5)。Σ单项 ≠ 总收益属正常:技能间存在交互
         (回体技能改变后续发动位置、速度技能改变体力曲线)。未发动的技能不计收益。
-        标「期望」的技能发动位置在满足区段内随机(如进弯道随机时刻),数字为区段全长均匀采样的期望,
-        点击可展开逐位置明细;名次类条件(依赖名次/间距)仍为规则取位近似。
+        标「期望」的技能发动位置在满足区段内随机(如进弯道随机时刻):行内数字与表尾两行期望口径
+        来自联合蒙特卡洛(所有随机位置技能的发动点联合抽样,含技能间随机耦合,确定性可复现);
+        展开明细为「固定其余技能规则发动」的逐位置对照。名次类条件(依赖名次/间距)仍为规则取位近似。
       </p>
     </div>
   );

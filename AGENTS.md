@@ -68,12 +68,16 @@ node tools/clean-skills.ts    # 重新生成 skills.json(node 24 直跑 TS)
   仅作"重新测量"触发器——图表挂载/重建时赛道条自身感知不到,**没有这个触发器首屏就错位**。
   两图悬停联动经 App 的 hoverMeter 状态中转:任一图悬停 → 另一图显示同距离数据
   (Chart 用 u.setCursor 吸附最近数据点并弹 tooltip,TrackBar 画虚线 + tooltip)。
-- **位置采样消融(方案二)**:触发代码含 `*_random` 的技能带 `randomPosition` 标记(1118 条),
-  其发动位置在满足区段内随机,规则取位(进区段即发动)只是随机的一个实现。消融时
-  `ablate()` 在满足区段全长(引擎 `sampleableSpans`)均匀取 7 点,经
-  `SimOptions.positionOverrides`(skillId → 米)强制发动后分别消融,报期望/区间/逐位置明细;
-  名次类条件(order_rate 等)依赖名次状态,不可枚举,维持规则取位。改采样逻辑前先读
-  `packages/analysis/src/ablate.ts` 头注释。
+- **位置采样与联合蒙特卡洛消融(方案二)**:触发代码含 `*_random` 的技能带 `randomPosition` 标记
+  (1118 条),其发动位置在满足区段内随机,规则取位(进区段即发动)只是随机的一个实现。
+  `ablate()` 两层处理(读 `packages/analysis/src/ablate.ts` 头注释再改):
+  ① 逐位置明细:满足区段全长(引擎 `sampleableSpans`)均匀取 7 点,经
+     `SimOptions.positionOverrides`(skillId → 米)强制发动后分别消融——展示"位置不同收益不同";
+  ② 联合蒙特卡洛期望:全部随机位置技能的发动点做联合拉丁超立方抽样(确定性可复现,
+     组数按技能数自适应 8~24),每组下跑全技能与逐技能 leave-one-out——
+     行级 expectedBody / 表尾 Σ与总收益的期望口径(±95%CI)均来自联合随机环境。
+  仅统计规则下确实发动的随机技能(装配限制不符的不采样);名次类条件(order_rate 等)
+  依赖名次状态,不可枚举,维持规则取位。
 
 ## 5. 本机环境坑(Windows + cmd,踩过的都在这)
 

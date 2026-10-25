@@ -70,12 +70,30 @@ describe('ablate 位置采样', () => {
     // 采样点覆盖满足区段(首个在弯道1内 100~246m)
     expect(row.positionSamples![0]!.meter).toBeGreaterThanOrEqual(100);
     expect(row.positionSamples![0]!.meter).toBeLessThanOrEqual(246);
-    // 期望 = 算术平均,且落在 [min, max] 内
-    expect(row.expectedBody!).toBeCloseTo(bodies.reduce((a, b) => a + b, 0) / 7, 10);
-    expect(row.expectedBody!).toBeGreaterThanOrEqual(row.bodyRange![0]! - 1e-9);
-    expect(row.expectedBody!).toBeLessThanOrEqual(row.bodyRange![1]! + 1e-9);
     // 不同位置收益确实不同(用户提出的问题前提)
     expect(new Set(bodies).size).toBeGreaterThan(1);
+    // 单随机技能:联合 MC 期望 ≈ K 点均匀采样期望(两者估计同一期望)
+    const kMean = bodies.reduce((a, b) => a + b, 0) / bodies.length;
+    expect(Math.abs(row.expectedBody! - kMean)).toBeLessThan(0.3);
+  });
+
+  test('联合蒙特卡洛:单随机技能时 Σ期望=总收益期望=行期望,且报抽样组数', () => {
+    const arc = skills.find(s => s.name === '弧线大师')!;
+    const runner = makeRunner({
+      stats: { speed: 2200, stamina: 1600, power: 1700, guts: 1200, wisdom: 1800 },
+      distanceAptitude: 'S',
+      surfaceAptitude: 'A',
+      tactic: 'senko',
+      skills: [arc],
+    });
+    const rep = ablate(nak, runner);
+    expect(rep.mcDraws).toBeDefined();
+    expect(rep.totalExpectedSec).toBeDefined();
+    expect(rep.sumExpectedSec).toBeDefined();
+    // 单技能:总收益期望与行期望是同一量的两种换算
+    const bodyFromTotal = (rep.totalExpectedSec! * (simulate(nak, runner).spurtTargetSpeed)) / 2.5;
+    expect(bodyFromTotal).toBeCloseTo(rep.rows[0]!.expectedBody!, 6);
+    expect(rep.sumExpectedSec! * (simulate(nak, runner).spurtTargetSpeed) / 2.5).toBeCloseTo(rep.rows[0]!.expectedBody!, 6);
   });
 
   test('非随机位置技能不采样(precise/无 randomPosition)', () => {
@@ -83,5 +101,6 @@ describe('ablate 位置采样', () => {
     const runner = makeRunner({ stats: { speed: 2200, stamina: 5000, power: 1700, guts: 1200, wisdom: 1800 }, skills: [s] });
     const rep = ablate(nak, runner);
     expect(rep.rows[0]!.positionSamples).toBeUndefined();
+    expect(rep.mcDraws).toBeUndefined();
   });
 });
