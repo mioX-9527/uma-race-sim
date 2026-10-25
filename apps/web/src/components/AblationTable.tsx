@@ -61,6 +61,22 @@ export function AblationTable({ report }: { report: AblationReport }): JSX.Eleme
                         被依赖 {r.dependentIds.length}
                       </span>
                     )}
+                    {r.carryOverSpeed !== undefined && (
+                      <span
+                        className="badge carry"
+                        title={
+                          `进入末脚(最终冲刺)时起步速度被抬高 +${r.carryOverSpeed.toFixed(2)} m/s`
+                          + (r.carryOverLeftSec === undefined
+                            ? ''
+                            : r.carryOverLeftSec >= 0
+                              ? `(技能还在生效,剩 ${r.carryOverLeftSec.toFixed(1)}s)`
+                              : `(技能已在进入末脚前 ${(-r.carryOverLeftSec).toFixed(1)}s 结束,残余部分按阶段减速度衰减后剩下的)`)
+                          + '。这段速度会被带进终盘加速段:加速段不用从原速重新爬,技能结束后也不用"还回去" —— 即「存速」'
+                        }
+                      >
+                        存速 +{r.carryOverSpeed.toFixed(2)}
+                      </span>
+                    )}
                   </td>
                   <td className="left">
                     {skill !== undefined ? (
@@ -163,6 +179,8 @@ export function AblationTable({ report }: { report: AblationReport }): JSX.Eleme
       </div>
       <p className="note">
         收益 = 只去掉该技能的效果(它照常发动、仍算进别的技能的前提)后,完赛变慢的幅度(马身 = 米差/2.5)。
+        绿底「存速 +x」= 进入末脚那一帧该项速度加成仍在生效:它把起步速度抬高了 x,终盘加速段(约 10s)因此缩短,
+        所以同样数值越靠近末脚起点收益越大;在末脚起点之后才发动、又在爬到原上限前结束的技能,加速段会把它吃掉(收益≈0)。
         所以回复/耐力类技能在体力不吃紧时显示 +0.00 是正常的;标「被依赖」的技能,从牌组里删掉才会连带失去依赖它的技能。
         Σ单项 ≠ 总收益属正常:技能间存在交互。
         标「期望」的技能发动位置在满足区段内随机(如进弯道随机时刻),数字来自联合蒙特卡洛

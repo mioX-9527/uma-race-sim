@@ -111,3 +111,30 @@ describe('单项效果消融(只去掉效果、保留发动)', () => {
     expect(byId.get('x-b2')!.dependentIds).toBeUndefined();
   });
 });
+
+describe('存速(末脚起点仍生效的速度加成)', () => {
+  const buff = (id: string, fromPct: number): SkillConfig => ({
+    id,
+    name: id,
+    rarity: 'normal',
+    precision: 'precise',
+    effects: [{ type: 'targetSpeed', value: 0.25 }],
+    durationSec: 5,
+    condition: { kind: 'distanceRate', fromPct, toPct: 100 },
+    wisdomScaled: false,
+  });
+
+  test('持续到末脚起点 → 报告 carryOverSpeed;起点前结束 → 不报告', () => {
+    const rep = ablate(C, freshRunner([buff('carry', 55), buff('early', 40)]));
+    const byId = new Map(rep.rows.map(r => [r.skillId, r]));
+    expect(byId.get('carry')!.carryOverSpeed).toBeCloseTo(0.25, 3);
+    expect(byId.get('carry')!.carryOverLeftSec).toBeGreaterThan(0);
+    expect(byId.get('early')!.carryOverSpeed).toBeUndefined();
+  });
+
+  test('存速行的收益高于同数值但早结束的行(加速段把它带进终盘)', () => {
+    const rep = ablate(C, freshRunner([buff('carry', 55), buff('early', 40)]));
+    const byId = new Map(rep.rows.map(r => [r.skillId, r]));
+    expect(byId.get('carry')!.deltaSec).toBeGreaterThan(byId.get('early')!.deltaSec);
+  });
+});

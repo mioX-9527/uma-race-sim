@@ -52,6 +52,15 @@ export interface AblationRow {
    * 说明为何「从牌组里删掉它」的损失可能大于本行收益:它一停,这些技能也不发动。
    */
   readonly dependentIds?: readonly string[];
+  /**
+   * **存速**:进入末脚(最终冲刺)那一帧仍然生效的速度加成(m/s)。
+   * 缺省 = 该技能在末脚起点之前就已结束(或没有持续型速度效果)。
+   * 这段速度会以「更高的起步速度」带进终盘加速段 —— 加速段不必从原速重新爬,
+   * 收益 ≈ 存速值 × 剩余加速时长(2400m 约 0.4 m/s²×10s)。
+   */
+  readonly carryOverSpeed?: number;
+  /** 存速还能保持多久(秒,自末脚起点起算;超过加速段的部分会在上限处被吃掉) */
+  readonly carryOverLeftSec?: number;
 }
 
 export interface AblationReport {
@@ -203,6 +212,40 @@ export function ablate(course: Course, runner: RunnerConfig): AblationReport {
   }
   const dependentsOf = (id: string): string[] => dependents.get(id) ?? [];
 
+  /**
+   * 存速:进入末脚(最终冲刺)那一帧的「起步速度」被持续型速度技能抬高了多少。
+   * 直接取「完整模拟 − 只去掉该技能效果」在同一位置的瞬时速度差(**精确值**,不做衰减建模:
+   * 技能若在末脚起点前不久结束,这段时间按阶段减速度已经衰减掉一部分,差值自动反映)。
+   * 只对带持续时间的速度技能计算(绿技能/被动是常时,不算存速)。
+   */
+  const spurtM = full.spurtStartMeter;
+  const speedAt = (r: typeof full, meter: number): number | null => {
+    for (let i = 1; i < r.x.length; i++) {
+      if (r.x[i - 1]! < meter && r.x[i]! >= meter) return r.v[i - 1]!;
+    }
+    return null;
+  };
+  const carryOverOf = (
+    skill: RunnerConfig['skills'][number],
+    without: typeof full,
+    acts: readonly { atSec: number }[],
+  ): { speed: number; leftSec: number } | null => {
+    if (spurtM === null) return null;
+    const dur = skill.durationSec !== null && skill.durationSec > 0 ? skill.durationSec * distScale : 0;
+    if (dur <= 0) return null;
+    if (!skill.effects.some(e => e.type === 'targetSpeed' || e.type === 'currentSpeed')) return null;
+    const a = speedAt(full, spurtM);
+    const b = speedAt(without, spurtM);
+    if (a === null || b === null) return null;
+    const speed = a - b;
+    if (speed <= 0.01) return null;
+    // 剩余时长(负值 = 已在进入末脚前 X 秒结束,残余部分靠衰减)
+    const covering = acts.filter(x => x.atSec <= full.spurtStartSec!).pop();
+    const leftSec = covering !== undefined ? covering.atSec + dur - full.spurtStartSec! : 0;
+    return { speed, leftSec };
+  };
+  const distScale = course.distance / 1000;
+
   const rows: AblationRow[] = runner.skills.map(skill => {
     // 装配限制是否满足(不满足 = 整场不生效:绿技能不计入属性,普通技能不发动)
     const applicable = skillApplicable(skill, course, runner);
@@ -250,6 +293,10 @@ export function ablate(course: Course, runner: RunnerConfig): AblationReport {
       deltaBody: deltaMeter / BODY_LENGTH_METERS,
       applicable,
       ...(dependentsOf(skill.id).length > 0 ? { dependentIds: dependentsOf(skill.id) } : {}),
+      ...(() => {
+        const carry = carryOverOf(skill, without, acts);
+        return carry !== null ? { carryOverSpeed: carry.speed, carryOverLeftSec: carry.leftSec } : {};
+      })(),
       ...(positionSamples !== undefined ? { positionSamples } : {}),
       ...(expectedBody !== undefined ? { expectedBody, bodyRange } : {}),
     };

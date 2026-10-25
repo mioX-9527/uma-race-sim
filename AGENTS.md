@@ -69,7 +69,7 @@ tools              抓取/清洗/构建后处理脚本(见下表)
 ```bash
 npm run dev         # 开发服务 http://localhost:5173(热更)
 npm run build       # 单文件构建:apps/web/dist/index.html + 根目录 打开模拟器.html
-npm test            # engine + analysis 全部 vitest(当前 126 例)
+npm test            # engine + analysis 全部 vitest(当前 134 例)
 npm run typecheck   # 四包 tsc(engine/analysis/schema/web;web 2026-10-25 纳入)
 node tools/validate-data.ts   # 数据 zod 校验
 node tools/clean-skills.ts    # 重新生成 skills.json(node 24 直跑 TS)
@@ -140,6 +140,12 @@ node tools/clean-skills.ts    # 重新生成 skills.json(node 24 直跑 TS)
   前提不满足是「本帧不发动、后续帧继续判」,不是「整场禁用」;消融的位置采样强制发动也要过前提。
   带前提的**常时被动**不并入起跑属性(加成在比赛中段才成立),数据侧标不支持。
   尚未建模:`activate_count_all_team`(队伍)、`is_activate_other_character_*`(他马)、`running_style_count_*`(他马跑法统计)。
+- **存速(Spurt Speed Carry-over,2026-10-25 核对)**:速度技能抬的是**目标速度上限**,不是加速度;
+  马始终以固定加速度爬向上限(2400m 约 9~10s ≈ 200m)。因此「加速段内不产生速度差」,
+  但**进入末脚那一帧仍在生效**的技能会把起步速度整体抬高 x,加速段全程少爬 x,技能结束后这段速度也不用还回去
+  —— 收益 ≈ x × 加速段时长(+0.25 ≈ 1.5~2 马身)。反之,末脚起点之后才发动、又在爬到原上限前结束的技能收益≈0。
+  判定基准 `SimResult.spurtStartMeter/spurtStartSec`;消融 `carryOverSpeed` 用「完整 − 只去掉效果」在同位置的
+  瞬时速度差(精确值)。**别再写「小 buff 完赛时间完全不变」这种绝对话** —— 只有不跨末脚起点时才成立。
 - **限制判定入口**:`packages/engine/src/restriction.ts` 的 `clauseSatisfied`(单子句,字段间为与)与
   `restrictionSatisfied`(有 `anyOf` 时任一子句满足即可)。`skillApplicable()` 供 UI/消融判断「不生效」。
   `base_*` 属性条件取**面板值**(`runner.stats`),不含绿技能与干劲。

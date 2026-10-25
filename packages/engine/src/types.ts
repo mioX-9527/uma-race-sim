@@ -360,6 +360,14 @@ export interface SimResult {
   readonly finishTimeSec: number;
   /** 末脚目标速度(m/s,有效属性口径);马身差换算基准(614tools 口径) */
   readonly spurtTargetSpeed: number;
+  /**
+   * 末脚(最终冲刺)起点:位置(米)。体力充足时 = 终盘分界,体力不足时由 HP 预算解算推迟;
+   * null = 全程未进入末脚(极端体力不足)。**「存速」的判定基准**:
+   * 进入末脚的瞬时速度由中盘速度技能抬高,这段速度会被带进终盘加速段(不需要"还回去")。
+   */
+  readonly spurtStartMeter: number | null;
+  /** 末脚起点时刻(秒);判定技能在进入末脚时是否仍生效(存速) */
+  readonly spurtStartSec: number | null;
   /** 逐帧序列(下标对齐);用 Float64 保存体力等大数值的帧间精度 */
   readonly t: Float64Array;
   readonly x: Float64Array;

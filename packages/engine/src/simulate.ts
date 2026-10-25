@@ -155,6 +155,9 @@ export function simulate(course: Course, runner: RunnerConfig, opts: SimOptions 
   let tempering = false;
   let spurtOn = false;
   let spurtTransition: number | null = null;
+  /** 末脚起点的位置/时刻(首次进入末脚那一帧;存速判定基准) */
+  let spurtStartMeter: number | null = null;
+  let spurtStartSec: number | null = null;
   let startDash = true;
   let exhaustedAtMeter: number | null = null;
   const buffs: Buff[] = [];
@@ -216,7 +219,11 @@ export function simulate(course: Course, runner: RunnerConfig, opts: SimOptions 
     if (phase >= 2 && spurtTransition === null) {
       spurtTransition = solveSpurtTransition(course, runner, { pos: x, hp }, inert);
     }
-    if (!spurtOn && spurtTransition !== null && x >= spurtTransition) spurtOn = true;
+    if (!spurtOn && spurtTransition !== null && x >= spurtTransition) {
+      spurtOn = true;
+      spurtStartMeter = x;
+      spurtStartSec = t;
+    }
     if (pdmActive && x >= pdmEndM) pdmActive = false;
     if (ashiiroOn && !ashiiroDone && x >= late) {
       ashiiroRemaining = ASHIIRO_DURATION_SEC;
@@ -336,6 +343,8 @@ export function simulate(course: Course, runner: RunnerConfig, opts: SimOptions 
   return {
     finishTimeSec: interp + START_DELAY_EXPECTED,
     spurtTargetSpeed: spurtV,
+    spurtStartMeter,
+    spurtStartSec,
     t: Float64Array.from(tArr),
     x: Float64Array.from(xArr),
     v: Float64Array.from(vArr),
