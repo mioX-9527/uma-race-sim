@@ -137,7 +137,7 @@ export function App(): JSX.Element {
       </div>
 
       <p className="disclaimer">
-        非官方同人开源工具(GPL-3.0),与 Cygames/bilibili 无关;《赛马娘 Pretty Derby》名称与商标归各权利方所有。
+        由 mioX 通过 AI 制作,仅供个人测试使用,非官方同人开源工具(GPL-3.0),与 Cygames/bilibili 无关;《赛马娘 Pretty Derby》名称与商标归各权利方所有。
         数据来源:公开解包数据与社区攻略资料整理;数值仅作育成参考。随机机制(焦躁/追比/多马阻挡等)不参与 v0.1 计算,近似项已在界面标注。
       </p>
     </div>
