@@ -146,6 +146,13 @@ node tools/clean-skills.ts    # 重新生成 skills.json(node 24 直跑 TS)
   —— 收益 ≈ x × 加速段时长(+0.25 ≈ 1.5~2 马身)。反之,末脚起点之后才发动、又在爬到原上限前结束的技能收益≈0。
   判定基准 `SimResult.spurtStartMeter/spurtStartSec`;消融 `carryOverSpeed` 用「完整 − 只去掉效果」在同位置的
   瞬时速度差(精确值)。**别再写「小 buff 完赛时间完全不变」这种绝对话** —— 只有不跨末脚起点时才成立。
+- **消融口径三分支(2026-10-25)**:只有触发代码含 `*_random` 的技能(1118 条)才有「位置在区段内随机」,
+  才给 `expectedBody`/`bodyRange`/`positionSamples`(位置采样 + 联合 MC)。**时机确定的技能
+  (开赛 X 秒后、终点前 X 米、末脚入口等)只有一个确定值,没有可抽样的分布 —— 别硬造期望**;
+  用户问「为什么没有期望」时先回查触发代码里有没有 `*_random`,没有就是设计如此。
+  带冷却、同场多次发动的技能另走 `SimOptions.inertFirings`(只去掉第 i 次的效果,其余各次照常、
+  仍记入 `fired`),消融报 `AblationRow.firingSamples`,UI 标「逐次」可展开;
+  Σ逐次 与 `deltaBody`(整条都去掉)的差 = 前后段耦合,不是 bug。
 - **限制判定入口**:`packages/engine/src/restriction.ts` 的 `clauseSatisfied`(单子句,字段间为与)与
   `restrictionSatisfied`(有 `anyOf` 时任一子句满足即可)。`skillApplicable()` 供 UI/消融判断「不生效」。
   `base_*` 属性条件取**面板值**(`runner.stats`),不含绿技能与干劲。

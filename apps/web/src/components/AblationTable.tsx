@@ -33,8 +33,11 @@ export function AblationTable({ report }: { report: AblationReport }): JSX.Eleme
             const skill = SKILLS.find(s => s.id === r.skillId);
             const idx = order.findIndex(o => o.skillId === r.skillId) + 1;
             const sampled = r.positionSamples !== undefined && r.positionSamples.length > 0;
+            const multi = r.firingSamples !== undefined && r.firingSamples.length > 1;
             const open = expanded === r.skillId;
+            const openFiring = expanded === `${r.skillId}#f`;
             const body = r.expectedBody ?? r.deltaBody;
+            const firingSum = multi ? r.firingSamples!.reduce((a, f) => a + f.deltaBody, 0) : 0;
             const isPassiveRaceStart =
               skill !== undefined && skill.effects.length > 0 && skill.effects.every(e => e.type === 'passive') && skill.condition.kind === 'raceStart';
             const need = skill !== undefined ? describeRestriction(skill) : '';
@@ -96,7 +99,7 @@ export function AblationTable({ report }: { report: AblationReport }): JSX.Eleme
                         : r.activatedAtMeter === null
                           ? '—'
                           : r.activationCount > 1
-                            ? `${Math.round(r.activatedAtMeter)}m ×${r.activationCount}次`
+                            ? <span title={r.firingSamples?.map(f => `第${f.index}次 ${Math.round(f.atMeter)}m (${f.atSec.toFixed(1)}s)`).join('  ') ?? ''}>{`${Math.round(r.activatedAtMeter)}m ×${r.activationCount}次`}</span>
                             : `${Math.round(r.activatedAtMeter)}m`}
                   </td>
                   <td className={!r.applicable ? '' : body > 0 ? 'pos' : 'neg'}>
@@ -116,11 +119,42 @@ export function AblationTable({ report }: { report: AblationReport }): JSX.Eleme
                           区间 {signed(r.bodyRange![0], 2)} ~ {signed(r.bodyRange![1], 2)}
                         </div>
                       </>
+                    ) : multi ? (
+                      <>
+                        <button
+                          type="button"
+                          className="linkish"
+                          onClick={() => setExpanded(openFiring ? null : `${r.skillId}#f`)}
+                          title="同场多次发动(带冷却);点击展开每一次各值多少马身"
+                        >
+                          {signed(r.deltaBody, 2)}
+                        </button>
+                        <div className="meta">逐次{openFiring ? '▲' : '▼'}</div>
+                      </>
                     ) : (
-                      signed(r.deltaBody, 2)
+                      <span title="发动时机确定(非区段随机),只有这一个确定值;带 *_random 触发的技能才显示期望与区间">
+                        {signed(r.deltaBody, 2)}
+                      </span>
                     )}
                   </td>
                 </tr>
+                {multi && openFiring && (
+                  <tr className="sample-row">
+                    <td colSpan={5}>
+                      <div className="meta" style={{ padding: '2px 8px' }}>
+                        逐次发动(只去掉这一次的效果,其余各次照常生效):
+                        {r.firingSamples!.map(f => (
+                          <span key={f.index} style={{ marginLeft: 10, whiteSpace: 'nowrap' }}>
+                            第{f.index}次 {Math.round(f.atMeter)}m({f.atSec.toFixed(1)}s) →{' '}
+                            <b className={f.deltaBody > 0 ? 'pos' : 'neg'}>{signed(f.deltaBody, 2)}</b>
+                          </span>
+                        ))}
+                        。整条技能都去掉为 {signed(r.deltaBody, 2)} 马身,逐次之和 {signed(firingSum, 2)}
+                        (差额来自前后段耦合:去掉前一次会改变后续发动位置与体力节奏)。
+                      </div>
+                    </td>
+                  </tr>
+                )}
                 {sampled && open && (
                   <tr className="sample-row">
                     <td colSpan={5}>
@@ -183,8 +217,11 @@ export function AblationTable({ report }: { report: AblationReport }): JSX.Eleme
         所以同样数值越靠近末脚起点收益越大;在末脚起点之后才发动、又在爬到原上限前结束的技能,加速段会把它吃掉(收益≈0)。
         所以回复/耐力类技能在体力不吃紧时显示 +0.00 是正常的;标「被依赖」的技能,从牌组里删掉才会连带失去依赖它的技能。
         Σ单项 ≠ 总收益属正常:技能间存在交互。
-        标「期望」的技能发动位置在满足区段内随机(如进弯道随机时刻),数字来自联合蒙特卡洛
+        标「期望」的技能发动位置在满足区段内随机(如进弯道随机时刻,触发代码含 *_random),数字来自联合蒙特卡洛
         (含技能间随机耦合,确定性可复现),点击展开逐位置明细;名次类条件仍为规则取位近似。
+        <b>发动时机确定的技能(开赛 X 秒后、终点前 X 米、末脚入口等)只有一个确定值</b> ——
+        它不在区段内随机,没有可抽样的位置分布,所以不给期望/区间。
+        同场多次发动的技能(带冷却)标「逐次」,点击展开每一次各值多少马身。
       </p>
     </div>
   );

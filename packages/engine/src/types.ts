@@ -353,6 +353,13 @@ export interface SimOptions {
    * 剥出来 —— 否则 3 个回复技能各自都会背上「大招因此不发动」的收益,重复计账。
    */
   readonly inertSkills?: ReadonlySet<string>;
+  /**
+   * 消融「逐次发动拆分」:只去掉该技能**第 i 次发动**(0 基序号)的效果,其余各次照常生效。
+   * 该次仍记入发动史(前提计数)与 activations,只是不施加效果。
+   * 用于带冷却、同场多次发动的技能(如 先走一步！ 开赛10s + 冷却30s):
+   * 总量是「去掉整条技能」,逐次量是「只去掉这一次」—— 两者可对照,看哪一次在挣钱。
+   */
+  readonly inertFirings?: ReadonlyMap<string, ReadonlySet<number>>;
 }
 
 export interface SimResult {

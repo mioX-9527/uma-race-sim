@@ -1,4 +1,5 @@
 import { describe, expect, test } from 'vitest';
+import { simulate } from '@uma-race-sim/engine';
 import { ablate } from '../src/ablate';
 import { freshRunner, speedSkill, TOKYO_TURF_2400 as C } from '@uma-race-sim/engine/test/fixtures';
 import type { SkillConfig } from '@uma-race-sim/engine';
@@ -136,5 +137,61 @@ describe('存速(末脚起点仍生效的速度加成)', () => {
     const rep = ablate(C, freshRunner([buff('carry', 55), buff('early', 40)]));
     const byId = new Map(rep.rows.map(r => [r.skillId, r]));
     expect(byId.get('carry')!.deltaSec).toBeGreaterThan(byId.get('early')!.deltaSec);
+  });
+});
+
+describe('逐次发动拆分(带冷却、同场多次发动)', () => {
+  /** 先走一步！型:开赛 10s 后发动,冷却 30s(2400m → 实际 72s),同场 2 次 */
+  const xianzou: SkillConfig = {
+    id: 'xz',
+    name: '先走一步！',
+    rarity: 'rareEvolved',
+    precision: 'approx',
+    effects: [{ type: 'targetSpeed', value: 0.35 }],
+    durationSec: 3,
+    cooldownSec: 30,
+    condition: { kind: 'elapsedSec', seconds: 10, base: 'start' },
+    wisdomScaled: false,
+  };
+
+  test('两次发动各报一份收益,均为正', () => {
+    const rep = ablate(C, freshRunner([xianzou]));
+    const row = rep.rows[0]!;
+    expect(row.activationCount).toBe(2);
+    expect(row.firingSamples).toHaveLength(2);
+    for (const f of row.firingSamples!) {
+      expect(f.deltaBody).toBeGreaterThan(0);
+      expect(f.atMeter).toBeGreaterThan(0);
+    }
+    // 第 1 次在序盘、第 2 次在冷却结束后(位置更靠后)
+    expect(row.firingSamples![0]!.atMeter).toBeLessThan(row.firingSamples![1]!.atMeter);
+  });
+
+  test('逐次之和 ≈ 整条技能的收益(留 15% 容差给前后段耦合)', () => {
+    const rep = ablate(C, freshRunner([xianzou]));
+    const row = rep.rows[0]!;
+    const sum = row.firingSamples!.reduce((a, f) => a + f.deltaBody, 0);
+    expect(Math.abs(sum - row.deltaBody)).toBeLessThan(Math.abs(row.deltaBody) * 0.15 + 0.05);
+  });
+
+  test('只发动一次的技能不给逐次明细', () => {
+    const once = { ...xianzou, cooldownSec: null };
+    const row = ablate(C, freshRunner([once])).rows[0]!;
+    expect(row.activationCount).toBe(1);
+    expect(row.firingSamples).toBeUndefined();
+  });
+
+  test('引擎层:inertFirings 只去掉指定那一次,完赛时间介于「全生效」与「全去掉」之间', () => {
+    const runner = freshRunner([xianzou]);
+    const full = simulate(C, runner);
+    const none = simulate(C, runner, { inertSkills: new Set(['xz']) });
+    const skipFirst = simulate(C, runner, { inertFirings: new Map([['xz', new Set([0])]]) });
+    const skipSecond = simulate(C, runner, { inertFirings: new Map([['xz', new Set([1])]]) });
+    // 两次发动都仍然记录(只是不施加效果)
+    expect(skipFirst.activations).toHaveLength(2);
+    expect(skipSecond.activations).toHaveLength(2);
+    expect(skipFirst.finishTimeSec).toBeGreaterThan(full.finishTimeSec);
+    expect(skipSecond.finishTimeSec).toBeGreaterThan(full.finishTimeSec);
+    expect(Math.max(skipFirst.finishTimeSec, skipSecond.finishTimeSec)).toBeLessThan(none.finishTimeSec);
   });
 });
