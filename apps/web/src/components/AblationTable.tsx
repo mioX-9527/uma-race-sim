@@ -94,18 +94,18 @@ export function AblationTable({ report }: { report: AblationReport }): JSX.Eleme
         </tbody>
         {rows.length > 0 && (
           <tfoot>
-            {report.mcDraws !== undefined && report.totalExpectedSec !== undefined ? (
+            {report.mcDraws !== undefined && report.totalExpectedBody !== undefined ? (
               <>
                 <tr>
                   <td colSpan={4}>Σ 单项收益(期望,联合抽样 {report.mcDraws} 组)</td>
                   <td>
-                    {signed((report.sumExpectedSec * 20) / 2.5, 2)} 马身({signed(report.sumExpectedSec, 3)}s)
+                    {signed(report.sumExpectedBody, 2)} 马身({signed(report.sumExpectedSec, 3)}s)
                   </td>
                 </tr>
                 <tr>
                   <td colSpan={4}>实测总收益(期望 ±95%CI)</td>
                   <td>
-                    {signed((report.totalExpectedSec * 20) / 2.5, 2)} 马身({signed(report.totalExpectedSec, 3)}s
+                    {signed(report.totalExpectedBody, 2)} 马身({signed(report.totalExpectedSec, 3)}s
                     <span className="meta"> ±{report.totalExpectedCI.toFixed(3)}</span>)
                   </td>
                 </tr>
@@ -114,11 +114,11 @@ export function AblationTable({ report }: { report: AblationReport }): JSX.Eleme
               <>
                 <tr>
                   <td colSpan={4}>Σ 单项收益(去重前)</td>
-                  <td>{signed((report.sumDeltaSec * 20) / 2.5, 2)} 马身({signed(report.sumDeltaSec, 3)}s)</td>
+                  <td>{signed(report.sumDeltaBody ?? report.sumDeltaSec * 8, 2)} 马身({signed(report.sumDeltaSec, 3)}s)</td>
                 </tr>
                 <tr>
                   <td colSpan={4}>实测总收益(无技能 − 全技能)</td>
-                  <td>{signed((report.totalDeltaSec * 20) / 2.5, 2)} 马身({signed(report.totalDeltaSec, 3)}s)</td>
+                  <td>{signed(report.totalDeltaBody ?? report.totalDeltaSec * 8, 2)} 马身({signed(report.totalDeltaSec, 3)}s)</td>
                 </tr>
               </>
             )}

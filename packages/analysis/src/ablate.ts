@@ -56,10 +56,16 @@ export interface AblationReport {
   readonly mcDraws?: number;
   /** Σ 单项收益的期望口径(各行 expectedBody 之和,联合随机环境) */
   readonly sumExpectedSec?: number;
+  /** Σ 单项收益期望的马身口径(与逐行同一换算) */
+  readonly sumExpectedBody?: number;
   /** 实测总收益的期望口径(全技能联合随机 vs 无技能);规则取位口径见 totalDeltaSec */
   readonly totalExpectedSec?: number;
   /** totalExpectedSec 的 95% 置信半宽(秒,±) */
   readonly totalExpectedCI?: number;
+  /** 实测总收益期望的马身口径(与逐行同一换算) */
+  readonly totalExpectedBody?: number;
+  /** Σ 规则取位收益的马身口径(与逐行同一换算) */
+  readonly sumDeltaBody?: number;
 }
 
 /** 在满足区段全长上均匀取 K 个采样点(按区段长度加权;第 i 点取 (i+0.5)/K 分位) */
@@ -202,20 +208,31 @@ export function ablate(course: Course, runner: RunnerConfig): AblationReport {
     };
   });
 
+  const totalDeltaSec = none.finishTimeSec - full.finishTimeSec;
+  const sumDeltaSec = rows.reduce((a, r) => a + r.deltaSec, 0);
+  // 马身换算统一用末脚冲刺目标速度(与逐行一致;UI 不得再用粗略 20m/s,否则与行内对不上)
+  const toBody = (secs: number): number => (secs * endV) / BODY_LENGTH_METERS;
+  const sumExpectedSec = rows.reduce(
+    (a, r) => a + (r.expectedBody !== undefined ? (r.expectedBody * BODY_LENGTH_METERS) / endV : r.deltaSec),
+    0,
+  );
+
   return {
     fullTimeSec: full.finishTimeSec,
     noSkillTimeSec: none.finishTimeSec,
-    totalDeltaSec: none.finishTimeSec - full.finishTimeSec,
-    sumDeltaSec: rows.reduce((a, r) => a + r.deltaSec, 0),
+    totalDeltaSec,
+    sumDeltaSec,
     rows,
+    /** 各合计的马身口径(与逐行同一换算):Σ规则 / Σ期望 / 总期望 */
+    sumDeltaBody: toBody(sumDeltaSec),
     ...(mcDraws !== undefined
       ? {
           mcDraws,
-          ...(totalExpectedSec !== undefined ? { totalExpectedSec, totalExpectedCI } : {}),
-          sumExpectedSec: rows.reduce(
-            (a, r) => a + (r.expectedBody !== undefined ? (r.expectedBody * BODY_LENGTH_METERS) / endV : r.deltaSec),
-            0,
-          ),
+          sumExpectedSec,
+          ...(totalExpectedSec !== undefined
+            ? { totalExpectedSec, totalExpectedCI, totalExpectedBody: toBody(totalExpectedSec) }
+            : {}),
+          sumExpectedBody: toBody(sumExpectedSec),
         }
       : {}),
   };
