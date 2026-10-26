@@ -1,5 +1,8 @@
 * text=auto eol=lf
-*.bat text eol=crlf
+# bat 必须保持 CRLF(纯 LF 会被 cmd 当一行解析,块语句直接崩);bat 内也不要写非 ASCII。
+# 用 -text 而不是 text eol=crlf:后者在仓库里存的还是 LF,GitHub 下载的 ZIP 不做 eol 转换
+# ⇒ clone 到的行尾正确、ZIP 里的却是 LF。原样存(-text)才能两条路都拿到 CRLF。
+*.bat -text
 *.png binary
 *.jpg binary
 *.webm binary
