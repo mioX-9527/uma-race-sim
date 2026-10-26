@@ -170,6 +170,11 @@ node tools/clean-skills.ts    # 重新生成 skills.json(node 24 直跑 TS)
 3. 涉及公式/机制:更新 `docs/formulas.md` + `docs/parity-log.md` 追加条目(对拍方法:614tools 实测或游戏实录);
 4. 涉及数据规模:同步 `data/version.json`(version/counts/skillPrecision/notes)与 README「状态」行;
 5. `npm run build` 后用静态服务(preview)冒烟:完赛时间 116.72s(东京默认配置)、技能搜索/耐力判定正常;
+6. **改了 packages/ 或 apps/web 就必须 `npm run build`,并把重新生成的 `打开模拟器.html` 一起提交** ——
+   别人从 GitHub 下载后是**双击这个文件直接用**的(仓库里没有 dist/,见 .gitignore),不带 user Scripting;
+   漏提交 = 下载者拿到旧版本。批处理 `启动模拟器.bat` 同目录通配 `*.html` 打开,
+   所以文件名可以随便改,但 bat 必须 CRLF + 纯 ASCII(`.gitattributes` 用 `*.bat -text` 原样存,
+   保证 clone 与 GitHub ZIP 两条路都拿到 CRLF);
 6. UI 文案不得出现外部工具名(历史遗留见 git;开发档案 docs/ 不受限)。
 
 ## 8. 已知边界与待办
