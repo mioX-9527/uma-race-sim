@@ -23,11 +23,25 @@ v0.1 核心已跑通(开发版,`npm run dev` 可本地体验):
 
 ## 快速开始
 
+### 只想用,不想装环境(推荐)
+
+仓库里已经带着**自包含的单文件构建** **`打开模拟器.html`**(JS/CSS/数据全部内联):
+
+1. 从 GitHub 下载源码 ZIP(或 `git clone`)并解压;
+2. **双击根目录的 `打开模拟器.html`** —— 不需要 Node、不需要联网,自动用默认浏览器打开即可用
+   (Windows 也可双击 `启动模拟器.bat`,效果相同);`file://` 直接打开已专门适配,不会有跨域/模块加载问题。
+
+> 提示:这个单文件每次 `npm run build` 会一并更新,所以拉到的版本 = 当时最新构建。
+> 如果你改了代码,只有重新 `npm run build` 才会更新它。
+
+### 参与开发
+
 ```bash
 npm install       # 安装依赖(monorepo workspaces)
 npm test          # 引擎 + 分析包单元测试
 npm run typecheck # 类型检查
 npm run dev       # 启动前端(apps/web)
+npm run build     # 构建:dist/index.html + 根目录 打开模拟器.html(单文件版)
 ```
 
 无后端,构建产物为纯静态站点,可部署到 GitHub Pages。
