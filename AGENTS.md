@@ -154,13 +154,19 @@ node tools/clean-skills.ts    # 重新生成 skills.json(node 24 直跑 TS)
   仍记入 `fired`),消融报 `AblationRow.firingSamples`,UI 标「逐次」可展开;
   Σ逐次 与 `deltaBody`(整条都去掉)的差 = 前后段耦合,不是 bug。
 - **绿技能「临场条件」默认不计(2026-10-29 用户要求)**:触发代码里的 `post_number`(枠番)、`popularity`(人气)、
-  `random_lot(_shared)`(抽选)、`grade`(赛事等级)、`is_dirtgrade`(交流重赏)、`time`(比赛时段)、`lane_type` 等
+  `random_lot(_shared)`(抽选)、`grade`(赛事等级)、`time`(比赛时段)、`lane_type` 等
   由**开赛时实际情况**决定、赛道与跑法都推不出来 ⇒ 常时被动(绿技能)不能保证 100% 发动,
   数据侧写入 `restriction.undetermined`(token 原文数组),引擎 `clauseSatisfied` 视为不满足
   (不进起跑属性、消融 0)。**判据:只有靠赛道/跑法/环境就能百分百判定的绿技能才计入**
   (赛场/回转/距离档/标准距离/场地/天气/季节/脚质/干劲/面板属性)。`is_tight_track`(小回り,可由赛场确定)
   与 `furlong` 不在 `UNDETERMINED_TOKENS` 里;非被动技能不加此字段(它们按规则取位发动、已标 approx)。
   测试锚点别再用带这类条件的绿技能当「无限制」样例(七福即生 `post_number==7` 踩过)。
+- **能从赛场推出来的条件不要塞进「临场条件」(2026-10-29 用户纠正)**:`is_dirtgrade`(交流重赏)就是典型 ——
+  游戏里地方赛场(大井/川崎/船桥/盛冈)**只办交流重赏**,所以它由赛场 100% 确定,不是临场条件。
+  落法是 `data/courses.json` 的 `course.dirtGrade`(make-courses 给 10100~10199 打标)+
+  `restriction.dirtGrade`(clean-skills 把 `is_dirtgrade==1/!=1` 映射成 true/false)+ restriction.ts 一票判定。
+  受影响 5 条:交流重赏◎/○/×/之鬼(202251~202254)、奔跑的吉祥物 `-b1`(dirtGrade) / `-b2`(非 dirtGrade)。
+  判据再强调一次:**先问「这个条件能不能由赛道/跑法/环境百分百判定」**,能就别标临场条件。
 - **限制判定入口**:`packages/engine/src/restriction.ts` 的 `clauseSatisfied`(单子句,字段间为与)与
   `restrictionSatisfied`(有 `anyOf` 时任一子句满足即可)。`skillApplicable()` 供 UI/消融判断「不生效」。
   `base_*` 属性条件取**面板值**(`runner.stats`),不含绿技能与干劲。
@@ -202,11 +208,12 @@ node tools/clean-skills.ts    # 重新生成 skills.json(node 24 直跑 TS)
 - 随机机制不建模:焦躁/追比/取位争夺/多马阻挡/下坡模式/智力 24 区间修正(614tools 也仅显示);
   天气/季节虽可选,但除技能条件外不参与任何计算(见 §6);场地状态参与体力消耗;
 - 仍未建模的触发代码 token(单马模型无法判断,按满足处理并记入 `data/skill-notes.json`):
-  `popularity`/`post_number`/`fan_count`/`grade`(100=G1)/`is_dirtgrade`(交流重赏)/`lane_type`/`furlong`/`time`/
+  `popularity`/`post_number`/`fan_count`/`grade`(100=G1)/`lane_type`/`furlong`/`time`/
   `activate_count_all_team`/`is_activate_other_character_activate_advantage_skill`/`running_style_count_*`/
   `visiblehorse`/`random_lot(_shared)`/`succession_skill_count`/`is_exist_chara_id`/`is_move_lane`/
   `remain_distance_viewer_id`。要新增建模时:clean-skills 加 token 分支 → types/schema 加字段 →
   restriction.ts 判定 → 文档表格同步(清单见 docs/formulas.md「仍未建模」行);
+  现成范例:`is_dirtgrade` → `course.dirtGrade`(地方赛场打标)+ `restriction.dirtGrade`;
   **新增映射前必须先找到语义出处**(BWIKI 技能页「触发条件」原文 / 解包字段 / 与技能名可自证的等价物),
   禁止按中文技能名推测(「标准距离」并不等于中长距离);`is_tight_track`(小回り)无需建模 ——
   触发条文明文列出 6 场比赛(札幌/函馆/福岛/小仓/川崎/船桥),文本侧已落成 `venues`;

@@ -53,6 +53,11 @@ export interface Course {
   /** 海外赛场(触发代码 is_abroad:隆尚/圣安妮塔公园/德尔马) */
   readonly overseas?: boolean;
   /**
+   * 交流重赏赛场(触发代码 is_dirtgrade):地方竞马场(大井/川崎/船桥/盛冈)只办交流重赏,
+   * 因此这一条**由赛场确定**,不是临场条件。海外泥地(圣安妮塔公园/德尔马)不属于交流重赏。
+   */
+  readonly dirtGrade?: boolean;
+  /**
    * 赛场回转方向:1=顺时针(中山/京都/阪神/札幌/函馆/福岛/小仓/大井/隆尚),
    * 2=逆时针(东京/中京/新潟/川崎/船桥/盛冈/圣安妮塔公园/德尔马);
    * 直線赛道(新潟草1000m)无回转,缺省 → 回转方向类技能一律不生效。
@@ -280,6 +285,12 @@ export interface RestrictionClause {
   readonly motivations?: readonly Motivation[];
   /** 是否为海外赛场(触发代码 is_abroad==0/1) */
   readonly abroad?: boolean;
+  /**
+   * 是否为交流重赏(触发代码 is_dirtgrade==1/!=1)。
+   * 与枠番/人气不同,它**能由赛场确定**:地方竞马场(大井/川崎/船桥/盛冈)办的泥地重赏即交流重赏
+   * (ダートグレード競走),JRA 十场与海外赛场都不是。
+   */
+  readonly dirtGrade?: boolean;
   /** 面板属性下限(含,触发代码 base_speed>=N 等;取面板值,不含绿技能与干劲) */
   readonly statsAtLeast?: Readonly<Partial<Record<PassiveStat, number>>>;
   /** 面板属性上限(不含,触发代码 base_wiz<N 等) */

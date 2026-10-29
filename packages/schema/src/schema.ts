@@ -44,6 +44,8 @@ export const courseSchema = z.object({
   rotation: z.union([z.literal(1), z.literal(2)]).optional(),
   /** 海外赛场(is_abroad:隆尚/圣安妮塔公园/德尔马) */
   overseas: z.boolean().optional(),
+  /** 交流重赏赛场(is_dirtgrade:地方赛场 大井/川崎/船桥/盛冈 只办交流重赏,由赛场即可确定) */
+  dirtGrade: z.boolean().optional(),
 });
 
 const conditionBase = z.enum(['start', 'midStart', 'lateStart', 'finalStart']);
@@ -86,6 +88,8 @@ const clauseSchema = z.object({
   motivations: z.array(z.enum(['best', 'good', 'normal', 'bad', 'worst'])).optional(),
   /** 海外赛场(触发代码 is_abroad) */
   abroad: z.boolean().optional(),
+  /** 交流重赏(触发代码 is_dirtgrade:地方赛场办的重赏,由赛场确定,非临场条件) */
+  dirtGrade: z.boolean().optional(),
   /** 面板属性下限(含)/上限(不含),触发代码 base_* */
   statsAtLeast: statMap.optional(),
   statsBelow: statMap.optional(),

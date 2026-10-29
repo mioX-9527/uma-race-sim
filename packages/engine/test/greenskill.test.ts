@@ -196,4 +196,36 @@ describe('触发代码严格执行(数据驱动:标准距离 / 面板属性 / �
     expect(skillApplicable(s, abroad, runner)).toBe(true);
     expect(skillApplicable(s, domestic, runner)).toBe(false);
   });
+
+  test('交流重赏(is_dirtgrade)按地方赛场判定 —— 不是临场条件', () => {
+    const s = byId('202251'); // 交流重赏◎:速度 +60
+    const nar = courses.find(c => c.dirtGrade === true)!; // 大井/川崎/船桥/盛冈
+    const jraDirt = courses.find(c => c.dirtGrade !== true && c.surface === 'dirt')!; // 中央泥地
+    const jraTurf = courses.find(c => c.surface === 'turf' && c.overseas !== true)!;
+    const runner = makeRunner({ skills: [s] });
+    expect(nar.venue).toMatch(/大井|川崎|船桥|盛冈/);
+    expect(skillApplicable(s, nar, runner)).toBe(true);
+    expect(passiveBonusOf(runner, nar).speed).toBe(60);
+    // 中央泥地(东京/中山…)与草地都不是交流重赏
+    expect(skillApplicable(s, jraDirt, runner)).toBe(false);
+    expect(skillApplicable(s, jraTurf, runner)).toBe(false);
+    expect(passiveBonusOf(runner, jraDirt).speed).toBe(0);
+    // 海外泥地也不是交流重赏
+    const abroadDirt = courses.find(c => c.overseas === true && c.surface === 'dirt')!;
+    expect(skillApplicable(s, abroadDirt, runner)).toBe(false);
+  });
+
+  test('奔跑的吉祥物(1)/(2) 按「是否交流重赏」互补', () => {
+    const b1 = byId('109802211-b1'); // 泥地 & 交流重赏 → 速度/力量 +80
+    const b2 = byId('109802211-b2'); // 泥地 & 非交流重赏 → 速度/力量 +60
+    const nar = courses.find(c => c.dirtGrade === true)!;
+    const jraDirt = courses.find(c => c.dirtGrade !== true && c.surface === 'dirt' && c.overseas !== true)!;
+    const runner = makeRunner({ skills: [b1, b2] });
+    const atNar = passiveBonusOf(runner, nar);
+    expect(atNar.speed).toBe(80);
+    expect(atNar.power).toBe(80);
+    const atJra = passiveBonusOf(runner, jraDirt);
+    expect(atJra.speed).toBe(60);
+    expect(atJra.power).toBe(60);
+  });
 });

@@ -9,6 +9,8 @@
  * - 赛场映射:10001~10010 = JRA 十场(札幌/函馆/新潟/福岛/中山/东京/中京/京都/阪神/小仓,
  *   其中 10006=东京、10005=中山、10008=京都 已用坡度指纹与赛道集合验证;
  *   10101~ 为地方赛场、10201~ 为海外赛场,按游戏内顺序映射,精度中等,待 BWIKI 抽查)
+ * - 地方赛场(10100~10199)标 `dirtGrade: true`:游戏里地方赛场只办交流重赏(ダートグレード),
+ *   因此触发代码 `is_dirtgrade` 可**由赛场确定**,不必当成临场条件(海外泥地不算)
  * - 同赛场同距离同场地存在内外回り双赛道时,名称追加线路后缀
  */
 import { readFileSync, writeFileSync } from 'node:fs';
@@ -81,6 +83,8 @@ const out = Object.entries(raw).map(([courseId, c]) => {
     rotation: rotationOf(c.turn),
     // 海外赛场:10201~ = 隆尚/圣安妮塔公园/德尔马(触发代码 is_abroad)
     ...(c.raceTrackId >= 10200 ? { overseas: true } : {}),
+    // 交流重赏:10100~ = 地方赛场(大井/川崎/船桥/盛冈),由赛场即可确定(触发代码 is_dirtgrade)
+    ...(c.raceTrackId >= 10100 && c.raceTrackId < 10200 ? { dirtGrade: true } : {}),
   };
 });
 

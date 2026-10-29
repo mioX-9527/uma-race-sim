@@ -1,4 +1,6 @@
 import { describe, expect, test } from 'vitest';
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import { simulate } from '../src/simulate';
 import { passiveBonusOf } from '../src/effstats';
 import { skillApplicable } from '../src/restriction';
@@ -137,6 +139,33 @@ describe('限制子句语义(anyOf / 面板属性 / 干劲 / 海外)', () => {
     const abroadOnly = { ...midSkill, restriction: { abroad: true } };
     expect(simulate(C, makeRunner({ skills: [abroadOnly] })).activations).toHaveLength(0);
     expect(simulate({ ...C, overseas: true }, makeRunner({ skills: [abroadOnly] })).activations).toHaveLength(1);
+  });
+
+  test('交流重赏条件(is_dirtgrade):由赛场确定,不是临场条件', () => {
+    const atDirtGrade = { ...midSkill, restriction: { dirtGrade: true } };
+    const notDirtGrade = { ...midSkill, restriction: { dirtGrade: false } };
+    // 东京(中央赛场)不是交流重赏
+    expect(simulate(C, freshRunner([atDirtGrade])).activations).toHaveLength(0);
+    expect(simulate(C, freshRunner([notDirtGrade])).activations).toHaveLength(1);
+    // 大井(地方赛场)= 交流重赏
+    const oi = { ...C, venue: '大井', surface: 'dirt' as const, dirtGrade: true };
+    expect(simulate(oi, freshRunner([atDirtGrade])).activations).toHaveLength(1);
+    expect(simulate(oi, freshRunner([notDirtGrade])).activations).toHaveLength(0);
+  });
+
+  test('数据自检:地方赛场标了 dirtGrade,中央与海外没标', () => {
+    const url = new URL('../../../data/courses.json', import.meta.url);
+    const courses = JSON.parse(readFileSync(fileURLToPath(url), 'utf8')) as Array<{
+      id: string;
+      venue: string;
+      surface: string;
+      dirtGrade?: boolean;
+    }>;
+    const local = new Set(['大井', '川崎', '船桥', '盛冈']);
+    for (const c of courses) {
+      if (!local.has(c.venue)) expect(`${c.id}:${String(c.dirtGrade)}`).toBe(`${c.id}:undefined`);
+      else expect(`${c.id}:${c.surface}:${String(c.dirtGrade)}`).toBe(`${c.id}:dirt:true`);
+    }
   });
 });
 

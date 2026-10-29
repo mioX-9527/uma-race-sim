@@ -268,6 +268,7 @@ function describeClause(r: RestrictionClause): string {
     if (t !== '') parts.push(t);
   }
   if (r.abroad !== undefined) parts.push(r.abroad ? '海外赛场' : '国内赛场');
+  if (r.dirtGrade !== undefined) parts.push(r.dirtGrade ? '交流重赏(地方赛事)' : '非交流重赏');
   for (const [k, v] of Object.entries(r.statsAtLeast ?? {})) parts.push(`${STAT_CN[k] ?? k}≥${v}`);
   for (const [k, v] of Object.entries(r.statsBelow ?? {})) parts.push(`${STAT_CN[k] ?? k}<${v}`);
   return parts.join(' · ');
@@ -342,7 +343,6 @@ const UNDETERMINED_LABEL: Record<string, string> = {
   random_lot: '抽选',
   random_lot_shared: '抽选',
   grade: '赛事等级',
-  is_dirtgrade: '交流重赏',
   time: '比赛时段',
   lane_type: '内外道',
   fan_count: '粉丝数',

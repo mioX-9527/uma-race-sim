@@ -155,6 +155,8 @@ interface CodeRestriction {
   motivations: Set<string>;
   /** 海外赛场(触发代码 is_abroad) */
   abroad?: boolean;
+  /** 交流重赏(触发代码 is_dirtgrade:地方赛场办的重赏,可由赛场确定) */
+  dirtGrade?: boolean;
   /** 标准距离(触发代码 is_basis_distance:赛程全长为 400 米整数倍) */
   basisDistance?: boolean;
   /** 面板属性下限(含,base_xxx>=N) */
@@ -202,7 +204,7 @@ const APPROX_NAME_RE =
 /** 环境前提 token:单马模拟视为满足,记录到备注 */
 const ENV_TOKENS = new Set([
   'popularity', 'post_number',
-  'fan_count', 'grade', 'is_dirtgrade', 'is_tight_track', 'lane_type',
+  'fan_count', 'grade', 'is_tight_track', 'lane_type',
   'furlong', 'remain_distance_viewer_id', 'is_exist_chara_id',
   'visiblehorse', 'random_lot', 'random_lot_shared', 'is_move_lane', 'time',
 ]);
@@ -214,10 +216,12 @@ const ENV_TOKENS = new Set([
  * 写进 `restriction.undetermined`,引擎视为不满足(见 restriction.ts)。
  * ⚠️ `is_tight_track`(小回り,可由赛场确定)与 `furlong`(与剩余距离有关)**不在列**,
  * 仍按「环境前提,视为满足」处理。
+ * ⚠️ `is_dirtgrade`(交流重赏)也**已移出**:地方赛场只办交流重赏 ⇒ 由赛场即可确定,
+ * 落成 `restriction.dirtGrade`(见 make-courses.ts 的 `dirtGrade` 字段)。
  */
 const UNDETERMINED_TOKENS = new Set([
   'post_number', 'popularity', 'random_lot', 'random_lot_shared',
-  'grade', 'is_dirtgrade', 'time', 'lane_type', 'fan_count',
+  'grade', 'time', 'lane_type', 'fan_count',
   'visiblehorse', 'is_move_lane', 'is_exist_chara_id', 'remain_distance_viewer_id',
 ]);
 
@@ -386,6 +390,7 @@ function andRestriction(a: CodeRestriction, b: CodeRestriction): void {
   andSet(a.seasons, b.seasons);
   andSet(a.motivations, b.motivations);
   if (b.abroad !== undefined) a.abroad = a.abroad === undefined ? b.abroad : a.abroad && b.abroad;
+  if (b.dirtGrade !== undefined) a.dirtGrade = a.dirtGrade === undefined ? b.dirtGrade : a.dirtGrade && b.dirtGrade;
   if (b.basisDistance !== undefined) {
     // 「与」:两边要求不同(一个要标准、一个要非标准)⇒ 该子句不可能成立,记成 false 兜底
     a.basisDistance = a.basisDistance === undefined ? b.basisDistance : a.basisDistance === b.basisDistance ? a.basisDistance : false;
@@ -400,7 +405,7 @@ function andRestriction(a: CodeRestriction, b: CodeRestriction): void {
 function restrictionIsEmpty(r: CodeRestriction): boolean {
   return r.tactics.size + r.distanceTypes.size + r.surfaces.size + r.venues.size + r.grounds.size + r.distances.size +
     r.rotations.size + r.weathers.size + r.seasons.size + r.motivations.size === 0 &&
-    r.abroad === undefined && r.basisDistance === undefined && Object.keys(r.statsAtLeast).length === 0 && Object.keys(r.statsBelow).length === 0 &&
+    r.abroad === undefined && r.dirtGrade === undefined && r.basisDistance === undefined && Object.keys(r.statsAtLeast).length === 0 && Object.keys(r.statsBelow).length === 0 &&
     r.distanceMin === undefined && r.distanceMax === undefined;
 }
 
@@ -675,6 +680,12 @@ function parseVariant(tokens: readonly Token[], notes: string[]): Omit<CodeParse
         // 海外赛场:隆尚/圣安妮塔公园/德尔马
         const flag = value === 1;
         restriction.abroad = op === '==' ? flag : !flag;
+        break;
+      }
+      case name === 'is_dirtgrade' && (op === '==' || op === '!='): {
+        // 交流重赏(ダートグレード競走):地方赛场 大井/川崎/船桥/盛冈 只办交流重赏 ⇒ 由赛场确定
+        const flag = value === 1;
+        restriction.dirtGrade = op === '==' ? flag : !flag;
         break;
       }
       case name === 'base_speed' || name === 'base_stamina' || name === 'base_power' || name === 'base_guts' || name === 'base_wiz': {
@@ -1296,6 +1307,7 @@ function cloneRestriction(c: CodeRestriction): CodeRestriction {
     rotations: new Set(c.rotations), weathers: new Set(c.weathers), seasons: new Set(c.seasons),
     motivations: new Set(c.motivations), statsAtLeast: { ...c.statsAtLeast }, statsBelow: { ...c.statsBelow },
     ...(c.abroad !== undefined ? { abroad: c.abroad } : {}),
+    ...(c.dirtGrade !== undefined ? { dirtGrade: c.dirtGrade } : {}),
     ...(c.basisDistance !== undefined ? { basisDistance: c.basisDistance } : {}),
     ...(c.distanceMin !== undefined ? { distanceMin: c.distanceMin } : {}),
     ...(c.distanceMax !== undefined ? { distanceMax: c.distanceMax } : {}),
@@ -1371,6 +1383,7 @@ function clauseObj(c: CodeRestriction): Record<string, unknown> {
   if (c.seasons.size > 0 && !isFullSet('seasons', [...c.seasons])) out.seasons = sortVals([...c.seasons], 'seasons');
   if (c.motivations.size > 0 && !isFullSet('motivations', [...c.motivations])) out.motivations = sortVals([...c.motivations], 'motivations');
   if (c.abroad !== undefined) out.abroad = c.abroad;
+  if (c.dirtGrade !== undefined) out.dirtGrade = c.dirtGrade;
   if (c.basisDistance !== undefined) out.basisDistance = c.basisDistance;
   if (Object.keys(c.statsAtLeast).length > 0) out.statsAtLeast = { ...c.statsAtLeast };
   if (Object.keys(c.statsBelow).length > 0) out.statsBelow = { ...c.statsBelow };

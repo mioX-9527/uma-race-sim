@@ -26871,9 +26871,7 @@
    "surfaces": [
     "dirt"
    ],
-   "undetermined": [
-    "is_dirtgrade==1"
-   ]
+   "dirtGrade": true
   },
   "restrictionText": "泥地",
   "wisdomScaled": true,
@@ -26907,9 +26905,7 @@
    "surfaces": [
     "dirt"
    ],
-   "undetermined": [
-    "is_dirtgrade!=1"
-   ]
+   "dirtGrade": false
   },
   "restrictionText": "泥地",
   "wisdomScaled": true,
@@ -52540,9 +52536,7 @@
    "kind": "raceStart"
   },
   "restriction": {
-   "undetermined": [
-    "is_dirtgrade==1"
-   ]
+   "dirtGrade": true
   },
   "wisdomScaled": false,
   "source": "BWIKI 速查表 + 触发代码(模块:技能数据库内容)",
@@ -52568,9 +52562,7 @@
    "kind": "raceStart"
   },
   "restriction": {
-   "undetermined": [
-    "is_dirtgrade==1"
-   ]
+   "dirtGrade": true
   },
   "wisdomScaled": false,
   "source": "BWIKI 速查表 + 触发代码(模块:技能数据库内容)",
@@ -52596,9 +52588,7 @@
    "kind": "raceStart"
   },
   "restriction": {
-   "undetermined": [
-    "is_dirtgrade==1"
-   ]
+   "dirtGrade": true
   },
   "wisdomScaled": false,
   "source": "BWIKI 速查表 + 触发代码(模块:技能数据库内容)",
@@ -52628,9 +52618,7 @@
    "kind": "raceStart"
   },
   "restriction": {
-   "undetermined": [
-    "is_dirtgrade==1"
-   ]
+   "dirtGrade": true
   },
   "wisdomScaled": true,
   "source": "BWIKI 速查表 + 触发代码(模块:技能数据库内容)",

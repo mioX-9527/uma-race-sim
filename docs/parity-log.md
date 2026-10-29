@@ -12,6 +12,43 @@
 - 差异与结论:(公式差异/实现差异/可接受误差)
 ```
 
+## 2026-10-29 交流重赏(is_dirtgrade)改由赛场确定 —— 不是临场条件
+
+**问题(用户提出)**:「交流重赏可以通过场地识别来触发」。上一节把 `is_dirtgrade` 归进了「临场条件」默认不计,
+但这一条其实**能由赛场百分百判定**,不该跟着枠番/人气一起被砍掉。
+
+**语义出处**:游戏里的交流重赏 = **ダートグレード競走(地方競馬場ハンデ重賞)**。JRA 十场不办交流重赏,
+海外赛场(隆尚/圣安妮塔公园/德尔马)也不办 —— 只有地方赛场(本仓库数据里是大井/川崎/船桥/盛冈)办。
+所以「是否交流重赏」=「赛场是否地方赛场」,开赛前就确定。
+
+**触发代码核对**(解包,模块:技能数据库内容):
+
+| 技能 | condition | 解析结果 |
+|---|---|---|
+| 交流重赏◎ 202251(速度+60) | `is_dirtgrade==1` | `{dirtGrade: true}` |
+| 交流重赏○ 202252(速度+40) | `is_dirtgrade==1` | `{dirtGrade: true}` |
+| 交流重赏× 202253(速度−40) | `is_dirtgrade==1` | `{dirtGrade: true}` |
+| 交流重赏之鬼 202254(速度+60 力量+60) | `is_dirtgrade==1` | `{dirtGrade: true}` |
+| 奔跑的吉祥物(1) 109802211-b1(+80/+80) | `ground_type==2&is_dirtgrade==1` | `{surfaces:['dirt'], dirtGrade:true}` |
+| 奔跑的吉祥物(2) 109802211-b2(+60/+60) | `ground_type==2&is_dirtgrade!=1` | `{surfaces:['dirt'], dirtGrade:false}` |
+
+**改动**:
+- 数据(赛道):`tools/make-courses.ts` 给 10100~10199(地方赛场)打 `dirtGrade: true`,共 14 条
+  (大井 3 / 川崎 3 / 船桥 4 / 盛冈 4,全部为泥地);JRA 十场与海外赛道不带该字段。
+- 数据(技能):`is_dirtgrade` 从 `ENV_TOKENS` / `UNDETERMINED_TOKENS` 移出,改走独立分支
+  → `restriction.dirtGrade`(==1 → true,!=1 → false);`andRestriction` / `restrictionIsEmpty` /
+  `cloneRestriction` / `clauseObj` 同步加字段。
+- 引擎:`clauseSatisfied` 加一行 `(course.dirtGrade === true) !== c.dirtGrade → false`(与 `abroad` 同构)。
+- UI:`describeClause` 输出「交流重赏(地方赛事)」/「非交流重赏」;`UNDETERMINED_LABEL` 删掉 `is_dirtgrade`。
+- 测试:engine 新增 4 例 —— ①限制子句真/假双分支(东京 vs 大井)②`data/courses.json` 自检
+  (地方赛场必须 `dirtGrade:true` 且为泥地,中央/海外必须无此字段)③数据驱动:交流重赏◎ 在大井计 +60、
+  在中央泥地与草地计 0、海外泥地也不计 ④奔跑的吉祥物(1)/(2)互补:大井 +80/+80、中央泥地 +60/+60。
+  engine 132(15 文件)+ analysis 14 全绿。
+
+**影响面**:`restriction.undetermined` 从 28 条降到 22 条;绿技能精度分层计数不变(409/1988/244)。
+只在地方赛场生效:东京2400 选 交流重赏◎ 仍是 0 收益(与本轮改动前一致,因为没有误判成常驻),
+大井 1800 选它则是速度 +60 进起跑属性。
+
 ## 2026-10-29 绿技能「临场条件」默认不计(用户要求:只算场地/跑法能百分百确定的)
 
 **问题(用户提出)**:「有额外要求的绿技能,比如幸运7、擅长外道默认无收益,只计算可以通过场地或者跑法确定可以百分百发动的绿技能」。
@@ -30,7 +67,7 @@
 | 七福即生 | `post_number==7` | 枠番 |
 | 伏兵◎○ / 胆小鬼 | `popularity>=4` / `popularity==1` | 人气(赔率顺位) |
 | 夜间赛◎○× | `time==4` | 比赛时段 |
-| 交流重赏◎○××之鬼 / 奔跑的吉祥物 | `is_dirtgrade==1` | 赛事分级 |
+| 交流重赏◎○× / 交流重赏之鬼 / 奔跑的吉祥物 | `is_dirtgrade==1` | 赛事分级 → **已改由赛场确定**,见上一节 |
 | 不擅长一级赛事 | `grade==100` | 赛事等级 |
 | 博弈者 / 投机取巧 / 凶悍博弈者 | `popularity>=4&random_lot_shared==60` 等 | 人气 + 抽选 |
 
@@ -273,7 +310,8 @@ ownedSkillBaseIds、绿技能计数只算生效的、真实数据 110061 与 202
 | `base_speed/stamina/power/guts/wiz` | 面板五维 | 拉普拉斯妖(1)/(2) 按 速度/智力 分流 |
 | `course_distance` | 赛程全长(米) | 直接比较 |
 | `is_tight_track` | 小回り赛场(札幌/函馆/福岛/小仓/川崎/船桥) | 触发条文明文列出 6 场 ⇒ 文本侧已落成 `venues` |
-| `grade` / `is_dirtgrade` | G1(=100)/ 交流重赏 | 赛道数据无比赛级别 ⇒ **无法判定**,按满足处理并记入 skill-notes |
+| `is_dirtgrade` | 1 交流重赏 | 地方赛场(大井/川崎/船桥/盛冈)办的泥地重赏 ⇒ **可由赛场判定**,现为 `dirtGrade` 字段(2026-10-29 修正) |
+| `grade` | G1(=100)/ 赛事等级 | 赛道数据无比赛级别 ⇒ **无法判定**,按满足处理并记入 skill-notes |
 | `popularity`/`post_number`/`fan_count`/`lane_type`/`furlong`/`time`/`visiblehorse`/`random_lot*`/`succession_skill_count`/`is_move_lane`/`remain_distance_viewer_id`/`is_exist_*` | 人气/闸位/粉丝数/道次/哈隆/时刻/随机数等 | 单马模型无法判定 ⇒ 按满足处理并记入 skill-notes |
 
 ## 2026-10-25 触发代码严格执行(标准距离类遗漏 + 分支 OR 语义勘误)
