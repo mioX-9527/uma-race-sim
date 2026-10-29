@@ -1,6 +1,6 @@
 import { Fragment, useState } from 'react';
 import type { AblationReport } from '@uma-race-sim/analysis';
-import { PRECISION_LABEL, SKILLS, describeCondition, describeEffects, describePrereq, describeRestriction } from '../lib/sim';
+import { PRECISION_LABEL, SKILLS, describeCondition, describeEffects, describePrereq, describeRestriction, describeUndetermined } from '../lib/sim';
 
 const signed = (v: number, digits: number): string => `${v >= 0 ? '+' : ''}${v.toFixed(digits)}`;
 
@@ -41,6 +41,7 @@ export function AblationTable({ report }: { report: AblationReport }): JSX.Eleme
             const isPassiveRaceStart =
               skill !== undefined && skill.effects.length > 0 && skill.effects.every(e => e.type === 'passive') && skill.condition.kind === 'raceStart';
             const need = skill !== undefined ? describeRestriction(skill) : '';
+            const cond = skill !== undefined ? describeUndetermined(skill) : '';
             return (
               <Fragment key={r.skillId}>
                 <tr className={r.applicable ? undefined : 'row-off'}>
@@ -48,11 +49,18 @@ export function AblationTable({ report }: { report: AblationReport }): JSX.Eleme
                   <td>
                     {r.name}
                     {skill !== undefined && <span className={`badge ${skill.precision}`}>{PRECISION_LABEL[skill.precision]}</span>}
-                    {!r.applicable && (
+                    {!r.applicable && (cond !== '' ? (
+                      <span
+                        className="badge cond"
+                        title={`临场条件:${cond} —— 由开赛时的实际情况决定(闸位/人气/抽选/赛事等级),赛道与跑法确定不了,不能保证 100% 发动 ⇒ 默认不计收益`}
+                      >
+                        临场条件
+                      </span>
+                    ) : (
                       <span className="badge off" title={need === '' ? '当前赛道/环境不满足装配限制' : `需:${need}`}>
                         不生效
                       </span>
-                    )}
+                    ))}
                     {skill !== undefined && skill.prereq !== undefined && (
                       <span className="badge pre" title={`前提:${describePrereq(skill)}`}>前提</span>
                     )}
@@ -93,7 +101,9 @@ export function AblationTable({ report }: { report: AblationReport }): JSX.Eleme
                   </td>
                   <td>
                     {!r.applicable
-                      ? <span title={need === '' ? '' : `需:${need}`}>不生效</span>
+                      ? cond !== ''
+                        ? <span title={`临场条件:${cond}(默认不计收益)`}>需临场条件</span>
+                        : <span title={need === '' ? '' : `需:${need}`}>不生效</span>
                       : isPassiveRaceStart
                         ? '常时'
                         : r.activatedAtMeter === null
@@ -104,7 +114,7 @@ export function AblationTable({ report }: { report: AblationReport }): JSX.Eleme
                   </td>
                   <td className={!r.applicable ? '' : body > 0 ? 'pos' : 'neg'}>
                     {!r.applicable ? (
-                      <span className="meta">—</span>
+                      <span className="meta" title={cond !== '' ? `临场条件:${cond} —— 不能保证 100% 发动,按 0 计` : undefined}>—</span>
                     ) : sampled ? (
                       <>
                         <button

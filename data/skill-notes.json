@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-25T08:59:33.051Z",
+ "generatedAt": "2026-10-29T10:51:36.589Z",
  "items": [
   {
    "id": "100031-b1",
@@ -75,16 +75,16 @@
    "id": "100301111",
    "page": "天才的技巧",
    "reasons": [
-    "is_move_lane==1(环境前提,视为满足)",
-    "is_move_lane==2(环境前提,视为满足)"
+    "is_move_lane==1(临场条件,赛道/跑法确定不了)",
+    "is_move_lane==2(临场条件,赛道/跑法确定不了)"
    ]
   },
   {
    "id": "100302211",
    "page": "地平の彼方まで",
    "reasons": [
-    "is_move_lane==1(环境前提,视为满足)",
-    "is_move_lane==2(环境前提,视为满足)"
+    "is_move_lane==1(临场条件,赛道/跑法确定不了)",
+    "is_move_lane==2(临场条件,赛道/跑法确定不了)"
    ]
   },
   {
@@ -121,15 +121,15 @@
    "id": "100471-b1",
    "page": "掲げよ、己が魂の剣を！",
    "reasons": [
-    "grade==100(环境前提,视为满足)",
-    "popularity<=3(环境前提,视为满足)"
+    "grade==100(临场条件,赛道/跑法确定不了)",
+    "popularity<=3(临场条件,赛道/跑法确定不了)"
    ]
   },
   {
    "id": "100491-b1",
    "page": "剣ヶ峰より、狂気に嗤え",
    "reasons": [
-    "popularity>=4(环境前提,视为满足)",
+    "popularity>=4(临场条件,赛道/跑法确定不了)",
     "前置条件:is_finalcorner==1&is_overtake==1"
    ]
   },
@@ -137,7 +137,7 @@
    "id": "100491-b2",
    "page": "剣ヶ峰より、狂気に嗤え",
    "reasons": [
-    "popularity<4(环境前提,视为满足)",
+    "popularity<4(临场条件,赛道/跑法确定不了)",
     "前置条件:is_finalcorner==1&is_overtake==1"
    ]
   },
@@ -159,14 +159,14 @@
    "id": "100551-b1",
    "page": "万彩☆マーベラス★世界",
    "reasons": [
-    "visiblehorse>=4(环境前提,视为满足)"
+    "visiblehorse>=4(临场条件,赛道/跑法确定不了)"
    ]
   },
   {
    "id": "100602211",
    "page": "クリスマスの奇跡体験",
    "reasons": [
-    "lane_type==0(环境前提,视为满足)"
+    "lane_type==0(临场条件,赛道/跑法确定不了)"
    ]
   },
   {
@@ -194,22 +194,22 @@
    "id": "100701-b1",
    "page": "セイリオス",
    "reasons": [
-    "popularity<=3(环境前提,视为满足)"
+    "popularity<=3(临场条件,赛道/跑法确定不了)"
    ]
   },
   {
    "id": "100701111",
    "page": "564アイズで視界クッキリ！",
    "reasons": [
-    "is_move_lane==1(环境前提,视为满足)",
-    "is_move_lane==2(环境前提,视为满足)"
+    "is_move_lane==1(临场条件,赛道/跑法确定不了)",
+    "is_move_lane==2(临场条件,赛道/跑法确定不了)"
    ]
   },
   {
    "id": "100702111",
    "page": "神秘体験！ゴルシワープ",
    "reasons": [
-    "lane_type==0(环境前提,视为满足)"
+    "lane_type==0(临场条件,赛道/跑法确定不了)"
    ]
   },
   {
@@ -328,7 +328,7 @@
    "id": "101061-b1",
    "page": "Bang☆ミラクるわせ！",
    "reasons": [
-    "popularity>=4(环境前提,视为满足)"
+    "popularity>=4(临场条件,赛道/跑法确定不了)"
    ]
   },
   {
@@ -524,7 +524,7 @@
    "id": "103402111",
    "page": "扇ノ舞",
    "reasons": [
-    "lane_type==0(环境前提,视为满足)"
+    "lane_type==0(临场条件,赛道/跑法确定不了)"
    ]
   },
   {
@@ -538,7 +538,7 @@
    "id": "103602211",
    "page": "刑苦",
    "reasons": [
-    "lane_type==0(环境前提,视为满足)"
+    "lane_type==0(临场条件,赛道/跑法确定不了)"
    ]
   },
   {
@@ -559,16 +559,18 @@
    "id": "104901211-b1",
    "page": "鉄火のギャンブラー",
    "reasons": [
-    "popularity>=4(环境前提,视为满足)",
-    "random_lot_shared==60(环境前提,视为满足)"
+    "popularity>=4(临场条件,赛道/跑法确定不了)",
+    "random_lot_shared==60(临场条件,赛道/跑法确定不了)",
+    "临场条件 popularity>=4&random_lot_shared==60:绿技能默认不计收益(赛道/跑法确定不了)"
    ]
   },
   {
    "id": "104901211-b2",
    "page": "鉄火のギャンブラー",
    "reasons": [
-    "popularity<=3(环境前提,视为满足)",
-    "random_lot_shared==30(环境前提,视为满足)"
+    "popularity<=3(临场条件,赛道/跑法确定不了)",
+    "random_lot_shared==30(临场条件,赛道/跑法确定不了)",
+    "临场条件 popularity<=3&random_lot_shared==30:绿技能默认不计收益(赛道/跑法确定不了)"
    ]
   },
   {
@@ -617,14 +619,15 @@
    "id": "105601211",
    "page": "七福即生",
    "reasons": [
-    "post_number==7(环境前提,视为满足)"
+    "post_number==7(临场条件,赛道/跑法确定不了)",
+    "临场条件 post_number==7:绿技能默认不计收益(赛道/跑法确定不了)"
    ]
   },
   {
    "id": "105602211",
    "page": "ばっちり開運体験！",
    "reasons": [
-    "lane_type==0(环境前提,视为满足)"
+    "lane_type==0(临场条件,赛道/跑法确定不了)"
    ]
   },
   {
@@ -638,7 +641,7 @@
    "id": "107002121-b2",
    "page": "すべてを焼き焦がす星",
    "reasons": [
-    "popularity<=3(环境前提,视为满足)"
+    "popularity<=3(临场条件,赛道/跑法确定不了)"
    ]
   },
   {
@@ -659,8 +662,8 @@
    "id": "107202211-b1",
    "page": "無双の追撃",
    "reasons": [
-    "lane_type==0(环境前提,视为满足)",
-    "lane_type==0(环境前提,视为满足)"
+    "lane_type==0(临场条件,赛道/跑法确定不了)",
+    "lane_type==0(临场条件,赛道/跑法确定不了)"
    ]
   },
   {
@@ -751,14 +754,16 @@
    "id": "109802211-b1",
    "page": "走る縁起物",
    "reasons": [
-    "is_dirtgrade==1(环境前提,视为满足)"
+    "is_dirtgrade==1(临场条件,赛道/跑法确定不了)",
+    "临场条件 is_dirtgrade==1:绿技能默认不计收益(赛道/跑法确定不了)"
    ]
   },
   {
    "id": "109802211-b2",
    "page": "走る縁起物",
    "reasons": [
-    "is_dirtgrade!=1(环境前提,视为满足)"
+    "is_dirtgrade!=1(临场条件,赛道/跑法确定不了)",
+    "临场条件 is_dirtgrade!=1:绿技能默认不计收益(赛道/跑法确定不了)"
    ]
   },
   {
@@ -846,8 +851,8 @@
    "id": "110301111",
    "page": "巧みなるファントム",
    "reasons": [
-    "is_move_lane==1(环境前提,视为满足)",
-    "is_move_lane==2(环境前提,视为满足)",
+    "is_move_lane==1(临场条件,赛道/跑法确定不了)",
+    "is_move_lane==2(临场条件,赛道/跑法确定不了)",
     "前置条件:distance_type==3&running_style==2"
    ]
   },
@@ -927,7 +932,7 @@
    "id": "110601-b1",
    "page": "Go☆Go☆for it!",
    "reasons": [
-    "popularity>=4(环境前提,视为满足)",
+    "popularity>=4(临场条件,赛道/跑法确定不了)",
     "前置条件:is_finalcorner==1&change_order_onetime<0"
    ]
   },
@@ -935,7 +940,7 @@
    "id": "110601-b2",
    "page": "Go☆Go☆for it!",
    "reasons": [
-    "popularity<4(环境前提,视为满足)",
+    "popularity<4(临场条件,赛道/跑法确定不了)",
     "前置条件:is_finalcorner==1&change_order_onetime<0"
    ]
   },
@@ -957,7 +962,7 @@
    "id": "110721-b1",
    "page": "剛勇果断、烈火之刀",
    "reasons": [
-    "lane_type==0(环境前提,视为满足)",
+    "lane_type==0(临场条件,赛道/跑法确定不了)",
     "前置条件:distance_rate>=40&distance_rate<=50&blocked_side_continuetime>=2"
    ]
   },
@@ -1303,7 +1308,7 @@
    "id": "120351-b1",
    "page": "GO! Full-send",
    "reasons": [
-    "popularity<=3(环境前提,视为满足)",
+    "popularity<=3(临场条件,赛道/跑法确定不了)",
     "前置条件:phase==1&change_order_onetime<0&order_rate>=40&order_rate<=80"
    ]
   },
@@ -1364,70 +1369,80 @@
    "id": "200251",
    "page": "内枠得意◎",
    "reasons": [
-    "post_number<=3(环境前提,视为满足)"
+    "post_number<=3(临场条件,赛道/跑法确定不了)",
+    "临场条件 post_number<=3:绿技能默认不计收益(赛道/跑法确定不了)"
    ]
   },
   {
    "id": "200252",
    "page": "内枠得意○",
    "reasons": [
-    "post_number<=3(环境前提,视为满足)"
+    "post_number<=3(临场条件,赛道/跑法确定不了)",
+    "临场条件 post_number<=3:绿技能默认不计收益(赛道/跑法确定不了)"
    ]
   },
   {
    "id": "200253",
    "page": "内枠苦手",
    "reasons": [
-    "post_number<=3(环境前提,视为满足)"
+    "post_number<=3(临场条件,赛道/跑法确定不了)",
+    "临场条件 post_number<=3:绿技能默认不计收益(赛道/跑法确定不了)"
    ]
   },
   {
    "id": "200261",
    "page": "外枠得意◎",
    "reasons": [
-    "post_number>=6(环境前提,视为满足)"
+    "post_number>=6(临场条件,赛道/跑法确定不了)",
+    "临场条件 post_number>=6:绿技能默认不计收益(赛道/跑法确定不了)"
    ]
   },
   {
    "id": "200262",
    "page": "外枠得意○",
    "reasons": [
-    "post_number>=6(环境前提,视为满足)"
+    "post_number>=6(临场条件,赛道/跑法确定不了)",
+    "临场条件 post_number>=6:绿技能默认不计收益(赛道/跑法确定不了)"
    ]
   },
   {
    "id": "200263",
    "page": "外枠苦手",
    "reasons": [
-    "post_number>=6(环境前提,视为满足)"
+    "post_number>=6(临场条件,赛道/跑法确定不了)",
+    "临场条件 post_number>=6:绿技能默认不计收益(赛道/跑法确定不了)"
    ]
   },
   {
    "id": "200301",
    "page": "伏兵◎",
    "reasons": [
-    "popularity>=4(环境前提,视为满足)"
+    "popularity>=4(临场条件,赛道/跑法确定不了)",
+    "临场条件 popularity>=4:绿技能默认不计收益(赛道/跑法确定不了)"
    ]
   },
   {
    "id": "200302",
    "page": "伏兵○",
    "reasons": [
-    "popularity>=4(环境前提,视为满足)"
+    "popularity>=4(临场条件,赛道/跑法确定不了)",
+    "临场条件 popularity>=4:绿技能默认不计收益(赛道/跑法确定不了)"
    ]
   },
   {
    "id": "200311",
    "page": "GⅠ苦手",
    "reasons": [
-    "grade==100(环境前提,视为满足)"
+    "grade==100(临场条件,赛道/跑法确定不了)",
+    "临场条件 grade==100:绿技能默认不计收益(赛道/跑法确定不了)"
    ]
   },
   {
    "id": "200321",
    "page": "小心者",
    "reasons": [
-    "popularity==1(环境前提,视为满足)"
+    "popularity==1(临场条件,赛道/跑法确定不了)",
+    "临场条件 popularity==1:绿技能默认不计收益(赛道/跑法确定不了)"
    ]
   },
   {
@@ -1448,78 +1463,80 @@
    "id": "200751",
    "page": "内的体験",
    "reasons": [
-    "lane_type==0(环境前提,视为满足)"
+    "lane_type==0(临场条件,赛道/跑法确定不了)"
    ]
   },
   {
    "id": "200752",
    "page": "内弁慶",
    "reasons": [
-    "lane_type==0(环境前提,视为满足)"
+    "lane_type==0(临场条件,赛道/跑法确定不了)"
    ]
   },
   {
    "id": "201141",
    "page": "神業ステップ",
    "reasons": [
-    "is_move_lane==1(环境前提,视为满足)",
-    "is_move_lane==2(环境前提,视为满足)"
+    "is_move_lane==1(临场条件,赛道/跑法确定不了)",
+    "is_move_lane==2(临场条件,赛道/跑法确定不了)"
    ]
   },
   {
    "id": "201142",
    "page": "軽やかステップ",
    "reasons": [
-    "is_move_lane==1(环境前提,视为满足)",
-    "is_move_lane==2(环境前提,视为满足)"
+    "is_move_lane==1(临场条件,赛道/跑法确定不了)",
+    "is_move_lane==2(临场条件,赛道/跑法确定不了)"
    ]
   },
   {
    "id": "201331",
    "page": "技巧派",
    "reasons": [
-    "is_move_lane==1(环境前提,视为满足)",
-    "is_move_lane==2(环境前提,视为满足)"
+    "is_move_lane==1(临场条件,赛道/跑法确定不了)",
+    "is_move_lane==2(临场条件,赛道/跑法确定不了)"
    ]
   },
   {
    "id": "201332",
    "page": "巧みなステップ",
    "reasons": [
-    "is_move_lane==1(环境前提,视为满足)",
-    "is_move_lane==2(环境前提,视为满足)"
+    "is_move_lane==1(临场条件,赛道/跑法确定不了)",
+    "is_move_lane==2(临场条件,赛道/跑法确定不了)"
    ]
   },
   {
    "id": "201471",
    "page": "視界良好！異常なし！",
    "reasons": [
-    "is_move_lane==1(环境前提,视为满足)",
-    "is_move_lane==2(环境前提,视为满足)"
+    "is_move_lane==1(临场条件,赛道/跑法确定不了)",
+    "is_move_lane==2(临场条件,赛道/跑法确定不了)"
    ]
   },
   {
    "id": "201472",
    "page": "お見通し",
    "reasons": [
-    "is_move_lane==1(环境前提,视为满足)",
-    "is_move_lane==2(环境前提,视为满足)"
+    "is_move_lane==1(临场条件,赛道/跑法确定不了)",
+    "is_move_lane==2(临场条件,赛道/跑法确定不了)"
    ]
   },
   {
    "id": "201561",
    "page": "スーパーラッキーセブン",
    "reasons": [
-    "random_lot==50(环境前提,视为满足)",
-    "post_number==7(环境前提,视为满足)"
+    "random_lot==50(临场条件,赛道/跑法确定不了)",
+    "post_number==7(临场条件,赛道/跑法确定不了)",
+    "临场条件 random_lot==50&post_number==7:绿技能默认不计收益(赛道/跑法确定不了)"
    ]
   },
   {
    "id": "201562",
    "page": "ラッキーセブン",
    "reasons": [
-    "random_lot==50(环境前提,视为满足)",
-    "post_number==7(环境前提,视为满足)"
+    "random_lot==50(临场条件,赛道/跑法确定不了)",
+    "post_number==7(临场条件,赛道/跑法确定不了)",
+    "临场条件 random_lot==50&post_number==7:绿技能默认不计收益(赛道/跑法确定不了)"
    ]
   },
   {
@@ -1568,21 +1585,24 @@
    "id": "202231",
    "page": "ナイター◎",
    "reasons": [
-    "time==4(环境前提,视为满足)"
+    "time==4(临场条件,赛道/跑法确定不了)",
+    "临场条件 time==4:绿技能默认不计收益(赛道/跑法确定不了)"
    ]
   },
   {
    "id": "202232",
    "page": "ナイター○",
    "reasons": [
-    "time==4(环境前提,视为满足)"
+    "time==4(临场条件,赛道/跑法确定不了)",
+    "临场条件 time==4:绿技能默认不计收益(赛道/跑法确定不了)"
    ]
   },
   {
    "id": "202233",
    "page": "ナイター×",
    "reasons": [
-    "time==4(环境前提,视为满足)"
+    "time==4(临场条件,赛道/跑法确定不了)",
+    "临场条件 time==4:绿技能默认不计收益(赛道/跑法确定不了)"
    ]
   },
   {
@@ -1610,60 +1630,68 @@
    "id": "202251",
    "page": "交流重賞◎",
    "reasons": [
-    "is_dirtgrade==1(环境前提,视为满足)"
+    "is_dirtgrade==1(临场条件,赛道/跑法确定不了)",
+    "临场条件 is_dirtgrade==1:绿技能默认不计收益(赛道/跑法确定不了)"
    ]
   },
   {
    "id": "202252",
    "page": "交流重賞○",
    "reasons": [
-    "is_dirtgrade==1(环境前提,视为满足)"
+    "is_dirtgrade==1(临场条件,赛道/跑法确定不了)",
+    "临场条件 is_dirtgrade==1:绿技能默认不计收益(赛道/跑法确定不了)"
    ]
   },
   {
    "id": "202253",
    "page": "交流重賞×",
    "reasons": [
-    "is_dirtgrade==1(环境前提,视为满足)"
+    "is_dirtgrade==1(临场条件,赛道/跑法确定不了)",
+    "临场条件 is_dirtgrade==1:绿技能默认不计收益(赛道/跑法确定不了)"
    ]
   },
   {
    "id": "202254",
    "page": "交流重賞の鬼",
    "reasons": [
-    "is_dirtgrade==1(环境前提,视为满足)"
+    "is_dirtgrade==1(临场条件,赛道/跑法确定不了)",
+    "临场条件 is_dirtgrade==1:绿技能默认不计收益(赛道/跑法确定不了)"
    ]
   },
   {
    "id": "202441-b1",
    "page": "勝負師",
    "reasons": [
-    "popularity>=4(环境前提,视为满足)",
-    "random_lot_shared==60(环境前提,视为满足)"
+    "popularity>=4(临场条件,赛道/跑法确定不了)",
+    "random_lot_shared==60(临场条件,赛道/跑法确定不了)",
+    "临场条件 popularity>=4&random_lot_shared==60:绿技能默认不计收益(赛道/跑法确定不了)"
    ]
   },
   {
    "id": "202441-b2",
    "page": "勝負師",
    "reasons": [
-    "popularity<=3(环境前提,视为满足)",
-    "random_lot_shared==30(环境前提,视为满足)"
+    "popularity<=3(临场条件,赛道/跑法确定不了)",
+    "random_lot_shared==30(临场条件,赛道/跑法确定不了)",
+    "临场条件 popularity<=3&random_lot_shared==30:绿技能默认不计收益(赛道/跑法确定不了)"
    ]
   },
   {
    "id": "202442-b1",
    "page": "やまっけ",
    "reasons": [
-    "popularity>=4(环境前提,视为满足)",
-    "random_lot_shared==30(环境前提,视为满足)"
+    "popularity>=4(临场条件,赛道/跑法确定不了)",
+    "random_lot_shared==30(临场条件,赛道/跑法确定不了)",
+    "临场条件 popularity>=4&random_lot_shared==30:绿技能默认不计收益(赛道/跑法确定不了)"
    ]
   },
   {
    "id": "202442-b2",
    "page": "やまっけ",
    "reasons": [
-    "popularity<=3(环境前提,视为满足)",
-    "random_lot_shared==15(环境前提,视为满足)"
+    "popularity<=3(临场条件,赛道/跑法确定不了)",
+    "random_lot_shared==15(临场条件,赛道/跑法确定不了)",
+    "临场条件 popularity<=3&random_lot_shared==15:绿技能默认不计收益(赛道/跑法确定不了)"
    ]
   },
   {
@@ -1866,30 +1894,30 @@
    "id": "300071",
    "page": "未知への走りを見せてくれ",
    "reasons": [
-    "is_exist_chara_id==1002(环境前提,视为满足)"
+    "is_exist_chara_id==1002(临场条件,赛道/跑法确定不了)"
    ]
   },
   {
    "id": "300081",
    "page": "ほんにゃか快走祈願！",
    "reasons": [
-    "is_exist_chara_id==1002(环境前提,视为满足)"
+    "is_exist_chara_id==1002(临场条件,赛道/跑法确定不了)"
    ]
   },
   {
    "id": "300091",
    "page": "友として、ライバルとして",
    "reasons": [
-    "is_exist_chara_id==1002(环境前提,视为满足)"
+    "is_exist_chara_id==1002(临场条件,赛道/跑法确定不了)"
    ]
   },
   {
    "id": "300101",
    "page": "憧れのエール",
    "reasons": [
-    "is_exist_chara_id==1002(环境前提,视为满足)",
-    "remain_distance_viewer_id>=800(环境前提,视为满足)",
-    "remain_distance_viewer_id<=850(环境前提,视为满足)"
+    "is_exist_chara_id==1002(临场条件,赛道/跑法确定不了)",
+    "remain_distance_viewer_id>=800(临场条件,赛道/跑法确定不了)",
+    "remain_distance_viewer_id<=850(临场条件,赛道/跑法确定不了)"
    ]
   },
   {
@@ -1961,15 +1989,15 @@
    "id": "900471-b1",
    "page": "继承技/掲げよ、己が魂の剣を！",
    "reasons": [
-    "grade==100(环境前提,视为满足)",
-    "popularity<=3(环境前提,视为满足)"
+    "grade==100(临场条件,赛道/跑法确定不了)",
+    "popularity<=3(临场条件,赛道/跑法确定不了)"
    ]
   },
   {
    "id": "900491-b1",
    "page": "继承技/剣ヶ峰より、狂気に嗤え",
    "reasons": [
-    "popularity>=4(环境前提,视为满足)",
+    "popularity>=4(临场条件,赛道/跑法确定不了)",
     "前置条件:is_finalcorner==1&is_overtake==1"
    ]
   },
@@ -1977,7 +2005,7 @@
    "id": "900491-b2",
    "page": "继承技/剣ヶ峰より、狂気に嗤え",
    "reasons": [
-    "popularity<4(环境前提,视为满足)",
+    "popularity<4(临场条件,赛道/跑法确定不了)",
     "前置条件:is_finalcorner==1&is_overtake==1"
    ]
   },
@@ -1999,14 +2027,14 @@
    "id": "900551-b1",
    "page": "继承技/万彩☆マーベラス★世界",
    "reasons": [
-    "visiblehorse>=4(环境前提,视为满足)"
+    "visiblehorse>=4(临场条件,赛道/跑法确定不了)"
    ]
   },
   {
    "id": "900701-b1",
    "page": "继承技/セイリオス",
    "reasons": [
-    "popularity<=3(环境前提,视为满足)"
+    "popularity<=3(临场条件,赛道/跑法确定不了)"
    ]
   },
   {
@@ -2104,7 +2132,7 @@
    "id": "901061-b1",
    "page": "继承技/Bang☆ミラクるわせ！",
    "reasons": [
-    "popularity>=4(环境前提,视为满足)"
+    "popularity>=4(临场条件,赛道/跑法确定不了)"
    ]
   },
   {
@@ -2285,7 +2313,7 @@
    "id": "910601-b1",
    "page": "继承技/Go☆Go☆for it!",
    "reasons": [
-    "popularity>=4(环境前提,视为满足)",
+    "popularity>=4(临场条件,赛道/跑法确定不了)",
     "前置条件:is_finalcorner==1&change_order_onetime<0"
    ]
   },
@@ -2293,7 +2321,7 @@
    "id": "910601-b2",
    "page": "继承技/Go☆Go☆for it!",
    "reasons": [
-    "popularity<4(环境前提,视为满足)",
+    "popularity<4(临场条件,赛道/跑法确定不了)",
     "前置条件:is_finalcorner==1&change_order_onetime<0"
    ]
   },
@@ -2448,7 +2476,7 @@
    "id": "920351-b1",
    "page": "继承技/GO! Full-send",
    "reasons": [
-    "popularity<=3(环境前提,视为满足)",
+    "popularity<=3(临场条件,赛道/跑法确定不了)",
     "前置条件:phase==1&change_order_onetime<0&order_rate>=40&order_rate<=80"
    ]
   },

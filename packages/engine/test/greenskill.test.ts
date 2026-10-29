@@ -25,8 +25,12 @@ const byId = (id: string): SkillConfig => {
 
 /** 独行侠◎:速度 +80,无装配限制(数值锚点用) */
 const DOKKOU = byId('200271');
-/** 七福即生:速度/耐力/力量 +80,无装配限制 */
+/** 七福即生:速度/耐力/力量 +80,但触发代码要求 post_number==7(临场条件)→ 默认不计 */
 const SHICHI = byId('105601211');
+/** 幸运7:速度/耐力/力量 +40,触发代码 random_lot==50&post_number==7(临场条件)→ 默认不计 */
+const LUCKY7 = byId('201562');
+/** 身为队伍的一员:耐力 +80,无任何限制(合并语义的数值锚点) */
+const STAMINA80 = byId('300121');
 /** 顺时针◎:速度 +60,限顺时针赛道 */
 const CLOCKWISE = byId('200011');
 /** 逆时针◎:速度 +60,限逆时针赛道 */
@@ -36,11 +40,19 @@ const AUTUMN = byId('101702211');
 
 describe('常时被动(绿技能)并入起跑属性', () => {
   test('passiveBonusOf:技能被动与手动 greenBonus 合并', () => {
-    const runner = makeRunner({ skills: [SHICHI], greenBonus: { speed: 20 } });
+    const runner = makeRunner({ skills: [DOKKOU, STAMINA80], greenBonus: { speed: 20 } });
     const p = passiveBonusOf(runner, nak);
-    expect(p.speed).toBe(100);
-    expect(p.stamina).toBe(80);
-    expect(p.power).toBe(80);
+    expect(p.speed).toBe(100); // 独行侠◎ 80 + greenBonus 20
+    expect(p.stamina).toBe(80); // 身为队伍的一员
+  });
+
+  test('临场条件(枠番/抽选)的绿技能默认不计:七福即生 / 幸运7', () => {
+    const runner = makeRunner({ skills: [SHICHI, LUCKY7] });
+    for (const s of [SHICHI, LUCKY7]) expect(skillApplicable(s, nak, runner)).toBe(false);
+    const p = passiveBonusOf(runner, nak);
+    expect(p.speed).toBe(0);
+    expect(p.stamina).toBe(0);
+    expect(p.power).toBe(0);
   });
 
   test('有效属性:绿加成先并入面板再过软上限,乘干劲(614tools ZP → E → mood)', () => {

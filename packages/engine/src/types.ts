@@ -284,6 +284,14 @@ export interface RestrictionClause {
   readonly statsAtLeast?: Readonly<Partial<Record<PassiveStat, number>>>;
   /** 面板属性上限(不含,触发代码 base_wiz<N 等) */
   readonly statsBelow?: Readonly<Partial<Record<PassiveStat, number>>>;
+  /**
+   * **临场条件**(触发代码里的 post_number/publicity/random_lot 等,原始 token 形式)。
+   * 这些条件由开赛时的实际情况决定(闸位、人气、抽选、赛事等级、比赛时段),**无法由赛道、
+   * 跑法或环境配置确定** ⇒ 引擎不做猜测:默认视为「不满足」,技能整场不生效、绿技能不计入起跑属性。
+   * 语义上是「不能保证 100% 发动,所以不计收益」,不是「一定不发动」;UI 用「临场条件」标注。
+   * 例:幸运7(`random_lot==50&post_number==7`)、擅长外道◎(`post_number>=6`)。
+   */
+  readonly undetermined?: readonly string[];
   /** 原始限制文本(展示用) */
   readonly rawText?: string;
 }

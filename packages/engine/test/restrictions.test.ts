@@ -1,6 +1,7 @@
 import { describe, expect, test } from 'vitest';
 import { simulate } from '../src/simulate';
 import { passiveBonusOf } from '../src/effstats';
+import { skillApplicable } from '../src/restriction';
 import { BASE_STATS, freshRunner, makeRunner, speedSkill, TOKYO_TURF_2400 as C } from './fixtures';
 
 /** 中盘发动的通用测试技能(便于观察限制是否拦截) */
@@ -136,5 +137,56 @@ describe('限制子句语义(anyOf / 面板属性 / 干劲 / 海外)', () => {
     const abroadOnly = { ...midSkill, restriction: { abroad: true } };
     expect(simulate(C, makeRunner({ skills: [abroadOnly] })).activations).toHaveLength(0);
     expect(simulate({ ...C, overseas: true }, makeRunner({ skills: [abroadOnly] })).activations).toHaveLength(1);
+  });
+});
+
+describe('临场条件(undetermined):枠番/人气/抽选,赛道与跑法确定不了 → 默认不计', () => {
+  /** 幸运7 型:random_lot==50&post_number==7,纯被动 +60 速度 */
+  const lucky7 = {
+    ...speedSkill('cond-lucky7', 0.5, 0, {
+      effects: [{ type: 'passive', stat: 'speed', value: 60 }] as never,
+      durationSec: null,
+      condition: { kind: 'raceStart' },
+      restriction: { undetermined: ['random_lot==50', 'post_number==7'] },
+    }),
+  };
+  /** 擅长外道◎ 型:post_number>=6 */
+  const outer = speedSkill('cond-outer', 0.5, 0, {
+    effects: [{ type: 'passive', stat: 'speed', value: 60 }] as never,
+    durationSec: null,
+    condition: { kind: 'raceStart' },
+    restriction: { undetermined: ['post_number>=6'] },
+  });
+  /** 对照:可由赛道确定的绿技能(逆时针) */
+  const counterClockwise = speedSkill('cond-ccw', 0.5, 0, {
+    effects: [{ type: 'passive', stat: 'speed', value: 60 }] as never,
+    durationSec: null,
+    condition: { kind: 'raceStart' },
+    restriction: { rotations: [2] },
+  });
+
+  test('skillApplicable=false,绿技能不进起跑属性(收益 0)', () => {
+    const runner = freshRunner([lucky7, outer]);
+    for (const s of [lucky7, outer]) {
+      expect(skillApplicable(s, C, runner)).toBe(false);
+    }
+    expect(passiveBonusOf(runner, C).speed).toBe(0);
+  });
+
+  test('对照:赛道能确定的绿技能照常计入(不受影响)', () => {
+    const course = { ...C, rotation: 2 as const };
+    const runner = freshRunner([counterClockwise]);
+    expect(skillApplicable(counterClockwise, course, runner)).toBe(true);
+    expect(passiveBonusOf(runner, course).speed).toBe(60);
+  });
+
+  test('顶层 undetermined 与 anyOf 并存时也视为不满足', () => {
+    const mixed = speedSkill('cond-mixed', 0.5, 0, {
+      effects: [{ type: 'passive', stat: 'speed', value: 60 }] as never,
+      durationSec: null,
+      condition: { kind: 'raceStart' },
+      restriction: { undetermined: ['post_number==7'], anyOf: [{ rotations: [1] }, { rotations: [2] }] },
+    });
+    expect(skillApplicable(mixed, C, freshRunner([mixed]))).toBe(false);
   });
 });

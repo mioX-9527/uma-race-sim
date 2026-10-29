@@ -334,3 +334,42 @@ export function describeRestriction(s: SkillConfig): string {
   }
   return describeClause(r);
 }
+
+/** 临场条件 token → 中文名(枠番/人气/抽选…,赛道与跑法都确定不了) */
+const UNDETERMINED_LABEL: Record<string, string> = {
+  post_number: '枠番',
+  popularity: '人气',
+  random_lot: '抽选',
+  random_lot_shared: '抽选',
+  grade: '赛事等级',
+  is_dirtgrade: '交流重赏',
+  time: '比赛时段',
+  lane_type: '内外道',
+  fan_count: '粉丝数',
+  visiblehorse: '视野内有马',
+  is_move_lane: '变道中',
+  is_exist_chara_id: '队伍角色',
+  remain_distance_viewer_id: '观察者距离',
+};
+
+/** 单个临场条件 token(`post_number>=6`)→ 可读文本(`枠番≥6`) */
+function undeterminedText(tok: string): string {
+  const m = tok.match(/^([a-z_0-9]+)(==|!=|>=|<=|>|<)(-?\d+)$/);
+  if (m === null) return tok;
+  const label = UNDETERMINED_LABEL[m[1]!] ?? m[1]!;
+  const op = m[2] === '==' ? '=' : m[2] === '!=' ? '≠' : m[2] === '>=' ? '≥' : m[2] === '<=' ? '≤' : m[2]!;
+  return `${label}${op}${m[3]}`;
+}
+
+/** 技能的临场条件列表(含 anyOf 各支),空数组 = 没有临场条件 */
+export function undeterminedOf(s: SkillConfig): readonly string[] {
+  const r = s.restriction;
+  if (r === undefined) return [];
+  const all = [...(r.undetermined ?? []), ...(r.anyOf ?? []).flatMap(c => c.undetermined ?? [])];
+  return [...new Set(all)];
+}
+
+/** 临场条件的展示文本,如「枠番≥6」;无则空串 */
+export function describeUndetermined(s: SkillConfig): string {
+  return undeterminedOf(s).map(undeterminedText).join(' · ');
+}

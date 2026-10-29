@@ -173,6 +173,8 @@ interface CodeParse {
   clauses: CodeRestriction[];
   /** 各 @ 变体的发动前提(变体之间是「或」) */
   prereqs: CodePrereq[];
+  /** 临场条件 token(post_number==7 等,无法由赛道/跑法确定;绿技能据此默认不计收益) */
+  undetermined: string[];
   notes: string[];
 }
 
@@ -203,6 +205,20 @@ const ENV_TOKENS = new Set([
   'fan_count', 'grade', 'is_dirtgrade', 'is_tight_track', 'lane_type',
   'furlong', 'remain_distance_viewer_id', 'is_exist_chara_id',
   'visiblehorse', 'random_lot', 'random_lot_shared', 'is_move_lane', 'time',
+]);
+
+/**
+ * **临场条件** token:由开赛时的实际情况决定 —— 闸位(枠番)、人气、抽选、赛事等级、
+ * 比赛时段、内外道、他马/观众/队伍 —— 赛道、跑法、环境配置全都确定不了。
+ * 常时被动(绿技能)带这些条件 ⇒ 不能保证 100% 发动,默认不计收益:
+ * 写进 `restriction.undetermined`,引擎视为不满足(见 restriction.ts)。
+ * ⚠️ `is_tight_track`(小回り,可由赛场确定)与 `furlong`(与剩余距离有关)**不在列**,
+ * 仍按「环境前提,视为满足」处理。
+ */
+const UNDETERMINED_TOKENS = new Set([
+  'post_number', 'popularity', 'random_lot', 'random_lot_shared',
+  'grade', 'is_dirtgrade', 'time', 'lane_type', 'fan_count',
+  'visiblehorse', 'is_move_lane', 'is_exist_chara_id', 'remain_distance_viewer_id',
 ]);
 
 function emptyRestriction(): CodeRestriction {
@@ -422,6 +438,8 @@ function parseVariant(tokens: readonly Token[], notes: string[]): Omit<CodeParse
   let slopeSign = 0;
   /** 全部 token 都属于装配限制/环境前提(无位置锚点)→ 条件视为"满足即常驻" */
   let onlyRestrictive = true;
+  /** 本变体内的临场条件(post_number==7 等;赛道/跑法确定不了) */
+  const undetermined: string[] = [];
 
   for (const tk of tokens) {
     const { name, op, value } = tk;
@@ -729,7 +747,12 @@ function parseVariant(tokens: readonly Token[], notes: string[]): Omit<CodeParse
         onlyRestrictive = false;
         break;
       case ENV_TOKENS.has(name):
-        notes.push(`${name}${op}${value}(环境前提,视为满足)`);
+        if (UNDETERMINED_TOKENS.has(name)) {
+          undetermined.push(`${name}${op}${value}`);
+          notes.push(`${name}${op}${value}(临场条件,赛道/跑法确定不了)`);
+        } else {
+          notes.push(`${name}${op}${value}(环境前提,视为满足)`);
+        }
         break;
       default:
         approx = true;
@@ -806,7 +829,7 @@ function parseVariant(tokens: readonly Token[], notes: string[]): Omit<CodeParse
     condition = { kind: 'raceStart' };
   }
 
-  return { condition, approx, restriction, prereq, notes };
+  return { condition, approx, restriction, prereq, notes, undetermined };
 }
 
 /** 完整条件字符串(可能含 @ 变体)→ 条件对象 + 并集限制 */
@@ -824,7 +847,12 @@ function parseCode(code: string): CodeParse {
     }
   }
   if (parsed.length > 1) approx = true;
-  return { condition: first.condition, approx, clauses: parsed.map(p => p.restriction), prereqs: parsed.map(p => p.prereq), notes };
+  // 临场条件按变体取并集(任一支需要 → 整体不能保证 100% 发动)
+  const undetermined = [...new Set(parsed.flatMap(p => p.undetermined))];
+  return {
+    condition: first.condition, approx, clauses: parsed.map(p => p.restriction),
+    prereqs: parsed.map(p => p.prereq), notes, undetermined,
+  };
 }
 
 /** 触发代码效果槽(ability_type_s_e)→ 效果列表 */
@@ -930,8 +958,17 @@ function skillFromLuaBranch(
     reasons.push(`ability_time_usage=${lua[`ability_time_usage_${slot}`]}`);
   }
 
-  const restrictionObj = restrictionObjOf(clauses, meta.textRestrictionObj);
+  let restrictionObj = restrictionObjOf(clauses, meta.textRestrictionObj);
   const prereqObjOut = prereqObjOf(prereqs);
+
+  // 绿技能(常时被动)带临场条件(枠番/人气/抽选/赛事等级/比赛时段)→ 不能保证 100% 发动,
+  // 默认不计收益:写进 restriction.undetermined,引擎视为不满足(不进起跑属性、收益 0)。
+  // 非被动技能不加(它们按规则取位发动,本身已标 approx),避免把整类技能一次性判死。
+  const undetermined = allPassive ? cp.undetermined : [];
+  if (undetermined.length > 0) {
+    restrictionObj = { ...(restrictionObj ?? {}), undetermined };
+    info.push(`临场条件 ${undetermined.join('&')}:绿技能默认不计收益(赛道/跑法确定不了)`);
+  }
 
   let precision: OutSkill['precision'];
   if (hasUnsupported || cp.condition === null || effects.length === 0) {

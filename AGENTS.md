@@ -153,6 +153,14 @@ node tools/clean-skills.ts    # 重新生成 skills.json(node 24 直跑 TS)
   带冷却、同场多次发动的技能另走 `SimOptions.inertFirings`(只去掉第 i 次的效果,其余各次照常、
   仍记入 `fired`),消融报 `AblationRow.firingSamples`,UI 标「逐次」可展开;
   Σ逐次 与 `deltaBody`(整条都去掉)的差 = 前后段耦合,不是 bug。
+- **绿技能「临场条件」默认不计(2026-10-29 用户要求)**:触发代码里的 `post_number`(枠番)、`popularity`(人气)、
+  `random_lot(_shared)`(抽选)、`grade`(赛事等级)、`is_dirtgrade`(交流重赏)、`time`(比赛时段)、`lane_type` 等
+  由**开赛时实际情况**决定、赛道与跑法都推不出来 ⇒ 常时被动(绿技能)不能保证 100% 发动,
+  数据侧写入 `restriction.undetermined`(token 原文数组),引擎 `clauseSatisfied` 视为不满足
+  (不进起跑属性、消融 0)。**判据:只有靠赛道/跑法/环境就能百分百判定的绿技能才计入**
+  (赛场/回转/距离档/标准距离/场地/天气/季节/脚质/干劲/面板属性)。`is_tight_track`(小回り,可由赛场确定)
+  与 `furlong` 不在 `UNDETERMINED_TOKENS` 里;非被动技能不加此字段(它们按规则取位发动、已标 approx)。
+  测试锚点别再用带这类条件的绿技能当「无限制」样例(七福即生 `post_number==7` 踩过)。
 - **限制判定入口**:`packages/engine/src/restriction.ts` 的 `clauseSatisfied`(单子句,字段间为与)与
   `restrictionSatisfied`(有 `anyOf` 时任一子句满足即可)。`skillApplicable()` 供 UI/消融判断「不生效」。
   `base_*` 属性条件取**面板值**(`runner.stats`),不含绿技能与干劲。
@@ -166,6 +174,8 @@ node tools/clean-skills.ts    # 重新生成 skills.json(node 24 直跑 TS)
 1. `npm run typecheck`(含 web)+ `npx vitest run` 全绿(不许跳过/删测试);
    本机若遇 vitest `EPERM ...\Temp\...\ssr\...`,把 TEMP/TMP 指到项目内再跑:
    `TEMP=%CD%\.tmp TMP=%CD%\.tmp npx vitest run`(沙箱不放行系统临时目录时);
+   **本机并行跑 vitest 会偶尔静默漏掉测试文件**(实测同一份代码连续三次给出 101/116/128 例,
+   串行才稳定):核对用例数时加 `--no-file-parallelism`,期望 engine 15 文件 / 128 例、analysis 1 文件 / 14 例;
 2. 涉及数据:`node tools/validate-data.ts`;
 3. 涉及公式/机制:更新 `docs/formulas.md` + `docs/parity-log.md` 追加条目(对拍方法:614tools 实测或游戏实录);
 4. 涉及数据规模:同步 `data/version.json`(version/counts/skillPrecision/notes)与 README「状态」行;

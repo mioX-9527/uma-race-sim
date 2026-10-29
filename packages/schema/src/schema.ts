@@ -89,6 +89,11 @@ const clauseSchema = z.object({
   /** 面板属性下限(含)/上限(不含),触发代码 base_* */
   statsAtLeast: statMap.optional(),
   statsBelow: statMap.optional(),
+  /**
+   * 临场条件(触发代码 post_number/popularity/random_lot/grade/is_dirtgrade/time 等原始 token):
+   * 赛道与跑法确定不了 ⇒ 引擎默认视为不满足(不生效、绿技能不计入起跑属性),UI 标「临场条件」。
+   */
+  undetermined: z.array(z.string()).optional(),
   rawText: z.string().optional(),
 });
 

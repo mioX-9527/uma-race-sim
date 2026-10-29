@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { skillApplicable } from '@uma-race-sim/engine';
 import type { Course, RunnerConfig } from '@uma-race-sim/engine';
-import { PRECISION_LABEL, SKILLS, describeCondition, describeEffects, describePrereq, describeRestriction, type SkillEntry } from '../lib/sim';
+import { PRECISION_LABEL, SKILLS, describeCondition, describeEffects, describePrereq, describeRestriction, describeUndetermined, undeterminedOf, type SkillEntry } from '../lib/sim';
 
 interface Props {
   selected: readonly string[];
@@ -63,7 +63,16 @@ export function SkillPicker({ selected, onChange, course, runner }: Props): JSX.
                   {s.rarity === 'evolved' && <span className="badge cn" title="进化技能:本体技能进化后的强化版,数值与发动条件以进化后为准">进化</span>}
                   {s.cnReleased === true && <span className="badge cn">国服</span>}
                   <span className={`badge ${s.precision}`}>{PRECISION_LABEL[s.precision]}</span>
-                  {!okOf(s) && <span className="badge off" title="当前赛道/环境不满足装配限制,选中也不生效">不生效</span>}
+                  {undeterminedOf(s).length > 0 ? (
+                    <span
+                      className="badge cond"
+                      title={`临场条件:${describeUndetermined(s)} —— 由开赛时的实际情况决定(闸位/人气/抽选/赛事等级),赛道与跑法都确定不了,不能保证 100% 发动 ⇒ 默认不计收益${okOf(s) ? '' : '(已按不生效处理)'}`}
+                    >
+                      临场条件
+                    </span>
+                  ) : (
+                    !okOf(s) && <span className="badge off" title="当前赛道/环境不满足装配限制,选中也不生效">不生效</span>
+                  )}
                   {s.prereq !== undefined && <span className="badge pre" title={`前提:${describePrereq(s)}`}>前提</span>}
                 </span>
               </div>
@@ -72,6 +81,10 @@ export function SkillPicker({ selected, onChange, course, runner }: Props): JSX.
                 {(() => {
                   const rst = describeRestriction(s);
                   return rst !== '' ? ` · 限:${rst}` : '';
+                })()}
+                {(() => {
+                  const und = describeUndetermined(s);
+                  return und !== '' ? ` · 临场条件:${und}(默认不计收益)` : '';
                 })()}
                 {(() => {
                   const pre = describePrereq(s);
@@ -95,7 +108,9 @@ export function SkillPicker({ selected, onChange, course, runner }: Props): JSX.
               <span className="idx">{i + 1}</span>
               {s.name}
               <span className={`badge ${s.precision}`}>{PRECISION_LABEL[s.precision]}</span>
-              {!okOf(s) && <span className="badge off">不生效</span>}
+              {undeterminedOf(s).length > 0
+                ? <span className="badge cond" title={`临场条件:${describeUndetermined(s)}(默认不计收益)`}>临场</span>
+                : !okOf(s) && <span className="badge off">不生效</span>}
               {s.prereq !== undefined && <span className="badge pre" title={`前提:${describePrereq(s)}`}>前提</span>}
               ×
             </span>
