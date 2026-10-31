@@ -169,7 +169,7 @@ export function AblationTable({ report }: { report: AblationReport }): JSX.Eleme
                   <tr className="sample-row">
                     <td colSpan={5}>
                       <div className="meta" style={{ padding: '2px 8px' }}>
-                        位置采样(满足区段全长均匀取 {r.positionSamples!.length} 点,强制发动后消融;其余技能按规则发动):
+                        位置采样(满足区段全长均匀取 {r.positionSamples!.length} 点,逐点强制发动后做单项消融=该落点的边际收益;其余技能按规则发动,口径与期望一致):
                         {r.positionSamples!.map(s => (
                           <span key={s.meter} style={{ marginLeft: 10, whiteSpace: 'nowrap' }}>
                             {s.meter}m → <b className={s.deltaBody > 0 ? 'pos' : 'neg'}>{signed(s.deltaBody, 2)}</b>

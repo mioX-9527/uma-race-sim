@@ -48,6 +48,11 @@ interface OutSkill {
   wisdomScaled: boolean;
   /** 触发代码含 *_random → 发动位置在满足区段内随机,消融按位置采样求期望 */
   randomPosition?: boolean;
+  /** 绿技能发动数分档(小林历奇固有等):引擎按当前生效绿技能数展开 */
+  scaleByGreen?: {
+    base: OutEffect[];
+    tiers: { min: number; max?: number; effects: OutEffect[] }[];
+  };
   source: string;
   fetchedAt: string;
 }
@@ -868,40 +873,85 @@ function parseCode(code: string): CodeParse {
 
 /** 触发代码效果槽(ability_type_s_e)→ 效果列表 */
 const CODE_EFFECT_TYPE: Record<string, string> = { '27': 'targetSpeed', '21': 'targetSpeed', '31': 'acceleration', '22': 'currentSpeed', '9': 'heal' };
+
+/**
+ * 绿技能发动数分档固有覆盖表(语义出处:BWIKI 技能页备注;解包数据为单行满档值,无分档编码,禁止按名推测)。
+ * 现有 1 条:
+ * - 100981 小林历奇固有「理運開かりて翔る」(时来运转，龙腾九霄):基础 速度+0.25(中盘后半随机,5s);
+ *   绿技能发动数 0~2 → 追加无效 / 3~4 → 速度+0.05·加速+0.05 / 5 → 速度+0.1·加速+0.1 / 6+ → 速度+0.15·加速+0.15。
+ *   解包效果槽 [27:2500, 27:500, 31:500] 中的 0.05/0.05 两槽即分档部分的 ×1 档值。
+ * effects 字段落 base,分档在 scaleByGreen,引擎 simulate 开头按 counterValue('green') 展开。
+ */
+const SCALE_BY_GREEN_OVERRIDES: Record<string, NonNullable<OutSkill['scaleByGreen']>> = {
+  '100981': {
+    base: [{ type: 'targetSpeed', value: 0.25 }],
+    tiers: [
+      { min: 3, max: 4, effects: [{ type: 'targetSpeed', value: 0.05 }, { type: 'acceleration', value: 0.05 }] },
+      { min: 5, max: 5, effects: [{ type: 'targetSpeed', value: 0.1 }, { type: 'acceleration', value: 0.1 }] },
+      { min: 6, effects: [{ type: 'targetSpeed', value: 0.15 }, { type: 'acceleration', value: 0.15 }] },
+    ],
+  },
+};
 const CODE_PASSIVE_STAT: Record<string, string> = { '1': 'speed', '2': 'stamina', '3': 'power', '4': 'guts', '5': 'wisdom' };
 
-function effectsFromLua(lua: Record<string, string>, slot: 1 | 2): { effects: OutEffect[]; hasUnsupported: boolean; allPassive: boolean } {
+/**
+ * 「信息槽」命名表:不可建模效果槽的人类可读名(仅用于备注/标签,不参与精度判定) ——
+ * 2026-10-31 用户决策(全库统一):**凡对自身马身收益无法量化的槽一律忽略,仅保留可产生收益的效果**;
+ * 丢弃后无任何效果的技能保留 unsupported 标签以便 UI 说明原因。
+ * 命名语义出处 = BWIKI 技能页「技能类型」字段:8=视野 29=焦躁率(formulas.md 🚫) 6=跑法行为(大逃)
+ * 10=出闸 14=出迟时长 32=全属性(临场) 35=切换跑道 37=触发其他技能;类型28(横向速度)按同日
+ * 「不计算走位收益」决策视为不可量化。妨害/他人(target≠1)为作用于他马的效果,单马模型恒零收益。
+ * 未知类型(42/48/49/50 等)命名待核实 —— ⚠️ 语义未核实即丢弃有高估风险(若实为自身负面),
+ * skill-notes 均有忽略备注可追溯(见 parity-log 2026-10-31)。
+ */
+const INFO_SLOT_NAMES: Record<string, string> = {
+  '8': '视野', '29': '焦躁率', '6': '跑法行为', '10': '出闸', '14': '出迟时长',
+  '32': '全属性(临场)', '35': '切换跑道', '37': '触发其他技能',
+};
+
+function effectsFromLua(lua: Record<string, string>, slot: 1 | 2): { effects: OutEffect[]; hasUnsupported: boolean; allPassive: boolean; info: string[] } {
   const effects: OutEffect[] = [];
+  const info: string[] = [];
   let hasUnsupported = false;
   let allPassive = true;
+  const infoSlots: { type: string; label: string; value: number }[] = [];
   for (const e of [1, 2, 3] as const) {
     const type = lua[`ability_type_${slot}_${e}`];
     if (type === undefined || type === '' || type === '0') continue;
     const rawValue = Number.parseFloat(lua[`float_ability_value_${slot}_${e}`] ?? '0');
     const target = lua[`target_type_${slot}_${e}`] ?? '1';
     const value = Math.round((rawValue / 10000) * 10000) / 10000;
-    if (target !== '1') {
-      hasUnsupported = true;
-      allPassive = false;
-      effects.push({ type: 'unsupported', label: `妨害/他人(目标${target})`, value });
-      continue;
-    }
-    const t = CODE_EFFECT_TYPE[type];
+    // 可建模效果槽:速度/加速度/即时速度/回复 + 被动属性;其余(妨害/行为/未知)全部进信息槽
+    const t = target === '1' ? CODE_EFFECT_TYPE[type] : undefined;
+    const stat = target === '1' ? CODE_PASSIVE_STAT[type] : undefined;
     if (t !== undefined) {
       allPassive = false;
       effects.push({ type: t, value });
+      continue;
+    }
+    if (stat !== undefined) {
+      effects.push({ type: 'passive', stat, value });
+      continue;
+    }
+    const name = target !== '1'
+      ? `妨害/他人(目标${target})`
+      : INFO_SLOT_NAMES[type] !== undefined
+        ? `效果类型${type}(${INFO_SLOT_NAMES[type]})`
+        : `效果类型${type}`;
+    infoSlots.push({ type, label: name, value });
+  }
+  if (infoSlots.length > 0) {
+    const desc = infoSlots.map(s => `${s.label}(值${s.value})`).join('/');
+    if (effects.length > 0) {
+      info.push(`${desc}对自身马身收益无模型对应已忽略,仅保留可产生收益的效果(2026-10-31 用户决策)`);
     } else {
-      const stat = CODE_PASSIVE_STAT[type];
-      if (stat !== undefined) {
-        effects.push({ type: 'passive', stat, value });
-      } else {
-        hasUnsupported = true;
-        allPassive = false;
-        effects.push({ type: 'unsupported', label: `效果类型${type}`, value });
-      }
+      // 纯信息槽技能(千里眼/领跑牵制/大逃等):无数值可保留,保留标签(unsupported)以便 UI 展示不支持原因
+      hasUnsupported = true;
+      allPassive = false;
+      for (const s of infoSlots) effects.push({ type: 'unsupported', label: s.label, value: s.value });
     }
   }
-  return { effects, hasUnsupported, allPassive };
+  return { effects, hasUnsupported, allPassive, info };
 }
 
 /** 触发代码路径的输出元数据(本体走速查表,继承技走名称映射) */
@@ -953,7 +1003,8 @@ function skillFromLuaBranch(
     info.push(`前置条件:${pre}`);
   }
 
-  const { effects, hasUnsupported, allPassive } = effectsFromLua(lua, slot);
+  const { effects, hasUnsupported, allPassive, info: effectInfo } = effectsFromLua(lua, slot);
+  for (const n of effectInfo) info.push(n);
   if (effects.length === 0) reasons.push('无效果');
   const rawDur = Number.parseFloat(lua[`float_ability_time_${slot}`] ?? '0');
   const durationSec = allPassive || rawDur <= 0 ? null : Math.round((rawDur / 10000) * 1000) / 1000;
@@ -1030,6 +1081,17 @@ function skillFromLuaBranch(
     source: meta.source,
     fetchedAt: raw.fetchedAt.slice(0, 10),
   };
+  // 绿技能发动数分档固有:解包为单行满档值、无分档编码,按 BWIKI 技能页备注覆盖(见 SCALE_BY_GREEN_OVERRIDES)
+  const scaleOverride = SCALE_BY_GREEN_OVERRIDES[meta.id];
+  if (scaleOverride !== undefined && precision !== 'unsupported') {
+    skill.effects = scaleOverride.base;
+    skill.scaleByGreen = scaleOverride;
+    info.push(
+      `绿技能发动数分档固有:${scaleOverride.tiers
+        .map(t => `${t.min}${t.max !== undefined ? `~${t.max}` : '+'}→${JSON.stringify(t.effects)}`)
+        .join(';')}(来源:BWIKI 技能页备注)`,
+    );
+  }
   return { skill, reasons, info };
 }
 

@@ -199,6 +199,15 @@ export const skillSchema = z.object({
   wisdomScaled: z.boolean(),
   /** 触发代码含 *_random → 发动位置在满足区段内随机,消融按位置采样求期望 */
   randomPosition: z.boolean().optional(),
+  /** 绿技能发动数分档(小林历奇固有等):引擎按当前生效绿技能数展开成普通 effects */
+  scaleByGreen: z
+    .object({
+      base: z.array(skillEffectSchema),
+      tiers: z.array(
+        z.object({ min: z.number().int(), max: z.number().int().optional(), effects: z.array(skillEffectSchema) }),
+      ),
+    })
+    .optional(),
   /** 数据来源与抓取日期,供追溯 */
   source: z.string().optional(),
   fetchedAt: z.string().optional(),

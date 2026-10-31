@@ -195,3 +195,31 @@ describe('逐次发动拆分(带冷却、同场多次发动)', () => {
     expect(Math.max(skipFirst.finishTimeSec, skipSecond.finishTimeSec)).toBeLessThan(none.finishTimeSec);
   });
 });
+
+describe('位置采样明细口径(单项消融,与期望可比)', () => {
+  // 牌组 = 1 条固定位置技能 + 1 条随机位置技能:明细若误用「空场」对照,
+  // 会把固定技能的收益混进每个采样点(2026-10-31 勘误的回归锚)
+  const fixed = speedSkill('fixed', 0.3, 5, { condition: { kind: 'phase', phase: 2 } });
+  const random = speedSkill('rand', 0.35, 5, {
+    precision: 'approx',
+    condition: { kind: 'phase', phase: 1, part: 'laterHalf' },
+    randomPosition: true,
+  });
+  const rep = ablate(C, freshRunner([fixed, random]));
+  const row = rep.rows.find(r => r.skillId === 'rand')!;
+
+  test('明细逐点为该技能边际收益:均值 ≈ 联合 MC 期望', () => {
+    expect(row.positionSamples).toBeDefined();
+    const meanSample = row.positionSamples!.reduce((a, s) => a + s.deltaBody, 0) / row.positionSamples!.length;
+    expect(row.expectedBody).toBeDefined();
+    // 7 点均匀 vs 拉丁超立方 24 组,同为同一边际函数的数值积分,允许离散化误差
+    expect(Math.abs(meanSample - row.expectedBody!)).toBeLessThan(row.expectedBody! * 0.25 + 0.05);
+  });
+
+  test('明细明显低于「空场对照」口径(回归:不得再混入其他技能收益)', () => {
+    // 空场口径会把 fixed 的收益(约 1 马身级)加进每点 —— 断言明细均值与期望之差远小于 fixed 的贡献
+    const meanSample = row.positionSamples!.reduce((a, s) => a + s.deltaBody, 0) / row.positionSamples!.length;
+    const fixedRow = rep.rows.find(r => r.skillId === 'fixed')!;
+    expect(Math.abs(meanSample - row.expectedBody!)).toBeLessThan(fixedRow.deltaBody);
+  });
+});
